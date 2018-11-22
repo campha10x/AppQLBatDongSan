@@ -1,0 +1,17 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BatDongSanAPI", "BatDongSanAPI\BatDongSanAPI.csproj", "{5052F413-D199-413A-BD23-A2BD31F1F3AE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5052F413-D199-413A-BD23-A2BD31F1F3AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5052F413-D199-413A-BD23-A2BD31F1F3AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5052F413-D199-413A-BD23-A2BD31F1F3AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5052F413-D199-413A-BD23-A2BD31F1F3AE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

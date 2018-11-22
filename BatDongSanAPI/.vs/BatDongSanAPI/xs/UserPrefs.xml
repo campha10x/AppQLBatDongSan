@@ -1,0 +1,34 @@
+﻿<Properties StartupConfiguration="{5052F413-D199-413A-BD23-A2BD31F1F3AE}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="BatDongSanAPI/Models/BatDongSanStoreContext.cs">
+    <Files>
+      <File FileName="BatDongSanAPI/Models/HoaDon.cs" Line="1" Column="1" />
+      <File FileName="BatDongSanAPI/Controllers/PhieuChiController.cs" Line="24" Column="1" />
+      <File FileName="BatDongSanAPI/Controllers/PhieuThuController.cs" Line="13" Column="2" />
+      <File FileName="BatDongSanAPI/Models/BatDongSanStoreContext.cs" Line="575" Column="31" />
+      <File FileName="BatDongSanAPI/Controllers/PhongController.cs" Line="22" Column="8" />
+      <File FileName="BatDongSanAPI/Models/PhieuThu.cs" Line="1" Column="1" />
+      <File FileName="BatDongSanAPI/Models/PhieuChi.cs" Line="1" Column="1" />
+      <File FileName="BatDongSanAPI/Models/DichVu.cs" Line="11" Column="35" />
+      <File FileName="BatDongSanAPI/Controllers/KhachHangController.cs" Line="33" Column="44" />
+      <File FileName="BatDongSanAPI/Models/KhachHang.cs" Line="1" Column="1" />
+      <File FileName="BatDongSanAPI/Controllers/HopDongController.cs" Line="21" Column="9" />
+      <File FileName="BatDongSanAPI/Controllers/NhaTroController.cs" Line="26" Column="8" />
+      <File FileName="BatDongSanAPI/Models/HopDong.cs" Line="4" Column="25" />
+      <File FileName="BatDongSanAPI/Controllers/HoaDonController.cs" Line="21" Column="19" />
+      <File FileName="../../test.cs" Line="21" Column="10" />
+      <File FileName="BatDongSanAPI/appsettings.json" Line="1" Column="1" />
+      <File FileName="BatDongSanAPI/Controllers/AccountController.cs" Line="1" Column="1" />
+      <File FileName="BatDongSanAPI/Controllers/DichVuController.cs" Line="26" Column="44" />
+      <File FileName="BatDongSanAPI/Controllers/DonViController.cs" Line="39" Column="128" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/duyxuan/Desktop/Do an/BatDongSanAPI/BatDongSanAPI/Controllers/DichVuController.cs" relfile="BatDongSanAPI/Controllers/DichVuController.cs" line="17" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.BatDongSanAPI PreferredExecutionTarget="MonoDevelop.Default" />
+  <MultiItemStartupConfigurations />
+</Properties>
