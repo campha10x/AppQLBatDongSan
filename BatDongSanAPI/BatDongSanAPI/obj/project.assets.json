@@ -11653,11 +11653,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/duyxuan/Desktop/Do an/BatDongSanAPI/BatDongSanAPI/BatDongSanAPI.csproj",
+      "projectUniqueName": "/Users/duyxuan/Desktop/AppQLBatDongSan/BatDongSanAPI/BatDongSanAPI/BatDongSanAPI.csproj",
       "projectName": "BatDongSanAPI",
-      "projectPath": "/Users/duyxuan/Desktop/Do an/BatDongSanAPI/BatDongSanAPI/BatDongSanAPI.csproj",
+      "projectPath": "/Users/duyxuan/Desktop/AppQLBatDongSan/BatDongSanAPI/BatDongSanAPI/BatDongSanAPI.csproj",
       "packagesPath": "/Users/duyxuan/.nuget/packages/",
-      "outputPath": "/Users/duyxuan/Desktop/Do an/BatDongSanAPI/BatDongSanAPI/obj",
+      "outputPath": "/Users/duyxuan/Desktop/AppQLBatDongSan/BatDongSanAPI/BatDongSanAPI/obj",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
