@@ -1,0 +1,6 @@
+framework module Pods_AppQLBatDongSan {
+  umbrella header "Pods-AppQLBatDongSan-umbrella.h"
+
+  export *
+  module * { export * }
+}

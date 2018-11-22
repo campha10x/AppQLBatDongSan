@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="Notice" customModule="ConnectPOS" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="433" height="59"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="notice-info" translatesAutoresizingMaskIntoConstraints="NO" id="YSh-qE-nMg">
+                    <rect key="frame" x="0.0" y="0.0" width="60" height="59"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="p7w-VV-YtO"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dQ5-HC-xjR">
+                    <rect key="frame" x="60" y="0.0" width="313" height="59"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="16u-97-egT">
+                    <rect key="frame" x="373" y="0.0" width="60" height="59"/>
+                    <state key="normal" image="icon-notice-close"/>
+                    <connections>
+                        <action selector="actionClose:" destination="iN0-l3-epB" eventType="touchUpInside" id="KyU-bL-Cbg"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="0.73333333329999995" green="0.73333333329999995" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="16u-97-egT" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="1rY-09-cXB"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="16u-97-egT" secondAttribute="bottom" id="1yN-yO-VgK"/>
+                <constraint firstItem="YSh-qE-nMg" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="2nQ-pL-Tkd"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="YSh-qE-nMg" secondAttribute="bottom" id="9VU-rk-axz"/>
+                <constraint firstItem="16u-97-egT" firstAttribute="width" secondItem="YSh-qE-nMg" secondAttribute="width" id="GE3-ri-rcm"/>
+                <constraint firstItem="dQ5-HC-xjR" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="Ms1-56-3S1"/>
+                <constraint firstItem="16u-97-egT" firstAttribute="leading" secondItem="dQ5-HC-xjR" secondAttribute="trailing" id="fTH-gS-tyD"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="dQ5-HC-xjR" secondAttribute="bottom" id="qNt-fV-8MQ"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="16u-97-egT" secondAttribute="trailing" id="qtb-i2-b8P"/>
+                <constraint firstItem="YSh-qE-nMg" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="rT1-nU-F8u"/>
+                <constraint firstItem="dQ5-HC-xjR" firstAttribute="leading" secondItem="YSh-qE-nMg" secondAttribute="trailing" id="t43-4q-Ive"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="iconType" destination="YSh-qE-nMg" id="CsY-pO-itH"/>
+                <outlet property="labelContent" destination="dQ5-HC-xjR" id="eJi-52-h3b"/>
+            </connections>
+            <point key="canvasLocation" x="-7.5" y="-188.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="icon-notice-close" width="17" height="17"/>
+        <image name="notice-info" width="30" height="29"/>
+    </resources>
+</document>
