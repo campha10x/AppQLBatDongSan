@@ -15,6 +15,8 @@ namespace BatDongSanAPI.Controllers
         [HttpGet("/Account/Index/{email}/{password}")]
         public IActionResult Index(string email, string password)
         {
+
+
             BatDongSanStoreContext context = HttpContext.RequestServices.GetService(typeof(BatDongSanStoreContext)) as BatDongSanStoreContext;
             Account a = context.GetInformationAccount(email, password).First();
             return Json(a);

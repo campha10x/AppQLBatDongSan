@@ -135,7 +135,7 @@ extension QLPhongViewController: eventProtocols {
             SVProgressHUD.dismiss()
             do {
                 Notice.make(type: .Success, content: "Xoá phòng thành công !").show()
-                Storage.shared.delete(NhaTro.self, ids: [self.listPhong[index].idPhong], idPrefix: "idPhong")
+                Storage.shared.delete(Phong.self, ids: [self.listPhong[index].idPhong], idPrefix: "idPhong")
                 self.listPhong.remove(at: index)
                 self.tblPhong.reloadData()
                 self.constraintHeightViewBody.constant = CGFloat (100 + 70 + 70 + 70 * self.listPhong.count + 60)

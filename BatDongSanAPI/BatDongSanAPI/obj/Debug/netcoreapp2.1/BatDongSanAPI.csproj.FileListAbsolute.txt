@@ -44,3 +44,26 @@
 /Users/duyxuan/Desktop/Do an/BatDongSanAPI/BatDongSanAPI/obj/Debug/netcoreapp2.1/BatDongSanAPI.dll
 /Users/duyxuan/Desktop/Do an/BatDongSanAPI/BatDongSanAPI/obj/Debug/netcoreapp2.1/BatDongSanAPI.pdb
 /Users/duyxuan/Desktop/Do an/BatDongSanAPI/BatDongSanAPI/obj/Debug/netcoreapp2.1/BatDongSanAPI.csproj.CopyComplete
+/Users/duyxuan/Desktop/AppQLBatDongSan/BatDongSanAPI/BatDongSanAPI/bin/Debug/netcoreapp2.1/BatDongSanAPI.deps.json
+/Users/duyxuan/Desktop/AppQLBatDongSan/BatDongSanAPI/BatDongSanAPI/bin/Debug/netcoreapp2.1/BatDongSanAPI.runtimeconfig.json
+/Users/duyxuan/Desktop/AppQLBatDongSan/BatDongSanAPI/BatDongSanAPI/bin/Debug/netcoreapp2.1/BatDongSanAPI.runtimeconfig.dev.json
+/Users/duyxuan/Desktop/AppQLBatDongSan/BatDongSanAPI/BatDongSanAPI/bin/Debug/netcoreapp2.1/BatDongSanAPI.dll
+/Users/duyxuan/Desktop/AppQLBatDongSan/BatDongSanAPI/BatDongSanAPI/bin/Debug/netcoreapp2.1/BatDongSanAPI.pdb
+/Users/duyxuan/Desktop/AppQLBatDongSan/BatDongSanAPI/BatDongSanAPI/bin/Debug/netcoreapp2.1/BatDongSanAPI.Views.dll
+/Users/duyxuan/Desktop/AppQLBatDongSan/BatDongSanAPI/BatDongSanAPI/bin/Debug/netcoreapp2.1/BatDongSanAPI.Views.pdb
+/Users/duyxuan/Desktop/AppQLBatDongSan/BatDongSanAPI/BatDongSanAPI/obj/Debug/netcoreapp2.1/BatDongSanAPI.csprojAssemblyReference.cache
+/Users/duyxuan/Desktop/AppQLBatDongSan/BatDongSanAPI/BatDongSanAPI/obj/Debug/netcoreapp2.1/BatDongSanAPI.csproj.CoreCompileInputs.cache
+/Users/duyxuan/Desktop/AppQLBatDongSan/BatDongSanAPI/BatDongSanAPI/obj/Debug/netcoreapp2.1/BatDongSanAPI.RazorAssemblyInfo.cache
+/Users/duyxuan/Desktop/AppQLBatDongSan/BatDongSanAPI/BatDongSanAPI/obj/Debug/netcoreapp2.1/BatDongSanAPI.RazorAssemblyInfo.cs
+/Users/duyxuan/Desktop/AppQLBatDongSan/BatDongSanAPI/BatDongSanAPI/obj/Debug/netcoreapp2.1/BatDongSanAPI.AssemblyInfoInputs.cache
+/Users/duyxuan/Desktop/AppQLBatDongSan/BatDongSanAPI/BatDongSanAPI/obj/Debug/netcoreapp2.1/BatDongSanAPI.AssemblyInfo.cs
+/Users/duyxuan/Desktop/AppQLBatDongSan/BatDongSanAPI/BatDongSanAPI/obj/Debug/netcoreapp2.1/BatDongSanAPI.TagHelpers.input.cache
+/Users/duyxuan/Desktop/AppQLBatDongSan/BatDongSanAPI/BatDongSanAPI/obj/Debug/netcoreapp2.1/BatDongSanAPI.TagHelpers.output.cache
+/Users/duyxuan/Desktop/AppQLBatDongSan/BatDongSanAPI/BatDongSanAPI/obj/Debug/netcoreapp2.1/BatDongSanAPI.RazorCoreGenerate.cache
+/Users/duyxuan/Desktop/AppQLBatDongSan/BatDongSanAPI/BatDongSanAPI/obj/Debug/netcoreapp2.1/Razor/Views/Account/Index.g.cshtml.cs
+/Users/duyxuan/Desktop/AppQLBatDongSan/BatDongSanAPI/BatDongSanAPI/obj/Debug/netcoreapp2.1/BatDongSanAPI.RazorTargetAssemblyInfo.cache
+/Users/duyxuan/Desktop/AppQLBatDongSan/BatDongSanAPI/BatDongSanAPI/obj/Debug/netcoreapp2.1/BatDongSanAPI.RazorTargetAssemblyInfo.cs
+/Users/duyxuan/Desktop/AppQLBatDongSan/BatDongSanAPI/BatDongSanAPI/obj/Debug/netcoreapp2.1/BatDongSanAPI.Views.pdb
+/Users/duyxuan/Desktop/AppQLBatDongSan/BatDongSanAPI/BatDongSanAPI/obj/Debug/netcoreapp2.1/BatDongSanAPI.dll
+/Users/duyxuan/Desktop/AppQLBatDongSan/BatDongSanAPI/BatDongSanAPI/obj/Debug/netcoreapp2.1/BatDongSanAPI.pdb
+/Users/duyxuan/Desktop/AppQLBatDongSan/BatDongSanAPI/BatDongSanAPI/obj/Debug/netcoreapp2.1/BatDongSanAPI.csproj.CopyComplete
