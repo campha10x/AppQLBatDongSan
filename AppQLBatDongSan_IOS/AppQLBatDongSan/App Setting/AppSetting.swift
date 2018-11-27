@@ -32,7 +32,7 @@ struct TimerDuration {
 }
 
 struct RealmSetting {
-    static let schemaVersion: UInt64 = 9
+    static let schemaVersion: UInt64 = 1
 }
 
 // Color using in app

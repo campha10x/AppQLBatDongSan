@@ -36,7 +36,7 @@ class AddAndEditHoaDonViewController: UIViewController {
             if let index = self.listPhong.index(where: { $0.idPhong == self.hoadon?.idPhong}) {
                 self.cbbPhong.setOptions(self.listPhong.map({$0.tenPhong}), placeholder: nil, selectedIndex: index)
             }
-            btnNgayTao.date = hoadon?.ngayTao.toDate(format: "yyyy-MM-dd HH:mm:ss +zzzz") ?? Date()
+            btnNgayTao.date = hoadon?.ngayTao.toDate(format: "MM/dd/yyyy HH:mm:ss") ?? Date()
             tfSotien.setValue(hoadon?.soTien)
             btnTao.setTitle("Sửa hoá đơn", for: .normal)
         } else {

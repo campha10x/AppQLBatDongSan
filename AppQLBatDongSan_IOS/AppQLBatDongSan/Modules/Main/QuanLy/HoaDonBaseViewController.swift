@@ -21,10 +21,12 @@ enum MainMenuType: String {
     case segueDonvi = "segueDonvi"
     case segueDichvu = "segueDichvu"
     case segueTongQuan = "segueTongQuan"
+    case segueAccountInfor = "segueAccountInfor"
 }
 
 class HoaDonBaseViewController: UIViewController {
     var hoadonDirectionViewController: QLBatDongSanViewController?
+    var headerViewController: HeaderMainViewController?
     
     var presenter: HoaDonPresenterProtocol?
     
@@ -48,6 +50,15 @@ class HoaDonBaseViewController: UIViewController {
         if segue.destination is UINavigationController {
             let destViewController = segue.destination as! UINavigationController
             hoadonDirectionViewController = destViewController.topViewController as? QLBatDongSanViewController
+        } else if segue.destination is HeaderMainViewController {
+            headerViewController = segue.destination as? HeaderMainViewController
+            headerViewController?.delegate = self
+        }
+        else if segue.destination is AccountInformationViewController {
+            let currentViewController = segue.destination as? AccountInformationViewController
+            currentViewController?.dismissViewController = {
+                self.mainMenuOpen(type: .segueTongQuan)
+            }
         }
     }
     
@@ -56,16 +67,28 @@ class HoaDonBaseViewController: UIViewController {
 extension HoaDonBaseViewController: MainMenuDelegate {
     func mainMenuOpen(type: MainMenuType){
         if type == .segueLogout {
+            Storage.shared.removeAll()
+            AppState.shared.saveAccount(account: nil)
             self.navigationController?.popToRootViewController(animated: true)
         } else {
             hoadonDirectionViewController?.segueIdentifierReceivedFromParent(type.rawValue)
         }
     }
-    
 }
-
-
 
 extension HoaDonBaseViewController: HoaDonViewProtocol {
     
 }
+
+extension HoaDonBaseViewController: HeaderMainOptionDelegate {
+    func eventClickShowInfor() {
+         self.mainMenuOpen(type: .segueAccountInfor)
+    }
+    
+    func eventClickLogout() {
+       
+    }
+    
+    
+}
+

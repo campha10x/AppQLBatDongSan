@@ -10,7 +10,7 @@ import UIKit
 
 class QLBatDongSanViewController: UIViewController {
 
-    fileprivate var segueIdentifier : String = "segueHoadon"
+    fileprivate var segueIdentifier : String = "segueTongQuan"
     
     private (set) var currentViewController : UIViewController?
     

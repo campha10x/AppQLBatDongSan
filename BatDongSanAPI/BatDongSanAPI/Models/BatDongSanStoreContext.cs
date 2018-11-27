@@ -270,6 +270,7 @@ namespace BatDongSanAPI.Models
             return phieuthu;
         }
 
+
         public HopDong addHopDong(string ChuHopDong,string idPhong, string SoTienCoc,string NgayBD, string NgayKT,string GhiChu, string GioiTinh, string SDTKhachHang, string EmailKhachHang)
         {
             HopDong hopdong = new HopDong();
@@ -496,6 +497,37 @@ namespace BatDongSanAPI.Models
             }
 
             return phieuchi;
+        }
+
+        public Account updateAccount(string IdAccount, string HoTen, string GioiTinh, string NamSinh, string SDT, string DiaChi)
+        {
+            Account account = new Account();
+
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("UPDATE Account SET HoTen = '" + HoTen + "' , GioiTinh = '" + GioiTinh + "', NamSinh = '" + NamSinh + "', SDT = '" + SDT + "', DiaChi = '" + DiaChi + "' WHERE IdAccount = '" + IdAccount + "'    ", conn);
+                cmd.ExecuteNonQuery();
+
+                cmd.CommandText = "SELECT * FROM Account WHERE IdAccount = '" + IdAccount + "' ";
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        account.IdAccount = reader["IdAccount"].ToString();
+                        account.Email = reader["Email"].ToString();
+                        account.MatKhau = reader["MatKhau"].ToString();
+                        account.Hoten = reader["Hoten"].ToString();
+                        account.Gioitinh = reader["Gioitinh"].ToString();
+                        account.NamSinh = reader["NamSinh"].ToString();
+                        account.Sdt = reader["SDT"].ToString();
+                        account.DiaChi = reader["DiaChi"].ToString();
+                    }
+                }
+            }
+
+            return account;
         }
 
         public Phong updatePhong(string idPhong, string TenPhong, string DonGia, string SoDien, string SoNuoc, string IdNhaTro)
@@ -855,12 +887,12 @@ namespace BatDongSanAPI.Models
                     {
                         list.Add(new Account()
                         {
-                            IdNhaTro = Convert.ToInt32(reader["idNhaTro"]),
+                            IdAccount = reader["IdAccount"].ToString(),
                             Email = reader["Email"].ToString(),
                             MatKhau = reader["MatKhau"].ToString(),
                             Hoten = reader["HoTen"].ToString(),
-                            Gioitinh = Convert.ToBoolean(reader["GioiTinh"]),
-                            NamSinh = Convert.ToInt32(reader["NamSinh"]),
+                            Gioitinh = reader["GioiTinh"].ToString(),
+                            NamSinh = reader["NamSinh"].ToString(),
                             Sdt = reader["SDT"].ToString(),
                             DiaChi = reader["DiaChi"].ToString(),
                             AnhDaiDien = reader["AnhDaiDien"].ToString()

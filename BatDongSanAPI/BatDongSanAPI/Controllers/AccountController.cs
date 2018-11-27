@@ -21,6 +21,15 @@ namespace BatDongSanAPI.Controllers
             Account a = context.GetInformationAccount(email, password).First();
             return Json(a);
         }
+
+        [HttpPost("/Account/EditAccount")]
+        public JsonResult EditAccount([FromHeader(Name = "IdAccount")] string IdAccount, [FromHeader(Name = "HoTen")] string HoTen, [FromHeader(Name = "GioiTinh")] string GioiTinh, [FromHeader(Name = "NamSinh")] string NamSinh, [FromHeader(Name = "SDT")] string SDT, [FromHeader(Name = "DiaChi")] string DiaChi)
+        {
+            BatDongSanStoreContext context = HttpContext.RequestServices.GetService(typeof(BatDongSanStoreContext)) as BatDongSanStoreContext;
+            Account a = context.updateAccount(IdAccount,HoTen, GioiTinh, NamSinh, SDT, DiaChi);
+            return Json(a);
+        }
+
         public IActionResult Index()
         {
             return View();

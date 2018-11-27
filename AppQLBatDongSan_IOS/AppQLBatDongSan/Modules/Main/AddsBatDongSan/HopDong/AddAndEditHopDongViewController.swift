@@ -65,8 +65,8 @@ class AddAndEditHopDongViewController: UIViewController {
             }
             tfSDT.text = hopdong?.SDTKhachHang
             tfEmailKH.text = hopdong?.emailKhachHang
-            btnNgayBatDauCalendar.date = hopdong?.NgayBD.toDate(format: "yyyy-MM-dd HH:mm:ss +zzzz") ?? Date()
-            btnNgayKTCalendar.date = hopdong?.NgayKT.toDate(format: "yyyy-MM-dd HH:mm:ss +zzzz") ?? Date()
+            btnNgayBatDauCalendar.date = hopdong?.NgayBD.toDate(format: "MM/dd/yyyy HH:mm:ss") ?? Date()
+            btnNgayKTCalendar.date = hopdong?.NgayKT.toDate(format: "MM/dd/yyyy HH:mm:ss") ?? Date()
             tfTienCoc.setValue(hopdong?.SoTienCoc)
             tfGhiChu.text = hopdong?.GhiChu
         } else {

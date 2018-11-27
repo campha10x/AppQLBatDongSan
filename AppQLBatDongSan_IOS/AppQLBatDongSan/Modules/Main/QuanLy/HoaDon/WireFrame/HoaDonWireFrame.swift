@@ -17,7 +17,7 @@ class HoaDonWireFrame: HoaDonWireFrameProtocol {
         let interactor: HoaDonInteractorProtocol = HoaDonInteractor()
         
         view.presenter = presenter
-        presenter.view = view
+        presenter.view = view  
         presenter.wireframe = wireframe
         presenter.interacter = interactor
         interactor.presenter = presenter

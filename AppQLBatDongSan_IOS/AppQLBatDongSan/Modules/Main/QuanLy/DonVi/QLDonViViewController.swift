@@ -63,7 +63,7 @@ class QLDonViViewController: UIViewController {
                 let json: JSON = try JSON.init(data: responseObject.data! )
                 self.listDonvi  = json.arrayValue.map({DonVi.init(json: $0)})
                 self.listDonvi.forEach({ (donvi) in
-                    if let donviCopy = donvi.copy() as? Phong {
+                    if let donviCopy = donvi.copy() as? DonVi {
                         Storage.shared.addOrUpdate([donviCopy], type: DonVi.self)
                     }
                 })

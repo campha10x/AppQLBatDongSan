@@ -8,7 +8,7 @@ namespace BatDongSanAPI.Models
     {
         private BatDongSanStoreContext context;
 
-        public int IdNhaTro { get; set; }
+        public string IdAccount { get; set; }
 
         public string Email { get; set; }
 
@@ -16,9 +16,9 @@ namespace BatDongSanAPI.Models
 
         public string Hoten { get; set; }
 
-        public bool Gioitinh { get; set; }
+        public string Gioitinh { get; set; }
 
-        public int NamSinh { get; set; }
+        public string NamSinh { get; set; }
 
         public string Sdt { get; set; }
 

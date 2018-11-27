@@ -58,7 +58,7 @@ class LoginViewController: UIViewController {
 
 extension LoginViewController: LoginViewProtocol {
     func loginFail(error: String) {
-        Notice.make(type: .Error, content: "Tài khoản không đùng mời bạn nhập lại").show()
+        Notice.make(type: .Error, content: error).show()
     }
     
     
