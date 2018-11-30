@@ -15,7 +15,7 @@ protocol eventProtocols {
 
 
 class ListPhieuChiTableViewCell: UITableViewCell {
-    @IBOutlet weak var labelPhong: UILabel!
+    @IBOutlet weak var labelCanHo: UILabel!
     @IBOutlet weak var labelDienGiai: UILabel!
     @IBOutlet weak var labelNgay: UILabel!
     @IBOutlet weak var labelSoTien: UILabel!
@@ -40,8 +40,8 @@ class ListPhieuChiTableViewCell: UITableViewCell {
     
     func binding(phieuchi: PhieuChi, index: Int )  {
         self.index = index
-        let listPhong = Storage.shared.getObjects(type: Phong.self) as? [Phong]
-        labelPhong.text = listPhong?.filter({ $0.idPhong == phieuchi.IdPhong }).first?.tenPhong
+        let listCanHo = Storage.shared.getObjects(type: CanHo.self) as? [CanHo]
+        labelCanHo.text = listCanHo?.filter({ $0.IdCanHo == phieuchi.IdCanHo }).first?.TenCanHo
         labelSoTien.text = phieuchi.Sotien.toNumberString(decimal: false)
         labelNgay.text = phieuchi.Ngay.formatDate()
         labelDienGiai.text = phieuchi.DienGiai

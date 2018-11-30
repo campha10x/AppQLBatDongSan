@@ -17,7 +17,7 @@ namespace BatDongSanAPI.Controllers
             return Json(a);
         }
 
-        [HttpGet("/HoaDon/GetListPhieuThu")]
+        [HttpGet("/PhieuThu/GetListPhieuThu")]
         public JsonResult GetListPhieuThu()
         {
             BatDongSanStoreContext context = HttpContext.RequestServices.GetService(typeof(BatDongSanStoreContext)) as BatDongSanStoreContext;
@@ -25,7 +25,7 @@ namespace BatDongSanAPI.Controllers
             return Json(listPhieuThu);
         }
 
-        [HttpPost(" /PhieuThu/RemoveListPhieuThu")]
+        [HttpPost("/PhieuThu/RemoveListPhieuThu")]
         public JsonResult RemoveListHoaDon([FromHeader(Name = "IdPhieuThu")] string IdPhieuThu)
         {
             BatDongSanStoreContext context = HttpContext.RequestServices.GetService(typeof(BatDongSanStoreContext)) as BatDongSanStoreContext;

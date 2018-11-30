@@ -1,5 +1,5 @@
 //
-//  QLPhongViewController.swift
+//  QLCanHoViewController.swift
 //  AppQLBatDongSan
 //
 //  Created by User on 10/21/18.
@@ -11,12 +11,12 @@ import SVProgressHUD
 import SwiftyJSON
 import Alamofire
 
-class QLPhongViewController: UIViewController {
+class QLCanHoViewController: UIViewController {
     
-    var listPhong: [Phong] = [Phong]()
+    var listCanHo: [CanHo] = [CanHo]()
     let manager = Alamofire.SessionManager()
     
-    @IBOutlet weak var tblPhong: UITableView!
+    @IBOutlet weak var tblCanHo: UITableView!
     @IBOutlet weak var constraintHeightViewBody: NSLayoutConstraint!
     @IBOutlet weak var viewBody: UIView!
     
@@ -25,21 +25,21 @@ class QLPhongViewController: UIViewController {
         configService()
         viewBody.layer.borderWidth = 2.0
         viewBody.layer.borderColor = UIColor.init(netHex: 0x5D7AFF).cgColor
-        tblPhong.delegate = self
-        tblPhong.dataSource = self
-        loadPhong()
+        tblCanHo.delegate = self
+        tblCanHo.dataSource = self
+        loadCanHo()
         // Do any additional setup after loading the view.
     }
     
     
-    @IBAction func themMoiPhong(_ sender: Any) {
+    @IBAction func themMoiCanHo(_ sender: Any) {
         let storyboard = UIStoryboard.init(name: "AddBatDongSan", bundle: nil)
-        let currentViewController = storyboard.instantiateViewController(withIdentifier: "AddAndEditPhongViewController") as! AddAndEditPhongViewController
+        let currentViewController = storyboard.instantiateViewController(withIdentifier: "AddAndEditCanHoViewController") as! AddAndEditCanHoViewController
         currentViewController.isCreateNew = true
-        currentViewController.done = { phongResponse in
-            self.listPhong.append(phongResponse)
-            self.tblPhong.reloadData()
-            self.constraintHeightViewBody.constant = CGFloat (100 + 70 + 70 + 70 * self.listPhong.count + 60)
+        currentViewController.done = { CanHoResponse in
+            self.listCanHo.append(CanHoResponse)
+            self.tblCanHo.reloadData()
+            self.constraintHeightViewBody.constant = CGFloat (100 + 70 + 70 + 70 * self.listCanHo.count + 60)
         }
         currentViewController.modalPresentationStyle = .overCurrentContext
         self.present(currentViewController, animated: true, completion: nil)
@@ -69,20 +69,20 @@ class QLPhongViewController: UIViewController {
         }
     }
     
-    func loadPhong()  {
+    func loadCanHo()  {
         SVProgressHUD.show()
-        manager.request("https://localhost:5001/Phong/GetListPhong", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil).responseJSON { (responseObject) in
+        manager.request("https://localhost:5001/CanHo/GetListCanHo", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil).responseJSON { (responseObject) in
             SVProgressHUD.dismiss()
             do {
                 let json: JSON = try JSON.init(data: responseObject.data! )
-                self.listPhong  = json.arrayValue.map({Phong.init(json: $0)})
-                self.listPhong.forEach({ (phong) in
-                    if let phongCopy = phong.copy() as? Phong {
-                        Storage.shared.addOrUpdate([phongCopy], type: Phong.self)
+                self.listCanHo  = json.arrayValue.map({CanHo.init(json: $0)})
+                self.listCanHo.forEach({ (canHo) in
+                    if let canHoCopy = canHo.copy() as? CanHo {
+                        Storage.shared.addOrUpdate([canHoCopy], type: CanHo.self)
                     }
                 })
-                self.tblPhong.reloadData()
-                self.constraintHeightViewBody.constant = CGFloat (200.0 +  70.0 * CGFloat(self.listPhong.count ))
+                self.tblCanHo.reloadData()
+                self.constraintHeightViewBody.constant = CGFloat (200.0 +  70.0 * CGFloat(self.listCanHo.count ))
             } catch {
                 if let error = responseObject.error {
                     Notice.make(type: .Error, content: error.localizedDescription ).show()
@@ -94,14 +94,14 @@ class QLPhongViewController: UIViewController {
     
 }
 
-extension QLPhongViewController: UITableViewDataSource, UITableViewDelegate  {
+extension QLCanHoViewController: UITableViewDataSource, UITableViewDelegate  {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return listPhong.count
+        return listCanHo.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: QLPhongTableViewCell.id, for: indexPath) as! QLPhongTableViewCell
-        cell.binding(phong: self.listPhong[indexPath.row], index: indexPath.row)
+        let cell = tableView.dequeueReusableCell(withIdentifier: QLCanHoTableViewCell.id, for: indexPath) as! QLCanHoTableViewCell
+        cell.binding(canHo: self.listCanHo[indexPath.row], index: indexPath.row)
         cell.delegate = self
         return cell
     }
@@ -110,18 +110,18 @@ extension QLPhongViewController: UITableViewDataSource, UITableViewDelegate  {
         return 70
     }
 }
-extension QLPhongViewController: eventProtocols {
+extension QLCanHoViewController: eventProtocols {
     func eventEdit(_ index: Int) {
         let storyboard = UIStoryboard.init(name: "AddBatDongSan", bundle: nil)
-        let currentViewController = storyboard.instantiateViewController(withIdentifier: "AddAndEditPhongViewController") as! AddAndEditPhongViewController
+        let currentViewController = storyboard.instantiateViewController(withIdentifier: "AddAndEditCanHoViewController") as! AddAndEditCanHoViewController
         currentViewController.modalPresentationStyle = .overCurrentContext
-        currentViewController.phong = self.listPhong[index].copy() as! Phong
+        currentViewController.canHo = self.listCanHo[index].copy() as! CanHo
         currentViewController.isCreateNew = false
-        currentViewController.done = { phongResponse in
-            if let index = self.listPhong.firstIndex(where: { $0.idPhong == phongResponse.idPhong}) {
-                self.listPhong[index] = phongResponse
-                self.tblPhong.reloadData()
-                self.constraintHeightViewBody.constant = CGFloat (100 + 70 + 70 + 70 * self.listPhong.count + 60)
+        currentViewController.done = { canHoResponse in
+            if let index = self.listCanHo.firstIndex(where: { $0.IdCanHo == canHoResponse.IdCanHo}) {
+                self.listCanHo[index] = canHoResponse
+                self.tblCanHo.reloadData()
+                self.constraintHeightViewBody.constant = CGFloat (100 + 70 + 70 + 70 * self.listCanHo.count + 60)
             }
         }
         self.present(currentViewController, animated: true, completion: nil)
@@ -129,16 +129,16 @@ extension QLPhongViewController: eventProtocols {
     }
     
     func eventRemove(_ index: Int) {
-        let parameters = ["idPhong": self.listPhong[index].idPhong ]
+        let parameters = ["IdCanHo": self.listCanHo[index].IdCanHo ]
         SVProgressHUD.show()
-        manager.request("https://localhost:5001/Phong/RemoveListPhong", method: .post, parameters: nil, encoding: URLEncoding.default, headers: parameters).responseJSON { (responseObject) in
+        manager.request("https://localhost:5001/CanHo/RemoveListCanHo", method: .post, parameters: nil, encoding: URLEncoding.default, headers: parameters).responseJSON { (responseObject) in
             SVProgressHUD.dismiss()
             do {
-                Notice.make(type: .Success, content: "Xoá phòng thành công !").show()
-                Storage.shared.delete(Phong.self, ids: [self.listPhong[index].idPhong], idPrefix: "idPhong")
-                self.listPhong.remove(at: index)
-                self.tblPhong.reloadData()
-                self.constraintHeightViewBody.constant = CGFloat (100 + 70 + 70 + 70 * self.listPhong.count + 60)
+                Notice.make(type: .Success, content: "Xoá căn hộ thành công !").show()
+                Storage.shared.delete(CanHo.self, ids: [self.listCanHo[index].IdCanHo], idPrefix: "IdCanHo")
+                self.listCanHo.remove(at: index)
+                self.tblCanHo.reloadData()
+                self.constraintHeightViewBody.constant = CGFloat (100 + 70 + 70 + 70 * self.listCanHo.count + 60)
             } catch {
                 if let error = responseObject.error {
                     Notice.make(type: .Error, content: error.localizedDescription).show()

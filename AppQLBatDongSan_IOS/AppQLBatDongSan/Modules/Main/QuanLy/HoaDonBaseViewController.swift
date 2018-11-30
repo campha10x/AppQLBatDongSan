@@ -54,12 +54,7 @@ class HoaDonBaseViewController: UIViewController {
             headerViewController = segue.destination as? HeaderMainViewController
             headerViewController?.delegate = self
         }
-        else if segue.destination is AccountInformationViewController {
-            let currentViewController = segue.destination as? AccountInformationViewController
-            currentViewController?.dismissViewController = {
-                self.mainMenuOpen(type: .segueTongQuan)
-            }
-        }
+
     }
     
 }

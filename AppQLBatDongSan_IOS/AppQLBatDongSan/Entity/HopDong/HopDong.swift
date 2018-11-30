@@ -13,7 +13,7 @@ import RealmSwift
 class HopDong: BaseRealmObject, NSCopying {
     @objc dynamic var idHopDong: String = ""
     @objc dynamic var ChuHopDong: String = ""
-    @objc dynamic var idPhong: String = ""
+    @objc dynamic var IdCanHo: String = ""
     @objc dynamic var SoTienCoc: String = ""
     @objc dynamic var NgayBD: String = ""
     @objc dynamic var NgayKT: String = ""
@@ -30,7 +30,7 @@ class HopDong: BaseRealmObject, NSCopying {
         self.init()
         self.idHopDong = json["idHopDong"].stringValue
         self.ChuHopDong = json["chuHopDong"].stringValue
-        self.idPhong = json["idPhong"].stringValue
+        self.IdCanHo = json["idPhong"].stringValue
         self.SoTienCoc = json["soTienCoc"].stringValue
         self.NgayBD = json["ngayBD"].stringValue
         self.NgayKT = json["ngayKT"].stringValue
@@ -40,22 +40,13 @@ class HopDong: BaseRealmObject, NSCopying {
         self.SDTKhachHang = json["sdtKhachHang"].stringValue
         self.emailKhachHang = json["emailKhachHang"].stringValue
     }
-    
-    //Incrementa ID
-    func IncrementaID() -> Int{
-        let realm = try! Realm()
-        if let retNext = realm.objects(HopDong.self).sorted(byKeyPath: "idHopDong").last?.idHopDong, let value = Int(retNext)  {
-            return value + 1
-        }else{
-            return 1
-        }
-    }
+
     
     func copy(with zone: NSZone? = nil) -> Any {
         let copy = HopDong()
         copy.idHopDong = self.idHopDong
         copy.ChuHopDong = self.ChuHopDong
-        copy.idPhong = self.idPhong
+        copy.IdCanHo = self.IdCanHo
         copy.SoTienCoc = self.SoTienCoc
         copy.NgayBD = self.NgayBD
         copy.NgayKT = self.NgayKT

@@ -33,6 +33,12 @@ class QLBatDongSanViewController: UIViewController {
                 currentViewController = nil
             }
         }
+        if segue.destination is AccountInformationViewController {
+            let currentViewController = segue.destination as? AccountInformationViewController
+            currentViewController?.dismissViewController = {
+                self.segueIdentifierReceivedFromParent(MainMenuType.segueTongQuan.rawValue)
+            }
+        }
         currentViewController = segue.destination
         self.addChildViewController(currentViewController!)
         currentViewController?.view.frame = CGRect.init(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)

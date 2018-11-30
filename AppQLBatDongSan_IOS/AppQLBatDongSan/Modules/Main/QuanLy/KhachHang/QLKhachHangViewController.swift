@@ -16,7 +16,7 @@ class QLKhachHangViewController: UIViewController {
     
     @IBOutlet weak var tableViewKhachHang: UITableView!
     @IBOutlet weak var textfieldTenKH: UITextField!
-    @IBOutlet weak var cbbPhong: MyCombobox!
+    @IBOutlet weak var cbbCanHo: MyCombobox!
     @IBOutlet weak var viewBody: UIView!
     @IBOutlet weak var constraintHeightViewBody: NSLayoutConstraint!
     
@@ -24,7 +24,7 @@ class QLKhachHangViewController: UIViewController {
     @IBOutlet weak var viewHeader: UIView!
     @IBOutlet weak var btnCreateNew: UIButton!
     var listKhachHang: [KhachHang] = []
-    var listPhong: [Phong] = []
+    var listCanHo: [CanHo] = []
     var listSearchKhachHang: [KhachHang] = []
     let manager = Alamofire.SessionManager()
     
@@ -33,9 +33,9 @@ class QLKhachHangViewController: UIViewController {
         customized()
         configService()
         loadKhachHang()
-        listPhong = Storage.shared.getObjects(type: Phong.self) as! [Phong]
-        self.cbbPhong.setOptions(self.listPhong.map({$0.tenPhong}), placeholder: nil, selectedIndex: nil)
-        self.cbbPhong.delegate = self
+        listCanHo = Storage.shared.getObjects(type: CanHo.self) as! [CanHo]
+        self.cbbCanHo.setOptions(self.listCanHo.map({$0.TenCanHo}), placeholder: nil, selectedIndex: nil)
+        self.cbbCanHo.delegate = self
         tableViewKhachHang.delegate = self
         tableViewKhachHang.dataSource = self
         self.listSearchKhachHang = self.listKhachHang
@@ -135,9 +135,9 @@ class QLKhachHangViewController: UIViewController {
 
 extension QLKhachHangViewController: MyComboboxDelegate {
     func mycombobox(_ cbb: MyCombobox, selectedAt index: Int) {
-        if cbb == cbbPhong {
-            let idPhong = self.listPhong[index].idPhong
-            self.listSearchKhachHang = self.listKhachHang.filter({ $0.IdPhong == idPhong })
+        if cbb == cbbCanHo {
+            let idCanHo = self.listCanHo[index].IdCanHo
+            self.listSearchKhachHang = self.listKhachHang.filter({ $0.IdCanHo == idCanHo })
             self.tableViewKhachHang.reloadData()
         }
         

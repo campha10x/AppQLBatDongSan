@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AppQLBatDongSan/Modules/Main/AddsBatDongSan/DichVu/AddAndEditDichVuViewController.swift"
-            timestampString = "564850260.368558"
+            timestampString = "565133548.339233"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "46"
@@ -26,7 +26,7 @@
                   moduleName = "AppQLBatDongSan"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/duyxuan/Desktop/AppQLBatDongSan/AppQLBatDongSan_IOS/AppQLBatDongSan/Modules/Main/AddsBatDongSan/DichVu/AddAndEditDichVuViewController.swift"
-                  timestampString = "564962447.494344"
+                  timestampString = "565252512.557197"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "46"
@@ -41,7 +41,7 @@
                   moduleName = "AppQLBatDongSan"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/duyxuan/Desktop/AppQLBatDongSan/AppQLBatDongSan_IOS/AppQLBatDongSan/Modules/Main/AddsBatDongSan/DichVu/AddAndEditDichVuViewController.swift"
-                  timestampString = "564962447.497808"
+                  timestampString = "565252512.560187"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "46"
@@ -57,29 +57,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "AppQLBatDongSan/Modules/Main/QuanLy/HoaDonBaseViewController.swift"
-            timestampString = "564962447.482728"
+            filePath = "AppQLBatDongSan/Entity/HoaDon/HoaDon.swift"
+            timestampString = "565252512.369969"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
-            landmarkName = "prepare(for:sender:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AppQLBatDongSan/Modules/Main/QuanLy/HoaDonBaseViewController.swift"
-            timestampString = "564962447.483282"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
-            landmarkName = "prepare(for:sender:)"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "init(json:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

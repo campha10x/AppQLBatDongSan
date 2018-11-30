@@ -13,46 +13,64 @@ import SwiftyJSON
 
 class AddAndEditHoaDonViewController: UIViewController {
 
-    @IBOutlet weak var cbbPhong: MyCombobox!
+    @IBOutlet weak var cbbCanHo: MyCombobox!
     @IBOutlet weak var tfSoPhieu: MyTextField!
     @IBOutlet weak var tfSotien: MyNumberField!
     @IBOutlet weak var btnNgayTao: MyButtonCalendar!
     @IBOutlet weak var btnTao: MySolidButton!
     @IBOutlet weak var viewBody: UIView!
     
-    var listPhong: [Phong] = []
+    @IBOutlet weak var tfSoDienMoi: MyNumberField!
+    @IBOutlet weak var tfSoNuocMoi: MyNumberField!
+    
+    var listCanHo: [CanHo] = []
     var isCreateNew: Bool = true
     var hoadon: HoaDon? = nil
     var done: ((_ hoadon: HoaDon)->())?
     let manager = Alamofire.SessionManager()
+    var soTien: Double = 0.0
+    
+    var indexCanHo = -1
     
     @IBOutlet weak var labelHeaderTitle: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         customized()
         configService()
         if !isCreateNew {
             tfSoPhieu.text = self.hoadon?.soPhieu
-            if let index = self.listPhong.index(where: { $0.idPhong == self.hoadon?.idPhong}) {
-                self.cbbPhong.setOptions(self.listPhong.map({$0.tenPhong}), placeholder: nil, selectedIndex: index)
+            if let index = self.listCanHo.index(where: { $0.IdCanHo == self.hoadon?.IdCanHo}) {
+                tfSoDienMoi.text = self.hoadon?.soDienMoi
+                tfSoNuocMoi.text = self.hoadon?.soNuocMoi
+                self.cbbCanHo.setOptions(self.listCanHo.map({$0.TenCanHo}), placeholder: nil, selectedIndex: index)
             }
             btnNgayTao.date = hoadon?.ngayTao.toDate(format: "MM/dd/yyyy HH:mm:ss") ?? Date()
             tfSotien.setValue(hoadon?.soTien)
+            tfSoDienMoi.setValue(hoadon?.soDienMoi)
+            tfSoNuocMoi.setValue(hoadon?.soNuocMoi)
             btnTao.setTitle("Sửa hoá đơn", for: .normal)
         } else {
+            tfSoDienMoi.setValue(0.0)
+            tfSoNuocMoi.setValue(0.0)
             tfSoPhieu.text = "SPHD-\(randomNumber(inRange: 100...50000))"
-            self.cbbPhong.setOptions(self.listPhong.map({$0.tenPhong}), placeholder: nil, selectedIndex: nil)
+            self.cbbCanHo.setOptions(self.listCanHo.map({$0.TenCanHo}), placeholder: nil, selectedIndex: nil)
             btnNgayTao.date = Date()
             btnTao.setTitle("Tạo hoá đơn", for: .normal)
         }
+        tfSoDienMoi.delegate = self
+        tfSoNuocMoi.delegate = self
+        tfSotien.isEnabled = false
         tfSoPhieu.isEnabled = false
          viewBody.layer.cornerRadius = 6.0
     }
     
     func customized()  {
-        listPhong = Storage.shared.getObjects(type: Phong.self) as! [Phong]
-        self.cbbPhong.delegate = self
+        listCanHo = Storage.shared.getObjects(type: CanHo.self) as! [CanHo]
+        self.cbbCanHo.delegate = self
         tfSotien?.setAsNumericKeyboard(type: .money, autoSelectAll: true)
+        tfSoDienMoi.setAsNumericKeyboard(type: .integer, autoSelectAll: true)
+        tfSoNuocMoi.setAsNumericKeyboard(type: .integer, autoSelectAll: true)
         labelHeaderTitle.text = isCreateNew == true ? "Tạo hoá đơn" : "Sửa hoá đơn"
         
         btnNgayTao.layer.cornerRadius = 6.0
@@ -134,17 +152,17 @@ class AddAndEditHoaDonViewController: UIViewController {
         hoadon.soTien = "\(tfSotien.getValueString())"
         hoadon.soPhieu = tfSoPhieu.text ?? ""
         hoadon.ngayTao = "\(btnNgayTao.date)"
-        if let index = cbbPhong.selectedIndex{
-            hoadon.idPhong = "\(listPhong[index].idPhong)"
+        if let index = cbbCanHo.selectedIndex{
+            hoadon.IdCanHo = "\(listCanHo[index].IdCanHo)"
         } else {
-            cbbPhong.warning()
+            cbbCanHo.warning()
             Notice.make(type: .Error, content: "Chưa chọn phòng, làm ơn hãy chọn ").show()
             return
         }
         
         let parameters: [String: String] = [
             "IdHoaDon" : hoadon.idHoaDon,
-            "IdPhong" : hoadon.idPhong ,
+            "IdCanHo" : hoadon.IdCanHo ,
             "SoPhieu" : hoadon.soPhieu,
             "NgayTao" : hoadon.ngayTao.formatDate(date: "yyyy-MM-dd HH:mm:ss +HHHH", dateTo: "YYYY-MM-dd"),
             "SoTien" : hoadon.soTien
@@ -188,13 +206,32 @@ class AddAndEditHoaDonViewController: UIViewController {
                 }
             }
         }
-       
-
-
+    }
+    
+    
+    func recaculatorSoTien () {
+        soTien = 0
+        if indexCanHo >= 0 {
+            soTien += Double(self.listCanHo[indexCanHo].DonGia) ?? 0
+        }
+        soTien += tfSoDienMoi.getValue() * 3500 + tfSoNuocMoi.getValue() * 20000
+        tfSotien.setValue(soTien)
     }
 
 }
 
 extension AddAndEditHoaDonViewController :MyComboboxDelegate{
-    
+    func mycombobox(_ cbb: MyCombobox, selectedAt index: Int) {
+        if index < self.listCanHo.count {
+            self.indexCanHo = index
+            recaculatorSoTien()
+        }
+    }
+}
+
+
+extension AddAndEditHoaDonViewController :UITextFieldDelegate{
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        recaculatorSoTien()
+    }
 }

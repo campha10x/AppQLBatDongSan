@@ -12,7 +12,7 @@ import RealmSwift
 
 class PhieuThu: BaseRealmObject, NSCopying {
     @objc dynamic var IdPhieuThu: String = ""
-    @objc dynamic var IdPhong: String = ""
+    @objc dynamic var IdCanHo: String = ""
     @objc dynamic var IdHoaDon: String = ""
     @objc dynamic var SoTien: String = ""
     @objc dynamic var Ngay: String = ""
@@ -25,7 +25,7 @@ class PhieuThu: BaseRealmObject, NSCopying {
     convenience init(json: JSON ) {
         self.init()
         self.IdPhieuThu = json["idPhieuThu"].stringValue
-        self.IdPhong = json["idPhong"].stringValue
+        self.IdCanHo = json["idCanHo"].stringValue
         self.IdHoaDon = json["idHoaDon"].stringValue
         self.SoTien = json["sotien"].stringValue
         self.Ngay = json["ngay"].stringValue
@@ -33,20 +33,10 @@ class PhieuThu: BaseRealmObject, NSCopying {
         
     }
     
-    //Incrementa ID
-    func IncrementaID() -> Int{
-        let realm = try! Realm()
-        if let retNext = realm.objects(PhieuThu.self).sorted(byKeyPath: "IdPhieuThu").last?.IdPhieuThu, let value = Int(retNext)  {
-            return value + 1
-        }else{
-            return 1
-        }
-    }
-    
     func copy(with zone: NSZone? = nil) -> Any {
         let copy = PhieuThu()
         copy.IdPhieuThu = self.IdPhieuThu
-        copy.IdPhong = self.IdPhong
+        copy.IdCanHo = self.IdCanHo
         copy.IdHoaDon = self.IdHoaDon
         copy.SoTien = self.SoTien
         copy.Ngay = self.Ngay

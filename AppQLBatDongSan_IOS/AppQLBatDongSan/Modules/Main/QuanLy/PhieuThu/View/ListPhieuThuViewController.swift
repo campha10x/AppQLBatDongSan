@@ -24,7 +24,7 @@ class ListPhieuThuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configService()
-        loadHoaDon()
+        loadPhieuThu()
         viewBody.layer.borderWidth = 2.0
         viewBody.layer.borderColor = UIColor.init(netHex: 0x5D7AFF).cgColor
         tblPhieuThu.delegate = self
@@ -32,9 +32,9 @@ class ListPhieuThuViewController: UIViewController {
 
     }
     
-    func loadHoaDon() {
+    func loadPhieuThu() {
         SVProgressHUD.show()
-        manager.request("https://localhost:5001/HoaDon/GetListPhieuThu", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil).responseJSON { (responseObject) in
+        manager.request("https://localhost:5001/PhieuThu/GetListPhieuThu", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil).responseJSON { (responseObject) in
             SVProgressHUD.dismiss()
             do {
                 let json: JSON = try JSON.init(data: responseObject.data! )
@@ -90,6 +90,7 @@ class ListPhieuThuViewController: UIViewController {
     func removePhieuThu(_ index: Int)  {
         SVProgressHUD.show()
         let parameters = ["IdPhieuThu": self.listPhieuThu[index].IdPhieuThu ]
+        
         manager.request("https://localhost:5001/PhieuThu/RemoveListPhieuThu", method: .post, parameters: nil, encoding: URLEncoding.default, headers: parameters).responseJSON { (responseObject) in
             SVProgressHUD.dismiss()
             if let error = responseObject.error {

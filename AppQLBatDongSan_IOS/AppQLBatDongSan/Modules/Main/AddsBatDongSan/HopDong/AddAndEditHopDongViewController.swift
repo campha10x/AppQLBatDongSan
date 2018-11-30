@@ -13,7 +13,7 @@ import SVProgressHUD
 import SwiftyJSON
 
 class AddAndEditHopDongViewController: UIViewController {
-    @IBOutlet weak var cbbPhong: MyCombobox!
+    @IBOutlet weak var cbbCanHo: MyCombobox!
     
     @IBOutlet weak var tfTenKH: MyTextField!
 
@@ -29,7 +29,7 @@ class AddAndEditHopDongViewController: UIViewController {
     @IBOutlet weak var viewBody: UIView!
     @IBOutlet weak var labelHeaderTitle: UILabel!
     
-    var listPhong: [Phong] = []
+    var listCanHo: [CanHo] = []
     var listDichVu: [DichVu] = []
     var isCreateNew: Bool = true
     var hopdong: HopDong? = nil
@@ -42,7 +42,7 @@ class AddAndEditHopDongViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configService()
-        listPhong = Storage.shared.getObjects(type: Phong.self) as! [Phong]
+        listCanHo = Storage.shared.getObjects(type: CanHo.self) as! [CanHo]
         listDichVu = Storage.shared.getObjects(type: DichVu.self) as! [DichVu]
 //        cbbDichVu.setOptions(self.listDichVu.map({ $0.TenDichVu}), placeholder: nil, selectedIndex: nil)
 //        cbbDichVu.isMultipleSelection = true
@@ -56,8 +56,8 @@ class AddAndEditHopDongViewController: UIViewController {
         labelHeaderTitle.text = isCreateNew == true ? "Tạo hợp đồng" : "Sửa hợp đồng"
         if !isCreateNew {
             tfTenKH.text = self.hopdong?.ChuHopDong
-            if let index = self.listPhong.index(where: { $0.idPhong == self.hopdong?.idPhong}) {
-                self.cbbPhong.setOptions(self.listPhong.map({$0.tenPhong}), placeholder: nil, selectedIndex: index)
+            if let index = self.listCanHo.index(where: { $0.IdCanHo == self.hopdong?.IdCanHo}) {
+                self.cbbCanHo.setOptions(self.listCanHo.map({$0.TenCanHo}), placeholder: nil, selectedIndex: index)
             }
             let gioitinh = self.hopdong?.GioiTinh == "1" ? "Nam" : "Nữ"
             if let index = self.listGioiTinh.index(where: { $0 == gioitinh}) {
@@ -70,7 +70,7 @@ class AddAndEditHopDongViewController: UIViewController {
             tfTienCoc.setValue(hopdong?.SoTienCoc)
             tfGhiChu.text = hopdong?.GhiChu
         } else {
-            self.cbbPhong.setOptions(self.listPhong.map({$0.tenPhong}), placeholder: nil, selectedIndex: nil)
+            self.cbbCanHo.setOptions(self.listCanHo.map({$0.TenCanHo}), placeholder: nil, selectedIndex: nil)
             self.cbbGioiTinh.setOptions(listGioiTinh, placeholder: nil, selectedIndex: 0)
             btnNgayBatDauCalendar.date = Date()
             btnNgayKTCalendar.date = Date()
@@ -90,7 +90,7 @@ class AddAndEditHopDongViewController: UIViewController {
         tfGhiChu.layer.borderColor = UIColor.gray.cgColor
         tfGhiChu.layer.borderWidth = 1.0
         
-        self.cbbPhong.delegate = self
+        self.cbbCanHo.delegate = self
         tfTienCoc?.setAsNumericKeyboard(type: .money, autoSelectAll: true)
           viewBody.layer.cornerRadius = 6.0
     }
@@ -197,17 +197,17 @@ class AddAndEditHopDongViewController: UIViewController {
         hopdong.GioiTinh = self.listGioiTinh[cbbGioiTinh.selectedIndex ?? 0 ] == "Nam" ? "1" : "0"
         hopdong.SDTKhachHang = tfSDT.text ?? ""
         hopdong.emailKhachHang = tfEmailKH.text ?? ""
-        if let index = cbbPhong.selectedIndex{
-            hopdong.idPhong = "\(listPhong[index].idPhong)"
+        if let index = cbbCanHo.selectedIndex{
+            hopdong.IdCanHo = "\(listCanHo[index].IdCanHo)"
         } else {
-            cbbPhong.warning()
-            Notice.make(type: .Error, content: "Chưa chọn phòng, làm ơn hãy chọn ").show()
+            cbbCanHo.warning()
+            Notice.make(type: .Error, content: "Chưa chọn Căn hộ, làm ơn hãy chọn ").show()
             return
         }
         let parameters: [String: String] = [
             "idHopDong" : hopdong.idHopDong,
             "ChuHopDong" : hopdong.ChuHopDong,
-            "idPhong" : hopdong.idPhong ,
+            "idCanHo" : hopdong.IdCanHo ,
             "SoTienCoc" : hopdong.SoTienCoc,
             "NgayBD" : hopdong.NgayBD.formatDate(date: "yyyy-MM-dd HH:mm:ss +HHHH", dateTo: "YYYY-MM-dd"),
             "NgayKT" : hopdong.NgayKT.formatDate(date: "yyyy-MM-dd HH:mm:ss +HHHH", dateTo: "YYYY-MM-dd"),

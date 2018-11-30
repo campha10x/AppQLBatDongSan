@@ -14,7 +14,7 @@ class QLHopDongTableViewCell: UITableViewCell {
     
     @IBOutlet weak var lblMaHopDong: UILabel!
     @IBOutlet weak var lblChuHopDong: UILabel!
-    @IBOutlet weak var lblPhong: UILabel!
+    @IBOutlet weak var lblCanHo: UILabel!
     @IBOutlet weak var lblNgayBatDau: UILabel!
     @IBOutlet weak var lblSoTienCoc: UILabel!
     @IBOutlet weak var lblNgayKetThuc: UILabel!
@@ -22,7 +22,7 @@ class QLHopDongTableViewCell: UITableViewCell {
     static let id = "QLHopDongTableViewCell"
     var index: Int = -1
     
-    var listPhong: [Phong] = Storage.shared.getObjects(type: Phong.self) as! [Phong]
+    var listCanHo: [CanHo] = Storage.shared.getObjects(type: CanHo.self) as! [CanHo]
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -38,10 +38,10 @@ class QLHopDongTableViewCell: UITableViewCell {
     
     func binding(hopdong: HopDong, index: Int )  {
         self.index = index
-        let tenPhong = listPhong.filter({$0.idPhong == hopdong.idPhong }).first?.tenPhong ?? "None"
+        let tenCanHo = listCanHo.filter({$0.IdCanHo == hopdong.IdCanHo }).first?.TenCanHo ?? "None"
         lblMaHopDong.text = hopdong.idHopDong
         lblChuHopDong.text = hopdong.ChuHopDong
-        lblPhong.text = tenPhong
+        lblCanHo.text = tenCanHo
         lblSoTienCoc.text = hopdong.SoTienCoc.toNumberString(decimal: false)
         lblNgayBatDau.text = hopdong.NgayBD.formatDate()
         lblNgayKetThuc.text = hopdong.NgayKT.formatDate()

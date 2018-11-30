@@ -8,11 +8,11 @@
 
 import UIKit
 
-class ListPhongTrongTableViewCell: UITableViewCell {
+class ListCanHoTrongTableViewCell: UITableViewCell {
 
     @IBOutlet weak var lblNamePhong: UILabel!
     
-    static let id = "ListPhongTrongTableViewCell"
+    static let id = "ListCanHoTrongTableViewCell"
     
     override func awakeFromNib() {
         super.awakeFromNib()

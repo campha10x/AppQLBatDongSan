@@ -24,7 +24,7 @@ class HoaDonViewController: UIViewController {
     @IBOutlet weak var tableViewHoaDon: UITableView!
     @IBOutlet weak var btnSearch: UIButton!
     
-    @IBOutlet weak var cbbPhong: MyCombobox!
+    @IBOutlet weak var cbbCanHo: MyCombobox!
     @IBOutlet weak var cbbThang: MyCombobox!
     @IBOutlet weak var cbbTrangThai: MyCombobox!
     @IBOutlet weak var textFieldSoPhieu: UITextField!
@@ -39,7 +39,7 @@ class HoaDonViewController: UIViewController {
     
     var listSearchHoaDon: [HoaDon] = [HoaDon]()
     var listHoaDon: [HoaDon] = [HoaDon]()
-    var listPhong: [Phong] = [Phong]()
+    var listCanHo: [CanHo] = [CanHo]()
     var listPhieuThu: [PhieuThu] = [PhieuThu]()
     
     let heightTableHoaDon: CGFloat = 70
@@ -53,7 +53,7 @@ class HoaDonViewController: UIViewController {
         configService()
         customized()
         dispatch = DispatchGroup()
-        loadPhong()
+        loadCanHo()
         loadHoaDon()
         loadListPhieuThu()
         dispatch?.notify(queue: .main, execute: {
@@ -71,9 +71,9 @@ class HoaDonViewController: UIViewController {
     }
     
     func customized() {
-        cbbPhong.textColor = MyColor.veryblack
-        cbbPhong.dropdownBackgroundColor = MyColor.quiteLightcyan
-        cbbPhong.dropdownForcegroundColor = MyColor.white
+        cbbCanHo.textColor = MyColor.veryblack
+        cbbCanHo.dropdownBackgroundColor = MyColor.quiteLightcyan
+        cbbCanHo.dropdownForcegroundColor = MyColor.white
         cbbThang.textColor = MyColor.veryblack
         cbbThang.dropdownBackgroundColor = MyColor.quiteLightcyan
         cbbThang.dropdownForcegroundColor = MyColor.white
@@ -121,7 +121,7 @@ class HoaDonViewController: UIViewController {
     func loadListPhieuThu()  {
         dispatch?.enter()
         SVProgressHUD.show()
-        manager.request("https://localhost:5001/HoaDon/GetListPhieuThu", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil).responseJSON { (responseObject) in
+        manager.request("https://localhost:5001/PhieuThu/GetListPhieuThu", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil).responseJSON { (responseObject) in
              SVProgressHUD.dismiss()
              self.dispatch?.leave()
             do {
@@ -140,7 +140,7 @@ class HoaDonViewController: UIViewController {
     func loadHoaDon() {
         dispatch?.enter()
         SVProgressHUD.show()
-        manager.request("https://localhost:5001/HoaDon/GetListHoaDon", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil).responseJSON { (responseObject) in
+        manager.request("https://localhost:5001/HoaDon/GetListHoaDon_CanHo", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil).responseJSON { (responseObject) in
             SVProgressHUD.dismiss()
             self.dispatch?.leave()
             do {
@@ -161,18 +161,18 @@ class HoaDonViewController: UIViewController {
 
     }
     
-    func loadPhong() {
+    func loadCanHo() {
         dispatch?.enter()
         SVProgressHUD.show()
-        manager.request("https://localhost:5001/Phong/GetListPhong", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil).responseJSON { (responseObject) in
+        manager.request("https://localhost:5001/CanHo/GetListCanHo", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil).responseJSON { (responseObject) in
             SVProgressHUD.dismiss()
             self.dispatch?.leave()
             do {
                  let json: JSON = try JSON.init(data: responseObject.data! )
-                self.listPhong  = json.arrayValue.map({Phong.init(json: $0)})
-                Storage.shared.addOrUpdate(self.listPhong, type: Phong.self)
-                self.cbbPhong.setOptions(self.listPhong.map({$0.tenPhong}), placeholder: nil, selectedIndex: nil)
-                self.cbbPhong.delegate = self
+                self.listCanHo  = json.arrayValue.map({CanHo.init(json: $0)})
+                Storage.shared.addOrUpdate(self.listCanHo, type: CanHo.self)
+                self.cbbCanHo.setOptions(self.listCanHo.map({$0.TenCanHo}), placeholder: nil, selectedIndex: nil)
+                self.cbbCanHo.delegate = self
             } catch {
                 if let error = responseObject.error {
                     Notice.make(type: .Error, content: error.localizedDescription).show()
@@ -223,9 +223,9 @@ class HoaDonViewController: UIViewController {
 
 extension HoaDonViewController: MyComboboxDelegate {
     func mycombobox(_ cbb: MyCombobox, selectedAt index: Int) {
-        if cbb == cbbPhong {
-            let idPhong = self.listPhong[index].idPhong
-            self.listSearchHoaDon = self.listHoaDon.filter({ $0.idPhong == idPhong })
+        if cbb == cbbCanHo {
+            let IdCanHo = self.listCanHo[index].IdCanHo
+            self.listSearchHoaDon = self.listHoaDon.filter({ $0.IdCanHo == IdCanHo })
             self.tableViewHoaDon.reloadData()
         } else if cbb == cbbThang {
             let thang = self.months[index]
@@ -275,9 +275,9 @@ extension HoaDonViewController: UITableViewDataSource, UITableViewDelegate {
         cell?.onRemove = { (_ index: Int) in
             self.removeHoaDon(index)
         }
-        let tenphong = self.listPhong.filter({$0.idPhong == self.listSearchHoaDon[indexPath.row].idPhong } ).first?.tenPhong ?? ""
+        let tenCanHo = self.listCanHo.filter({$0.IdCanHo == self.listSearchHoaDon[indexPath.row].IdCanHo } ).first?.TenCanHo ?? ""
         cell?.backgroundColor = (indexPath.row % 2 == 0 ? UIColor.gray : UIColor.white)
-        cell?.bindding(index: indexPath.row, obj: listSearchHoaDon[indexPath.row], datra: datra, tenphong: tenphong)
+        cell?.bindding(index: indexPath.row, obj: listSearchHoaDon[indexPath.row], datra: datra, tenphong: tenCanHo)
         return cell!
     }
     
@@ -300,12 +300,14 @@ extension HoaDonViewController: UITableViewDataSource, UITableViewDelegate {
     
    
     func removeHoaDon(_ index: Int)  {
-        SVProgressHUD.show()
+        let idPhieuThu = self.listPhieuThu.first(where: { $0.IdHoaDon == self.listSearchHoaDon[index].idHoaDon})?.IdPhieuThu ?? ""
         let parameters = ["IdHoaDon": self.listSearchHoaDon[index].idHoaDon ]
         SVProgressHUD.show()
         manager.request("https://localhost:5001/HoaDon/RemoveListHoaDon", method: .post, parameters: nil, encoding: URLEncoding.default, headers: parameters).responseJSON { (responseObject) in
             SVProgressHUD.dismiss()
-            do {
+            if let error = responseObject.error {
+                Notice.make(type: .Error, content: error.localizedDescription).show()
+            } else {
                 Notice.make(type: .Success, content: "Xoá hoá đơn thành công !").show()
                 Storage.shared.delete(HoaDon.self, ids: [self.listSearchHoaDon[index].idHoaDon], idPrefix: "idHoaDon")
                 if let index = self.listHoaDon.index(where: { $0.idHoaDon == self.listSearchHoaDon[index].idHoaDon  } )
@@ -313,14 +315,23 @@ extension HoaDonViewController: UITableViewDataSource, UITableViewDelegate {
                     self.listHoaDon.remove(at: index)
                 }
                 self.listSearchHoaDon.remove(at: index)
-                self.tableViewHoaDon.reloadData()
-                self.constraintHeightViewBody.constant = CGFloat (100 + 70 + 70 + 70 * self.listHoaDon.count + 60)
-            } catch {
-                if let error = responseObject.error {
-                    Notice.make(type: .Error, content: error.localizedDescription).show()
+                let parametersPhieuThu = ["IdPhieuThu" : idPhieuThu]
+                SVProgressHUD.show()
+                self.manager.request("https://localhost:5001/PhieuThu/RemoveListPhieuThu", method: .post, parameters: nil, encoding: URLEncoding.default, headers: parametersPhieuThu).responseJSON  { (responseObject) in
+                    SVProgressHUD.dismiss()
+                    if let error = responseObject.error {
+                        Notice.make(type: .Error, content: error.localizedDescription).show()
+                    } else {
+                        Storage.shared.delete(PhieuThu.self, ids: [idPhieuThu], idPrefix: "IdPhieuThu")
+                        self.listPhieuThu.removeAll(where: { $0.IdPhieuThu == idPhieuThu})
+                        self.tableViewHoaDon.reloadData()
+                    }
                 }
+                self.constraintHeightViewBody.constant = CGFloat (100 + 70 + 70 + 70 * self.listHoaDon.count + 60)
             }
         }
+        
+       
         
     }
     

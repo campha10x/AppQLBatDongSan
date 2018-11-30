@@ -15,7 +15,7 @@ import SwiftyJSON
 class EditListKhachHangViewController: UIViewController {
     
     var khachhang: KhachHang? = nil
-    var listPhong: [Phong] = []
+    var listCanHo: [CanHo] = []
     
     @IBOutlet weak var groupGioiTinh: MyCheckboxGroup!
     @IBOutlet weak var tfHoten: UITextField!
@@ -25,7 +25,7 @@ class EditListKhachHangViewController: UIViewController {
     @IBOutlet weak var tfSodienthoai: UITextField!
     @IBOutlet weak var tfEmail: UITextField!
     @IBOutlet weak var tfCmnd: UITextField!
-    @IBOutlet weak var cbbPhong: MyCombobox!
+    @IBOutlet weak var cbbCanHo: MyCombobox!
     @IBOutlet weak var viewBody: UIView!
     
     @IBOutlet weak var labelHeaderTitle: UILabel!
@@ -42,7 +42,7 @@ class EditListKhachHangViewController: UIViewController {
         viewBody.layer.cornerRadius = MyUI.buttonCornerRadius
         binding()
         configService()
-//        self.cbbPhong.delegate = self
+//        self.cbbCanHo.delegate = self
     }
     
     func configService() {
@@ -70,7 +70,7 @@ class EditListKhachHangViewController: UIViewController {
     }
     
     func binding() {
-        listPhong = Storage.shared.getObjects(type: Phong.self) as! [Phong]
+        listCanHo = Storage.shared.getObjects(type: CanHo.self) as! [CanHo]
          groupGioiTinh.addTitleAndOptions("Gioi Tinh", options: [0: "Nữ ",1: "Nam"],isRadioBox: true)
         if !isCreateNew {
             groupGioiTinh.selecteAt(index: Int(khachhang?.GioiTinh ?? "0" )!)
@@ -80,13 +80,13 @@ class EditListKhachHangViewController: UIViewController {
             tfEmail.text = khachhang?.Email
             tfCmnd.text = khachhang?.CMND
             textViewQueQuan.text = khachhang?.Quequan
-            if let index = self.listPhong.index(where: { $0.idPhong == self.khachhang?.IdPhong}) {
-                self.cbbPhong.setOptions(self.listPhong.map({$0.tenPhong}), placeholder: nil, selectedIndex: index)
+            if let index = self.listCanHo.index(where: { $0.IdCanHo == self.khachhang?.IdCanHo}) {
+                self.cbbCanHo.setOptions(self.listCanHo.map({$0.TenCanHo}), placeholder: nil, selectedIndex: index)
             } else {
-                self.cbbPhong.setOptions(self.listPhong.map({$0.tenPhong}), placeholder: nil, selectedIndex: nil)
+                self.cbbCanHo.setOptions(self.listCanHo.map({$0.TenCanHo}), placeholder: nil, selectedIndex: nil)
             }
         } else {
-             self.cbbPhong.setOptions(self.listPhong.map({$0.tenPhong}), placeholder: nil, selectedIndex: nil)
+             self.cbbCanHo.setOptions(self.listCanHo.map({$0.TenCanHo}), placeholder: nil, selectedIndex: nil)
             btnNgaySinh.date = Date()
             groupGioiTinh.selecteAt(index: 0 )
         }
@@ -104,14 +104,14 @@ class EditListKhachHangViewController: UIViewController {
     @IBAction func eventClickSave(_ sender: Any) {
 
         let khachangNew = KhachHang()
-        if let index = cbbPhong.selectedIndex{
-            khachangNew.IdPhong = "\(self.listPhong[index].idPhong)"
+        if let index = cbbCanHo.selectedIndex{
+            khachangNew.IdCanHo = "\(self.listCanHo[index].IdCanHo)"
         } else {
-            cbbPhong.warning()
+            cbbCanHo.warning()
             Notice.make(type: .Error, content: "Chưa chọn phòng, làm ơn hãy chọn ").show()
             return
         }
-        khachangNew.idKhachHang = isCreateNew ? "\(khachangNew.IncrementaID())" : self.khachhang?.idKhachHang ?? ""
+        khachangNew.idKhachHang = isCreateNew ? "" : self.khachhang?.idKhachHang ?? ""
         khachangNew.TenKH = tfHoten.text ?? ""
         khachangNew.SDT = tfSodienthoai.text ?? ""
         khachangNew.Email = tfEmail.text ?? ""
@@ -124,7 +124,7 @@ class EditListKhachHangViewController: UIViewController {
         let parameters: [String: String] = [
             "IdKhachHang" : khachangNew.idKhachHang,
             "TenKH" : khachangNew.TenKH,
-            "IdPhong" : khachangNew.IdPhong ,
+            "IdCanHo" : khachangNew.IdCanHo ,
             "NgaySinh" : khachangNew.NgaySinh.formatDate(date: "yyyy-MM-dd HH:mm:ss +HHHH", dateTo: "YYYY-MM-dd"),
             "GioiTinh" : khachangNew.GioiTinh,
             "SDT" : khachangNew.SDT,

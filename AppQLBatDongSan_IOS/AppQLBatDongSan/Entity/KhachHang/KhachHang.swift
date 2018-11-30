@@ -13,7 +13,7 @@ import RealmSwift
 class KhachHang: BaseRealmObject, NSCopying {
     @objc dynamic var idKhachHang: String = ""
     @objc dynamic var TenKH: String = ""
-    @objc dynamic var IdPhong: String = ""
+    @objc dynamic var IdCanHo: String = ""
     @objc dynamic var NgaySinh: String = ""
     @objc dynamic var GioiTinh: String = ""
     @objc dynamic var SDT: String = ""
@@ -28,9 +28,9 @@ class KhachHang: BaseRealmObject, NSCopying {
     convenience init(json: JSON ) {
         self.init()
         self.idKhachHang = json["idKhachHang"].stringValue
-        self.IdPhong = json["idPhong"].stringValue
+        self.IdCanHo = json["idCanHo"].stringValue
         self.TenKH = json["tenKH"].stringValue
-        self.IdPhong = json["idPhong"].stringValue
+        self.IdCanHo = json["idCanHo"].stringValue
         self.NgaySinh = json["ngaySinh"].stringValue
         self.GioiTinh = json["gioiTinh"].stringValue
         self.SDT = json["sdt"].stringValue
@@ -40,23 +40,13 @@ class KhachHang: BaseRealmObject, NSCopying {
         
     }
     
-    //Incrementa ID
-    func IncrementaID() -> Int{
-        let realm = try! Realm()
-        if let retNext = realm.objects(KhachHang.self).sorted(byKeyPath: "idKhachHang").last?.idKhachHang, let value = Int(retNext)  {
-            return value + 1
-        }else{
-            return 1
-        }
-    }
-
+   
     
     func copy(with zone: NSZone? = nil) -> Any {
         let copy = KhachHang()
         copy.idKhachHang = self.idKhachHang
-        copy.IdPhong = self.IdPhong
+        copy.IdCanHo = self.IdCanHo
         copy.TenKH = self.TenKH
-        copy.IdPhong = self.IdPhong
         copy.NgaySinh = self.NgaySinh
         copy.GioiTinh = self.GioiTinh
         copy.SDT = self.SDT

@@ -15,7 +15,7 @@ protocol QLKhachHangCellDelegates {
 class QLKhachHangTableViewCell: UITableViewCell {
 
     @IBOutlet weak var lbTenKhachHang: UILabel!
-    @IBOutlet weak var lbTenPhong: UILabel!
+    @IBOutlet weak var lbTenCanHo: UILabel!
     @IBOutlet weak var lbNamSinh: UILabel!
     @IBOutlet weak var lbQuequan: UILabel!
     @IBOutlet weak var lbCMND: UILabel!
@@ -41,10 +41,10 @@ class QLKhachHangTableViewCell: UITableViewCell {
     
     func binding(_ khachhang: KhachHang, _ index: Int)  {
         lbTenKhachHang.text = khachhang.TenKH
-        let listPhong = Storage.shared.getObjects(type: Phong.self) as? [Phong]
-        let phong: Phong? = listPhong?.filter({ $0.idPhong == khachhang.IdPhong }).first
+        let listCanHo = Storage.shared.getObjects(type: CanHo.self) as? [CanHo]
+        let canHo: CanHo? = listCanHo?.filter({ $0.IdCanHo == khachhang.IdCanHo }).first
         self.index = index
-        lbTenPhong.text = phong?.tenPhong ?? ""
+        lbTenCanHo.text = canHo?.TenCanHo ?? ""
         lbNamSinh.text = khachhang.NgaySinh.formatDate()
         lbSDT.text = khachhang.SDT
         lbEmail.text = khachhang.Email

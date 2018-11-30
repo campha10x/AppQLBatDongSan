@@ -11,23 +11,23 @@ import UIKit
 import Charts
 
 class TongQuanViewController: UIViewController {
-    @IBOutlet weak var chartViewPhong: PieChartView!
-    var listPhong: [Phong] = []
+    @IBOutlet weak var chartViewCanHo: PieChartView!
+    var listCanHo: [CanHo] = []
     var listHopDong: [HopDong] = []
     
-    var statePhong = ["Phòng chưa thuê","Phòng đã thuê"]
-    var slPhongDaThue: Int = 0
-    var slPhongConLai: Int = 0
+    var stateCanHo = ["Phòng chưa thuê","Phòng đã thuê"]
+    var slCanHoDaThue: Int = 0
+    var slCanHoConLai: Int = 0
     
-    var listPhongTrong: [Phong] = []
+    var listCanHoTrong: [CanHo] = []
     
-    @IBOutlet weak var tableViewStatePhong: UITableView!
+    @IBOutlet weak var tableViewStateCanHo: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
        config()
-        tableViewStatePhong.dataSource = self
-        tableViewStatePhong.separatorStyle = .none
+        tableViewStateCanHo.dataSource = self
+        tableViewStateCanHo.separatorStyle = .none
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,19 +38,19 @@ class TongQuanViewController: UIViewController {
     }
     
     func config() {
-        listPhong = Storage.shared.getObjects(type: Phong.self) as! [Phong]
+        listCanHo = Storage.shared.getObjects(type: CanHo.self) as! [CanHo]
         listHopDong = Storage.shared.getObjects(type: HopDong.self) as! [HopDong]
         
-        for item in listPhong {
-            if listHopDong.filter({ $0.idPhong == item.idPhong}).first != nil{
-                slPhongDaThue = slPhongDaThue + 1
+        for item in listCanHo {
+            if listHopDong.filter({ $0.IdCanHo == item.IdCanHo}).first != nil{
+                slCanHoDaThue = slCanHoDaThue + 1
             } else {
-                listPhongTrong.append(item)
+                listCanHoTrong.append(item)
             }
         }
-        slPhongConLai = listPhong.count - slPhongDaThue
-        self.setup(pieChartView: chartViewPhong)
-        let l = chartViewPhong.legend
+        slCanHoConLai = listCanHo.count - slCanHoDaThue
+        self.setup(pieChartView: chartViewCanHo)
+        let l = chartViewCanHo.legend
         l.horizontalAlignment = .right
         l.verticalAlignment = .top
         l.orientation = .vertical
@@ -58,19 +58,19 @@ class TongQuanViewController: UIViewController {
         l.yEntrySpace = 0
         l.yOffset = 0
         self.setDataCount(2, range: 100)
-        chartViewPhong.animate(xAxisDuration: 1.4, easingOption: .easeOutBack)
-        chartViewPhong.entryLabelColor = .black
-        chartViewPhong.entryLabelFont = .systemFont(ofSize: 11, weight: .light)
+        chartViewCanHo.animate(xAxisDuration: 1.4, easingOption: .easeOutBack)
+        chartViewCanHo.entryLabelColor = .black
+        chartViewCanHo.entryLabelFont = .systemFont(ofSize: 11, weight: .light)
     }
     
     func setDataCount(_ count: Int, range: Int) {
         let entries = (0..<count).map { (i) -> PieChartDataEntry in
             var value: Double = 0
-            if slPhongConLai != 0 || slPhongDaThue != 0 {
-                value = Double(i == 0 ? slPhongConLai : slPhongDaThue) / Double(slPhongConLai + slPhongDaThue)
+            if slCanHoConLai != 0 || slCanHoDaThue != 0 {
+                value = Double(i == 0 ? slCanHoConLai : slCanHoDaThue) / Double(slCanHoConLai + slCanHoDaThue)
             }
             return PieChartDataEntry(value: value * 100,
-                                     label: statePhong[i],
+                                     label: stateCanHo[i],
                                      icon: nil)
         }
         
@@ -98,8 +98,8 @@ class TongQuanViewController: UIViewController {
         data.setValueFont(.systemFont(ofSize: 14, weight: .light))
         data.setValueTextColor(.black)
         
-        chartViewPhong.data = data
-        chartViewPhong.highlightValues(nil)
+        chartViewCanHo.data = data
+        chartViewCanHo.highlightValues(nil)
     }
     
     func setup(pieChartView chartView: PieChartView) {
@@ -135,12 +135,12 @@ class TongQuanViewController: UIViewController {
 
 extension TongQuanViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return listPhongTrong.count
+        return listCanHoTrong.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ListPhongTrongTableViewCell.id, for: indexPath) as! ListPhongTrongTableViewCell
-        cell.binding(tenPhong: listPhongTrong[indexPath.row].tenPhong)
+        let cell = tableView.dequeueReusableCell(withIdentifier: ListCanHoTrongTableViewCell.id, for: indexPath) as! ListCanHoTrongTableViewCell
+        cell.binding(tenPhong: listCanHoTrong[indexPath.row].TenCanHo)
         return cell
     }
     

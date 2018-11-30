@@ -15,7 +15,7 @@ import SwiftyJSON
 class EditPhieuChiViewController: UIViewController {
     @IBOutlet weak var cbbNgay: MyButtonCalendar!
     
-    @IBOutlet weak var cbbPhong: MyCombobox!
+    @IBOutlet weak var cbbCanHo: MyCombobox!
     
     @IBOutlet weak var textfieldSotien: MyNumberField!
     
@@ -28,9 +28,9 @@ class EditPhieuChiViewController: UIViewController {
     
     var onUpdatePhieuChi: ((PhieuChi)->())?
     var phieuchi: PhieuChi?
-    var phong: Phong?
+    var canHo: CanHo?
     var isCreateNew: Bool = true
-    var listPhong: [Phong] = []
+    var listCanHo: [CanHo] = []
      let manager = Alamofire.SessionManager()
     
     
@@ -41,16 +41,16 @@ class EditPhieuChiViewController: UIViewController {
         labelHeader.text = isCreateNew ? "Thêm phiêu thu" : "Sửa phiếu thu"
         if !isCreateNew {
             cbbNgay.date = phieuchi?.Ngay.toDate(format: "MM/dd/yyyy HH:mm:ss") ?? Date()
-            let listPhong = Storage.shared.getObjects(type: Phong.self) as? [Phong]
+            let listCanHo = Storage.shared.getObjects(type: CanHo.self) as? [CanHo]
             textfieldSotien.text = phieuchi?.Sotien.toNumberString(decimal: false)
             textViewDiengiai.text = phieuchi?.DienGiai
             
-            if let index = self.listPhong.index(where: { $0.idPhong == self.phieuchi?.IdPhong}) {
-                self.cbbPhong.setOptions(self.listPhong.map({$0.tenPhong}), placeholder: nil, selectedIndex: index)
+            if let index = self.listCanHo.index(where: { $0.IdCanHo == self.phieuchi?.IdCanHo}) {
+                self.cbbCanHo.setOptions(self.listCanHo.map({$0.TenCanHo}), placeholder: nil, selectedIndex: index)
             }
 
         } else {
-            self.cbbPhong.setOptions(self.listPhong.map({$0.tenPhong}), placeholder: nil, selectedIndex: nil)
+            self.cbbCanHo.setOptions(self.listCanHo.map({$0.TenCanHo}), placeholder: nil, selectedIndex: nil)
             cbbNgay.date = Date()
             
         }
@@ -82,7 +82,7 @@ class EditPhieuChiViewController: UIViewController {
     
     func customized() {
         viewBody.layer.cornerRadius = MyUI.buttonCornerRadius
-        listPhong = Storage.shared.getObjects(type: Phong.self) as! [Phong]
+        listCanHo = Storage.shared.getObjects(type: CanHo.self) as! [CanHo]
         textfieldSotien?.setAsNumericKeyboard(type: .money, autoSelectAll: true)
         btnLuu.layer.cornerRadius = MyUI.buttonCornerRadius
         textViewDiengiai.layer.borderColor = UIColor.gray.cgColor
@@ -107,15 +107,15 @@ class EditPhieuChiViewController: UIViewController {
         phieuchi.DienGiai = textViewDiengiai.text ?? ""
         phieuchi.Ngay = "\(cbbNgay.date)"
         
-        if let index = cbbPhong.selectedIndex{
-            phieuchi.IdPhong = "\(listPhong[index].idPhong)"
+        if let index = cbbCanHo.selectedIndex{
+            phieuchi.IdCanHo = "\(listCanHo[index].IdCanHo)"
         } else {
-            cbbPhong.warning()
+            cbbCanHo.warning()
             Notice.make(type: .Error, content: "Chưa chọn phòng, làm ơn hãy chọn ").show()
             return
         }
         let parameters: [String: String] = [
-            "IdPhong" : phieuchi.IdPhong,
+            "IdCanHo" : phieuchi.IdCanHo,
             "IdPhieuChi" : phieuchi.IdPhieuChi ,
             "SoTien" : phieuchi.Sotien,
             "Ngay" : phieuchi.Ngay.formatDate(date: "yyyy-MM-dd HH:mm:ss +HHHH", dateTo: "YYYY-MM-dd"),

@@ -5,9 +5,9 @@ namespace BatDongSanAPI.Models
     {
         private BatDongSanStoreContext context;
 
-        public String idKhachHang { get; set; }
+        public String IdKhachHang { get; set; }
         public String TenKH { get; set; }
-        public String IdPhong { get; set; }
+        public String IdCanHo { get; set; }
         public String NgaySinh { get; set; }
         public String GioiTinh { get; set; }
         public String SDT { get; set; }
