@@ -132,7 +132,6 @@ class HoaDonViewController: UIViewController {
                 if let error = responseObject.error {
                     Notice.make(type: .Error, content: error.localizedDescription ).show()
                 }
-
             }
         }
     }
@@ -158,7 +157,6 @@ class HoaDonViewController: UIViewController {
                 }
             }
         }
-
     }
     
     func loadCanHo() {
@@ -185,7 +183,7 @@ class HoaDonViewController: UIViewController {
     
     @IBAction func eventChangeSoPhieu(_ sender: Any) {
         if let soPhieuText = self.textFieldSoPhieu.text?.trimmingCharacters(in: .whitespacesAndNewlines), !soPhieuText.isEmpty {
-            self.listSearchHoaDon = self.listHoaDon.filter({ $0.soPhieu == soPhieuText })
+            self.listSearchHoaDon = self.listHoaDon.filter({ $0.soPhieu.lowercased().contains(soPhieuText.lowercased()) })
         } else {
             self.listSearchHoaDon = self.listHoaDon
         }
@@ -234,9 +232,16 @@ extension HoaDonViewController: MyComboboxDelegate {
         } else if cbb == cbbTrangThai {
             let stateRoom = self.stateRooms[index]
             if stateRoom == StateRoom.DaThanhToan.rawValue {
-                self.listSearchHoaDon = self.listHoaDon.filter({ (Double($0.soTien) ?? 0) - (Double($0.daTra) ?? 0) == 0 })
+//                self.listSearchHoaDon = self.listHoaDon.filter({ (Double($0.soTien) ?? 0) - datra == 0 })
+                self.listSearchHoaDon = self.listHoaDon.filter({ (item) -> Bool in
+                    let datra = listPhieuThu.filter({ $0.IdHoaDon == item.idHoaDon }).reduce(0, ( { $0 + (Double($1.SoTien) ?? 0) }))
+                    return (Double(item.soTien) ?? 0 ) - datra == 0
+                })
             } else {
-                self.listSearchHoaDon = self.listHoaDon.filter({ (Double($0.soTien) ?? 0) - (Double($0.daTra) ?? 0) != 0 })
+                self.listSearchHoaDon = self.listHoaDon.filter({ (item) -> Bool in
+                    let datra = listPhieuThu.filter({ $0.IdHoaDon == item.idHoaDon }).reduce(0, ( { $0 + (Double($1.SoTien) ?? 0) }))
+                    return (Double(item.soTien) ?? 0 ) - datra != 0
+                })
             }
             self.tableViewHoaDon.reloadData()
         }
@@ -252,10 +257,10 @@ extension HoaDonViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "QuanLiTableViewCell", for: indexPath) as? QuanLiTableViewCell
-        var datra: Int = 0
+        var datra: Double = 0
         let list = listPhieuThu.filter({ $0.IdHoaDon == self.listHoaDon[indexPath.row].idHoaDon })
         if list.count > 0 {
-            datra = list.reduce(0, { $0 + (Double($1.SoTien)?.toInt())! })
+            datra = list.reduce(0.0, { $0 + (Double($1.SoTien) ?? 0) })
         }
         cell?.onChiTietHoaDon = { (_ index: Int) in
             self.eventEdit(index)

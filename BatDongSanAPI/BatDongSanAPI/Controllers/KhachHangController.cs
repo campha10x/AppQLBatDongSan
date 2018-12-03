@@ -27,18 +27,18 @@ namespace BatDongSanAPI.Controllers
         }
 
         [HttpPost("/KhachHang/EditKhachHang")]
-        public JsonResult editKhachHang([FromHeader(Name = "IdKhachHang")] string IdKhachHang, [FromHeader(Name = "TenKH")] string TenKH, [FromHeader(Name = "IdPhong")] string IdPhong, [FromHeader(Name = "NgaySinh")] string NgaySinh, [FromHeader(Name = "GioiTinh")] string GioiTinh, [FromHeader(Name = "SDT")] string SDT, [FromHeader(Name = "Email")] string Email, [FromHeader(Name = "CMND")] string CMND, [FromHeader(Name = "Quequan")] string Quequan)
+        public JsonResult editKhachHang([FromHeader(Name = "IdKhachHang")] string IdKhachHang, [FromHeader(Name = "TenKH")] string TenKH, [FromHeader(Name = "IdCanHo")] string IdCanHo, [FromHeader(Name = "NgaySinh")] string NgaySinh, [FromHeader(Name = "GioiTinh")] string GioiTinh, [FromHeader(Name = "SDT")] string SDT, [FromHeader(Name = "Email")] string Email, [FromHeader(Name = "CMND")] string CMND, [FromHeader(Name = "Quequan")] string Quequan)
         {
             BatDongSanStoreContext context = HttpContext.RequestServices.GetService(typeof(BatDongSanStoreContext)) as BatDongSanStoreContext;
-            KhachHang a = context.updateKhachHang(IdKhachHang,TenKH,IdPhong,NgaySinh,GioiTinh,SDT,Email,CMND,Quequan);
+            KhachHang a = context.updateKhachHang(IdKhachHang,TenKH, IdCanHo, NgaySinh,GioiTinh,SDT,Email,CMND,Quequan);
             return Json(a);
         }
 
         [HttpPost("/KhachHang/AddKhachHang")]
-        public JsonResult addKhachHang( [FromHeader(Name = "TenKH")] string TenKH, [FromHeader(Name = "IdPhong")] string IdPhong, [FromHeader(Name = "NgaySinh")] string NgaySinh, [FromHeader(Name = "GioiTinh")] string GioiTinh, [FromHeader(Name = "SDT")] string SDT, [FromHeader(Name = "Email")] string Email, [FromHeader(Name = "CMND")] string CMND, [FromHeader(Name = "Quequan")] string Quequan)
+        public JsonResult addKhachHang( [FromHeader(Name = "TenKH")] string TenKH, [FromHeader(Name = "IdCanHo")] string IdCanHo, [FromHeader(Name = "NgaySinh")] string NgaySinh, [FromHeader(Name = "GioiTinh")] string GioiTinh, [FromHeader(Name = "SDT")] string SDT, [FromHeader(Name = "Email")] string Email, [FromHeader(Name = "CMND")] string CMND, [FromHeader(Name = "Quequan")] string Quequan)
         {
             BatDongSanStoreContext context = HttpContext.RequestServices.GetService(typeof(BatDongSanStoreContext)) as BatDongSanStoreContext;
-            KhachHang a = context.addKhachHang(TenKH,IdPhong,NgaySinh,GioiTinh,SDT,Email,CMND,Quequan);
+            KhachHang a = context.addKhachHang(TenKH, IdCanHo, NgaySinh,GioiTinh,SDT,Email,CMND,Quequan);
             return Json(a);
         }
 

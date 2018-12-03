@@ -16,5 +16,9 @@
     <Compile Remove="Controllers\PhieuChi.cs" />
     <Compile Remove="Models\HomeController.cs" />
     <Compile Remove="..\..\..\test.cs" />
+    <Compile Remove="Controllers\NhaTroController.cs" />
+    <Compile Remove="Models\NhaTro.cs" />
+    <Compile Remove="Models\DonVi.cs" />
+    <Compile Remove="Controllers\DonViController.cs" />
   </ItemGroup>
 </Project>

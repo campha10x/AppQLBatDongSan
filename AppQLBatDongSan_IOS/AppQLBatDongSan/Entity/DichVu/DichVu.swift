@@ -14,30 +14,19 @@ class DichVu: BaseRealmObject, NSCopying {
     @objc dynamic var idDichVu: String = ""
     @objc dynamic var TenDichVu: String = ""
     @objc dynamic var DonGia: String = ""
-    @objc dynamic var idDonvi: String = ""
-    @objc dynamic var MacDinh: String = ""
+    @objc dynamic var DonVi: String = ""
     
     override static func primaryKey() -> String? {
         return "idDichVu"
     }
     
-    //Incrementa ID
-    func IncrementaID() -> Int{
-        let realm = try! Realm()
-        if let retNext = realm.objects(HopDong.self).sorted(byKeyPath: "idDichVu").first?.idHopDong, let value = Int(retNext)  {
-            return value + 1
-        }else{
-            return 1
-        }
-    }
     
     convenience init(json: JSON ) {
         self.init()
         self.idDichVu = json["idDichVu"].stringValue
         self.TenDichVu = json["tenDichVu"].stringValue
         self.DonGia = json["donGia"].stringValue
-         self.idDonvi = json["idDonvi"].stringValue
-         self.MacDinh = json["macDinh"].stringValue
+         self.DonVi = json["donVi"].stringValue
     }
     
     func copy(with zone: NSZone? = nil) -> Any {
@@ -45,8 +34,7 @@ class DichVu: BaseRealmObject, NSCopying {
         copy.idDichVu = self.idDichVu
         copy.TenDichVu = self.TenDichVu
         copy.DonGia = self.DonGia
-        copy.idDonvi = self.idDonvi
-         copy.MacDinh = self.MacDinh
+        copy.DonVi = self.DonVi
         return copy
     }
     

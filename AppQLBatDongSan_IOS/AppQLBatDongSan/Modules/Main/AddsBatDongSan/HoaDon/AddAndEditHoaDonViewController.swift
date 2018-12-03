@@ -22,6 +22,7 @@ class AddAndEditHoaDonViewController: UIViewController {
     
     @IBOutlet weak var tfSoDienMoi: MyNumberField!
     @IBOutlet weak var tfSoNuocMoi: MyNumberField!
+    @IBOutlet weak var labelHeaderTitle: UILabel!
     
     var listCanHo: [CanHo] = []
     var isCreateNew: Bool = true
@@ -30,12 +31,17 @@ class AddAndEditHoaDonViewController: UIViewController {
     let manager = Alamofire.SessionManager()
     var soTien: Double = 0.0
     
+    var selectedDichVu: [DichVu] = []
     var indexCanHo = -1
     
-    @IBOutlet weak var labelHeaderTitle: UILabel!
+    var listDichVu: [DichVu] = []
+    var listDichVu_CanHo: [CanHo_DichVu] = []
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        listDichVu = Storage.shared.getObjects(type: DichVu.self) as! [DichVu]
+        listDichVu_CanHo = Storage.shared.getObjects(type: CanHo_DichVu.self) as! [CanHo_DichVu]
         customized()
         configService()
         if !isCreateNew {
@@ -139,6 +145,20 @@ class AddAndEditHoaDonViewController: UIViewController {
     }
     
     @IBAction func eventClickTaoHD(_ sender: Any) {
+        if let soDienCu: Double = Double(self.listCanHo[indexCanHo].SoDienCu), let SoNuocCu: Double = Double(self.listCanHo[indexCanHo].SoNuocCu) {
+            if soDienCu > tfSoDienMoi.getValue() {
+                tfSoDienMoi.warning()
+                Notice.make(type: .Error, content: "Số điện mới phải lớn hơn số điện cũ của căn hộ đó ").show()
+                return
+            } else if SoNuocCu > tfSoNuocMoi.getValue() {
+                tfSoNuocMoi.warning()
+                Notice.make(type: .Error, content: "Số nước mới phải lớn hơn số nước cũ của căn hộ đó ").show()
+                return
+            }
+            tfSoDienMoi.borderColor = UIColor.gray.withAlphaComponent(0.8)
+            tfSoNuocMoi.borderColor = UIColor.gray.withAlphaComponent(0.8)
+        }
+        
         let hoadon = HoaDon()
         guard tfSotien.text != ""  else {
             if tfSotien.text == "" {
@@ -152,6 +172,8 @@ class AddAndEditHoaDonViewController: UIViewController {
         hoadon.soTien = "\(tfSotien.getValueString())"
         hoadon.soPhieu = tfSoPhieu.text ?? ""
         hoadon.ngayTao = "\(btnNgayTao.date)"
+        hoadon.soDienMoi = tfSoDienMoi.getValueString()
+        hoadon.soNuocMoi = tfSoNuocMoi.getValueString()
         if let index = cbbCanHo.selectedIndex{
             hoadon.IdCanHo = "\(listCanHo[index].IdCanHo)"
         } else {
@@ -165,7 +187,9 @@ class AddAndEditHoaDonViewController: UIViewController {
             "IdCanHo" : hoadon.IdCanHo ,
             "SoPhieu" : hoadon.soPhieu,
             "NgayTao" : hoadon.ngayTao.formatDate(date: "yyyy-MM-dd HH:mm:ss +HHHH", dateTo: "YYYY-MM-dd"),
-            "SoTien" : hoadon.soTien
+            "SoTien" : hoadon.soTien,
+            "SoDienMoi" : hoadon.soDienMoi,
+            "SoNuocMoi" : hoadon.soNuocMoi
         ]
         if isCreateNew {
             SVProgressHUD.show()
@@ -178,8 +202,9 @@ class AddAndEditHoaDonViewController: UIViewController {
                         Storage.shared.addOrUpdate([hoadonCopy], type: HoaDon.self)
                     }
                     Notice.make(type: .Success, content: "Thêm mới hoá đơn thành công! ").show()
+                    self.updateSoDienSoNuocCanHo(IdCanHo: hoadonResponse.IdCanHo)
                     self.done?(hoadonResponse)
-                    self.dismiss(animated: true, completion: nil)
+                    
                 } catch {
                     if let error = responseObject.error {
                         Notice.make(type: .Error, content: error.localizedDescription).show()
@@ -197,8 +222,8 @@ class AddAndEditHoaDonViewController: UIViewController {
                         Storage.shared.addOrUpdate([hoadonCopy], type: HoaDon.self)
                     }
                     Notice.make(type: .Success, content: "Sửa mới hoá đơn thành công! ").show()
+                    self.updateSoDienSoNuocCanHo(IdCanHo: hoadonResponse.IdCanHo)
                     self.done?(hoadonResponse)
-                    self.dismiss(animated: true, completion: nil)
                 } catch {
                     if let error = responseObject.error {
                         Notice.make(type: .Error, content: error.localizedDescription).show()
@@ -208,14 +233,50 @@ class AddAndEditHoaDonViewController: UIViewController {
         }
     }
     
+    func updateSoDienSoNuocCanHo(IdCanHo: String)  {
+        let parameters: [String: String] = [
+                        "IdCanHo" : IdCanHo,
+                         "SoDienCu" : "\(tfSoDienMoi.getValue())",
+                         "SoNuocCu": "\(tfSoNuocMoi.getValue())"
+                        ]
+        
+        SVProgressHUD.show()
+        self.manager.request("https://localhost:5001/HoaDon/UpDateSoDienNuocCanHo", method: .post, parameters: nil, encoding: URLEncoding.default, headers: parameters).responseJSON { (responseObject) in
+            SVProgressHUD.dismiss()
+            do {
+                if let canhoObjects: CanHo = self.listCanHo.filter({$0.IdCanHo == IdCanHo}).first?.copy() as! CanHo{
+                    canhoObjects.SoDienCu  = self.tfSoDienMoi.getValueString()
+                    canhoObjects.SoNuocCu = self.tfSoNuocMoi.getValueString()
+                    Storage.shared.addOrUpdate([canhoObjects], type: CanHo.self)
+                }
+                self.dismiss(animated: true, completion: nil)
+            } catch {
+                if let error = responseObject.error {
+                    Notice.make(type: .Error, content: error.localizedDescription).show()
+                }
+            }
+        }
+        
+    }
     
     func recaculatorSoTien () {
         soTien = 0
         if indexCanHo >= 0 {
             soTien += Double(self.listCanHo[indexCanHo].DonGia) ?? 0
+            
+            let selectedDichVu  = listDichVu_CanHo.filter({ $0.IdCanHo == self.listCanHo[indexCanHo].IdCanHo }).first?.IdDichVu.split(separator: ",")
+            let caculatorDichVu = self.listDichVu.filter { (item) -> Bool in
+                return selectedDichVu?.filter({ $0 == item.idDichVu}).first != nil
+            }
+            soTien += caculatorDichVu.reduce(0.0, { $0 + (Double($1.DonGia) ?? 0) })
+            if let soDienCu: Double = Double(self.listCanHo[indexCanHo].SoDienCu), let SoNuocCu: Double = Double(self.listCanHo[indexCanHo].SoNuocCu) {
+                soTien += (( tfSoDienMoi.getValue() - soDienCu) * 3500 + (tfSoNuocMoi.getValue() - SoNuocCu ) * 20000)
+                tfSotien.setValue(soTien)
+            }
+        } else {
+            Notice.make(type: .Error, content: "Bạn phải nhập căn hộ mới tính tiền được").show()
         }
-        soTien += tfSoDienMoi.getValue() * 3500 + tfSoNuocMoi.getValue() * 20000
-        tfSotien.setValue(soTien)
+
     }
 
 }

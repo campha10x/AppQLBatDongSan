@@ -53,9 +53,9 @@ namespace BatDongSanAPI.Models
 
         public string DonGia { get; set; }
 
-        public string SoDien { get; set; }
+        public string SoDienCu { get; set; }
 
-        public string SoNuoc { get; set; }
+        public string SoNuocCu { get; set; }
 
         public string DienTich { get; set; }
 

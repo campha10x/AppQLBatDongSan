@@ -36,7 +36,11 @@ class AppState  {
     }
     
     func saveAccount(account: Account?) {
-        UserDefaults.standard.set(account?.email, forKey: "email")
+        if let getAccount = account {
+            Storage.shared.addOrUpdate([getAccount], type: Account.self)
+            UserDefaults.standard.set(getAccount.email, forKey: "email")
+        }
+
 //        let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: account)
 //        UserDefaults.standard.set(encodedData, forKey: "account")
 //        UserDefaults.standard.synchronize()

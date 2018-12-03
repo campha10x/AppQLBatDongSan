@@ -15,28 +15,28 @@ import SwiftyJSON
 class AddAndEditHopDongViewController: UIViewController {
     @IBOutlet weak var cbbCanHo: MyCombobox!
     
-    @IBOutlet weak var tfTenKH: MyTextField!
+    @IBOutlet weak var tfTenChuHD: MyTextField!
 
-    @IBOutlet weak var cbbGioiTinh: MyCombobox!
-    @IBOutlet weak var tfSDT: MyTextField!
+    @IBOutlet weak var cbbTenKH: MyCombobox!
     @IBOutlet weak var cbbDichVu: MyCombobox!
     
     @IBOutlet weak var tfGhiChu: UITextView!
     @IBOutlet weak var tfTienCoc: MyNumberField!
     @IBOutlet weak var btnNgayKTCalendar: MyButtonCalendar!
     @IBOutlet weak var btnNgayBatDauCalendar: MyButtonCalendar!
-    @IBOutlet weak var tfEmailKH: MyTextField!
     @IBOutlet weak var viewBody: UIView!
     @IBOutlet weak var labelHeaderTitle: UILabel!
     
     var listCanHo: [CanHo] = []
     var listDichVu: [DichVu] = []
+    var listKhachHang: [KhachHang] = []
+    
     var isCreateNew: Bool = true
     var hopdong: HopDong? = nil
     var listGioiTinh: [String] = ["Nam", "Nữ"]
     var done: ((_ hopdong: HopDong)->())?
     
-      let manager = Alamofire.SessionManager()
+    let manager = Alamofire.SessionManager()
     
     
     override func viewDidLoad() {
@@ -44,6 +44,7 @@ class AddAndEditHopDongViewController: UIViewController {
         configService()
         listCanHo = Storage.shared.getObjects(type: CanHo.self) as! [CanHo]
         listDichVu = Storage.shared.getObjects(type: DichVu.self) as! [DichVu]
+        listKhachHang = Storage.shared.getObjects(type: KhachHang.self) as! [KhachHang]
 //        cbbDichVu.setOptions(self.listDichVu.map({ $0.TenDichVu}), placeholder: nil, selectedIndex: nil)
 //        cbbDichVu.isMultipleSelection = true
 //        cbbDichVu.delegate = self
@@ -54,24 +55,28 @@ class AddAndEditHopDongViewController: UIViewController {
     
     func binding() {
         labelHeaderTitle.text = isCreateNew == true ? "Tạo hợp đồng" : "Sửa hợp đồng"
+        let accounts = Storage.shared.getObjects(type: Account.self) as! [Account]
+        tfTenChuHD.text = accounts.filter({ $0.email == AppState.shared.getAccount()}).first?.hoten ?? ""
         if !isCreateNew {
-            tfTenKH.text = self.hopdong?.ChuHopDong
+            tfTenChuHD.text = self.hopdong?.ChuHopDong
             if let index = self.listCanHo.index(where: { $0.IdCanHo == self.hopdong?.IdCanHo}) {
                 self.cbbCanHo.setOptions(self.listCanHo.map({$0.TenCanHo}), placeholder: nil, selectedIndex: index)
+            } else {
+                self.cbbCanHo.setOptions(self.listCanHo.map({$0.TenCanHo}), placeholder: nil, selectedIndex: nil)
             }
-            let gioitinh = self.hopdong?.GioiTinh == "1" ? "Nam" : "Nữ"
-            if let index = self.listGioiTinh.index(where: { $0 == gioitinh}) {
-                self.cbbGioiTinh.setOptions(self.listGioiTinh.map({$0}), placeholder: nil, selectedIndex: index)
+            if let index = self.listKhachHang.index(where: { $0.idKhachHang
+                == self.hopdong?.IdKhachHang}) {
+                self.cbbTenKH.setOptions(self.listKhachHang.map({$0.TenKH}), placeholder: nil, selectedIndex: index)
+            } else {
+                 self.cbbTenKH.setOptions(self.listKhachHang.map({$0.TenKH}), placeholder: nil, selectedIndex: nil)
             }
-            tfSDT.text = hopdong?.SDTKhachHang
-            tfEmailKH.text = hopdong?.emailKhachHang
             btnNgayBatDauCalendar.date = hopdong?.NgayBD.toDate(format: "MM/dd/yyyy HH:mm:ss") ?? Date()
             btnNgayKTCalendar.date = hopdong?.NgayKT.toDate(format: "MM/dd/yyyy HH:mm:ss") ?? Date()
             tfTienCoc.setValue(hopdong?.SoTienCoc)
             tfGhiChu.text = hopdong?.GhiChu
         } else {
             self.cbbCanHo.setOptions(self.listCanHo.map({$0.TenCanHo}), placeholder: nil, selectedIndex: nil)
-            self.cbbGioiTinh.setOptions(listGioiTinh, placeholder: nil, selectedIndex: 0)
+            self.cbbTenKH.setOptions(self.listKhachHang.map({$0.TenKH}), placeholder: nil, selectedIndex: nil)
             btnNgayBatDauCalendar.date = Date()
             btnNgayKTCalendar.date = Date()
         }
@@ -93,6 +98,7 @@ class AddAndEditHopDongViewController: UIViewController {
         self.cbbCanHo.delegate = self
         tfTienCoc?.setAsNumericKeyboard(type: .money, autoSelectAll: true)
           viewBody.layer.cornerRadius = 6.0
+        tfTenChuHD.isEnabled = false
     }
     
     func configService() {
@@ -171,32 +177,31 @@ class AddAndEditHopDongViewController: UIViewController {
 
     @IBAction func eventClickTaoKH(_ sender: Any) {
         let hopdong = HopDong()
-        guard tfTenKH.text != "" && tfTienCoc.text != "" && tfEmailKH.text != "" && tfSDT.text != "" else {
-            if tfTenKH.text == "" {
-                tfTenKH.warning()
+        guard tfTenChuHD.text != "" && tfTienCoc.text != "" && cbbTenKH.selectedIndex != nil  else {
+            if tfTenChuHD.text == "" {
+                tfTenChuHD.warning()
             }
             if tfTienCoc.text == "" {
                 tfTienCoc.warning()
             }
-            if tfEmailKH.text == "" {
-                tfEmailKH.warning()
+            if cbbTenKH.selectedIndex == nil {
+                cbbTenKH.warning()
             }
-            if tfSDT.text == "" {
-                tfSDT.warning()
-            }
+            cbbTenKH.warning()
             Notice.make(type: .Error, content: "Không được để rỗng hãy kiểm tra lại").show()
             return
             
         }
         hopdong.idHopDong = isCreateNew ? "" : self.hopdong?.idHopDong ?? ""
-        hopdong.ChuHopDong = tfTenKH.text ?? ""
+        hopdong.ChuHopDong = tfTenChuHD.text ?? ""
         hopdong.SoTienCoc = "\(tfTienCoc.getValue())"
         hopdong.NgayBD = "\(btnNgayBatDauCalendar.date)"
         hopdong.NgayKT = "\(btnNgayKTCalendar.date)"
         hopdong.GhiChu = tfGhiChu.text
-        hopdong.GioiTinh = self.listGioiTinh[cbbGioiTinh.selectedIndex ?? 0 ] == "Nam" ? "1" : "0"
-        hopdong.SDTKhachHang = tfSDT.text ?? ""
-        hopdong.emailKhachHang = tfEmailKH.text ?? ""
+        
+        if let index = cbbTenKH.selectedIndex{
+            hopdong.IdKhachHang = "\(listKhachHang[index].idKhachHang)"
+        }
         if let index = cbbCanHo.selectedIndex{
             hopdong.IdCanHo = "\(listCanHo[index].IdCanHo)"
         } else {
@@ -212,9 +217,7 @@ class AddAndEditHopDongViewController: UIViewController {
             "NgayBD" : hopdong.NgayBD.formatDate(date: "yyyy-MM-dd HH:mm:ss +HHHH", dateTo: "YYYY-MM-dd"),
             "NgayKT" : hopdong.NgayKT.formatDate(date: "yyyy-MM-dd HH:mm:ss +HHHH", dateTo: "YYYY-MM-dd"),
             "GhiChu" : hopdong.GhiChu,
-            "GioiTinh" : hopdong.GioiTinh,
-            "SDTKhachHang" : hopdong.SDTKhachHang,
-            "EmailKhachHang" : hopdong.emailKhachHang,
+            "IdKhachHang" : hopdong.IdKhachHang
         ]
         if isCreateNew {
             SVProgressHUD.show()

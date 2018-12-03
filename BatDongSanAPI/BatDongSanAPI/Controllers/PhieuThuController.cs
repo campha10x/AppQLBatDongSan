@@ -11,9 +11,9 @@ namespace BatDongSanAPI.Controllers
     public class PhieuThuController : Controller
     {
         [HttpPost("/PhieuThu/AddPhieuThu")]
-        public JsonResult addPhieuThu([FromHeader(Name = "IdPhong")] string IdPhong, [FromHeader(Name = "IdHoaDon")] string IdHoaDon, [FromHeader(Name = "SoTien")] string SoTien, [FromHeader(Name = "Ngay")] string Ngay, [FromHeader(Name = "GhiChu")] string GhiChu) {
+        public JsonResult addPhieuThu([FromHeader(Name = "IdCanHo")] string IdCanHo, [FromHeader(Name = "IdHoaDon")] string IdHoaDon, [FromHeader(Name = "SoTien")] string SoTien, [FromHeader(Name = "Ngay")] string Ngay, [FromHeader(Name = "GhiChu")] string GhiChu) {
             BatDongSanStoreContext context = HttpContext.RequestServices.GetService(typeof(BatDongSanStoreContext)) as BatDongSanStoreContext;
-            PhieuThu a = context.addPhieuThu(IdPhong,IdHoaDon,SoTien,Ngay,GhiChu);
+            PhieuThu a = context.addPhieuThu(IdCanHo, IdHoaDon,SoTien,Ngay,GhiChu);
             return Json(a);
         }
 

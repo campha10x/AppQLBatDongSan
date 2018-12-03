@@ -27,18 +27,18 @@ namespace BatDongSanAPI.Controllers
         }
 
         [HttpPost("/PhieuChi/EditPhieuChi")]
-        public JsonResult editPhieuChi([FromHeader(Name = "IdPhieuChi")] string IdPhieuChi, [FromHeader(Name = "IdPhong")] string IdPhong, [FromHeader(Name = "Sotien")] string SoTien, [FromHeader(Name = "Ngay")] string Ngay, [FromHeader(Name = "DienGiai")] string DienGiai)
+        public JsonResult editPhieuChi([FromHeader(Name = "IdPhieuChi")] string IdPhieuChi, [FromHeader(Name = "IdCanHo")] string IdCanHo, [FromHeader(Name = "Sotien")] string SoTien, [FromHeader(Name = "Ngay")] string Ngay, [FromHeader(Name = "DienGiai")] string DienGiai)
         {
             BatDongSanStoreContext context = HttpContext.RequestServices.GetService(typeof(BatDongSanStoreContext)) as BatDongSanStoreContext;
-            PhieuChi a = context.updatePhieuChi(IdPhong, IdPhong, SoTien, Ngay, DienGiai);
+            PhieuChi a = context.updatePhieuChi(IdPhieuChi, IdCanHo, SoTien, Ngay, DienGiai);
             return Json(a);
         }
 
         [HttpPost("/PhieuChi/AddPhieuChi")]
-        public JsonResult AddPhieuChi([FromHeader(Name = "IdPhong")] string IdPhong, [FromHeader(Name = "SoTien")] string SoTien, [FromHeader(Name = "Ngay")] string Ngay, [FromHeader(Name = "DienGiai")] string DienGiai)
+        public JsonResult AddPhieuChi([FromHeader(Name = "IdCanHo")] string IdCanHo, [FromHeader(Name = "SoTien")] string SoTien, [FromHeader(Name = "Ngay")] string Ngay, [FromHeader(Name = "DienGiai")] string DienGiai)
         {
             BatDongSanStoreContext context = HttpContext.RequestServices.GetService(typeof(BatDongSanStoreContext)) as BatDongSanStoreContext;
-            PhieuChi a = context.addPhieuChi(IdPhong, SoTien, Ngay, DienGiai);
+            PhieuChi a = context.addPhieuChi(IdCanHo, SoTien, Ngay, DienGiai);
             return Json(a);
         }
 

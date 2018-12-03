@@ -38,7 +38,7 @@ class QuanLiTableViewCell: UITableViewCell {
         buttonDelete.backgroundColor = UIColor.red
     }
 
-    func bindding(index: Int, obj: HoaDon, datra: Int, tenphong: String) {
+    func bindding(index: Int, obj: HoaDon, datra: Double, tenphong: String) {
         self.index = index
         labelPhong.text = tenphong
         labelSoPhieu.text = obj.soPhieu

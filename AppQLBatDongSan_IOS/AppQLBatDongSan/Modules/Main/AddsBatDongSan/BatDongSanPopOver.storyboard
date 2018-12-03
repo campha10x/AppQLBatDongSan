@@ -160,7 +160,7 @@
                                             <action selector="eventChooseDate:" destination="Vfb-aZ-agi" eventType="touchUpInside" id="ZBL-ZH-dOM"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phòng" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xdg-2D-ODH">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Căn hộ" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xdg-2D-ODH">
                                         <rect key="frame" x="100" y="156" width="151" height="46"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
@@ -313,8 +313,8 @@
                         <outlet property="imageStar" destination="ucN-He-7kW" id="tGP-SH-b55"/>
                         <outlet property="labelHeaderTitle" destination="ee9-TB-uZM" id="lGb-o5-kOg"/>
                         <outlet property="textViewGhiChu" destination="Ail-fx-W0Y" id="TLQ-eB-Pon"/>
+                        <outlet property="textfieldCanHo" destination="axM-ws-uj9" id="u7L-IS-YWv"/>
                         <outlet property="textfieldMaHoaDon" destination="jZG-jn-TnE" id="OO9-wT-hIT"/>
-                        <outlet property="textfieldPhong" destination="axM-ws-uj9" id="EXh-cv-SjP"/>
                         <outlet property="textfieldSotien" destination="HaE-Jy-A4T" id="pAl-ft-YSg"/>
                         <outlet property="viewBody" destination="UHJ-BW-bbz" id="5rj-TW-wK8"/>
                     </connections>
@@ -340,10 +340,10 @@
                                 </connections>
                             </button>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AE4-s0-Z9K">
-                                <rect key="frame" x="236.5" y="40" width="639.5" height="570"/>
+                                <rect key="frame" x="234" y="40" width="644.5" height="570"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u1H-ab-Cnf">
-                                        <rect key="frame" x="0.0" y="0.0" width="639.5" height="70"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="644.5" height="70"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" translatesAutoresizingMaskIntoConstraints="NO" id="vdp-WL-Blv">
                                                 <rect key="frame" x="20" y="15" width="40" height="40"/>
@@ -369,13 +369,13 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ngày" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yiv-Tm-GZv">
-                                        <rect key="frame" x="100" y="100" width="49.5" height="46"/>
+                                        <rect key="frame" x="100" y="100" width="54.5" height="46"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C6O-A7-K2g" customClass="MyButtonCalendar" customModule="AppQLBatDongSan" customModuleProvider="target">
-                                        <rect key="frame" x="169.5" y="100" width="370" height="46"/>
+                                        <rect key="frame" x="174.5" y="100" width="370" height="46"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="46" id="9JU-zO-3Hl"/>
                                             <constraint firstAttribute="width" constant="370" id="Icg-aA-JWv"/>
@@ -389,8 +389,8 @@
                                             <action selector="eventChooseDate:" destination="cjs-tW-kRf" eventType="touchUpInside" id="ChY-Iq-VwN"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phòng" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZuD-c0-IKh">
-                                        <rect key="frame" x="100" y="156" width="49.5" height="46"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Căn hộ" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZuD-c0-IKh">
+                                        <rect key="frame" x="100" y="156" width="54.5" height="46"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -408,26 +408,26 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="t4h-8j-mhm" customClass="MyNumberField" customModule="AppQLBatDongSan" customModuleProvider="target">
-                                        <rect key="frame" x="169.5" y="212" width="370" height="46"/>
+                                        <rect key="frame" x="174.5" y="212" width="370" height="46"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hTh-7y-WKU">
-                                        <rect key="frame" x="169.5" y="268" width="370" height="92"/>
+                                        <rect key="frame" x="174.5" y="268" width="370" height="92"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="apc-v3-hvH">
-                                        <rect key="frame" x="0.0" y="410" width="639.5" height="1"/>
+                                        <rect key="frame" x="0.0" y="410" width="644.5" height="1"/>
                                         <color key="backgroundColor" red="0.73333333329999995" green="0.73333333329999995" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="h6k-AW-fky"/>
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bh4-6O-jiN">
-                                        <rect key="frame" x="479.5" y="426" width="130" height="46"/>
+                                        <rect key="frame" x="484.5" y="426" width="130" height="46"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="130" id="GT8-vV-au7"/>
                                             <constraint firstAttribute="height" constant="46" id="cOZ-LI-m24"/>
@@ -441,7 +441,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AAA-hI-6hj">
-                                        <rect key="frame" x="329.5" y="426" width="130" height="46"/>
+                                        <rect key="frame" x="334.5" y="426" width="130" height="46"/>
                                         <color key="backgroundColor" red="0.18966848019999999" green="0.29627445229999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <inset key="imageEdgeInsets" minX="-40" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="Lưu" image="save"/>
@@ -450,7 +450,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ud-Kr-z7R" customClass="MyCombobox" customModule="AppQLBatDongSan" customModuleProvider="target">
-                                        <rect key="frame" x="169.5" y="156" width="370" height="46"/>
+                                        <rect key="frame" x="174.5" y="156" width="370" height="46"/>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -513,8 +513,8 @@
                     </view>
                     <connections>
                         <outlet property="btnLuu" destination="AAA-hI-6hj" id="DQC-bN-jWa"/>
+                        <outlet property="cbbCanHo" destination="3Ud-Kr-z7R" id="bGF-jS-O2O"/>
                         <outlet property="cbbNgay" destination="C6O-A7-K2g" id="bRy-A1-RRO"/>
-                        <outlet property="cbbPhong" destination="3Ud-Kr-z7R" id="ehK-gO-vl8"/>
                         <outlet property="labelHeader" destination="Eiw-O2-aqw" id="dj9-f1-VEt"/>
                         <outlet property="textViewDiengiai" destination="hTh-7y-WKU" id="QjN-2m-dDW"/>
                         <outlet property="textfieldSotien" destination="t4h-8j-mhm" id="Ma3-D5-Nok"/>
@@ -603,7 +603,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phòng" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="izY-J2-k8J">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tên căn hộ" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="izY-J2-k8J">
                                         <rect key="frame" x="20" y="300" width="200" height="45"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
@@ -796,7 +796,7 @@
                     </view>
                     <connections>
                         <outlet property="btnNgaySinh" destination="WBQ-Fy-xIU" id="Gzm-LR-eqW"/>
-                        <outlet property="cbbPhong" destination="5u1-Ur-ADe" id="C2o-Ed-dBW"/>
+                        <outlet property="cbbCanHo" destination="5u1-Ur-ADe" id="VMj-pw-mXS"/>
                         <outlet property="groupGioiTinh" destination="TgE-tR-VXj" id="DL5-c7-G97"/>
                         <outlet property="labelHeaderTitle" destination="K0I-cD-WRW" id="dLf-bi-q8H"/>
                         <outlet property="textViewQueQuan" destination="aDq-O4-SIk" id="NCa-Wj-bYX"/>

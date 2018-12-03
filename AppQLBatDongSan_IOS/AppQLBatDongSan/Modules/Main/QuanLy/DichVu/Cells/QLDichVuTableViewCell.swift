@@ -15,18 +15,15 @@ class QLDichVuTableViewCell: UITableViewCell {
     @IBOutlet weak var lblTenDichVu: UILabel!
     @IBOutlet weak var lblDongia: UILabel!
     @IBOutlet weak var lblDonvi: UILabel!
-    @IBOutlet weak var lblMacdinh: UILabel!
     
     
+        
     
-    
-    var listDonVi: [DonVi] = []
     static let id = "QLDichVuTableViewCell"
     var index: Int = -1
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        listDonVi = Storage.shared.getObjects(type: DonVi.self) as! [DonVi]
     }
     
     @IBAction func eventEdit(_ sender: Any) {
@@ -38,12 +35,10 @@ class QLDichVuTableViewCell: UITableViewCell {
     }
     
     func binding(dichvu: DichVu, index: Int )  {
-        let nameDonVi = listDonVi.filter({ $0.idDonVi == dichvu.idDonvi}).first?.TenDonVi
         self.index = index
         lblTenDichVu.text = dichvu.TenDichVu
         lblDongia.text = dichvu.DonGia.toNumberString(decimal: false)
-        lblDonvi.text = nameDonVi
-        lblMacdinh.text = dichvu.MacDinh == "1" ? "True" : "False"
+        lblDonvi.text = dichvu.DonVi
     }
 
 }

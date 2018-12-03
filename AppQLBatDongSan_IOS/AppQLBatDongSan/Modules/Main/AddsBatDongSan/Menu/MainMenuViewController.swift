@@ -24,6 +24,9 @@ class MainMenuViewController: UIViewController {
     
     var delegate : MainMenuDelegate?
     
+    
+    let arrayMenus: [String] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         btnLogout.backgroundColor = UIColor.init(netHex: 0xF46463)
@@ -88,39 +91,33 @@ extension MainMenuViewController: UITableViewDataSource, UITableViewDelegate {
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return 9
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "OptionTableViewCell", for: indexPath) as! OptionTableViewCell
         if indexPath.row == 0 {
-            cell.setDataForOption(nameImage: "icon-sell.png", titleOption: "Tổng quan")
+            cell.setDataForOption(nameImage: "worldwide", titleOption: "Tổng quan")
         } else if indexPath.row == 1 {
-            cell.setDataForOption(nameImage: "icon-sell.png", titleOption: "Hoá đơn")
+            cell.setDataForOption(nameImage: "bills", titleOption: "Hoá đơn")
         }
         else if indexPath.row == 2 {
-            cell.setDataForOption(nameImage: "icon-shift.png", titleOption: "Phiếu Thu")
+            cell.setDataForOption(nameImage: "money-bag", titleOption: "Phiếu Thu")
         }
         else if indexPath.row == 3 {
-            cell.setDataForOption(nameImage: "icon-shift.png", titleOption: "Phiếu chi")
+            cell.setDataForOption(nameImage: "money-bag", titleOption: "Phiếu chi")
         }
         else if indexPath.row == 4 {
-            cell.setDataForOption(nameImage: "icon-order-list.png", titleOption: "Khách hàng")
+            cell.setDataForOption(nameImage: "customer", titleOption: "Khách hàng")
         }
         else if indexPath.row == 5 {
-            cell.setDataForOption(nameImage: "icon-setting.png", titleOption: "Hợp đồng")
-        }
-//        else if indexPath.row == 6 {
-//            cell.setDataForOption(nameImage: "icon-setting.png", titleOption: "Thống kê")
-//        }
-        else if indexPath.row == 6 {
-            cell.setDataForOption(nameImage: "icon-setting.png", titleOption: "Nhà trọ")
+            cell.setDataForOption(nameImage: "report", titleOption: "Hợp đồng")
+        }else if indexPath.row == 6 {
+            cell.setDataForOption(nameImage: "fireplace", titleOption: "Căn hộ")
         }else if indexPath.row == 7 {
-            cell.setDataForOption(nameImage: "icon-setting.png", titleOption: "Phòng")
+            cell.setDataForOption(nameImage: "customer-support", titleOption: "Dịch vụ")
         }else if indexPath.row == 8 {
-            cell.setDataForOption(nameImage: "icon-setting.png", titleOption: "Đơn vị")
-        }else if indexPath.row == 9 {
-            cell.setDataForOption(nameImage: "icon-setting.png", titleOption: "Dịch vụ")
+            cell.setDataForOption(nameImage: "graph", titleOption: "Thống kê")
         }
                 
         return cell
@@ -138,42 +135,25 @@ extension MainMenuViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
             delegate?.mainMenuOpen(type: .segueTongQuan)
-            self.hide()
         } else if indexPath.row == 1 {
             delegate?.mainMenuOpen(type: .segueHoadon)
-            self.hide()
         }else if indexPath.row == 2 {
             delegate?.mainMenuOpen(type: .seguePhieuthu)
-            self.hide()
         } else if indexPath.row == 3 {
             delegate?.mainMenuOpen(type: .seguePhieuchi)
-            self.hide()
         } else if indexPath.row == 4 {
             delegate?.mainMenuOpen(type: .segueKhachhang)
-            self.hide()
         } else if indexPath.row == 5 {
             delegate?.mainMenuOpen(type: .segueHopdong)
-            self.hide()
         }
-//        else if indexPath.row == 6 {
-//            delegate?.mainMenuOpen(type: .segueDoanhthu)
-//            self.hide()
-//        }
         else if indexPath.row == 6 {
-            delegate?.mainMenuOpen(type: .segueNhatro)
-            self.hide()
-        }
-        else if indexPath.row == 7 {
             delegate?.mainMenuOpen(type: .seguePhong)
-            self.hide()
-        }else if indexPath.row == 8 {
-            delegate?.mainMenuOpen(type: .segueDonvi)
-            self.hide()
-        }else if indexPath.row == 9 {
+        }else if indexPath.row == 7 {
             delegate?.mainMenuOpen(type: .segueDichvu)
-            self.hide()
+        }else if indexPath.row == 8 {
+            delegate?.mainMenuOpen(type: .segueDoanhthu)
         }
-        
+        self.hide()
     }
     
 }

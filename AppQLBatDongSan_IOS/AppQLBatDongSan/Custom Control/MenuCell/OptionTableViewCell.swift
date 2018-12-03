@@ -23,7 +23,7 @@ class OptionTableViewCell: UITableViewCell {
     }
     
     func setDataForOption(nameImage image:String, titleOption title:String ) -> Void {
-        self.imgOption.image = UIImage(named: image)?.withRenderingMode(.alwaysTemplate)
+        self.imgOption.image = UIImage(named: image)
         self.lbTitleOption.text = title.uppercased()
     }
     

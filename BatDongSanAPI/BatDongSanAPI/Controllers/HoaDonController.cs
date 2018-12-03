@@ -29,8 +29,6 @@ namespace BatDongSanAPI.Controllers
         [HttpGet("/HoaDon/GetListHoaDon_CanHo")]
         public JsonResult GetListHoaDon_CanHo()
         {
-            string host = Dns.GetHostName();
-            IPHostEntry ip = Dns.GetHostEntry(host);
 
             BatDongSanStoreContext context = HttpContext.RequestServices.GetService(typeof(BatDongSanStoreContext)) as BatDongSanStoreContext;
             List<HoaDon_CanHo> listHoaDon = context.getListHoaDon_CanHo();
@@ -49,18 +47,27 @@ namespace BatDongSanAPI.Controllers
 
 
         [HttpPost("/HoaDon/AddListHoaDon")]
-        public JsonResult AddListHoaDon([FromHeader(Name = "IdCanHo")] string IdCanHo, [FromHeader(Name = "SoPhieu")] string SoPhieu, [FromHeader(Name = "NgayTao")] string NgayTao, [FromHeader(Name = "SoTien")] string SoTien)
+        public JsonResult AddListHoaDon([FromHeader(Name = "IdCanHo")] string IdCanHo, [FromHeader(Name = "SoPhieu")] string SoPhieu, [FromHeader(Name = "NgayTao")] string NgayTao, [FromHeader(Name = "SoTien")] string SoTien, [FromHeader(Name = "SoDienMoi")] string SoDienMoi, [FromHeader(Name = "SoNuocMoi")] string SoNuocMoi)
         {
             BatDongSanStoreContext context = HttpContext.RequestServices.GetService(typeof(BatDongSanStoreContext)) as BatDongSanStoreContext;
-            HoaDon a = context.AddListHoaDon(IdCanHo, SoPhieu, NgayTao, SoTien);
+            HoaDon a = context.AddListHoaDon(IdCanHo, SoPhieu, NgayTao, SoTien, SoDienMoi, SoNuocMoi);
             return Json(a);
         }
 
         [HttpPost("/HoaDon/EditListHoaDon")]
-        public JsonResult EditListHoaDon([FromHeader(Name = "IdHoaDon")] string IdHoaDon, [FromHeader(Name = "IdCanHo")] string IdCanHo, [FromHeader(Name = "SoPhieu")] string SoPhieu, [FromHeader(Name = "NgayTao")] string NgayTao, [FromHeader(Name = "SoTien")] string SoTien)
+        public JsonResult EditListHoaDon([FromHeader(Name = "IdHoaDon")] string IdHoaDon, [FromHeader(Name = "IdCanHo")] string IdCanHo, [FromHeader(Name = "SoPhieu")] string SoPhieu, [FromHeader(Name = "NgayTao")] string NgayTao, [FromHeader(Name = "SoTien")] string SoTien, [FromHeader(Name = "SoDienMoi")] string SoDienMoi, [FromHeader(Name = "SoNuocMoi")] string SoNuocMoi)
         {
             BatDongSanStoreContext context = HttpContext.RequestServices.GetService(typeof(BatDongSanStoreContext)) as BatDongSanStoreContext;
-            HoaDon a = context.updateHoaDon(IdHoaDon, IdCanHo, SoPhieu, NgayTao, SoTien);
+            HoaDon a = context.updateHoaDon(IdHoaDon, IdCanHo, SoPhieu, NgayTao, SoTien,SoDienMoi,SoNuocMoi);
+            return Json(a);
+        }
+
+
+        [HttpPost("/HoaDon/UpDateSoDienNuocCanHo")]
+        public JsonResult upDateSoDienNuocCanHo([FromHeader(Name = "IdCanHo")] string IdCanHo, [FromHeader(Name = "SoDienCu")] string SoDienCu, [FromHeader(Name = "SoNuocCu")] string SoNuocCu)
+        {
+            BatDongSanStoreContext context = HttpContext.RequestServices.GetService(typeof(BatDongSanStoreContext)) as BatDongSanStoreContext;
+            String a = context.upDateSoDienNuocCanHo(IdCanHo, SoDienCu, SoNuocCu);
             return Json(a);
         }
 

@@ -30,7 +30,7 @@ class PhieuThuViewController: UIViewController {
     @IBOutlet weak var btnLuu: UIButton!
     
     var hoadon: HoaDon?
-    var datra: Int?
+    var datra: Double?
     var listCanHo: [CanHo] = []
     var onUpdatePhieuThu: ((PhieuThu)->())?
     let manager = Alamofire.SessionManager()
@@ -39,8 +39,8 @@ class PhieuThuViewController: UIViewController {
         super.viewDidLoad()
         configService()
         customized()
-        if let hoadon = hoadon {
-            let conlai = (Double(hoadon.soTien)?.toInt()!)! - datra!
+        if let hoadon = hoadon, let datra = self.datra {
+            let conlai = (Double(hoadon.soTien) ?? 0 ) - datra
             textfieldMaHoaDon.text = "\(String(describing: hoadon.idHoaDon)) - \(hoadon.ngayTao.formatDate()) - \(conlai)"
 //            textfieldSotien.text = "\(conlai)".toNumberString(decimal: false)
             

@@ -29,18 +29,18 @@ namespace BatDongSanAPI.Controllers
 
 
         [HttpPost("/DichVu/EditDichVu")]
-        public JsonResult EditDichVu([FromHeader(Name = "idDichVu")] string idDichVu, [FromHeader(Name = "TenDichVu")] string TenDichVu, [FromHeader(Name = "DonGia")] string DonGia, [FromHeader(Name = "idDonvi")] string idDonvi, [FromHeader(Name = "MacDinh")] string MacDinh)
+        public JsonResult EditDichVu([FromHeader(Name = "idDichVu")] string idDichVu, [FromHeader(Name = "TenDichVu")] string TenDichVu, [FromHeader(Name = "DonGia")] string DonGia, [FromHeader(Name = "Donvi")] string donvi)
         {
             BatDongSanStoreContext context = HttpContext.RequestServices.GetService(typeof(BatDongSanStoreContext)) as BatDongSanStoreContext;
-            DichVu a = context.updateDichVu(idDichVu, TenDichVu, DonGia, idDonvi, MacDinh);
+            DichVu a = context.updateDichVu(idDichVu, TenDichVu, DonGia, donvi);
             return Json(a);
         }
 
         [HttpPost("/DichVu/AddDichVu")]
-        public JsonResult AddDichVu([FromHeader(Name = "TenDichVu")] string TenDichVu, [FromHeader(Name = "DonGia")] string DonGia, [FromHeader(Name = "idDonvi")] string idDonvi, [FromHeader(Name = "MacDinh")] string MacDinh)
+        public JsonResult AddDichVu([FromHeader(Name = "TenDichVu")] string TenDichVu, [FromHeader(Name = "DonGia")] string DonGia, [FromHeader(Name = "Donvi")] string donvi)
         {
             BatDongSanStoreContext context = HttpContext.RequestServices.GetService(typeof(BatDongSanStoreContext)) as BatDongSanStoreContext;
-            DichVu a = context.addDichvu(TenDichVu, DonGia, idDonvi, MacDinh);
+            DichVu a = context.addDichvu(TenDichVu, DonGia, donvi);
             return Json(a);
         }
 
