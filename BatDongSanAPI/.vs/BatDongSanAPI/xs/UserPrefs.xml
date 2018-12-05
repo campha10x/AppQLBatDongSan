@@ -1,13 +1,6 @@
 ﻿<Properties StartupConfiguration="{5052F413-D199-413A-BD23-A2BD31F1F3AE}|Default">
   <MonoDevelop.Ide.ItemProperties.BatDongSanAPI PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="BatDongSanAPI/Models/BatDongSanStoreContext.cs">
-    <Files>
-      <File FileName="BatDongSanAPI/Controllers/PhieuChiController.cs" Line="35" Column="10" />
-      <File FileName="BatDongSanAPI/Controllers/CanHo_DichVuController.cs" Line="31" Column="9" />
-      <File FileName="BatDongSanAPI/Models/BatDongSanStoreContext.cs" Line="864" Column="23" />
-      <File FileName="BatDongSanAPI/Controllers/HoaDonController.cs" Line="78" Column="39" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

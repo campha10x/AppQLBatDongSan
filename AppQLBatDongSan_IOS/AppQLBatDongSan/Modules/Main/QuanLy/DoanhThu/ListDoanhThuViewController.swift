@@ -7,10 +7,49 @@
 //
 
 import UIKit
+import SVProgressHUD
+import SwiftyJSON
+import Alamofire
+import Charts
 
 class DoanhThu {
     var thoigian: String = ""
     var sotien: String = ""
+}
+
+extension BarChartView {
+    private class BarChartFormatter: NSObject, IAxisValueFormatter {
+        
+        var labels: [String] = []
+        
+        func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+            return labels[Int(value)]
+        }
+        
+        init(labels: [String]) {
+            super.init()
+            self.labels = labels
+        }
+    }
+    func setBarChartData(xValues: [String], yValues: [Double], label: String) {
+        
+        var dataEntries: [BarChartDataEntry] = []
+        
+        for i in 0..<yValues.count {
+            let dataEntry = BarChartDataEntry(x: Double(i), y: yValues[i])
+            dataEntries.append(dataEntry)
+        }
+        
+        let chartDataSet = BarChartDataSet(values: dataEntries, label: label)
+        let chartData = BarChartData(dataSet: chartDataSet)
+        chartData.setValueFont(UIFont.systemFont(ofSize: 15))
+        let chartFormatter = BarChartFormatter(labels: xValues)
+        let xAxis = XAxis()
+        xAxis.valueFormatter = chartFormatter
+        self.xAxis.valueFormatter = xAxis.valueFormatter
+        
+        self.data = chartData
+    }
 }
 
 class ListDoanhThuViewController: UIViewController {
@@ -18,17 +57,159 @@ class ListDoanhThuViewController: UIViewController {
     @IBOutlet weak var btnCalenderTo: MyButtonCalendar!
     @IBOutlet weak var tblViewThongKe: UITableView!
     
+    @IBOutlet weak var viewFooter: UIView!
+    @IBOutlet weak var chartViewThongKe: BarChartView!
     var listDoanhThu: [DoanhThu] = []
+    
+    var listPhieuThu: [PhieuThu] = [PhieuThu]()
+    var listPhieuChi: [PhieuChi] = [PhieuChi]()
+     let manager = Alamofire.SessionManager()
+    var dispatch : DispatchGroup?
+    
+    var months: [String]  = [ "1", "2" , "3" , "4" , "5" , "6" , "7", "8" , "9" , "10" , "11" , "12"]
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        dispatch = DispatchGroup()
+        configService()
+        loadPhieuChi()
+        loadPhieuThu()
+        dispatch?.notify(queue: .main, execute: {
+            self.caculatorDoanhThu()
+            self.setChart()
+            self.viewFooter.frame = CGRect.init(x: 0, y: 13 * 50, width: self.tblViewThongKe.frame.width, height: 700)
+            self.tblViewThongKe.tableFooterView = self.viewFooter
+        })
 
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd"
-        btnCalendarFrom.date  = formatter.date(from: "2017/01/01") ?? Date()
+        btnCalendarFrom.date  = formatter.date(from: "\(Date().year)/01/01") ?? Date()
         btnCalenderTo.date = Date()
        
+        btnCalendarFrom.layer.borderColor = UIColor.gray.cgColor
+        btnCalendarFrom.layer.borderWidth = 1.0
+        
+        btnCalenderTo.layer.borderColor = UIColor.gray.cgColor
+        btnCalenderTo.layer.borderWidth = 1.0
+        tblViewThongKe.dataSource = self
+        tblViewThongKe.delegate = self
+        
+
     }
+    
+    
+    func setChart(){
+        chartViewThongKe.rightAxis.enabled = false
+        chartViewThongKe.legend.font = .systemFont(ofSize: 15)
+        chartViewThongKe.xAxis.labelFont = .systemFont(ofSize: 15)
+         chartViewThongKe.leftAxis.labelFont = .systemFont(ofSize: 15)
+        var convertNumberMonth: [String] = []
+        var unitsSold: [Double] = []
+        for item in listDoanhThu {
+            convertNumberMonth.append(item.thoigian + "/2018")
+            unitsSold.append((Double(item.sotien) ?? 0))
+        }
+        chartViewThongKe.setBarChartData(xValues: convertNumberMonth, yValues: unitsSold , label: "Doanh thu")
+        chartViewThongKe.isUserInteractionEnabled = false
+    }
+    
+    func caculatorDoanhThu() {
+        for month in months {
+            let getListPhieuThu = listPhieuThu.filter({ return returnMonth(ngayTao: $0.Ngay) == month })
+            let totalPhieuThu = getListPhieuThu.reduce(0.0, { $0 + (Double($1.SoTien) ?? 0.0) })
+            let getListPhieuChi = listPhieuChi.filter({ return returnMonth(ngayTao: $0.Ngay) == month })
+            let totalPhieuChi = getListPhieuChi.reduce(0.0, { $0 + (Double($1.Sotien) ?? 0.0) })
+            
+            let doanhThu = DoanhThu()
+            doanhThu.sotien = "\(totalPhieuThu - totalPhieuChi)"
+            doanhThu.thoigian = month
+            self.listDoanhThu.append(doanhThu)
+            
+        }
+        tblViewThongKe.reloadData()
+    }
+    
+    func returnMonth(ngayTao: String) -> String {
+        var month = String(ngayTao.split(separator: "/")[0])
+        if month.contains("0"){
+            month.removeFirst()
+        }
+        return month
+    }
+    
+    func configService() {
+        manager.delegate.sessionDidReceiveChallenge = { session, challenge in
+            var disposition: URLSession.AuthChallengeDisposition = .performDefaultHandling
+            var credential: URLCredential?
+            
+            if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
+                disposition = URLSession.AuthChallengeDisposition.useCredential
+                credential = URLCredential(trust: (challenge.protectionSpace.serverTrust ?? nil)!)
+            } else {
+                if challenge.previousFailureCount > 0 {
+                    disposition = .cancelAuthenticationChallenge
+                } else {
+                    credential = self.manager.session.configuration.urlCredentialStorage?.defaultCredential(for: challenge.protectionSpace)
+                    
+                    if credential != nil {
+                        disposition = .useCredential
+                    }
+                }
+            }
+            
+            return (disposition, credential)
+        }
+    }
+    
+    
+    func loadPhieuThu() {
+        dispatch?.enter()
+        SVProgressHUD.show()
+        manager.request("https://localhost:5001/PhieuThu/GetListPhieuThu", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil).responseJSON { (responseObject) in
+            SVProgressHUD.dismiss()
+            self.dispatch?.leave()
+            do {
+                let json: JSON = try JSON.init(data: responseObject.data! )
+                self.listPhieuThu  = json.arrayValue.map({PhieuThu.init(json: $0)})
+                self.listPhieuThu.forEach({ (phieuthu) in
+                    if let phieuthuCopy = phieuthu.copy() as? PhieuThu {
+                        Storage.shared.addOrUpdate([phieuthuCopy], type: PhieuThu.self)
+                    }
+                })
+            } catch {
+                if let error = responseObject.error {
+                    Notice.make(type: .Error, content: error.localizedDescription).show()
+                }
+            }
+        }
+        
+    }
+    
+    
+    func loadPhieuChi() {
+        dispatch?.enter()
+        SVProgressHUD.show()
+        manager.request("https://localhost:5001/PhieuChi/GetListPhieuChi", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil).responseJSON { (responseObject) in
+            SVProgressHUD.dismiss()
+            self.dispatch?.leave()
+            do {
+                let json: JSON = try JSON.init(data: responseObject.data! )
+                self.listPhieuChi  = json.arrayValue.map({PhieuChi.init(json: $0)})
+                self.listPhieuChi.forEach({ (phieuchi) in
+                    if let phieuchiCopy = phieuchi.copy() as? PhieuChi {
+                        Storage.shared.addOrUpdate([phieuchi], type: PhieuChi.self)
+                    }
+                })
+            } catch {
+                if let error = responseObject.error {
+                    Notice.make(type: .Error, content: error.localizedDescription).show()
+                }
+            }
+        }
+        
+    }
+    
     
     @IBAction func eventChooseDate(_ sender: Any) {
         guard let btn = sender as? MyButtonCalendar else { return  }
@@ -64,3 +245,23 @@ class ListDoanhThuViewController: UIViewController {
 
 }
 
+extension ListDoanhThuViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.listDoanhThu.count + 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "DoanhThuTableViewCell", for: indexPath) as! DoanhThuTableViewCell
+        if indexPath.row == listDoanhThu.count {
+            let sum = self.listDoanhThu.reduce(0.0, { $0 + (Double($1.sotien) ?? 0) })
+            cell.binding(date: "Tổng cộng", money: "\(sum)",rowLast: true)
+        }else {
+            cell.binding(date: self.listDoanhThu[indexPath.row].thoigian, money: self.listDoanhThu[indexPath.row].sotien)
+        }
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
+    }
+}

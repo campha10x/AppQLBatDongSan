@@ -19,5 +19,101 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AppQLBatDongSan/Modules/Main/QuanLy/DoanhThu/ListDoanhThuViewController.swift"
+            timestampString = "565739162.100055"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "174"
+            endingLineNumber = "174"
+            landmarkName = "loadPhieuThu()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Any&gt;) -&gt; () in AppQLBatDongSan.ListDoanhThuViewController.loadPhieuThu() -&gt; ()"
+                  moduleName = "AppQLBatDongSan"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/duyxuan/Desktop/AppQLBatDongSan/AppQLBatDongSan_IOS/AppQLBatDongSan/Modules/Main/QuanLy/DoanhThu/ListDoanhThuViewController.swift"
+                  timestampString = "565628072.2013431"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "113"
+                  endingLineNumber = "113"
+                  offsetFromSymbolStart = "641">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (SwiftyJSON.JSON) -&gt; AppQLBatDongSan.PhieuThu in closure #1 (Alamofire.DataResponse&lt;Any&gt;) -&gt; () in AppQLBatDongSan.ListDoanhThuViewController.loadPhieuThu() -&gt; ()"
+                  moduleName = "AppQLBatDongSan"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/duyxuan/Desktop/AppQLBatDongSan/AppQLBatDongSan_IOS/AppQLBatDongSan/Modules/Main/QuanLy/DoanhThu/ListDoanhThuViewController.swift"
+                  timestampString = "565628072.205179"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "113"
+                  endingLineNumber = "113"
+                  offsetFromSymbolStart = "26">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AppQLBatDongSan/Modules/Main/QuanLy/DoanhThu/ListDoanhThuViewController.swift"
+            timestampString = "565739162.1008331"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "199"
+            endingLineNumber = "199"
+            landmarkName = "loadPhieuChi()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Any&gt;) -&gt; () in AppQLBatDongSan.ListDoanhThuViewController.loadPhieuChi() -&gt; ()"
+                  moduleName = "AppQLBatDongSan"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/duyxuan/Desktop/AppQLBatDongSan/AppQLBatDongSan_IOS/AppQLBatDongSan/Modules/Main/QuanLy/DoanhThu/ListDoanhThuViewController.swift"
+                  timestampString = "565628072.213775"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "138"
+                  endingLineNumber = "138"
+                  offsetFromSymbolStart = "971">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (AppQLBatDongSan.PhieuChi) -&gt; () in closure #1 (Alamofire.DataResponse&lt;Any&gt;) -&gt; () in AppQLBatDongSan.ListDoanhThuViewController.loadPhieuChi() -&gt; ()"
+                  moduleName = "AppQLBatDongSan"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/duyxuan/Desktop/AppQLBatDongSan/AppQLBatDongSan_IOS/AppQLBatDongSan/Modules/Main/QuanLy/DoanhThu/ListDoanhThuViewController.swift"
+                  timestampString = "565628072.218819"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "139"
+                  endingLineNumber = "139"
+                  offsetFromSymbolStart = "33">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

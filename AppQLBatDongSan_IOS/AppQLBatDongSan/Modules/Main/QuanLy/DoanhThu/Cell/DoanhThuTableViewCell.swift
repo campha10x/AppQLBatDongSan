@@ -9,7 +9,9 @@
 import UIKit
 
 class DoanhThuTableViewCell: UITableViewCell {
-
+    
+    @IBOutlet weak var lbMoney: UILabel!
+    @IBOutlet weak var lbDate: UILabel!
     static let id = "DoanhThuTableViewCell"
     
     override func awakeFromNib() {
@@ -17,8 +19,14 @@ class DoanhThuTableViewCell: UITableViewCell {
         // Initialization code
     }
 
-    func binding() {
-        
+    func binding(date: String, money: String, rowLast: Bool = false) {
+        if rowLast {
+            self.lbDate.text = date
+            self.lbDate.font = UIFont.boldSystemFont(ofSize: 15)
+        } else {
+            self.lbDate.text = date + "/ \(Date().year)"
+        }
+        self.lbMoney.text = money.toNumberString(decimal: false)
     }
 
 }
