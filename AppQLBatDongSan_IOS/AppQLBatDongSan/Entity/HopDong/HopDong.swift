@@ -11,7 +11,7 @@ import SwiftyJSON
 import RealmSwift
 
 class HopDong: BaseRealmObject, NSCopying {
-    @objc dynamic var idHopDong: String = ""
+    @objc dynamic var IdHopDong: String = ""
     @objc dynamic var ChuHopDong: String = ""
     @objc dynamic var IdCanHo: String = ""
     @objc dynamic var SoTienCoc: String = ""
@@ -19,14 +19,18 @@ class HopDong: BaseRealmObject, NSCopying {
     @objc dynamic var NgayKT: String = ""
     @objc dynamic var GhiChu: String = ""
     @objc dynamic var IdKhachHang: String = ""
-    @objc dynamic var idDichVu: String = ""
+    @objc dynamic var TienDien: String = ""
+    @objc dynamic var TienNuoc: String = ""
+    @objc dynamic var SoDienBd: String = ""
+    @objc dynamic var SoNuocBd: String = ""
+    
     override static func primaryKey() -> String? {
-        return "idHopDong"
+        return "IdHopDong"
     }
     
     convenience init(json: JSON ) {
         self.init()
-        self.idHopDong = json["idHopDong"].stringValue
+        self.IdHopDong = json["idHopDong"].stringValue
         self.ChuHopDong = json["chuHopDong"].stringValue
         self.IdCanHo = json["idCanHo"].stringValue
         self.SoTienCoc = json["soTienCoc"].stringValue
@@ -34,13 +38,16 @@ class HopDong: BaseRealmObject, NSCopying {
         self.NgayKT = json["ngayKT"].stringValue
         self.GhiChu = json["ghiChu"].stringValue
         self.IdKhachHang = json["idKhachHang"].stringValue
-        self.idDichVu = json["idDichVu"].stringValue
+        self.TienDien = json["tienDien"].stringValue
+        self.TienNuoc = json["tienNuoc"].stringValue
+        self.SoDienBd = json["soDienBd"].stringValue
+        self.SoNuocBd = json["soNuocBd"].stringValue
     }
 
     
     func copy(with zone: NSZone? = nil) -> Any {
         let copy = HopDong()
-        copy.idHopDong = self.idHopDong
+        copy.IdHopDong = self.IdHopDong
         copy.ChuHopDong = self.ChuHopDong
         copy.IdCanHo = self.IdCanHo
         copy.SoTienCoc = self.SoTienCoc
@@ -48,6 +55,10 @@ class HopDong: BaseRealmObject, NSCopying {
         copy.NgayKT = self.NgayKT
         copy.GhiChu = self.GhiChu
         copy.IdKhachHang = self.IdKhachHang
+        copy.TienDien = self.TienDien
+        copy.TienNuoc = self.TienNuoc
+        copy.SoDienBd = self.SoDienBd
+        copy.SoNuocBd = self.SoNuocBd
         return copy
     }
     

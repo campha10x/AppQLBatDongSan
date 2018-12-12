@@ -20,6 +20,9 @@ class KhachHang: BaseRealmObject, NSCopying {
     @objc dynamic var Email: String = ""
     @objc dynamic var CMND: String = ""
     @objc dynamic var Quequan: String = ""
+     @objc dynamic var NgayCap: String = ""
+     @objc dynamic var NoiCap: String = ""
+     @objc dynamic var DiaChi: String = ""
     
     override static func primaryKey() -> String? {
         return "idKhachHang"
@@ -37,7 +40,8 @@ class KhachHang: BaseRealmObject, NSCopying {
         self.Email = json["email"].stringValue
         self.CMND = json["cmnd"].stringValue
          self.Quequan = json["quequan"].stringValue
-        
+        self.NgayCap = json["ngayCap"].stringValue
+        self.NoiCap = json["noiCap"].stringValue
     }
     
    
@@ -53,6 +57,8 @@ class KhachHang: BaseRealmObject, NSCopying {
         copy.Email = self.Email
         copy.CMND = self.CMND
         copy.Quequan = self.Quequan
+         copy.NgayCap = self.NgayCap
+         copy.NoiCap = self.NoiCap
         return copy
     }
     

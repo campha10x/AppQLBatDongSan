@@ -26,9 +26,12 @@ class MainMenuViewController: UIViewController {
     
     
     let arrayMenus: [String] = []
+    var accountObject: Account? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let listAccounts = Storage.shared.getObjects(type: Account.self) as! [Account]
+        accountObject = listAccounts.filter({$0.email == AppState.shared.getAccount()}).first?.copy() as? Account
         btnLogout.backgroundColor = UIColor.init(netHex: 0xF46463)
         self.setUpXIB()
     }
@@ -129,7 +132,7 @@ extension MainMenuViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return  30
+        return  125
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -155,6 +158,18 @@ extension MainMenuViewController: UITableViewDataSource, UITableViewDelegate {
         }
         self.hide()
     }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let height = self.tableView(tableView, heightForHeaderInSection: section)
+        let header =  CashierHeaderView.instanceFromNib()
+        header.frame = CGRect(x: 0, y: 0, width: tableView.bounds.width, height: height - 30)
+        header.setDataCashier(nameImage: nil, nameCashier: accountObject?.hoten ?? "")
+        let headerBound = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: height))
+        headerBound.backgroundColor = .clear
+        headerBound.addSubview(header)
+        return headerBound
+    }
+    
     
 }
 

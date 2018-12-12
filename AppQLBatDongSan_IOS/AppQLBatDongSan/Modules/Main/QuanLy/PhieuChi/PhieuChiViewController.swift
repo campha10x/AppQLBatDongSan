@@ -73,7 +73,7 @@ class PhieuChiViewController: UIViewController {
                 self.listPhieuChi  = json.arrayValue.map({PhieuChi.init(json: $0)})
                 self.listPhieuChi.forEach({ (phieuchi) in
                     if let phieuchiCopy = phieuchi.copy() as? PhieuChi {
-                        Storage.shared.addOrUpdate([phieuchi], type: PhieuChi.self)
+                        Storage.shared.addOrUpdate([phieuchiCopy], type: PhieuChi.self)
                     }
                 })
                 self.reCaculatorAmountPhieuChi()

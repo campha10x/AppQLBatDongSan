@@ -24,7 +24,4 @@ class HoaDonWireFrame: HoaDonWireFrameProtocol {
         
         return view
     }
-    func presentMainScreen(from view: LoginViewProtocol, animated: Bool) {
-        
-    }
 }

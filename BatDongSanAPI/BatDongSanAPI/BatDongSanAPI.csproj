@@ -21,4 +21,7 @@
     <Compile Remove="Models\DonVi.cs" />
     <Compile Remove="Controllers\DonViController.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Image\" />
+  </ItemGroup>
 </Project>

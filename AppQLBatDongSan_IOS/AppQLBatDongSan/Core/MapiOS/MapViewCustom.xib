@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="ipad12_9" orientation="landscape">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="MapViewCustom" customModule="AppQLBatDongSan" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cWH-2O-Ixv" customClass="GMSMapView">
+                    <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <textField hidden="YES" opaque="NO" clipsSubviews="YES" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="stI-xX-tJ5">
+                    <rect key="frame" x="139" y="28" width="601" height="36"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="36" id="0ea-f8-TrO"/>
+                    </constraints>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <action selector="eventClickChangeSearchMap:" destination="iN0-l3-epB" eventType="editingChanged" id="eRp-2D-nSw"/>
+                        <action selector="eventInputLocation:" destination="iN0-l3-epB" eventType="editingDidEnd" id="cf1-zh-IWy"/>
+                    </connections>
+                </textField>
+                <segmentedControl opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="EHq-rt-Vkp">
+                    <rect key="frame" x="12" y="28" width="111" height="37"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <segments>
+                        <segment title="Map"/>
+                        <segment title="Hybrid"/>
+                    </segments>
+                    <color key="tintColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <connections>
+                        <action selector="eventChangeTypeMap:" destination="iN0-l3-epB" eventType="valueChanged" id="s4m-I5-Pyg"/>
+                    </connections>
+                </segmentedControl>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GgW-k1-wIm">
+                    <rect key="frame" x="1314" y="32" width="40" height="40"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
+                    <state key="normal" title="Route">
+                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="eventClickRoute:" destination="iN0-l3-epB" eventType="touchUpInside" id="gUb-tL-j1I"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="do2-LJ-EAN">
+                    <rect key="frame" x="1314" y="80" width="40" height="40"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="0B7-XP-hgp"/>
+                        <constraint firstAttribute="height" constant="40" id="s3f-PI-a2l"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                    <state key="normal" title="+">
+                        <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="eventClickZoomOut:" destination="iN0-l3-epB" eventType="touchUpInside" id="DG0-3e-W3G"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cek-Dr-Hdu">
+                    <rect key="frame" x="1314" y="128" width="40" height="40"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                    <state key="normal" title="-">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="eventClickZoomIn:" destination="iN0-l3-epB" eventType="touchUpInside" id="BdL-cc-LnN"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="0.6705882353" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="cWH-2O-Ixv" secondAttribute="bottom" id="1nn-p2-95N"/>
+                <constraint firstItem="EHq-rt-Vkp" firstAttribute="leading" secondItem="u8T-SY-EnY" secondAttribute="leading" constant="12" id="2a4-9g-WKX"/>
+                <constraint firstItem="cek-Dr-Hdu" firstAttribute="height" secondItem="do2-LJ-EAN" secondAttribute="height" id="2uR-SZ-maA"/>
+                <constraint firstItem="do2-LJ-EAN" firstAttribute="leading" secondItem="GgW-k1-wIm" secondAttribute="leading" id="6Jf-fm-C1C"/>
+                <constraint firstItem="cek-Dr-Hdu" firstAttribute="trailing" secondItem="do2-LJ-EAN" secondAttribute="trailing" id="EdM-9Q-F5H"/>
+                <constraint firstItem="do2-LJ-EAN" firstAttribute="width" secondItem="GgW-k1-wIm" secondAttribute="width" id="HOL-qo-OxO"/>
+                <constraint firstItem="stI-xX-tJ5" firstAttribute="centerY" secondItem="EHq-rt-Vkp" secondAttribute="centerY" id="J3F-Pp-6Qw"/>
+                <constraint firstAttribute="trailing" secondItem="cek-Dr-Hdu" secondAttribute="trailing" constant="12" id="NKw-JH-afI"/>
+                <constraint firstAttribute="trailing" secondItem="cWH-2O-Ixv" secondAttribute="trailing" id="OkC-wJ-r9E"/>
+                <constraint firstItem="do2-LJ-EAN" firstAttribute="height" secondItem="GgW-k1-wIm" secondAttribute="height" id="QqM-Op-YsI"/>
+                <constraint firstItem="EHq-rt-Vkp" firstAttribute="top" secondItem="u8T-SY-EnY" secondAttribute="top" constant="8" id="TVl-hv-5SM"/>
+                <constraint firstItem="do2-LJ-EAN" firstAttribute="top" secondItem="GgW-k1-wIm" secondAttribute="bottom" constant="8" id="U7y-Ry-gf5"/>
+                <constraint firstItem="cWH-2O-Ixv" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="UGA-ms-vff"/>
+                <constraint firstItem="stI-xX-tJ5" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.44" id="WnZ-Fo-0PG"/>
+                <constraint firstItem="cek-Dr-Hdu" firstAttribute="width" secondItem="do2-LJ-EAN" secondAttribute="width" id="adf-fI-SXd"/>
+                <constraint firstItem="EHq-rt-Vkp" firstAttribute="height" secondItem="stI-xX-tJ5" secondAttribute="height" id="g7F-eC-0j3"/>
+                <constraint firstItem="do2-LJ-EAN" firstAttribute="trailing" secondItem="GgW-k1-wIm" secondAttribute="trailing" id="nhu-KP-Vwg"/>
+                <constraint firstItem="GgW-k1-wIm" firstAttribute="top" secondItem="u8T-SY-EnY" secondAttribute="top" constant="12" id="orF-xG-55F"/>
+                <constraint firstItem="cWH-2O-Ixv" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="q44-I9-RXP"/>
+                <constraint firstItem="stI-xX-tJ5" firstAttribute="leading" secondItem="EHq-rt-Vkp" secondAttribute="trailing" constant="16" id="rhT-dB-rva"/>
+                <constraint firstItem="cek-Dr-Hdu" firstAttribute="leading" secondItem="do2-LJ-EAN" secondAttribute="leading" id="xvG-Ip-dk1"/>
+                <constraint firstItem="cek-Dr-Hdu" firstAttribute="top" secondItem="do2-LJ-EAN" secondAttribute="bottom" constant="8" id="zKy-QT-eoE"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="u8T-SY-EnY"/>
+            <connections>
+                <outlet property="gmsMapViewCustom" destination="cWH-2O-Ixv" id="Juw-CF-gRX"/>
+                <outlet property="segmentControl" destination="EHq-rt-Vkp" id="nYe-rh-aX8"/>
+                <outlet property="txtSearchLocation" destination="stI-xX-tJ5" id="Hqb-I0-M9e"/>
+            </connections>
+        </view>
+    </objects>
+</document>

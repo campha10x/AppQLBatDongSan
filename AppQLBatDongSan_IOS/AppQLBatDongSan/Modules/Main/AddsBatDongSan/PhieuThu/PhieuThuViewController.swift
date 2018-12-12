@@ -59,7 +59,7 @@ class PhieuThuViewController: UIViewController {
         cbbNgay.layer.borderColor = UIColor.gray.cgColor
         cbbNgay.layer.borderWidth = 1.0
         listCanHo = Storage.shared.getObjects(type: CanHo.self) as! [CanHo]
-        textfieldCanHo.text = listCanHo.filter({ $0.IdCanHo == hoadon?.IdCanHo}).first?.TenCanHo ?? ""
+        textfieldCanHo.text = listCanHo.filter({ $0.IdCanHo == hoadon?.IdCanHo}).first?.maCanHo ?? ""
         textfieldCanHo.isEnabled = false
         textfieldSotien.setAsNumericKeyboard(type: .money, autoSelectAll: false)
     }

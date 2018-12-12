@@ -11,7 +11,7 @@ import SVProgressHUD
 import SwiftyJSON
 import Alamofire
 
-class QLCanHoViewController: UIViewController {
+class QLCanHoViewControlvar: UIViewController {
     
     var listCanHo: [CanHo] = [CanHo]()
     let manager = Alamofire.SessionManager()
@@ -39,7 +39,7 @@ class QLCanHoViewController: UIViewController {
         currentViewController.done = { CanHoResponse in
             self.listCanHo.append(CanHoResponse)
             self.tblCanHo.reloadData()
-            self.constraintHeightViewBody.constant = CGFloat (100 + 70 + 70 + 70 * self.listCanHo.count + 60)
+            self.constraintHeightViewBody.constant = CGFloat ( 70 + 200 * self.listCanHo.count + 50)
         }
         currentViewController.modalPresentationStyle = .overCurrentContext
         self.present(currentViewController, animated: true, completion: nil)
@@ -82,7 +82,7 @@ class QLCanHoViewController: UIViewController {
                     }
                 })
                 self.tblCanHo.reloadData()
-                self.constraintHeightViewBody.constant = CGFloat (200.0 +  70.0 * CGFloat(self.listCanHo.count ))
+                self.constraintHeightViewBody.constant = CGFloat ( 70 + 200 * self.listCanHo.count + 50)
             } catch {
                 if let error = responseObject.error {
                     Notice.make(type: .Error, content: error.localizedDescription ).show()
@@ -94,7 +94,7 @@ class QLCanHoViewController: UIViewController {
     
 }
 
-extension QLCanHoViewController: UITableViewDataSource, UITableViewDelegate  {
+extension QLCanHoViewControlvar: UITableViewDataSource, UITableViewDelegate  {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return listCanHo.count
     }
@@ -107,10 +107,22 @@ extension QLCanHoViewController: UITableViewDataSource, UITableViewDelegate  {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70
+        return 200
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) {
+            cell.contentView.backgroundColor = UIColor.white
+        }
+        let storyboard = UIStoryboard.init(name: "DetailBatDongSan", bundle: nil)
+        let currentViewController = storyboard.instantiateViewController(withIdentifier: "CanHoInforViewController") as! CanHoInforViewController
+        currentViewController.canHoObject = self.listCanHo[indexPath.row].copy() as? CanHo
+        self.present(currentViewController, animated: true, completion: nil)
+    }
+    
+    
 }
-extension QLCanHoViewController: eventProtocols {
+extension QLCanHoViewControlvar: eventProtocols {
     func eventEdit(_ index: Int) {
         let storyboard = UIStoryboard.init(name: "AddBatDongSan", bundle: nil)
         let currentViewController = storyboard.instantiateViewController(withIdentifier: "AddAndEditCanHoViewController") as! AddAndEditCanHoViewController
@@ -121,7 +133,7 @@ extension QLCanHoViewController: eventProtocols {
             if let index = self.listCanHo.firstIndex(where: { $0.IdCanHo == canHoResponse.IdCanHo}) {
                 self.listCanHo[index] = canHoResponse
                 self.tblCanHo.reloadData()
-                self.constraintHeightViewBody.constant = CGFloat (100 + 70 + 70 + 70 * self.listCanHo.count + 60)
+                self.constraintHeightViewBody.constant = CGFloat ( 70 + 200 * self.listCanHo.count + 50)
             }
         }
         self.present(currentViewController, animated: true, completion: nil)
@@ -145,9 +157,6 @@ extension QLCanHoViewController: eventProtocols {
                 }
             }
         }
-        
     }
-    
-    
 }
 

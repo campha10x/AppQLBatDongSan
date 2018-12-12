@@ -38,15 +38,21 @@ class QLHopDongTableViewCell: UITableViewCell {
     
     func binding(hopdong: HopDong, index: Int )  {
         self.index = index
-        let tenCanHo = listCanHo.filter({$0.IdCanHo == hopdong.IdCanHo }).first?.TenCanHo ?? "None"
-        lblMaHopDong.text = hopdong.idHopDong
+        let canHo = listCanHo.filter({$0.IdCanHo == hopdong.IdCanHo }).first
+        lblMaHopDong.text = hopdong.IdHopDong
         lblChuHopDong.text = hopdong.ChuHopDong
-        lblCanHo.text = tenCanHo
+        lblCanHo.text = canHo?.maCanHo
         lblSoTienCoc.text = hopdong.SoTienCoc.toNumberString(decimal: false)
         lblNgayBatDau.text = hopdong.NgayBD.formatDate()
         lblNgayKetThuc.text = hopdong.NgayKT.formatDate()
     }
 
+    @IBAction func eventClickShowHopDong(_ sender: Any) {
+        if let delegate = self.delegate {
+            delegate.eventShowHopDong?(self.index)
+        }
 
+    }
+    
 
 }

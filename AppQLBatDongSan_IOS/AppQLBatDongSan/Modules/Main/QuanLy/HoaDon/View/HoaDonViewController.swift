@@ -43,8 +43,6 @@ class HoaDonViewController: UIViewController {
     var listPhieuThu: [PhieuThu] = [PhieuThu]()
     
     let heightTableHoaDon: CGFloat = 70
-    
-    var segueDetailHoaDon = "DetailHoaDon"
     var dispatch : DispatchGroup?
     
     
@@ -139,7 +137,7 @@ class HoaDonViewController: UIViewController {
     func loadHoaDon() {
         dispatch?.enter()
         SVProgressHUD.show()
-        manager.request("https://localhost:5001/HoaDon/GetListHoaDon_CanHo", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil).responseJSON { (responseObject) in
+        manager.request("https://localhost:5001/HoaDon/GetListHoaDon", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil).responseJSON { (responseObject) in
             SVProgressHUD.dismiss()
             self.dispatch?.leave()
             do {
@@ -169,7 +167,7 @@ class HoaDonViewController: UIViewController {
                  let json: JSON = try JSON.init(data: responseObject.data! )
                 self.listCanHo  = json.arrayValue.map({CanHo.init(json: $0)})
                 Storage.shared.addOrUpdate(self.listCanHo, type: CanHo.self)
-                self.cbbCanHo.setOptions(self.listCanHo.map({$0.TenCanHo}), placeholder: nil, selectedIndex: nil)
+                self.cbbCanHo.setOptions(self.listCanHo.map({$0.maCanHo}), placeholder: nil, selectedIndex: nil)
                 self.cbbCanHo.delegate = self
             } catch {
                 if let error = responseObject.error {
@@ -201,12 +199,6 @@ class HoaDonViewController: UIViewController {
         }
         currentViewController.modalPresentationStyle = .overCurrentContext
         self.present(currentViewController, animated: true, completion: nil)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == segueDetailHoaDon {
-            
-        }
     }
     
     func returnMonth(ngayTao: String) -> String {
@@ -280,9 +272,9 @@ extension HoaDonViewController: UITableViewDataSource, UITableViewDelegate {
         cell?.onRemove = { (_ index: Int) in
             self.removeHoaDon(index)
         }
-        let tenCanHo = self.listCanHo.filter({$0.IdCanHo == self.listSearchHoaDon[indexPath.row].IdCanHo } ).first?.TenCanHo ?? ""
+        let maCanHo = self.listCanHo.filter({$0.IdCanHo == self.listSearchHoaDon[indexPath.row].IdCanHo } ).first?.maCanHo ?? "None"
         cell?.backgroundColor = (indexPath.row % 2 == 0 ? UIColor.gray : UIColor.white)
-        cell?.bindding(index: indexPath.row, obj: listSearchHoaDon[indexPath.row], datra: datra, tenphong: tenCanHo)
+        cell?.bindding(index: indexPath.row, obj: listSearchHoaDon[indexPath.row], datra: datra, maCanHo: maCanHo)
         return cell!
     }
     

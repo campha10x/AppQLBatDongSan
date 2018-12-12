@@ -14,11 +14,11 @@ import SwiftyJSON
 import SVProgressHUD
 
 class CanHoNoTien {
-    var tenCanHo: String = ""
+    var maCanHo: String = ""
     var soTienNo: String = ""
     
-    init(tenCanHo: String, soTienNo: String) {
-        self.tenCanHo = tenCanHo
+    init(maCanHo: String, soTienNo: String) {
+        self.maCanHo = maCanHo
         self.soTienNo = soTienNo
     }
     
@@ -38,7 +38,7 @@ class TongQuanViewController: UIViewController {
     
     var listCanHoTrong: [CanHo] = []
     
-    let manager = Alamofire.SessionManager()
+    let manager = SessionManager()
     
     let stateCanHo: [String] = ["Căn hộ đã thuê", "Căn hộ chưa thuê"]
     var dispatch: DispatchGroup?
@@ -55,12 +55,12 @@ class TongQuanViewController: UIViewController {
         loadHopDong()
         loadHoaDon()
         loadListPhieuThu()
-//        setUpChart_ThongKe()
+        loadPhieuChi()
+        loadKhachHang()
+        loadDichvu()
         loadCanHo_DichVu()
         dispatch?.notify(queue: .main, execute: {
             self.config()
-
-//            self.setDataCountThongKe(2000,range: 50)
         })
         tableViewCanHoNoTien.dataSource = self
         tableViewCanHoNoTien.separatorStyle = .none
@@ -76,10 +76,55 @@ class TongQuanViewController: UIViewController {
         self.navigationController?.navigationItem.setHidesBackButton(true, animated: false)
     }
     
+    
+    func loadPhieuChi()  {
+        SVProgressHUD.show()
+        dispatch?.enter()
+        manager.request("https://localhost:5001/PhieuChi/GetListPhieuChi", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil).responseJSON { (responseObject) in
+            SVProgressHUD.dismiss()
+            self.dispatch?.leave()
+            do {
+                let json: JSON = try JSON.init(data: responseObject.data! )
+                let listPhieuChi: [PhieuChi]  = json.arrayValue.map({PhieuChi.init(json: $0)})
+                listPhieuChi.forEach({ (phieuchi) in
+                    if let phieuchiCopy = phieuchi.copy() as? PhieuChi {
+                        Storage.shared.addOrUpdate([phieuchiCopy], type: PhieuChi.self)
+                    }
+                })
+            } catch {
+                if let error = responseObject.error {
+                    Notice.make(type: .Error, content: error.localizedDescription).show()
+                }
+            }
+        }
+    }
+    
+    func loadKhachHang() {
+        SVProgressHUD.show()
+        dispatch?.enter()
+        manager.request("https://localhost:5001/KhachHang/GetListKhachHang", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil).responseJSON { (responseObject) in
+            SVProgressHUD.dismiss()
+            self.dispatch?.leave()
+            do {
+                let json: JSON = try JSON.init(data: responseObject.data! )
+                let listKhachHang: [KhachHang]  = json.arrayValue.map({KhachHang.init(json: $0)})
+                listKhachHang.forEach({ (khachhang) in
+                    if let khachhangCopy = khachhang.copy() as? KhachHang {
+                        Storage.shared.addOrUpdate([khachhangCopy], type: KhachHang.self)
+                    }
+                })
+            } catch {
+                if let error = responseObject.error {
+                    Notice.make(type: .Error, content: error.localizedDescription).show()
+                }
+            }
+        }
+    }
+    
     func loadHoaDon() {
         dispatch?.enter()
         SVProgressHUD.show()
-        manager.request("https://localhost:5001/HoaDon/GetListHoaDon_CanHo", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil).responseJSON { (responseObject) in
+        manager.request("https://localhost:5001/HoaDon/GetListHoaDon", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil).responseJSON { (responseObject) in
             SVProgressHUD.dismiss()
             self.dispatch?.leave()
             do {
@@ -108,6 +153,29 @@ class TongQuanViewController: UIViewController {
                 if let error = responseObject.error {
                     Notice.make(type: .Error, content: error.localizedDescription ).show()
                 }
+            }
+        }
+    }
+    
+    func loadDichvu()  {
+        SVProgressHUD.show()
+        dispatch?.enter()
+        manager.request("https://localhost:5001/DichVu/GetListDichVu", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil).responseJSON { (responseObject) in
+            SVProgressHUD.dismiss()
+            self.dispatch?.leave()
+            do {
+                let json: JSON = try JSON.init(data: responseObject.data! )
+                let listDichvu: [DichVu]  = json.arrayValue.map({DichVu.init(json: $0)})
+                listDichvu.forEach({ (dichvu) in
+                    if let dichvuCopy = dichvu.copy() as? DichVu {
+                        Storage.shared.addOrUpdate([dichvuCopy], type: DichVu.self)
+                    }
+                })
+            } catch {
+                if let error = responseObject.error {
+                    Notice.make(type: .Error, content: error.localizedDescription ).show()
+                }
+                
             }
         }
     }
@@ -318,8 +386,8 @@ class TongQuanViewController: UIViewController {
             }
             let soTienConLai = (Double(item.soTien) ?? 0 ) - datra
             if soTienConLai > 0 {
-                if let tenCanHo = self.listCanHo.filter({$0.IdCanHo == item.IdCanHo}).first?.TenCanHo {
-                    listCanHoNoTien.append(CanHoNoTien.init(tenCanHo: tenCanHo, soTienNo: "\(soTienConLai)"))
+                if let maCanHo = self.listCanHo.filter({$0.IdCanHo == item.IdCanHo}).first?.maCanHo {
+                    listCanHoNoTien.append(CanHoNoTien.init(maCanHo: maCanHo, soTienNo: "\(soTienConLai)"))
                 }
             }
         }
@@ -341,6 +409,7 @@ class TongQuanViewController: UIViewController {
         }
         
         let set = PieChartDataSet(values: entries, label: "")
+        set.entryLabelFont = UIFont.systemFont(ofSize: 15)
         set.drawIconsEnabled = false
         set.sliceSpace = 2
         
@@ -361,7 +430,7 @@ class TongQuanViewController: UIViewController {
         pFormatter.percentSymbol = " %"
         data.setValueFormatter(DefaultValueFormatter(formatter: pFormatter))
         
-        data.setValueFont(.systemFont(ofSize: 14, weight: .light))
+        data.setValueFont(.systemFont(ofSize: 15, weight: .light))
         data.setValueTextColor(.black)
         
         chartViewCanHo.data = data
@@ -412,14 +481,13 @@ extension TongQuanViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView ==  self.tableViewStateCanHo {
             let cell = tableView.dequeueReusableCell(withIdentifier: ListCanHoTrongTableViewCell.id, for: indexPath) as! ListCanHoTrongTableViewCell
-            cell.binding(tenPhong: listCanHoTrong[indexPath.row].TenCanHo)
+            cell.binding(maCanHo: listCanHoTrong[indexPath.row].maCanHo)
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: ListCanHoNoTienTableViewCell.id, for: indexPath) as! ListCanHoNoTienTableViewCell
-            cell.binding(soTien: self.listCanHoNoTien[indexPath.row].soTienNo, tenCanho: self.listCanHoNoTien[indexPath.row].tenCanHo)
+            cell.binding(soTien: self.listCanHoNoTien[indexPath.row].soTienNo, tenCanho: self.listCanHoNoTien[indexPath.row].maCanHo)
             return cell
         }
-        return UITableViewCell()
     }
     
     

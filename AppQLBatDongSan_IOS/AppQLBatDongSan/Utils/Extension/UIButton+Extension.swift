@@ -10,6 +10,11 @@ import Foundation
 import UIKit
 
 extension UIButton {
+    func circleAnBorderButton(radius width:CGFloat, border xCm:CGFloat) {
+        self.layer.cornerRadius = width
+        self.layer.borderWidth = xCm
+    }
+
     func setBackgroundColor(color: UIColor, forState: UIControlState) {
         UIGraphicsBeginImageContext(CGSize(width: 1, height: 1))
         UIGraphicsGetCurrentContext()!.setFillColor(color.cgColor)

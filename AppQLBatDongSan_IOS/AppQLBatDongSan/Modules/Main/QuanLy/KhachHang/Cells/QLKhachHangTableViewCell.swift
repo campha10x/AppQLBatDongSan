@@ -44,7 +44,7 @@ class QLKhachHangTableViewCell: UITableViewCell {
         let listCanHo = Storage.shared.getObjects(type: CanHo.self) as? [CanHo]
         let canHo: CanHo? = listCanHo?.filter({ $0.IdCanHo == khachhang.IdCanHo }).first
         self.index = index
-        lbTenCanHo.text = canHo?.TenCanHo ?? ""
+//        lbTenCanHo.text = canHo?.TenCanHo ?? ""
         lbNamSinh.text = khachhang.NgaySinh.formatDate()
         lbSDT.text = khachhang.SDT
         lbEmail.text = khachhang.Email

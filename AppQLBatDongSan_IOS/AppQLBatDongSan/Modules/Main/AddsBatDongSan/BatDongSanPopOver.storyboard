@@ -32,7 +32,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="315" height="814"/>
                                         <subviews>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="h8A-QQ-F7n">
-                                                <rect key="frame" x="0.0" y="30" width="315" height="679"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="315" height="709"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </tableView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hH1-Su-vLs" customClass="MySolidButton" customModule="AppQLBatDongSan" customModuleProvider="target">
@@ -57,7 +57,7 @@
                                             <constraint firstAttribute="bottom" secondItem="hH1-Su-vLs" secondAttribute="bottom" constant="30" id="Miv-rF-xFc"/>
                                             <constraint firstItem="hH1-Su-vLs" firstAttribute="top" secondItem="h8A-QQ-F7n" secondAttribute="bottom" constant="30" id="OQL-YD-pMy"/>
                                             <constraint firstAttribute="trailing" secondItem="h8A-QQ-F7n" secondAttribute="trailing" id="T6u-h5-pxV"/>
-                                            <constraint firstItem="h8A-QQ-F7n" firstAttribute="top" secondItem="tuE-MK-zSs" secondAttribute="top" constant="30" id="nWF-ti-68h"/>
+                                            <constraint firstItem="h8A-QQ-F7n" firstAttribute="top" secondItem="tuE-MK-zSs" secondAttribute="top" id="nWF-ti-68h"/>
                                             <constraint firstItem="h8A-QQ-F7n" firstAttribute="leading" secondItem="tuE-MK-zSs" secondAttribute="leading" id="pE1-8V-si4"/>
                                             <constraint firstItem="hH1-Su-vLs" firstAttribute="centerX" secondItem="tuE-MK-zSs" secondAttribute="centerX" id="vnN-41-DCY"/>
                                         </constraints>

@@ -9,11 +9,16 @@
 import Foundation
 
 extension Double {
-    func formatNumber(format: String? = nil, type: MyNumberFieldFormat) -> String {
+    func formatNumber(format: String? = nil, type: MyNumberFieldFormat, isRemoveComma: Bool) -> String {
         let formatter = POSFormatter.number
         formatter.numberStyle = .decimal
-        formatter.groupingSeparator =  ","
-        formatter.decimalSeparator =  "."
+        if isRemoveComma == false {
+            formatter.groupingSeparator =  ","
+            formatter.decimalSeparator =  "."
+        } else {
+            formatter.groupingSeparator =  ""
+            formatter.decimalSeparator =  ""
+        }
         formatter.minimumIntegerDigits =  1
         formatter.groupingSize =  3
         let stringFormat = "%@"

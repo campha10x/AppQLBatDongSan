@@ -17,14 +17,14 @@ class SplashViewController: UIViewController {
 
     func load() {
         let nav = self.navigationController
-         let loginVC = LoginWireFrame.createLogin()
+         let loginVC = UIStoryboard.init(name: "Login", bundle: nil).instantiateInitialViewController() as! LoginViewController
         nav?.pushViewController(loginVC, animated: false)
         nav?.viewControllers.removeAll()
         nav?.viewControllers = [ loginVC]
-//        if AppState.shared.account != nil {
+        if AppState.shared.account != nil {
             let main = HoaDonWireFrame.createHoaDon()
            nav?.pushViewController(main, animated: false)
-//        }
+        }
     }
 
 }

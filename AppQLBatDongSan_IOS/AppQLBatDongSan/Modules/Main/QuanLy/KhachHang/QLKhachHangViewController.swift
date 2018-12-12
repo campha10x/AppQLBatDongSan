@@ -34,7 +34,7 @@ class QLKhachHangViewController: UIViewController {
         configService()
         loadKhachHang()
         listCanHo = Storage.shared.getObjects(type: CanHo.self) as! [CanHo]
-        self.cbbCanHo.setOptions(self.listCanHo.map({$0.TenCanHo}), placeholder: nil, selectedIndex: nil)
+//        self.cbbCanHo.setOptions(self.listCanHo.map({$0.TenCanHo}), placeholder: nil, selectedIndex: nil)
         self.cbbCanHo.delegate = self
         tableViewKhachHang.delegate = self
         tableViewKhachHang.dataSource = self

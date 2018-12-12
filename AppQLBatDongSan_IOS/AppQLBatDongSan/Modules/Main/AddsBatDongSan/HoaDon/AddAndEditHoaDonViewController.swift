@@ -36,12 +36,15 @@ class AddAndEditHoaDonViewController: UIViewController {
     
     var listDichVu: [DichVu] = []
     var listDichVu_CanHo: [CanHo_DichVu] = []
-
+    var listHopDong: [HopDong] = []
+    var listHoaDon: [HoaDon] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         listDichVu = Storage.shared.getObjects(type: DichVu.self) as! [DichVu]
         listDichVu_CanHo = Storage.shared.getObjects(type: CanHo_DichVu.self) as! [CanHo_DichVu]
+        listHopDong = Storage.shared.getObjects(type: HopDong.self) as! [HopDong]
+        listHoaDon = Storage.shared.getObjects(type: HoaDon.self) as! [HoaDon]
         customized()
         configService()
         if !isCreateNew {
@@ -49,7 +52,7 @@ class AddAndEditHoaDonViewController: UIViewController {
             if let index = self.listCanHo.index(where: { $0.IdCanHo == self.hoadon?.IdCanHo}) {
                 tfSoDienMoi.text = self.hoadon?.soDienMoi
                 tfSoNuocMoi.text = self.hoadon?.soNuocMoi
-                self.cbbCanHo.setOptions(self.listCanHo.map({$0.TenCanHo}), placeholder: nil, selectedIndex: index)
+                self.cbbCanHo.setOptions(self.listCanHo.map({$0.maCanHo}), placeholder: nil, selectedIndex: index)
             }
             btnNgayTao.date = hoadon?.ngayTao.toDate(format: "MM/dd/yyyy HH:mm:ss") ?? Date()
             tfSotien.setValue(hoadon?.soTien)
@@ -60,7 +63,7 @@ class AddAndEditHoaDonViewController: UIViewController {
             tfSoDienMoi.setValue(0.0)
             tfSoNuocMoi.setValue(0.0)
             tfSoPhieu.text = "SPHD-\(randomNumber(inRange: 100...50000))"
-            self.cbbCanHo.setOptions(self.listCanHo.map({$0.TenCanHo}), placeholder: nil, selectedIndex: nil)
+            self.cbbCanHo.setOptions(self.listCanHo.map({$0.maCanHo}), placeholder: nil, selectedIndex: nil)
             btnNgayTao.date = Date()
             btnTao.setTitle("Tạo hoá đơn", for: .normal)
         }
@@ -145,19 +148,19 @@ class AddAndEditHoaDonViewController: UIViewController {
     }
     
     @IBAction func eventClickTaoHD(_ sender: Any) {
-        if let soDienCu: Double = Double(self.listCanHo[indexCanHo].SoDienCu), let SoNuocCu: Double = Double(self.listCanHo[indexCanHo].SoNuocCu) {
-            if soDienCu > tfSoDienMoi.getValue() {
-                tfSoDienMoi.warning()
-                Notice.make(type: .Error, content: "Số điện mới phải lớn hơn số điện cũ của căn hộ đó ").show()
-                return
-            } else if SoNuocCu > tfSoNuocMoi.getValue() {
-                tfSoNuocMoi.warning()
-                Notice.make(type: .Error, content: "Số nước mới phải lớn hơn số nước cũ của căn hộ đó ").show()
-                return
-            }
-            tfSoDienMoi.borderColor = UIColor.gray.withAlphaComponent(0.8)
-            tfSoNuocMoi.borderColor = UIColor.gray.withAlphaComponent(0.8)
-        }
+//        if let soDienCu: Double = Double(self.listCanHo[indexCanHo].SoDienCu), let SoNuocCu: Double = Double(self.listCanHo[indexCanHo].SoNuocCu) {
+//            if soDienCu > tfSoDienMoi.getValue() {
+//                tfSoDienMoi.warning()
+//                Notice.make(type: .Error, content: "Số điện mới phải lớn hơn số điện cũ của căn hộ đó ").show()
+//                return
+//            } else if SoNuocCu > tfSoNuocMoi.getValue() {
+//                tfSoNuocMoi.warning()
+//                Notice.make(type: .Error, content: "Số nước mới phải lớn hơn số nước cũ của căn hộ đó ").show()
+//                return
+//            }
+//            tfSoDienMoi.borderColor = UIColor.gray.withAlphaComponent(0.8)
+//            tfSoNuocMoi.borderColor = UIColor.gray.withAlphaComponent(0.8)
+//        }
         
         let hoadon = HoaDon()
         guard tfSotien.text != ""  else {
@@ -202,7 +205,7 @@ class AddAndEditHoaDonViewController: UIViewController {
                         Storage.shared.addOrUpdate([hoadonCopy], type: HoaDon.self)
                     }
                     Notice.make(type: .Success, content: "Thêm mới hoá đơn thành công! ").show()
-                    self.updateSoDienSoNuocCanHo(IdCanHo: hoadonResponse.IdCanHo)
+                    self.dismiss(animated: true, completion: nil)
                     self.done?(hoadonResponse)
                     
                 } catch {
@@ -222,7 +225,7 @@ class AddAndEditHoaDonViewController: UIViewController {
                         Storage.shared.addOrUpdate([hoadonCopy], type: HoaDon.self)
                     }
                     Notice.make(type: .Success, content: "Sửa mới hoá đơn thành công! ").show()
-                    self.updateSoDienSoNuocCanHo(IdCanHo: hoadonResponse.IdCanHo)
+                    self.dismiss(animated: true, completion: nil)
                     self.done?(hoadonResponse)
                 } catch {
                     if let error = responseObject.error {
@@ -233,46 +236,51 @@ class AddAndEditHoaDonViewController: UIViewController {
         }
     }
     
-    func updateSoDienSoNuocCanHo(IdCanHo: String)  {
-        let parameters: [String: String] = [
-                        "IdCanHo" : IdCanHo,
-                         "SoDienCu" : "\(tfSoDienMoi.getValue())",
-                         "SoNuocCu": "\(tfSoNuocMoi.getValue())"
-                        ]
-        
-        SVProgressHUD.show()
-        self.manager.request("https://localhost:5001/HoaDon/UpDateSoDienNuocCanHo", method: .post, parameters: nil, encoding: URLEncoding.default, headers: parameters).responseJSON { (responseObject) in
-            SVProgressHUD.dismiss()
-            do {
-                if let canhoObjects: CanHo = self.listCanHo.filter({$0.IdCanHo == IdCanHo}).first?.copy() as! CanHo{
-                    canhoObjects.SoDienCu  = self.tfSoDienMoi.getValueString()
-                    canhoObjects.SoNuocCu = self.tfSoNuocMoi.getValueString()
-                    Storage.shared.addOrUpdate([canhoObjects], type: CanHo.self)
-                }
-                self.dismiss(animated: true, completion: nil)
-            } catch {
-                if let error = responseObject.error {
-                    Notice.make(type: .Error, content: error.localizedDescription).show()
-                }
-            }
-        }
-        
-    }
-    
-    func recaculatorSoTien () {
+    func recaculatorSoTien (isUpdateTextField: Bool = false) {
         soTien = 0
         if indexCanHo >= 0 {
             soTien += Double(self.listCanHo[indexCanHo].DonGia) ?? 0
-            
-            let selectedDichVu  = listDichVu_CanHo.filter({ $0.IdCanHo == self.listCanHo[indexCanHo].IdCanHo }).first?.IdDichVu.split(separator: ",")
-            let caculatorDichVu = self.listDichVu.filter { (item) -> Bool in
-                return selectedDichVu?.filter({ $0 == item.idDichVu}).first != nil
+            guard let hopdongObject = listHopDong.filter({$0.IdCanHo == self.listCanHo[indexCanHo].IdCanHo}).first?.copy() as? HopDong else {
+                Notice.make(type: .Error, content: "Căn hộ này cần tạo hợp đồng mới có thể tạo được hoá đơn").show()
+                btnTao.isUserInteractionEnabled = false
+                return
             }
-            soTien += caculatorDichVu.reduce(0.0, { $0 + (Double($1.DonGia) ?? 0) })
-            if let soDienCu: Double = Double(self.listCanHo[indexCanHo].SoDienCu), let SoNuocCu: Double = Double(self.listCanHo[indexCanHo].SoNuocCu) {
-                soTien += (( tfSoDienMoi.getValue() - soDienCu) * 3500 + (tfSoNuocMoi.getValue() - SoNuocCu ) * 20000)
-                tfSotien.setValue(soTien)
+            btnTao.isUserInteractionEnabled = true
+            let arrayHoadonLonNhat = listHoaDon.filter({ $0.IdCanHo == self.listHoaDon[indexCanHo].IdCanHo}).sorted { (hoadon1, hoadon2) -> Bool in
+                let date1 = hoadon1.ngayTao.toDate(format: "MM/dd/yyyy HH:mm:ss") ?? Date()
+                let date2 = hoadon2.ngayTao.toDate(format: "MM/dd/yyyy HH:mm:ss") ?? Date()
+                return date1 < date2
             }
+            var  hoadonLonNhat: HoaDon? = nil
+            if let _ = self.hoadon, arrayHoadonLonNhat.count > 1 {
+                hoadonLonNhat = arrayHoadonLonNhat[1]
+            } else {
+                hoadonLonNhat = arrayHoadonLonNhat.first
+            }
+                let components = Calendar.current.dateComponents([.year, .month, .day], from: btnNgayTao.date)
+                if let hoadonLonNhat = hoadonLonNhat, let ngay1 = hoadonLonNhat.ngayTao.toDate(format: "MM/dd/yyyy HH:mm:ss"), ngay1.month == (components.month ?? 1) - 1 , ngay1.year == components.year {
+                        let tienDien = Double(hopdongObject.TienDien) ?? 0
+                        let soDienCu = Double(hoadonLonNhat.soDienMoi) ?? 0
+                        let tienNuoc = Double(hopdongObject.TienNuoc) ?? 0
+                        let soNuocCu = Double(hoadonLonNhat.soNuocMoi) ?? 0
+                        if isUpdateTextField {
+                            self.tfSoDienMoi.setValue(soDienCu)
+                            self.tfSoNuocMoi.setValue(soNuocCu)
+                        }
+                        soTien +=  (tienDien * (tfSoDienMoi.getValue() - soDienCu ) +  tienNuoc * ( tfSoNuocMoi.getValue() - soNuocCu ) )
+                } else {
+                    let tienDien = Double(hopdongObject.TienDien) ?? 0
+                    let soDienCu = Double(hopdongObject.SoDienBd) ?? 0
+                    let tienNuoc = Double(hopdongObject.TienNuoc) ?? 0
+                    let soNuocCu = Double(hopdongObject.SoNuocBd) ?? 0
+                    if isUpdateTextField {
+                        tfSoDienMoi.setValue(soDienCu)
+                        tfSoNuocMoi.setValue(soNuocCu)
+                    }
+                    soTien +=  (tienDien * (tfSoDienMoi.getValue() - soDienCu ) +  tienNuoc * ( tfSoNuocMoi.getValue() - soNuocCu ) )
+
+                }
+            tfSotien.setValue(soTien)
         } else {
             Notice.make(type: .Error, content: "Bạn phải nhập căn hộ mới tính tiền được").show()
         }
@@ -285,7 +293,7 @@ extension AddAndEditHoaDonViewController :MyComboboxDelegate{
     func mycombobox(_ cbb: MyCombobox, selectedAt index: Int) {
         if index < self.listCanHo.count {
             self.indexCanHo = index
-            recaculatorSoTien()
+            recaculatorSoTien(isUpdateTextField: true)
         }
     }
 }

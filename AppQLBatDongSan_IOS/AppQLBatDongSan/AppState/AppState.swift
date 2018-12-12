@@ -17,17 +17,6 @@ class AppState  {
     
     
     func getAccount()-> String?  {
-//        if let decoded  = UserDefaults.standard.object(forKey: "account") as? Data ,  let code_login = NSKeyedUnarchiver.unarchiveObject(with: decoded) as? Account {
-//            return code_login
-//        }
-//        return nil
-        
-//        if let accounts: [Account]  = Storage.shared.getObjects(type: Account.self) as! [Account] {
-//            for item in accounts {
-//
-//            }
-//            return code_login
-//        }
         if let email = UserDefaults.standard.string(forKey: "email") {
             return email
         }
@@ -39,11 +28,9 @@ class AppState  {
         if let getAccount = account {
             Storage.shared.addOrUpdate([getAccount], type: Account.self)
             UserDefaults.standard.set(getAccount.email, forKey: "email")
+        } else {
+            UserDefaults.standard.set(nil, forKey: "email")
         }
-
-//        let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: account)
-//        UserDefaults.standard.set(encodedData, forKey: "account")
-//        UserDefaults.standard.synchronize()
     }
     
 }

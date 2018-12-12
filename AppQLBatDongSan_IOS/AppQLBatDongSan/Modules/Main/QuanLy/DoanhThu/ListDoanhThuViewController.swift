@@ -131,6 +131,9 @@ class ListDoanhThuViewController: UIViewController {
     }
     
     func returnMonth(ngayTao: String) -> String {
+        if ngayTao.isEmpty {
+            return ""
+        }
         var month = String(ngayTao.split(separator: "/")[0])
         if month.contains("0"){
             month.removeFirst()

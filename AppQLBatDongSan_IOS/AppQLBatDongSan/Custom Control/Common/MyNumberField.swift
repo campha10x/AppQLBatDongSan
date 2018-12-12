@@ -51,7 +51,7 @@ class MyNumberField: MyTextField {
     
     // delegate
     var numberDelegate : MyNumberFieldDelegate?
-    
+    var isRemoveComma: Bool = false
     // For format number decimal
     private var value_ : Double = 0 // true value of text
     private var number: String = "" // input text
@@ -74,13 +74,13 @@ class MyNumberField: MyTextField {
         if format == .integer {
             value_ = round(value_)
             number = "\(Int(value_))"
-            text = value_.formatNumber(type: format)
+            text = value_.formatNumber(type: format, isRemoveComma: self.isRemoveComma)
         }
         else {
             // money | decimal
             number = String(format: "%0.\(defaultFragtion)f", value_)
             number = number.replacingOccurrences(of: ".", with: "")
-            text = value_.formatNumber(type: format)
+            text = value_.formatNumber(type: format, isRemoveComma: self.isRemoveComma)
         }
     }
     
@@ -256,7 +256,7 @@ extension MyNumberField: NumericKeyboardDelegate {
     }
     
     func applyText(){
-        self.text = (isNagative && value_ > 0 ? "-" : "") + value_.formatNumber(type: format)
+        self.text = (isNagative && value_ > 0 ? "-" : "") + value_.formatNumber(type: format, isRemoveComma: self.isRemoveComma)
     }
     
 }

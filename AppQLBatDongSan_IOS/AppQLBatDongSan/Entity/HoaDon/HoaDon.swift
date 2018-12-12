@@ -17,7 +17,6 @@ class HoaDon: BaseRealmObject, NSCopying {
     @objc dynamic  var ngayTao: String = ""
     @objc dynamic  var soTien: String = ""
     @objc dynamic  var daTra: String = ""
-    @objc dynamic var tenCanHo: String = ""
     @objc dynamic var soDienMoi: String = ""
     @objc dynamic var soNuocMoi: String = ""
      @objc dynamic var idPhieuThu: String = ""
@@ -34,7 +33,6 @@ class HoaDon: BaseRealmObject, NSCopying {
         self.ngayTao = json["ngayTao"].stringValue
         self.soTien = json["soTien"].stringValue
         self.daTra = json["daTra"].stringValue
-        self.tenCanHo = json["tenCanHo"].stringValue
         self.soDienMoi = json["soDienMoi"].stringValue
         self.soNuocMoi = json["soNuocMoi"].stringValue
           self.idPhieuThu = json["idPhieuThu"].stringValue
@@ -48,7 +46,6 @@ class HoaDon: BaseRealmObject, NSCopying {
         copy.ngayTao  = self.ngayTao
         copy.soTien  = self.soTien
         copy.daTra  = self.daTra
-        copy.tenCanHo = self.tenCanHo
         copy.soDienMoi = self.soDienMoi
         copy.soNuocMoi = self.soNuocMoi
         copy.idPhieuThu = self.idPhieuThu 

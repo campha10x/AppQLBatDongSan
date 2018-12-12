@@ -10,6 +10,9 @@ import UIKit
 import SVProgressHUD
 import Reachability
 import RealmSwift
+import GoogleMaps
+import GooglePlaces
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -18,6 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private var reachability : Reachability?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        // Map configure
+        GMSServices.provideAPIKey("AIzaSyCc9t6g4kAeg325G0j4_OW9k3vVoyFcW1o")
+        GMSPlacesClient.provideAPIKey("AIzaSyCc9t6g4kAeg325G0j4_OW9k3vVoyFcW1o")
         
         // Check connect internet
         listenNetworkStatus()

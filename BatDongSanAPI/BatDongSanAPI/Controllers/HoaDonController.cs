@@ -26,15 +26,6 @@ namespace BatDongSanAPI.Controllers
             return Json(listHoaDon);
         }
 
-        [HttpGet("/HoaDon/GetListHoaDon_CanHo")]
-        public JsonResult GetListHoaDon_CanHo()
-        {
-
-            BatDongSanStoreContext context = HttpContext.RequestServices.GetService(typeof(BatDongSanStoreContext)) as BatDongSanStoreContext;
-            List<HoaDon_CanHo> listHoaDon = context.getListHoaDon_CanHo();
-            return Json(listHoaDon);
-        }
-
         [HttpPost("/HoaDon/RemoveListHoaDon")]
         public JsonResult RemoveListHoaDon([FromHeader(Name = "IdHoaDon")] string IdHoaDon)
         {
@@ -62,14 +53,6 @@ namespace BatDongSanAPI.Controllers
             return Json(a);
         }
 
-
-        [HttpPost("/HoaDon/UpDateSoDienNuocCanHo")]
-        public JsonResult upDateSoDienNuocCanHo([FromHeader(Name = "IdCanHo")] string IdCanHo, [FromHeader(Name = "SoDienCu")] string SoDienCu, [FromHeader(Name = "SoNuocCu")] string SoNuocCu)
-        {
-            BatDongSanStoreContext context = HttpContext.RequestServices.GetService(typeof(BatDongSanStoreContext)) as BatDongSanStoreContext;
-            String a = context.upDateSoDienNuocCanHo(IdCanHo, SoDienCu, SoNuocCu);
-            return Json(a);
-        }
 
         [HttpPost("/HoaDon/UpdateHoaDon_PhieuThu")]
         public JsonResult UpdateHoaDon_PhieuThu([FromHeader(Name = "IdHoaDon")] string IdHoaDon, [FromHeader(Name = "IdPhieuThu")] string IdPhieuThu)

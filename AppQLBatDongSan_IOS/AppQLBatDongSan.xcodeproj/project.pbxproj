@@ -16,7 +16,17 @@
 		6800087821B42A310000EFF6 /* DayAxisValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6800087421B42A310000EFF6 /* DayAxisValueFormatter.swift */; };
 		6800087921B42A310000EFF6 /* DateValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6800087521B42A310000EFF6 /* DateValueFormatter.swift */; };
 		6800087A21B42A310000EFF6 /* LargeValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6800087621B42A310000EFF6 /* LargeValueFormatter.swift */; };
+		6800910C21C1150E0043F7C9 /* CashierHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6800910A21C1150D0043F7C9 /* CashierHeaderView.swift */; };
+		6800910D21C1150E0043F7C9 /* CashierHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6800910B21C1150E0043F7C9 /* CashierHeaderView.xib */; };
+		6800910F21C115690043F7C9 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6800910E21C115690043F7C9 /* UIView+Extension.swift */; };
+		6807CC9721C166ED00665B63 /* MapViewCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6807CC9421C166ED00665B63 /* MapViewCustom.swift */; };
+		6807CC9921C166ED00665B63 /* MapViewCustom.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6807CC9621C166ED00665B63 /* MapViewCustom.xib */; };
+		6812061921BDE6E2004924B2 /* DetailBatDongSan.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6812061821BDE6E2004924B2 /* DetailBatDongSan.storyboard */; };
+		6812061B21BDEA9A004924B2 /* SlidePictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6812061A21BDEA9A004924B2 /* SlidePictureViewController.swift */; };
+		6812061E21BDEB1F004924B2 /* CanHoInforViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6812061D21BDEB1F004924B2 /* CanHoInforViewController.swift */; };
+		6812062021BDEDBC004924B2 /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6812061F21BDEDBC004924B2 /* CategoryView.swift */; };
 		68284CD021B573CC00298EDD /* ListCanHoNoTienTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68284CCF21B573CC00298EDD /* ListCanHoNoTienTableViewCell.swift */; };
+		68D2547921C0021D006C829E /* HopDongInforViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D2547821C0021D006C829E /* HopDongInforViewController.swift */; };
 		68D8EF3A21AD9747002DB7E6 /* ListDoanhThuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D8EF3921AD9747002DB7E6 /* ListDoanhThuViewController.swift */; };
 		68D8EF3D21AD97DA002DB7E6 /* DoanhThuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D8EF3C21AD97DA002DB7E6 /* DoanhThuTableViewCell.swift */; };
 		68E173E321AAD3A6006444AA /* MenuOptionInforViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68E173E221AAD3A6006444AA /* MenuOptionInforViewController.swift */; };
@@ -51,10 +61,6 @@
 		CE2EFE0F215FADC70036F45E /* OptionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE2EFE0D215FADC70036F45E /* OptionTableViewCell.xib */; };
 		CE3F68922159384D00F12672 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3F68912159384D00F12672 /* SplashViewController.swift */; };
 		CE3F6895215938A300F12672 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3F6894215938A300F12672 /* AppState.swift */; };
-		CE3F689721593C1300F12672 /* LoginListProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3F689621593C1300F12672 /* LoginListProtocol.swift */; };
-		CE3F689921593D4600F12672 /* LoginWireFrameProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3F689821593D4600F12672 /* LoginWireFrameProtocol.swift */; };
-		CE3F689B21593E8000F12672 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3F689A21593E8000F12672 /* LoginPresenter.swift */; };
-		CE3F689D21593EA900F12672 /* LoginInteracter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3F689C21593EA900F12672 /* LoginInteracter.swift */; };
 		CE431E872178CD5800174234 /* MyCheckboxGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE431E862178CD5800174234 /* MyCheckboxGroup.swift */; };
 		CE431E892178CE1B00174234 /* MyCheckbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE431E882178CE1B00174234 /* MyCheckbox.swift */; };
 		CE44B23D21876ABC009DBEE6 /* QLDichVuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE44B23C21876ABC009DBEE6 /* QLDichVuViewController.swift */; };
@@ -118,7 +124,17 @@
 		6800087421B42A310000EFF6 /* DayAxisValueFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayAxisValueFormatter.swift; sourceTree = "<group>"; };
 		6800087521B42A310000EFF6 /* DateValueFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateValueFormatter.swift; sourceTree = "<group>"; };
 		6800087621B42A310000EFF6 /* LargeValueFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LargeValueFormatter.swift; sourceTree = "<group>"; };
+		6800910A21C1150D0043F7C9 /* CashierHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CashierHeaderView.swift; sourceTree = "<group>"; };
+		6800910B21C1150E0043F7C9 /* CashierHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CashierHeaderView.xib; sourceTree = "<group>"; };
+		6800910E21C115690043F7C9 /* UIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		6807CC9421C166ED00665B63 /* MapViewCustom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewCustom.swift; sourceTree = "<group>"; };
+		6807CC9621C166ED00665B63 /* MapViewCustom.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapViewCustom.xib; sourceTree = "<group>"; };
+		6812061821BDE6E2004924B2 /* DetailBatDongSan.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DetailBatDongSan.storyboard; sourceTree = "<group>"; };
+		6812061A21BDEA9A004924B2 /* SlidePictureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlidePictureViewController.swift; sourceTree = "<group>"; };
+		6812061D21BDEB1F004924B2 /* CanHoInforViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanHoInforViewController.swift; sourceTree = "<group>"; };
+		6812061F21BDEDBC004924B2 /* CategoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
 		68284CCF21B573CC00298EDD /* ListCanHoNoTienTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCanHoNoTienTableViewCell.swift; sourceTree = "<group>"; };
+		68D2547821C0021D006C829E /* HopDongInforViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HopDongInforViewController.swift; sourceTree = "<group>"; };
 		68D8EF3921AD9747002DB7E6 /* ListDoanhThuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDoanhThuViewController.swift; sourceTree = "<group>"; };
 		68D8EF3C21AD97DA002DB7E6 /* DoanhThuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoanhThuTableViewCell.swift; sourceTree = "<group>"; };
 		68E173E221AAD3A6006444AA /* MenuOptionInforViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOptionInforViewController.swift; sourceTree = "<group>"; };
@@ -154,10 +170,6 @@
 		CE2EFE0D215FADC70036F45E /* OptionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionTableViewCell.xib; sourceTree = "<group>"; };
 		CE3F68912159384D00F12672 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		CE3F6894215938A300F12672 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
-		CE3F689621593C1300F12672 /* LoginListProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginListProtocol.swift; sourceTree = "<group>"; };
-		CE3F689821593D4600F12672 /* LoginWireFrameProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWireFrameProtocol.swift; sourceTree = "<group>"; };
-		CE3F689A21593E8000F12672 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
-		CE3F689C21593EA900F12672 /* LoginInteracter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteracter.swift; sourceTree = "<group>"; };
 		CE431E862178CD5800174234 /* MyCheckboxGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCheckboxGroup.swift; sourceTree = "<group>"; };
 		CE431E882178CE1B00174234 /* MyCheckbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCheckbox.swift; sourceTree = "<group>"; };
 		CE44B23C21876ABC009DBEE6 /* QLDichVuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QLDichVuViewController.swift; sourceTree = "<group>"; };
@@ -245,6 +257,7 @@
 		6800086A21B429A00000EFF6 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				6807CC9321C166ED00665B63 /* MapiOS */,
 				6800087221B42A310000EFF6 /* Formatters */,
 				6800086B21B429AB0000EFF6 /* Components */,
 			);
@@ -270,6 +283,42 @@
 				6800087621B42A310000EFF6 /* LargeValueFormatter.swift */,
 			);
 			path = Formatters;
+			sourceTree = "<group>";
+		};
+		6807CC9321C166ED00665B63 /* MapiOS */ = {
+			isa = PBXGroup;
+			children = (
+				6807CC9421C166ED00665B63 /* MapViewCustom.swift */,
+				6807CC9621C166ED00665B63 /* MapViewCustom.xib */,
+			);
+			path = MapiOS;
+			sourceTree = "<group>";
+		};
+		6812061721BDE667004924B2 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				68D2547721C001FF006C829E /* HopDong */,
+				6812061C21BDEADA004924B2 /* CanHo */,
+				6812061821BDE6E2004924B2 /* DetailBatDongSan.storyboard */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		6812061C21BDEADA004924B2 /* CanHo */ = {
+			isa = PBXGroup;
+			children = (
+				6812061A21BDEA9A004924B2 /* SlidePictureViewController.swift */,
+				6812061D21BDEB1F004924B2 /* CanHoInforViewController.swift */,
+			);
+			path = CanHo;
+			sourceTree = "<group>";
+		};
+		68D2547721C001FF006C829E /* HopDong */ = {
+			isa = PBXGroup;
+			children = (
+				68D2547821C0021D006C829E /* HopDongInforViewController.swift */,
+			);
+			path = HopDong;
 			sourceTree = "<group>";
 		};
 		68D8EF3821AD9729002DB7E6 /* DoanhThu */ = {
@@ -402,6 +451,7 @@
 		CE2AE4C52160592C00EA61B8 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				6812061F21BDEDBC004924B2 /* CategoryView.swift */,
 				CEC84F46219036270095E683 /* MyTextField.swift */,
 				CEC84F44219024420095E683 /* MyButton.swift */,
 				CE431E882178CE1B00174234 /* MyCheckbox.swift */,
@@ -479,6 +529,7 @@
 		CE2EFDF4215F7FD90036F45E /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				6800910E21C115690043F7C9 /* UIView+Extension.swift */,
 				CE2EFDF7215F80780036F45E /* String+Extension.swift */,
 				CE2EFDF5215F80000036F45E /* UIColor+Hex.swift */,
 				CE2AE4CA21605DE800EA61B8 /* UIButton+Extension.swift */,
@@ -491,6 +542,7 @@
 		CE2EFDF9215F866C0036F45E /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				6812061721BDE667004924B2 /* Detail */,
 				CEC84F3F218FEF670095E683 /* AddsBatDongSan */,
 				CE2AE4AF215FC56500EA61B8 /* QuanLy */,
 				CE2EFDFA215F86870036F45E /* MainBaseViewController.swift */,
@@ -519,6 +571,8 @@
 		CE2EFE0B215FADAD0036F45E /* MenuCell */ = {
 			isa = PBXGroup;
 			children = (
+				6800910A21C1150D0043F7C9 /* CashierHeaderView.swift */,
+				6800910B21C1150E0043F7C9 /* CashierHeaderView.xib */,
 				CE2EFE0C215FADC70036F45E /* OptionTableViewCell.swift */,
 				CE2EFE0D215FADC70036F45E /* OptionTableViewCell.xib */,
 			);
@@ -775,10 +829,6 @@
 		CE8F9FFA215935CA005D4B10 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				CE8F9FFF215936E7005D4B10 /* Protocols */,
-				CE8F9FFE215936DF005D4B10 /* Wireframe */,
-				CE8F9FFD21593696005D4B10 /* Interactor */,
-				CE8F9FFC21593690005D4B10 /* Presenter */,
 				CE8F9FFB2159368B005D4B10 /* View */,
 			);
 			path = Login;
@@ -792,38 +842,6 @@
 				CE8FA00021593724005D4B10 /* LoginViewController.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		CE8F9FFC21593690005D4B10 /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-				CE3F689A21593E8000F12672 /* LoginPresenter.swift */,
-			);
-			path = Presenter;
-			sourceTree = "<group>";
-		};
-		CE8F9FFD21593696005D4B10 /* Interactor */ = {
-			isa = PBXGroup;
-			children = (
-				CE3F689C21593EA900F12672 /* LoginInteracter.swift */,
-			);
-			path = Interactor;
-			sourceTree = "<group>";
-		};
-		CE8F9FFE215936DF005D4B10 /* Wireframe */ = {
-			isa = PBXGroup;
-			children = (
-				CE3F689821593D4600F12672 /* LoginWireFrameProtocol.swift */,
-			);
-			path = Wireframe;
-			sourceTree = "<group>";
-		};
-		CE8F9FFF215936E7005D4B10 /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				CE3F689621593C1300F12672 /* LoginListProtocol.swift */,
-			);
-			path = Protocols;
 			sourceTree = "<group>";
 		};
 		CE8FA0022159372A005D4B10 /* Storyboards */ = {
@@ -980,6 +998,7 @@
 				CE8F9FE2215934D0005D4B10 /* Frameworks */,
 				CE8F9FE3215934D0005D4B10 /* Resources */,
 				526102773F44A6FD70471777 /* [CP] Embed Pods Frameworks */,
+				6AD985F8B936392C6FB955EA /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1030,10 +1049,13 @@
 			files = (
 				CEFE99962175F7AD002FA809 /* NumericKeyboard.xib in Resources */,
 				CEC84F3E218FEEE70095E683 /* AddBatDongSan.storyboard in Resources */,
+				6812061921BDE6E2004924B2 /* DetailBatDongSan.storyboard in Resources */,
 				68E173E621AAD3D1006444AA /* AccountInforUser.storyboard in Resources */,
 				CE2AE4AC215FBD7000EA61B8 /* BatDongSanPopOver.storyboard in Resources */,
+				6800910D21C1150E0043F7C9 /* CashierHeaderView.xib in Resources */,
 				CE8F9FF3215934D2005D4B10 /* LaunchScreen.storyboard in Resources */,
 				CE2EFE0F215FADC70036F45E /* OptionTableViewCell.xib in Resources */,
+				6807CC9921C166ED00665B63 /* MapViewCustom.xib in Resources */,
 				CE8F9FF0215934D2005D4B10 /* Assets.xcassets in Resources */,
 				CE8FA0042159373B005D4B10 /* Login.storyboard in Resources */,
 				CE2EFE0A215FAD960036F45E /* Notice.xib in Resources */,
@@ -1096,6 +1118,30 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		6AD985F8B936392C6FB955EA /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-AppQLBatDongSan/Pods-AppQLBatDongSan-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AppQLBatDongSan/Pods-AppQLBatDongSan-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1114,6 +1160,7 @@
 				CE4FCCD9219137D700AD76D3 /* AddAndEditDichVuViewController.swift in Sources */,
 				68E173E321AAD3A6006444AA /* MenuOptionInforViewController.swift in Sources */,
 				68284CD021B573CC00298EDD /* ListCanHoNoTienTableViewCell.swift in Sources */,
+				6812061B21BDEA9A004924B2 /* SlidePictureViewController.swift in Sources */,
 				CE2EFDDF215F73BC0036F45E /* Account.swift in Sources */,
 				CE44B24021876AE2009DBEE6 /* QLDichVuTableViewCell.swift in Sources */,
 				68D8EF3A21AD9747002DB7E6 /* ListDoanhThuViewController.swift in Sources */,
@@ -1121,7 +1168,6 @@
 				CEFE99A321762862002FA809 /* KhachHang.swift in Sources */,
 				CE2AE4C9216059CB00EA61B8 /* ExpandView.swift in Sources */,
 				CECFF78F215A82B8004189CD /* ViewRegisterViewController.swift in Sources */,
-				CE3F689D21593EA900F12672 /* LoginInteracter.swift in Sources */,
 				CE2AE4AA215FBD5A00EA61B8 /* MainMenuViewController.swift in Sources */,
 				CECFF78D215A82A8004189CD /* ViewLoginViewController.swift in Sources */,
 				CE5BC7BA21947F03000CF770 /* ListPhongTrongTableViewCell.swift in Sources */,
@@ -1132,23 +1178,27 @@
 				CE4992012166DBD7005F6D5C /* MyButtonCalendar.swift in Sources */,
 				CE8E6BA9218D1710000187AE /* QLHopDongTableViewCell.swift in Sources */,
 				CE2EFDFC215F86870036F45E /* MainBaseViewController.swift in Sources */,
+				6812061E21BDEB1F004924B2 /* CanHoInforViewController.swift in Sources */,
+				6807CC9721C166ED00665B63 /* MapViewCustom.swift in Sources */,
 				CE2AE4CB21605DE800EA61B8 /* UIButton+Extension.swift in Sources */,
 				CEFE999D217615F4002FA809 /* QLKhachHangViewController.swift in Sources */,
 				CE44FB99216E47B700AF9FC1 /* QLPhieuThuTableViewCell.swift in Sources */,
 				CEA5C9062173A7F90069B849 /* QLBatDongSanViewController.swift in Sources */,
 				CE2AE4D22160BCAE00EA61B8 /* HoaDonDirectionViewController.swift in Sources */,
 				CEC84F43219023590095E683 /* MySolidButton.swift in Sources */,
-				CE3F689921593D4600F12672 /* LoginWireFrameProtocol.swift in Sources */,
 				CE876956216A42E8001EF3C3 /* PhieuThuViewController.swift in Sources */,
+				6812062021BDEDBC004924B2 /* CategoryView.swift in Sources */,
 				CEE16D9321907FDF008170C6 /* AddAndEditHoaDonViewController.swift in Sources */,
 				CE2AE4D02160B9EB00EA61B8 /* HoaDonViewController.swift in Sources */,
 				CEFE99822174F940002FA809 /* PhieuChi.swift in Sources */,
 				CE2EFE09215FAD960036F45E /* Notice.swift in Sources */,
+				6800910C21C1150E0043F7C9 /* CashierHeaderView.swift in Sources */,
 				6800087A21B42A310000EFF6 /* LargeValueFormatter.swift in Sources */,
 				CEFE997F2174F228002FA809 /* PhieuChiViewController.swift in Sources */,
 				CEA5C9082173ACE90069B849 /* EmptySegue.swift in Sources */,
 				6800086621B373AA0000EFF6 /* CanHo_DichVu.swift in Sources */,
 				CE2AE4CE2160B87100EA61B8 /* QuanLiTableViewCell.swift in Sources */,
+				6800910F21C115690043F7C9 /* UIView+Extension.swift in Sources */,
 				CE2AE4C8216059CB00EA61B8 /* MyCombobox.swift in Sources */,
 				CEFE99972175F7AD002FA809 /* NumericKeyboard.swift in Sources */,
 				CEC325872164343A00E14CF1 /* HoaDon.swift in Sources */,
@@ -1161,7 +1211,6 @@
 				CEFE99992175FAD5002FA809 /* MyNumberField.swift in Sources */,
 				CE4992032166DC58005F6D5C /* Date+Extension.swift in Sources */,
 				CE48FF9F217827FB00A44FA2 /* EditListKhachHangViewController.swift in Sources */,
-				CE3F689721593C1300F12672 /* LoginListProtocol.swift in Sources */,
 				CEC84F47219036270095E683 /* MyTextField.swift in Sources */,
 				CEC84F45219024420095E683 /* MyButton.swift in Sources */,
 				CE2AE4B7215FC5FE00EA61B8 /* HoaDonWireFrame.swift in Sources */,
@@ -1176,12 +1225,12 @@
 				CE876959216ACCBB001EF3C3 /* PhieuThu.swift in Sources */,
 				CE4FCD022191D7E600AD76D3 /* TongQuanViewController.swift in Sources */,
 				CEFE99A021761E59002FA809 /* QLKhachHangTableViewCell.swift in Sources */,
+				68D2547921C0021D006C829E /* HopDongInforViewController.swift in Sources */,
 				68D8EF3D21AD97DA002DB7E6 /* DoanhThuTableViewCell.swift in Sources */,
 				CE2EFDE6215F75810036F45E /* BaseObject.swift in Sources */,
 				68E173E921AAEDBA006444AA /* AccountInformationViewController.swift in Sources */,
 				CE2EFE0E215FADC70036F45E /* OptionTableViewCell.swift in Sources */,
 				CE47D646216D2FD800F6025D /* PhieuThuWireFrame.swift in Sources */,
-				CE3F689B21593E8000F12672 /* LoginPresenter.swift in Sources */,
 				CE8E6BAC218D4567000187AE /* HopDong.swift in Sources */,
 				CE2AE4BE215FC69C00EA61B8 /* HoaDonProtocols.swift in Sources */,
 				6800087121B429AB0000EFF6 /* RadarMarkerView.swift in Sources */,

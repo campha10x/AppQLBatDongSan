@@ -13,5 +13,9 @@ namespace BatDongSanAPI.Models
         public String NgayKT { get; set; }
         public String GhiChu { get; set; }
         public String IdKhachHang { get; set; }
+        public String TienDien { get; set; }
+        public String TienNuoc { get; set; }
+        public String SoDienBd { get; set; }
+        public String SoNuocBd { get; set; }
     }
 }

@@ -80,13 +80,13 @@ class EditListKhachHangViewController: UIViewController {
             tfEmail.text = khachhang?.Email
             tfCmnd.text = khachhang?.CMND
             textViewQueQuan.text = khachhang?.Quequan
-            if let index = self.listCanHo.index(where: { $0.IdCanHo == self.khachhang?.IdCanHo}) {
-                self.cbbCanHo.setOptions(self.listCanHo.map({$0.TenCanHo}), placeholder: nil, selectedIndex: index)
-            } else {
-                self.cbbCanHo.setOptions(self.listCanHo.map({$0.TenCanHo}), placeholder: nil, selectedIndex: nil)
-            }
+//            if let index = self.listCanHo.index(where: { $0.IdCanHo == self.khachhang?.IdCanHo}) {
+//                self.cbbCanHo.setOptions(self.listCanHo.map({$0.TenCanHo}), placeholder: nil, selectedIndex: index)
+//            } else {
+//                self.cbbCanHo.setOptions(self.listCanHo.map({$0.TenCanHo}), placeholder: nil, selectedIndex: nil)
+//            }
         } else {
-             self.cbbCanHo.setOptions(self.listCanHo.map({$0.TenCanHo}), placeholder: nil, selectedIndex: nil)
+//             self.cbbCanHo.setOptions(self.listCanHo.map({$0.TenCanHo}), placeholder: nil, selectedIndex: nil)
             btnNgaySinh.date = Date()
             groupGioiTinh.selecteAt(index: 0 )
         }

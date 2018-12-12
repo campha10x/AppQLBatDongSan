@@ -1,10 +1,24 @@
 ﻿<Properties StartupConfiguration="{5052F413-D199-413A-BD23-A2BD31F1F3AE}|Default">
   <MonoDevelop.Ide.ItemProperties.BatDongSanAPI PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workbench ActiveDocument="BatDongSanAPI/Models/BatDongSanStoreContext.cs">
+    <Files>
+      <File FileName="BatDongSanAPI/Controllers/KhachHangController.cs" Line="31" Column="10" />
+      <File FileName="BatDongSanAPI/Controllers/HoaDonController.cs" Line="55" Column="1" />
+      <File FileName="BatDongSanAPI/Models/BatDongSanStoreContext.cs" Line="469" Column="1" />
+      <File FileName="BatDongSanAPI/Controllers/HopDongController.cs" Line="42" Column="39" />
+      <File FileName="BatDongSanAPI/Models/HoaDonChiTiet.cs" Line="1" Column="1" />
+      <File FileName="BatDongSanAPI/Models/HopDong.cs" Line="16" Column="1" />
+      <File FileName="BatDongSanAPI/Controllers/CanHoController.cs" Line="26" Column="49" />
+      <File FileName="BatDongSanAPI/Models/CanHo.cs" Line="23" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/duyxuan/Desktop/AppQLBatDongSan/BatDongSanAPI/BatDongSanAPI/Controllers/CanHoController.cs" relfile="BatDongSanAPI/Controllers/CanHoController.cs" line="42" column="1" />
+      <Breakpoint file="/Users/duyxuan/Desktop/AppQLBatDongSan/BatDongSanAPI/BatDongSanAPI/Controllers/CanHoController.cs" relfile="BatDongSanAPI/Controllers/CanHoController.cs" line="50" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
 </Properties>

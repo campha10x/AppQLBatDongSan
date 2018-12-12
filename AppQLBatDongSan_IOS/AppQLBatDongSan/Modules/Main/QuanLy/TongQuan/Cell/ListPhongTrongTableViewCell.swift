@@ -19,8 +19,8 @@ class ListCanHoTrongTableViewCell: UITableViewCell {
         // Initialization code
     }
     
-    func binding(tenPhong: String){
-        lblNamePhong.text = tenPhong
+    func binding(maCanHo: String){
+        lblNamePhong.text = maCanHo
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

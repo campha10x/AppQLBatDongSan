@@ -98,10 +98,14 @@ extension String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = date
         
-        let dateReceived: Date = dateFormatter.date(from:  self)!
-        dateFormatter.dateFormat = dateTo
+        if let dateReceived: Date = dateFormatter.date(from:  self) {
+            dateFormatter.dateFormat = dateTo
+             return  dateFormatter.string(from: dateReceived)
+        }
+        return ""
+
         
-        return  dateFormatter.string(from: dateReceived)
+       
     }
     
     func toDate(isDayOnly: Bool = false) -> Date? {

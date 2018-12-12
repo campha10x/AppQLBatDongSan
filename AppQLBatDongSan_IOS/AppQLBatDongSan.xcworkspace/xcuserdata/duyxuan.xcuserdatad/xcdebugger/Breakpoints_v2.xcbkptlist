@@ -9,12 +9,12 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "AppQLBatDongSan/Modules/Main/AddsBatDongSan/DichVu/AddAndEditDichVuViewController.swift"
-            timestampString = "565452392.42277"
+            filePath = "AppQLBatDongSan/Modules/Main/AddsBatDongSan/CanHo/AddAndEditCanHoViewController.swift"
+            timestampString = "566322767.417923"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
             landmarkName = "tao(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -25,94 +25,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "AppQLBatDongSan/Modules/Main/QuanLy/DoanhThu/ListDoanhThuViewController.swift"
-            timestampString = "565739162.100055"
+            filePath = "AppQLBatDongSan/Core/MapiOS/MapViewCustom.swift"
+            timestampString = "566326153.450143"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "174"
-            endingLineNumber = "174"
-            landmarkName = "loadPhieuThu()"
+            startingLineNumber = "195"
+            endingLineNumber = "195"
+            landmarkName = "eventChangeTypeMap(_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Any&gt;) -&gt; () in AppQLBatDongSan.ListDoanhThuViewController.loadPhieuThu() -&gt; ()"
-                  moduleName = "AppQLBatDongSan"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/duyxuan/Desktop/AppQLBatDongSan/AppQLBatDongSan_IOS/AppQLBatDongSan/Modules/Main/QuanLy/DoanhThu/ListDoanhThuViewController.swift"
-                  timestampString = "565628072.2013431"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "113"
-                  endingLineNumber = "113"
-                  offsetFromSymbolStart = "641">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (SwiftyJSON.JSON) -&gt; AppQLBatDongSan.PhieuThu in closure #1 (Alamofire.DataResponse&lt;Any&gt;) -&gt; () in AppQLBatDongSan.ListDoanhThuViewController.loadPhieuThu() -&gt; ()"
-                  moduleName = "AppQLBatDongSan"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/duyxuan/Desktop/AppQLBatDongSan/AppQLBatDongSan_IOS/AppQLBatDongSan/Modules/Main/QuanLy/DoanhThu/ListDoanhThuViewController.swift"
-                  timestampString = "565628072.205179"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "113"
-                  endingLineNumber = "113"
-                  offsetFromSymbolStart = "26">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AppQLBatDongSan/Modules/Main/QuanLy/DoanhThu/ListDoanhThuViewController.swift"
-            timestampString = "565739162.1008331"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "199"
-            endingLineNumber = "199"
-            landmarkName = "loadPhieuChi()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Any&gt;) -&gt; () in AppQLBatDongSan.ListDoanhThuViewController.loadPhieuChi() -&gt; ()"
-                  moduleName = "AppQLBatDongSan"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/duyxuan/Desktop/AppQLBatDongSan/AppQLBatDongSan_IOS/AppQLBatDongSan/Modules/Main/QuanLy/DoanhThu/ListDoanhThuViewController.swift"
-                  timestampString = "565628072.213775"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "138"
-                  endingLineNumber = "138"
-                  offsetFromSymbolStart = "971">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 (AppQLBatDongSan.PhieuChi) -&gt; () in closure #1 (Alamofire.DataResponse&lt;Any&gt;) -&gt; () in AppQLBatDongSan.ListDoanhThuViewController.loadPhieuChi() -&gt; ()"
-                  moduleName = "AppQLBatDongSan"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/duyxuan/Desktop/AppQLBatDongSan/AppQLBatDongSan_IOS/AppQLBatDongSan/Modules/Main/QuanLy/DoanhThu/ListDoanhThuViewController.swift"
-                  timestampString = "565628072.218819"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "139"
-                  endingLineNumber = "139"
-                  offsetFromSymbolStart = "33">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

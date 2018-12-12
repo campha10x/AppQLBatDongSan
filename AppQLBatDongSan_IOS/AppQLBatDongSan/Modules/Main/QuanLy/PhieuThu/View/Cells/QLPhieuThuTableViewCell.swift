@@ -32,7 +32,7 @@ class ListPhieuThuTableViewCell: UITableViewCell {
     func binding(phieuthu: PhieuThu, index: Int )  {
         self.index = index
         let listPhong = Storage.shared.getObjects(type: CanHo.self) as? [CanHo]
-        labelTenPhong.text = listPhong?.filter({ $0.IdCanHo == phieuthu.IdCanHo }).first?.TenCanHo
+//        labelTenPhong.text = listPhong?.filter({ $0.IdCanHo == phieuthu.IdCanHo }).first?.TenCanHo
         labelMaHoaDon.text = phieuthu.IdHoaDon
         labelSoTien.text = phieuthu.SoTien.toNumberString(decimal: false)
         labelNgay.text = phieuthu.Ngay.formatDate()

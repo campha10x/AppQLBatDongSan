@@ -115,10 +115,10 @@ extension QLHopDongViewController: eventProtocols {
         let storyboard = UIStoryboard.init(name: "AddBatDongSan", bundle: nil)
         let currentViewController = storyboard.instantiateViewController(withIdentifier: "AddListBatDongSanViewController") as! AddAndEditHopDongViewController
         currentViewController.modalPresentationStyle = .overCurrentContext
-        currentViewController.hopdong = self.listHopDong[index].copy() as! HopDong
+        currentViewController.hopdong = self.listHopDong[index].copy() as? HopDong
         currentViewController.isCreateNew = false
         currentViewController.done = { hopdongResponse in
-            if let index = self.listHopDong.firstIndex(where: { $0.idHopDong == hopdongResponse.idHopDong}) {
+            if let index = self.listHopDong.firstIndex(where: { $0.IdHopDong == hopdongResponse.IdHopDong}) {
                 self.listHopDong[index] = hopdongResponse
                 self.tblHopDong.reloadData()
                 self.constraintHeightViewBody.constant = CGFloat (100 + 70 + 70 + 70 * self.listHopDong.count + 60)
@@ -129,13 +129,13 @@ extension QLHopDongViewController: eventProtocols {
     
     func eventRemove(_ index: Int) {
         SVProgressHUD.show()
-        let parameters = ["idHopDong": self.listHopDong[index].idHopDong ]
+        let parameters = ["idHopDong": self.listHopDong[index].IdHopDong ]
         SVProgressHUD.show()
         manager.request("https://localhost:5001/HopDong/RemoveListHopDong", method: .post, parameters: nil, encoding: URLEncoding.default, headers: parameters).responseJSON { (responseObject) in
             SVProgressHUD.dismiss()
             do {
                 Notice.make(type: .Success, content: "Xoá hợp đồng thành công !").show()
-                Storage.shared.delete(HopDong.self, ids: [self.listHopDong[index].idHopDong], idPrefix: "idHopDong")
+                Storage.shared.delete(HopDong.self, ids: [self.listHopDong[index].IdHopDong], idPrefix: "IdHopDong")
                 self.listHopDong.remove(at: index)
                 self.tblHopDong.reloadData()
                 self.constraintHeightViewBody.constant = CGFloat (100 + 70 + 70 + 70 * self.listHopDong.count + 60)
@@ -144,6 +144,13 @@ extension QLHopDongViewController: eventProtocols {
                     Notice.make(type: .Error, content: error.localizedDescription).show()
                 }
             }
+        }
+    }
+    
+    func eventShowHopDong(_ index: Int) {
+        if let vc = UIStoryboard.init(name: "DetailBatDongSan", bundle: nil).instantiateViewController(withIdentifier: "HopDongInforViewController") as? HopDongInforViewController {
+            vc.hopDongObject = self.listHopDong[index]
+            self.present(vc, animated: true, completion: nil)
         }
     }
     

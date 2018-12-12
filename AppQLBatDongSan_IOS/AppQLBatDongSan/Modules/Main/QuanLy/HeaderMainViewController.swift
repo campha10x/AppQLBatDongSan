@@ -13,9 +13,7 @@ import SwiftyJSON
 import Alamofire
 
 class HeaderMainViewController: UIViewController {
-    
-    @IBOutlet weak var cbbNhaTro: MyCombobox!
-    
+
     let manager = Alamofire.SessionManager()
     
     var delegate: HeaderMainOptionDelegate?

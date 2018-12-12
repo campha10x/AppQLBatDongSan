@@ -14,6 +14,8 @@ namespace BatDongSanAPI.Models
         public String Email { get; set; }
         public String CMND { get; set; }
         public String Quequan { get; set; }
+        public String NgayCap { get; set; }
+        public String NoiCap { get; set; }
         public KhachHang()
         {
         }

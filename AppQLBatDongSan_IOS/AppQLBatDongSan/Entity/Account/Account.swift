@@ -19,7 +19,10 @@ class Account:  BaseRealmObject, NSCopying {
     @objc dynamic var namSinh: String = ""
     @objc dynamic var sdt: String = ""
     @objc dynamic var diaChi: String = ""
-    @objc dynamic var anhDaiDien: String = ""
+     @objc dynamic var CMND: String = ""
+     @objc dynamic var ngayCap: String = ""
+     @objc dynamic var noiCap: String = ""
+    
     
     override static func primaryKey() -> String? {
         return "IdAccount"
@@ -32,12 +35,14 @@ class Account:  BaseRealmObject, NSCopying {
         self.IdAccount = json["idAccount"].stringValue
         self.email = json["email"].stringValue
         self.matKhau = json["matKhau"].stringValue
-        self.hoten = json["hoten"].stringValue
+        self.hoten = json["hoTen"].stringValue
         self.gioitinh = json["gioitinh"].stringValue
         self.namSinh = json["namSinh"].stringValue
         self.sdt = json["sdt"].stringValue
         self.diaChi = json["diaChi"].stringValue
-        self.anhDaiDien = json["anhDaiDien"].stringValue
+        self.CMND = json["cmnd"].stringValue
+        self.ngayCap = json["ngayCap"].stringValue
+        self.noiCap = json["noiCap"].stringValue
     }
     
     func encode(with aCoder: NSCoder) {
@@ -49,7 +54,9 @@ class Account:  BaseRealmObject, NSCopying {
         aCoder.encode(namSinh, forKey: "namSinh")
         aCoder.encode(sdt, forKey: "sdt")
         aCoder.encode(diaChi, forKey: "diaChi")
-        aCoder.encode(anhDaiDien, forKey: "anhDaiDien")
+        aCoder.encode(CMND, forKey: "cmnd")
+        aCoder.encode(ngayCap, forKey: "ngayCap")
+        aCoder.encode(noiCap, forKey: "noiCap")
     }
     
 
@@ -59,13 +66,16 @@ class Account:  BaseRealmObject, NSCopying {
     func copy(with zone: NSZone? = nil) -> Any {
         let copy = Account()
         copy.IdAccount = self.IdAccount
+        copy.email = self.email
         copy.matKhau  = self.matKhau
         copy.hoten  = self.hoten
         copy.gioitinh  = self.gioitinh
         copy.namSinh  = self.namSinh
         copy.sdt  = self.sdt
         copy.diaChi = self.diaChi
-        copy.anhDaiDien = self.anhDaiDien
+        copy.CMND = self.CMND
+        copy.ngayCap = self.ngayCap
+        copy.noiCap = self.noiCap
         return copy
     }
     
