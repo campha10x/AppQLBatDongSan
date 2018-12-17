@@ -66,7 +66,7 @@ extension HeaderMainViewController: HeaderMainOptionDelegate {
     
     func eventClickLogout() {
         Storage.shared.removeAll()
-        AppState.shared.saveAccount(account: nil)
+        AppState.shared.saveAccount(account: nil, typeLogin: nil)
         self.navigationController?.popToRootViewController(animated: true)
     }
     

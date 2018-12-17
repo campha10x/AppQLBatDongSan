@@ -176,6 +176,13 @@ import SnapKit
         }
     }
     
+    // get selected index
+    var selectedText: String? {
+        get {
+            return boxGroup.first(where: {$0.isSelected})?.text
+        }
+    }
+    
     var selectedIds: [Int]? {
         get {
             return boxGroup.filter({$0.isSelected}).map({$0.tag})

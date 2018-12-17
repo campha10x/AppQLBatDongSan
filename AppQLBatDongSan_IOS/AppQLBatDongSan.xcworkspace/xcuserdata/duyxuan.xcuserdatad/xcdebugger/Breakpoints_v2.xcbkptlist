@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "AppQLBatDongSan/Modules/Main/AddsBatDongSan/CanHo/AddAndEditCanHoViewController.swift"
-            timestampString = "566322767.417923"
+            filePath = "AppQLBatDongSan/Core/MapiOS/MapViewCustom.swift"
+            timestampString = "566359675.901852"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
-            landmarkName = "tao(_:)"
+            startingLineNumber = "195"
+            endingLineNumber = "195"
+            landmarkName = "eventChangeTypeMap(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,45 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "AppQLBatDongSan/Core/MapiOS/MapViewCustom.swift"
-            timestampString = "566326153.450143"
+            filePath = "AppQLBatDongSan/Custom Control/Common/MyServiceGroupView.swift"
+            timestampString = "566674679.859594"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "195"
-            endingLineNumber = "195"
-            landmarkName = "eventChangeTypeMap(_:)"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "addOptions(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AppQLBatDongSan/Modules/Main/Detail/HoaDon/HoaDonInforViewConroller.swift"
+            timestampString = "566677299.843042"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "125"
+            endingLineNumber = "125"
+            landmarkName = "config()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AppQLBatDongSan/Modules/Main/Detail/HoaDon/HoaDonInforViewConroller.swift"
+            timestampString = "566677299.843215"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
+            landmarkName = "config()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

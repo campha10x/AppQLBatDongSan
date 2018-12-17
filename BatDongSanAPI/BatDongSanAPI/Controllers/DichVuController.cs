@@ -20,27 +20,27 @@ namespace BatDongSanAPI.Controllers
         }
 
         [HttpPost("/DichVu/RemoveListDichVu")]
-        public JsonResult RemoveListDichVu([FromHeader(Name = "idDichVu")] string idDichVu)
+        public JsonResult RemoveListDichVu([FromHeader(Name = "IdDichVu")] string IdDichVu)
         {
             BatDongSanStoreContext context = HttpContext.RequestServices.GetService(typeof(BatDongSanStoreContext)) as BatDongSanStoreContext;
-            context.removeDichVu(idDichVu);
-            return Json(idDichVu);
+            context.removeDichVu(IdDichVu);
+            return Json(IdDichVu);
         }
 
 
         [HttpPost("/DichVu/EditDichVu")]
-        public JsonResult EditDichVu([FromHeader(Name = "idDichVu")] string idDichVu, [FromHeader(Name = "TenDichVu")] string TenDichVu, [FromHeader(Name = "DonGia")] string DonGia, [FromHeader(Name = "Donvi")] string donvi)
+        public JsonResult EditDichVu([FromHeader(Name = "IdDichVu")] string idDichVu, [FromHeader(Name = "TenDichVu")] string TenDichVu, [FromHeader(Name = "Donvi")] string donvi)
         {
             BatDongSanStoreContext context = HttpContext.RequestServices.GetService(typeof(BatDongSanStoreContext)) as BatDongSanStoreContext;
-            DichVu a = context.updateDichVu(idDichVu, TenDichVu, DonGia, donvi);
+            DichVu a = context.updateDichVu(idDichVu, TenDichVu, donvi);
             return Json(a);
         }
 
         [HttpPost("/DichVu/AddDichVu")]
-        public JsonResult AddDichVu([FromHeader(Name = "TenDichVu")] string TenDichVu, [FromHeader(Name = "DonGia")] string DonGia, [FromHeader(Name = "Donvi")] string donvi)
+        public JsonResult AddDichVu([FromHeader(Name = "TenDichVu")] string TenDichVu, [FromHeader(Name = "Donvi")] string donvi)
         {
             BatDongSanStoreContext context = HttpContext.RequestServices.GetService(typeof(BatDongSanStoreContext)) as BatDongSanStoreContext;
-            DichVu a = context.addDichvu(TenDichVu, DonGia, donvi);
+            DichVu a = context.addDichvu(TenDichVu,donvi);
             return Json(a);
         }
 

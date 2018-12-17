@@ -52,6 +52,7 @@ class TongQuanViewController: UIViewController {
         dispatch = DispatchGroup()
         configService()
         loadCanHo()
+        loadHopDong_DichVu()
         loadHopDong()
         loadHoaDon()
         loadListPhieuThu()
@@ -324,6 +325,30 @@ class TongQuanViewController: UIViewController {
                 listCanHo_DichVu.forEach({ (canHo) in
                     if let canHoCopy = canHo.copy() as? CanHo_DichVu {
                         Storage.shared.addOrUpdate([canHoCopy], type: CanHo_DichVu.self)
+                    }
+                })
+            } catch {
+                if let error = responseObject.error {
+                    Notice.make(type: .Error, content: error.localizedDescription ).show()
+                }
+                
+            }
+        }
+    }
+    
+    func loadHopDong_DichVu()  {
+        SVProgressHUD.show()
+        dispatch?.enter()
+        manager.request("https://localhost:5001/HopDong_DichVu/GetListHopDong_DichVu", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil).responseJSON { (responseObject) in
+            self.dispatch?.leave()
+            SVProgressHUD.dismiss()
+            do {
+                let json: JSON = try JSON.init(data: responseObject.data! )
+                var listCanHo_DichVu: [HopDong_DichVu] = []
+                listCanHo_DichVu = json.arrayValue.map({HopDong_DichVu.init(json: $0)})
+                listCanHo_DichVu.forEach({ (canHo) in
+                    if let canHoCopy = canHo.copy() as? HopDong_DichVu {
+                        Storage.shared.addOrUpdate([canHoCopy], type: HopDong_DichVu.self)
                     }
                 })
             } catch {

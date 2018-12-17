@@ -128,6 +128,7 @@ extension PhieuChiViewController: eventProtocols {
         vc.isCreateNew = false
         vc.onUpdatePhieuChi = { (phieuchiResponse) in
             if let index = self.listPhieuChi.firstIndex(where: { $0.IdPhieuChi == phieuchiResponse.IdPhieuChi}) {
+                self.reCaculatorAmountPhieuChi()
                 self.listPhieuChi[index] = phieuchiResponse
                 self.tblPhieuChi.reloadData()
                 self.constraintHeightViewBody.constant = CGFloat (100 + 70 + 70 + 70 * self.listPhieuChi.count + 60)

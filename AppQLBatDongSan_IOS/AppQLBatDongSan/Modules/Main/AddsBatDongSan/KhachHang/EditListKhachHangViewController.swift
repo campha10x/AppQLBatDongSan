@@ -27,7 +27,10 @@ class EditListKhachHangViewController: UIViewController {
     @IBOutlet weak var tfCmnd: UITextField!
     @IBOutlet weak var cbbCanHo: MyCombobox!
     @IBOutlet weak var viewBody: UIView!
+    @IBOutlet weak var btnNgayCap: MyButtonCalendar!
+    @IBOutlet weak var tfNoiCap: UITextField!
     
+    @IBOutlet weak var tfMatKhau: UITextField!
     @IBOutlet weak var labelHeaderTitle: UILabel!
     
     var index: Int = -1
@@ -73,25 +76,31 @@ class EditListKhachHangViewController: UIViewController {
         listCanHo = Storage.shared.getObjects(type: CanHo.self) as! [CanHo]
          groupGioiTinh.addTitleAndOptions("Gioi Tinh", options: [0: "Nữ ",1: "Nam"],isRadioBox: true)
         if !isCreateNew {
-            groupGioiTinh.selecteAt(index: Int(khachhang?.GioiTinh ?? "0" )!)
+            groupGioiTinh.selecteAt(index: (Int(khachhang?.GioiTinh ?? "0") ?? 0 ))
             tfHoten.text = khachhang?.TenKH
             tfSodienthoai.text = khachhang?.SDT
             btnNgaySinh.date = khachhang?.NgaySinh.toDate(format: "MM/dd/yyyy HH:mm:ss") ?? Date()
             tfEmail.text = khachhang?.Email
             tfCmnd.text = khachhang?.CMND
             textViewQueQuan.text = khachhang?.Quequan
-//            if let index = self.listCanHo.index(where: { $0.IdCanHo == self.khachhang?.IdCanHo}) {
-//                self.cbbCanHo.setOptions(self.listCanHo.map({$0.TenCanHo}), placeholder: nil, selectedIndex: index)
-//            } else {
-//                self.cbbCanHo.setOptions(self.listCanHo.map({$0.TenCanHo}), placeholder: nil, selectedIndex: nil)
-//            }
+            if let index = self.listCanHo.index(where: { $0.IdCanHo == self.khachhang?.IdCanHo}) {
+                self.cbbCanHo.setOptions(self.listCanHo.map({$0.maCanHo}), placeholder: nil, selectedIndex: index)
+            } else {
+                self.cbbCanHo.setOptions(self.listCanHo.map({$0.maCanHo}), placeholder: nil, selectedIndex: nil)
+            }
+             btnNgayCap.date = khachhang?.NgayCap.toDate(format: "MM/dd/yyyy HH:mm:ss") ?? Date()
+            tfNoiCap.text = khachhang?.NoiCap
+            tfMatKhau.text = khachhang?.Password
         } else {
-//             self.cbbCanHo.setOptions(self.listCanHo.map({$0.TenCanHo}), placeholder: nil, selectedIndex: nil)
+             self.cbbCanHo.setOptions(self.listCanHo.map({$0.maCanHo}), placeholder: nil, selectedIndex: nil)
             btnNgaySinh.date = Date()
             groupGioiTinh.selecteAt(index: 0 )
         }
         btnNgaySinh.layer.borderColor = UIColor.gray.cgColor
         btnNgaySinh.layer.borderWidth = 1.0
+        btnNgayCap.layer.borderColor = UIColor.gray.cgColor
+        btnNgayCap.layer.borderWidth = 1.0
+        
         textViewQueQuan.layer.borderColor = UIColor.gray.cgColor
         textViewQueQuan.layer.borderWidth = 1.0
         textViewQueQuan.layer.cornerRadius = MyUI.buttonCornerRadius
@@ -118,6 +127,9 @@ class EditListKhachHangViewController: UIViewController {
         khachangNew.CMND = tfCmnd.text ?? ""
         khachangNew.NgaySinh = "\(btnNgaySinh.date)"
         khachangNew.Quequan = textViewQueQuan.text
+        khachangNew.NgayCap = "\(btnNgayCap.date)"
+        khachangNew.NoiCap = tfNoiCap.text ?? ""
+         khachangNew.Password = tfMatKhau.text ?? ""
         if let id = groupGioiTinh.selectedId {
             khachangNew.GioiTinh = "\(id)"
         }
@@ -131,7 +143,9 @@ class EditListKhachHangViewController: UIViewController {
             "Email" : khachangNew.Email,
             "CMND" : khachangNew.CMND,
             "Quequan" : khachangNew.Quequan,
-            
+            "NgayCap": khachangNew.NgayCap.formatDate(date: "yyyy-MM-dd HH:mm:ss +HHHH", dateTo: "YYYY-MM-dd"),
+            "NoiCap" : khachangNew.NoiCap,
+            "Password" : khachangNew.Password
         ]
         if isCreateNew {
             SVProgressHUD.show()

@@ -27,11 +27,19 @@ class MainMenuViewController: UIViewController {
     
     let arrayMenus: [String] = []
     var accountObject: Account? = nil
+    var khachHangObject: KhachHang? = nil
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let listAccounts = Storage.shared.getObjects(type: Account.self) as! [Account]
-        accountObject = listAccounts.filter({$0.email == AppState.shared.getAccount()}).first?.copy() as? Account
+        if AppState.shared.typeLogin == TypeLogin.ChuCanho.rawValue {
+            let listAccounts = Storage.shared.getObjects(type: Account.self) as! [Account]
+            accountObject = listAccounts.filter({$0.email == AppState.shared.getAccount()}).first?.copy() as? Account
+        } else {
+            let listKhachHang = Storage.shared.getObjects(type: KhachHang.self) as! [KhachHang]
+            khachHangObject = listKhachHang.filter({$0.Email == AppState.shared.getAccount()}).first?.copy() as? KhachHang
+        }
+
         btnLogout.backgroundColor = UIColor.init(netHex: 0xF46463)
         self.setUpXIB()
     }
@@ -94,34 +102,50 @@ extension MainMenuViewController: UITableViewDataSource, UITableViewDelegate {
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 9
+        if AppState.shared.typeLogin == TypeLogin.ChuCanho.rawValue {
+            return 9
+        } else {
+            return 3
+        }
+
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "OptionTableViewCell", for: indexPath) as! OptionTableViewCell
-        if indexPath.row == 0 {
-            cell.setDataForOption(nameImage: "worldwide", titleOption: "Tổng quan")
-        } else if indexPath.row == 1 {
-            cell.setDataForOption(nameImage: "bills", titleOption: "Hoá đơn")
+        if AppState.shared.typeLogin == TypeLogin.ChuCanho.rawValue {
+            if indexPath.row == 0 {
+                cell.setDataForOption(nameImage: "worldwide", titleOption: "Tổng quan")
+            } else if indexPath.row == 1 {
+                cell.setDataForOption(nameImage: "bills", titleOption: "Hoá đơn")
+            }
+            else if indexPath.row == 2 {
+                cell.setDataForOption(nameImage: "money-bag", titleOption: "Phiếu Thu")
+            }
+            else if indexPath.row == 3 {
+                cell.setDataForOption(nameImage: "money-bag", titleOption: "Phiếu chi")
+            }
+            else if indexPath.row == 4 {
+                cell.setDataForOption(nameImage: "customer", titleOption: "Khách hàng")
+            }
+            else if indexPath.row == 5 {
+                cell.setDataForOption(nameImage: "report", titleOption: "Hợp đồng")
+            }else if indexPath.row == 6 {
+                cell.setDataForOption(nameImage: "fireplace", titleOption: "Căn hộ")
+            }else if indexPath.row == 7 {
+                cell.setDataForOption(nameImage: "customer-support", titleOption: "Dịch vụ")
+            }else if indexPath.row == 8 {
+                cell.setDataForOption(nameImage: "graph", titleOption: "Thống kê")
+            }
+        } else {
+            if indexPath.row == 0 {
+                cell.setDataForOption(nameImage: "bills", titleOption: "Hoá đơn")
+            }else if indexPath.row == 1 {
+                cell.setDataForOption(nameImage: "report", titleOption: "Hợp đồng")
+            }else if indexPath.row == 2 {
+                cell.setDataForOption(nameImage: "fireplace", titleOption: "Căn hộ")
+            }
         }
-        else if indexPath.row == 2 {
-            cell.setDataForOption(nameImage: "money-bag", titleOption: "Phiếu Thu")
-        }
-        else if indexPath.row == 3 {
-            cell.setDataForOption(nameImage: "money-bag", titleOption: "Phiếu chi")
-        }
-        else if indexPath.row == 4 {
-            cell.setDataForOption(nameImage: "customer", titleOption: "Khách hàng")
-        }
-        else if indexPath.row == 5 {
-            cell.setDataForOption(nameImage: "report", titleOption: "Hợp đồng")
-        }else if indexPath.row == 6 {
-            cell.setDataForOption(nameImage: "fireplace", titleOption: "Căn hộ")
-        }else if indexPath.row == 7 {
-            cell.setDataForOption(nameImage: "customer-support", titleOption: "Dịch vụ")
-        }else if indexPath.row == 8 {
-            cell.setDataForOption(nameImage: "graph", titleOption: "Thống kê")
-        }
+       
                 
         return cell
     }
@@ -136,26 +160,37 @@ extension MainMenuViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 0 {
-            delegate?.mainMenuOpen(type: .segueTongQuan)
-        } else if indexPath.row == 1 {
-            delegate?.mainMenuOpen(type: .segueHoadon)
-        }else if indexPath.row == 2 {
-            delegate?.mainMenuOpen(type: .seguePhieuthu)
-        } else if indexPath.row == 3 {
-            delegate?.mainMenuOpen(type: .seguePhieuchi)
-        } else if indexPath.row == 4 {
-            delegate?.mainMenuOpen(type: .segueKhachhang)
-        } else if indexPath.row == 5 {
-            delegate?.mainMenuOpen(type: .segueHopdong)
+        if AppState.shared.typeLogin == TypeLogin.ChuCanho.rawValue {
+            if indexPath.row == 0 {
+                delegate?.mainMenuOpen(type: .segueTongQuan)
+            } else if indexPath.row == 1 {
+                delegate?.mainMenuOpen(type: .segueHoadon)
+            }else if indexPath.row == 2 {
+                delegate?.mainMenuOpen(type: .seguePhieuthu)
+            } else if indexPath.row == 3 {
+                delegate?.mainMenuOpen(type: .seguePhieuchi)
+            } else if indexPath.row == 4 {
+                delegate?.mainMenuOpen(type: .segueKhachhang)
+            } else if indexPath.row == 5 {
+                delegate?.mainMenuOpen(type: .segueHopdong)
+            }
+            else if indexPath.row == 6 {
+                delegate?.mainMenuOpen(type: .seguePhong)
+            }else if indexPath.row == 7 {
+                delegate?.mainMenuOpen(type: .segueDichvu)
+            }else if indexPath.row == 8 {
+                delegate?.mainMenuOpen(type: .segueDoanhthu)
+            }
+        } else {
+            if indexPath.row == 0 {
+                delegate?.mainMenuOpen(type: .segueHoadon)
+            }else if indexPath.row == 1 {
+                delegate?.mainMenuOpen(type: .segueHopdong)
+            }else if indexPath.row == 2 {
+                delegate?.mainMenuOpen(type: .seguePhong)
+            }
         }
-        else if indexPath.row == 6 {
-            delegate?.mainMenuOpen(type: .seguePhong)
-        }else if indexPath.row == 7 {
-            delegate?.mainMenuOpen(type: .segueDichvu)
-        }else if indexPath.row == 8 {
-            delegate?.mainMenuOpen(type: .segueDoanhthu)
-        }
+        
         self.hide()
     }
     
@@ -163,7 +198,12 @@ extension MainMenuViewController: UITableViewDataSource, UITableViewDelegate {
         let height = self.tableView(tableView, heightForHeaderInSection: section)
         let header =  CashierHeaderView.instanceFromNib()
         header.frame = CGRect(x: 0, y: 0, width: tableView.bounds.width, height: height - 30)
-        header.setDataCashier(nameImage: nil, nameCashier: accountObject?.hoten ?? "")
+        if AppState.shared.typeLogin == TypeLogin.ChuCanho.rawValue {
+            header.setDataCashier(nameImage: nil, nameCashier: accountObject?.hoten ?? "")
+        } else {
+            header.setDataCashier(nameImage: nil, nameCashier: khachHangObject?.TenKH ?? "")
+        }
+
         let headerBound = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: height))
         headerBound.backgroundColor = .clear
         headerBound.addSubview(header)

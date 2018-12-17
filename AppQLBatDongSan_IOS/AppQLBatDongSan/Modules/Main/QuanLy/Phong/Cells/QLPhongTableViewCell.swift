@@ -16,6 +16,9 @@ class QLCanHoTableViewCell: UITableViewCell {
     @IBOutlet weak var lbGiaCanho: UILabel!
     @IBOutlet weak var lbMaCanHo: UILabel!
     
+    @IBOutlet weak var btnEdit: UIButton!
+    @IBOutlet weak var btnRemove: UIButton!
+    @IBOutlet weak var btnChothue: MySolidButton!
     @IBOutlet weak var lbNgayDang: UILabel!
     @IBOutlet weak var lbDienTich: UILabel!
     @IBOutlet weak var lbMoTa: UILabel!
@@ -65,8 +68,12 @@ class QLCanHoTableViewCell: UITableViewCell {
         delegate?.eventEdit(self.index)
     }
     
+    @IBAction func eventClickChoThue(_ sender: Any) {
+        delegate?.eventClickChoThue?(self.index)
+        
+    }
     
-    func binding(canHo: CanHo, index: Int )  {
+    func binding(canHo: CanHo, index: Int, isChoThue: Bool  )  {
         self.index = index
         lbTieuDe.text = canHo.TieuDe
         lbMoTa.text = canHo.MoTa
@@ -75,6 +82,7 @@ class QLCanHoTableViewCell: UITableViewCell {
         lbMaCanHo.text = "Mã căn hộ: CT" + canHo.IdCanHo
         lbNgayDang.text = canHo.NgayTao.formatDate()
         let listImage = canHo.AnhCanHo.split(separator: ",")
+        
         guard let imgFirst = listImage.first else { return }
         // The image to dowload
         let stringUrl = "https://localhost:5001/CanHo/Image/\(imgFirst)"
@@ -88,6 +96,14 @@ class QLCanHoTableViewCell: UITableViewCell {
                 }
             }
         }
+        if AppState.shared.typeLogin == TypeLogin.ChuCanho.rawValue {
+            btnChothue.isHidden = !isChoThue
+        } else {
+             btnChothue.isHidden = true
+            btnEdit.isHidden = true
+            btnRemove.isHidden = true
+        }
+
     }
     
 }

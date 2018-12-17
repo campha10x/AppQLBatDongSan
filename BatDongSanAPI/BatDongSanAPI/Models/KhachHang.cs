@@ -16,6 +16,8 @@ namespace BatDongSanAPI.Models
         public String Quequan { get; set; }
         public String NgayCap { get; set; }
         public String NoiCap { get; set; }
+        public String Password { get; set; }
+
         public KhachHang()
         {
         }

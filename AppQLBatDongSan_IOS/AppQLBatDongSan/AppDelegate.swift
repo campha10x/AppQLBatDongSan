@@ -25,7 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Map configure
         GMSServices.provideAPIKey("AIzaSyCc9t6g4kAeg325G0j4_OW9k3vVoyFcW1o")
         GMSPlacesClient.provideAPIKey("AIzaSyCc9t6g4kAeg325G0j4_OW9k3vVoyFcW1o")
-        
         // Check connect internet
         listenNetworkStatus()
         

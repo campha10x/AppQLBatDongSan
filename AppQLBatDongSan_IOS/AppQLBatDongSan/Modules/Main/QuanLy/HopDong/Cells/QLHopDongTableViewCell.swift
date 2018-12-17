@@ -19,13 +19,20 @@ class QLHopDongTableViewCell: UITableViewCell {
     @IBOutlet weak var lblSoTienCoc: UILabel!
     @IBOutlet weak var lblNgayKetThuc: UILabel!
     
+    @IBOutlet weak var btnDelete: UIButton!
+    @IBOutlet weak var btnEdit: UIButton!
+    
+    
     static let id = "QLHopDongTableViewCell"
     var index: Int = -1
     
     var listCanHo: [CanHo] = Storage.shared.getObjects(type: CanHo.self) as! [CanHo]
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        if AppState.shared.typeLogin == TypeLogin.NguoiThue.rawValue {
+           btnDelete.isHidden = true
+            btnEdit.isHidden = true
+        }
     }
     
     @IBAction func eventEdit(_ sender: Any) {
@@ -39,7 +46,7 @@ class QLHopDongTableViewCell: UITableViewCell {
     func binding(hopdong: HopDong, index: Int )  {
         self.index = index
         let canHo = listCanHo.filter({$0.IdCanHo == hopdong.IdCanHo }).first
-        lblMaHopDong.text = hopdong.IdHopDong
+        lblMaHopDong.text = hopdong.maHopDong
         lblChuHopDong.text = hopdong.ChuHopDong
         lblCanHo.text = canHo?.maCanHo
         lblSoTienCoc.text = hopdong.SoTienCoc.toNumberString(decimal: false)

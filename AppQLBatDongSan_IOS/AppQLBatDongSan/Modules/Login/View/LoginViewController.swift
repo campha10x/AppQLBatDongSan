@@ -53,21 +53,40 @@ class LoginViewController: UIViewController {
         }
     }
     
-    func login(username email: String, password: String) {
+    func login(username email: String, password: String, typeLogin: TypeLogin) {
         SVProgressHUD.show()
-        manager.request("https://localhost:5001/Account/Index/\(email)/\(password)", method: .get, parameters: [:], encoding: JSONEncoding(options: [])).responseJSON { response in
-            do {
-                let json: JSON = try JSON.init(data: response.data! )
-                let account  = Account.init(json: json)
-                Storage.shared.addOrUpdate([account], type: Account.self)
-                AppState.shared.saveAccount(account: account)
-
-                self.presentMainScreen( animated: true)
-            } catch {
-                self.loginFail(error: error.localizedDescription)
+        if typeLogin.rawValue == TypeLogin.ChuCanho.rawValue {
+            manager.request("https://localhost:5001/Account/Index/\(email)/\(password)", method: .get, parameters: [:], encoding: JSONEncoding(options: [])).responseJSON { response in
+                do {
+                    let json: JSON = try JSON.init(data: response.data! )
+                    let account  = Account.init(json: json)
+//                    Storage.shared.addOrUpdate([account], type: Account.self)
+                    AppState.shared.saveAccount(account: account, typeLogin: typeLogin)
+                    
+                    self.presentMainScreen( animated: true)
+                } catch {
+                    
+                    self.loginFail(error: error.localizedDescription)
+                }
+                SVProgressHUD.dismiss()
             }
-            SVProgressHUD.dismiss()
+        } else {
+            manager.request("https://localhost:5001/KhachHang/Index/\(email)/\(password)", method: .get, parameters: [:], encoding: JSONEncoding(options: [])).responseJSON { response in
+                do {
+                    let json: JSON = try JSON.init(data: response.data! )
+                    let khachHang  = KhachHang.init(json: json)
+//                    Storage.shared.addOrUpdate([khachHang], type: KhachHang.self)
+                    AppState.shared.saveKhachHang(khachHang: khachHang, typeLogin: typeLogin)
+                    
+                    self.presentMainScreen( animated: true)
+                } catch {
+                    
+                    self.loginFail(error: error.localizedDescription)
+                }
+                SVProgressHUD.dismiss()
+            }
         }
+       
     }
     
     func presentMainScreen(animated: Bool) {
@@ -79,8 +98,8 @@ class LoginViewController: UIViewController {
         viewLogin?.onRegister = {
             self.showContainer(containerView: self.containerViewRegister)
         }
-        viewLogin?.onLogin = { email, password in
-            self.login(username: email, password: password)
+        viewLogin?.onLogin = { email, password, typeLogin in
+            self.login(username: email, password: password, typeLogin: typeLogin)
         }
         
         viewRegister?.onLogin = {
@@ -109,7 +128,7 @@ class LoginViewController: UIViewController {
 
 extension LoginViewController: RegisterDelegates {
     func loginFail(error: String) {
-        Notice.make(type: .Error, content: error).show()
+        Notice.make(type: .Error, content: "Tài khoản không đúng mời bạn nhập lại").show()
     }
     
     func didRegister(email: String, phone: String, password: String ) {

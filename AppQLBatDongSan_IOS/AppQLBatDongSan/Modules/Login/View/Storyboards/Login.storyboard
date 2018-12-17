@@ -53,16 +53,16 @@
                                                 </constraints>
                                             </view>
                                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bNW-lP-tfY">
-                                                <rect key="frame" x="170.5" y="210" width="683" height="500"/>
+                                                <rect key="frame" x="170.5" y="210" width="683" height="600"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="500" id="wgs-Z9-HZo"/>
+                                                    <constraint firstAttribute="height" constant="600" id="wgs-Z9-HZo"/>
                                                 </constraints>
                                                 <connections>
                                                     <segue destination="Ct6-mO-upx" kind="embed" id="ocT-Hj-o6J"/>
                                                 </connections>
                                             </containerView>
                                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Ut-4c-2BI">
-                                                <rect key="frame" x="170.5" y="210" width="683" height="500"/>
+                                                <rect key="frame" x="170.5" y="210" width="683" height="600"/>
                                                 <connections>
                                                     <segue destination="h7x-YH-1dc" kind="embed" id="A9Y-6e-G9z"/>
                                                 </connections>
@@ -116,11 +116,11 @@
             <objects>
                 <viewController storyboardIdentifier="ViewLoginViewController" id="Ct6-mO-upx" customClass="ViewLoginViewController" customModule="AppQLBatDongSan" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lBg-Qn-4tl">
-                        <rect key="frame" x="0.0" y="0.0" width="683" height="500"/>
+                        <rect key="frame" x="0.0" y="0.0" width="683" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j4M-s4-ECN">
-                                <rect key="frame" x="0.0" y="0.0" width="683" height="500"/>
+                                <rect key="frame" x="0.0" y="0.0" width="683" height="600"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mkm-dz-BMi">
                                         <rect key="frame" x="30" y="50" width="95" height="48"/>
@@ -129,7 +129,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jc2-ot-efe">
-                                        <rect key="frame" x="0.0" y="454" width="683" height="46"/>
+                                        <rect key="frame" x="0.0" y="554" width="683" height="46"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="46" id="2Nh-ig-TId"/>
@@ -142,7 +142,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jye-FR-top">
-                                        <rect key="frame" x="0.0" y="408" width="683" height="46"/>
+                                        <rect key="frame" x="0.0" y="508" width="683" height="46"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="46" id="svJ-kR-yT8"/>
@@ -152,7 +152,7 @@
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bdt-7h-2sE">
-                                        <rect key="frame" x="523" y="313" width="120" height="45"/>
+                                        <rect key="frame" x="523" y="413" width="120" height="45"/>
                                         <color key="backgroundColor" red="0.14534485089999999" green="0.16215230050000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="120" id="LYd-Di-46W"/>
@@ -167,13 +167,13 @@
                                         </connections>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="t8u-ch-r0P">
-                                        <rect key="frame" x="20" y="144" width="643" height="45"/>
+                                        <rect key="frame" x="20" y="244" width="643" height="45"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YEJ-ap-PYF">
-                                        <rect key="frame" x="20" y="209" width="643" height="45"/>
+                                        <rect key="frame" x="20" y="309" width="643" height="45"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="8yN-DV-Eic"/>
                                         </constraints>
@@ -181,11 +181,20 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c8n-tT-ZfV" customClass="MyCheckboxGroup" customModule="AppQLBatDongSan" customModuleProvider="target">
+                                        <rect key="frame" x="116" y="364" width="451" height="50"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="Dm1-SP-z6U"/>
+                                            <constraint firstAttribute="width" constant="451" id="jX7-K3-Bac"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="YEJ-ap-PYF" firstAttribute="leading" secondItem="j4M-s4-ECN" secondAttribute="leading" constant="20" id="82X-bx-yok"/>
                                     <constraint firstItem="t8u-ch-r0P" firstAttribute="height" secondItem="YEJ-ap-PYF" secondAttribute="height" id="8sg-6J-maf"/>
+                                    <constraint firstItem="c8n-tT-ZfV" firstAttribute="top" secondItem="YEJ-ap-PYF" secondAttribute="bottom" constant="10" id="Ac1-Fi-e5k"/>
                                     <constraint firstAttribute="trailing" secondItem="bdt-7h-2sE" secondAttribute="trailing" constant="40" id="EsF-fy-7ti"/>
                                     <constraint firstAttribute="trailing" secondItem="YEJ-ap-PYF" secondAttribute="trailing" constant="20" id="FLJ-9K-HhY"/>
                                     <constraint firstAttribute="trailing" secondItem="Jc2-ot-efe" secondAttribute="trailing" id="MMt-ld-Z7R"/>
@@ -200,7 +209,7 @@
                                     <constraint firstAttribute="bottom" secondItem="Jc2-ot-efe" secondAttribute="bottom" id="kbk-v1-Yh0"/>
                                     <constraint firstItem="Jye-FR-top" firstAttribute="top" secondItem="bdt-7h-2sE" secondAttribute="bottom" constant="50" id="l32-V6-Ful"/>
                                     <constraint firstItem="Jye-FR-top" firstAttribute="leading" secondItem="j4M-s4-ECN" secondAttribute="leading" id="nT3-dZ-azc"/>
-                                    <constraint firstAttribute="height" constant="500" id="sxC-66-1cg"/>
+                                    <constraint firstItem="c8n-tT-ZfV" firstAttribute="centerX" secondItem="j4M-s4-ECN" secondAttribute="centerX" id="oWI-nA-th7"/>
                                     <constraint firstItem="Jc2-ot-efe" firstAttribute="leading" secondItem="j4M-s4-ECN" secondAttribute="leading" id="uGo-M8-Ymu"/>
                                 </constraints>
                             </view>
@@ -215,6 +224,7 @@
                         <viewLayoutGuide key="safeArea" id="Pvs-TU-UDD"/>
                     </view>
                     <connections>
+                        <outlet property="checkboxTypeLogin" destination="c8n-tT-ZfV" id="N7f-cm-s7G"/>
                         <outlet property="textfieldEmail" destination="t8u-ch-r0P" id="3kE-By-FUi"/>
                         <outlet property="textfieldPassword" destination="YEJ-ap-PYF" id="CcY-RT-Edo"/>
                     </connections>
@@ -228,7 +238,7 @@
             <objects>
                 <viewController storyboardIdentifier="ViewRegisterViewController" id="h7x-YH-1dc" customClass="ViewRegisterViewController" customModule="AppQLBatDongSan" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="J2L-AB-fCa">
-                        <rect key="frame" x="0.0" y="0.0" width="683" height="500"/>
+                        <rect key="frame" x="0.0" y="0.0" width="683" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Đăng kí thành viên" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nbl-66-yoQ">

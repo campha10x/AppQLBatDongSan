@@ -8,13 +8,19 @@
 
 import UIKit
 
+enum TypeLogin: Int {
+    case ChuCanho = 0
+    case NguoiThue = 1
+}
+
 class ViewLoginViewController: UIViewController {
 
     @IBOutlet weak var textfieldPassword: UITextField!
     @IBOutlet weak var textfieldEmail: UITextField!
     var onRegister: (()->())?
-    var onLogin: ((_ email: String, _ passWord: String)->())?
+    var onLogin: ((_ email: String, _ passWord: String, _ typeLogin: TypeLogin)->())?
     
+    @IBOutlet weak var checkboxTypeLogin: MyCheckboxGroup!
     override func viewDidLoad() {
         super.viewDidLoad()
         textfieldEmail.placeholder = "Địa chỉ email hoặc số điện thoại"
@@ -22,6 +28,8 @@ class ViewLoginViewController: UIViewController {
         textfieldEmail.text = "phamxuanduy1996@gmail.com"
         textfieldPassword.text = "thaythuoc"
         textfieldPassword.isSecureTextEntry = true
+        checkboxTypeLogin.addTitleAndOptions("", options: [TypeLogin.ChuCanho.rawValue:  "Bạn là chủ căn hộ",TypeLogin.NguoiThue.rawValue: "Bạn là người thuê"],isRadioBox: true)
+            checkboxTypeLogin.selecteAt(index: 0)
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,7 +38,10 @@ class ViewLoginViewController: UIViewController {
     }
     @IBAction func eventLogin(_ sender: Any) {
         guard let email = textfieldEmail.text, let password = textfieldPassword.text else { return }
-        onLogin?(email, password)
+        if let type = TypeLogin.init(rawValue: checkboxTypeLogin.selectedId ?? 0){
+            onLogin?(email, password, type)
+        }
+
     }
 
     @IBAction func eventRegister(_ sender: Any) {

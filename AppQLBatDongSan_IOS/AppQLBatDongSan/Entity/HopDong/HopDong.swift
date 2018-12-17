@@ -24,6 +24,11 @@ class HopDong: BaseRealmObject, NSCopying {
     @objc dynamic var SoDienBd: String = ""
     @objc dynamic var SoNuocBd: String = ""
     
+    var maHopDong: String {
+        let id = (Int(IdHopDong) ?? 0) + 9444001
+        return "HD-\(id)"
+    }
+    
     override static func primaryKey() -> String? {
         return "IdHopDong"
     }

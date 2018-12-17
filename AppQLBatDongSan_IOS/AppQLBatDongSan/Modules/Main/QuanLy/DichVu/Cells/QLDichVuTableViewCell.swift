@@ -13,7 +13,6 @@ class QLDichVuTableViewCell: UITableViewCell {
     var delegate: eventProtocols?
     
     @IBOutlet weak var lblTenDichVu: UILabel!
-    @IBOutlet weak var lblDongia: UILabel!
     @IBOutlet weak var lblDonvi: UILabel!
     
     
@@ -37,7 +36,6 @@ class QLDichVuTableViewCell: UITableViewCell {
     func binding(dichvu: DichVu, index: Int )  {
         self.index = index
         lblTenDichVu.text = dichvu.TenDichVu
-        lblDongia.text = dichvu.DonGia.toNumberString(decimal: false)
         lblDonvi.text = dichvu.DonVi
     }
 

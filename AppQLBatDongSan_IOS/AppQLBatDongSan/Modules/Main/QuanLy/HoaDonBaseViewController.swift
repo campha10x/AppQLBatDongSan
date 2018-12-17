@@ -61,7 +61,7 @@ extension HoaDonBaseViewController: MainMenuDelegate {
     func mainMenuOpen(type: MainMenuType){
         if type == .segueLogout {
             Storage.shared.removeAll()
-            AppState.shared.saveAccount(account: nil)
+            AppState.shared.saveAccount(account: nil, typeLogin: nil)
             self.navigationController?.popToRootViewController(animated: true)
         } else {
             hoadonDirectionViewController?.segueIdentifierReceivedFromParent(type.rawValue)

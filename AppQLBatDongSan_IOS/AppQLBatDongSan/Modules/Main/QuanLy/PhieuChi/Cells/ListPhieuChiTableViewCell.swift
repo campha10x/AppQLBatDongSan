@@ -12,6 +12,8 @@ import UIKit
     func eventEdit(_ index: Int)
     func eventRemove(_ index: Int)
     @objc optional func eventShowHopDong(_ index: Int)
+    @objc optional func eventClickChoThue(_ index: Int)
+    
 }
 
 
@@ -42,7 +44,7 @@ class ListPhieuChiTableViewCell: UITableViewCell {
     func binding(phieuchi: PhieuChi, index: Int )  {
         self.index = index
         let listCanHo = Storage.shared.getObjects(type: CanHo.self) as? [CanHo]
-//        labelCanHo.text = listCanHo?.filter({ $0.IdCanHo == phieuchi.IdCanHo }).first?.TenCanHo
+        labelCanHo.text = listCanHo?.filter({ $0.IdCanHo == phieuchi.IdCanHo }).first?.maCanHo
         labelSoTien.text = phieuchi.Sotien.toNumberString(decimal: false)
         labelNgay.text = phieuchi.Ngay.formatDate()
         labelDienGiai.text = phieuchi.DienGiai

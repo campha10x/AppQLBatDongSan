@@ -17,6 +17,7 @@ class QLHopDongViewController: UIViewController {
     @IBOutlet weak var constraintHeightViewBody: NSLayoutConstraint!
     @IBOutlet weak var viewBody: UIView!
     
+    @IBOutlet weak var btnCreateNew: UIButton!
     var listHopDong: [HopDong] = [HopDong]()
     let manager = Alamofire.SessionManager()
     
@@ -76,6 +77,15 @@ class QLHopDongViewController: UIViewController {
             do {
                 let json: JSON = try JSON.init(data: responseObject.data! )
                 self.listHopDong  = json.arrayValue.map({HopDong.init(json: $0)})
+                
+                if AppState.shared.typeLogin == TypeLogin.NguoiThue.rawValue {
+                    guard let khachHangObject = AppState.shared.khachHangObject else { return }
+                    if let idKhachHang = self.listHopDong.filter({$0.IdKhachHang == khachHangObject.idKhachHang}).first?.IdKhachHang {
+                        self.listHopDong = self.listHopDong.filter({ $0.IdKhachHang == idKhachHang})
+                    }
+                    self.btnCreateNew.isHidden = true
+                }
+                
                 self.listHopDong.forEach({ (hopdong) in
                     if let hopdongCopy = hopdong.copy() as? HopDong {
                         Storage.shared.addOrUpdate([hopdongCopy], type: HopDong.self)

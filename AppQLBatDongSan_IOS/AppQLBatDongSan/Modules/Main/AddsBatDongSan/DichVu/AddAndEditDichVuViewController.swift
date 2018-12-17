@@ -14,7 +14,6 @@ import SwiftyJSON
 class AddAndEditDichVuViewController: UIViewController {
 
     @IBOutlet weak var tfTenDV: MyTextField!
-    @IBOutlet weak var tfDonGia: MyNumberField!
     @IBOutlet weak var labelHeaderTitle: UILabel!
     @IBOutlet weak var tfDonVi: UITextField!
     @IBOutlet weak var viewBody: UIView!
@@ -30,11 +29,9 @@ class AddAndEditDichVuViewController: UIViewController {
         labelHeaderTitle.text = isCreateNew == true ? "Tạo dịch vụ" : "Sửa dịch vụ"
         if !isCreateNew {
             tfTenDV.text = dichvu?.TenDichVu
-            tfDonGia.setValue(dichvu?.DonGia ?? "0")
             tfDonVi.text = dichvu?.DonVi
         } else {
         }
-        tfDonGia.setAsNumericKeyboard(type: .money, autoSelectAll: false)
          viewBody.layer.cornerRadius = 6.0
     }
     
@@ -67,13 +64,11 @@ class AddAndEditDichVuViewController: UIViewController {
         dichvu.idDichVu = isCreateNew ? "" : self.dichvu?.idDichVu ?? ""
         dichvu.TenDichVu = tfTenDV.text!
         dichvu.DonVi = tfDonVi.text!
-        dichvu.DonGia = tfDonGia.getValueString()
         Storage.shared.addOrUpdate([dichvu], type: DichVu.self)
         
         let parameters: [String: String] = [
-            "idDichVu" : dichvu.idDichVu,
+            "IdDichVu" : dichvu.idDichVu,
             "TenDichVu" : dichvu.TenDichVu ,
-            "DonGia" : dichvu.DonGia,
             "Donvi" : dichvu.DonVi
         ]
         if isCreateNew {

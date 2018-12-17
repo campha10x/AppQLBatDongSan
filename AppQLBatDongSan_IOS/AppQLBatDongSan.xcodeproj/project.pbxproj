@@ -26,9 +26,15 @@
 		6812061E21BDEB1F004924B2 /* CanHoInforViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6812061D21BDEB1F004924B2 /* CanHoInforViewController.swift */; };
 		6812062021BDEDBC004924B2 /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6812061F21BDEDBC004924B2 /* CategoryView.swift */; };
 		68284CD021B573CC00298EDD /* ListCanHoNoTienTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68284CCF21B573CC00298EDD /* ListCanHoNoTienTableViewCell.swift */; };
+		687746AE21C671EC00A24264 /* MyServiceGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 687746AD21C671EC00A24264 /* MyServiceGroupView.swift */; };
+		687746B021C6729B00A24264 /* MyServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 687746AF21C6729B00A24264 /* MyServiceView.swift */; };
+		687746B321C685F100A24264 /* HopDong_DichVu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 687746B221C685F100A24264 /* HopDong_DichVu.swift */; };
+		68D12DA921C2053E00CC9664 /* HoaDonInforViewConroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D12DA821C2053E00CC9664 /* HoaDonInforViewConroller.swift */; };
+		68D12DAC21C2062D00CC9664 /* HoaDonInforTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D12DAB21C2062D00CC9664 /* HoaDonInforTableViewCell.swift */; };
 		68D2547921C0021D006C829E /* HopDongInforViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D2547821C0021D006C829E /* HopDongInforViewController.swift */; };
 		68D8EF3A21AD9747002DB7E6 /* ListDoanhThuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D8EF3921AD9747002DB7E6 /* ListDoanhThuViewController.swift */; };
 		68D8EF3D21AD97DA002DB7E6 /* DoanhThuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D8EF3C21AD97DA002DB7E6 /* DoanhThuTableViewCell.swift */; };
+		68DFDE5A21C243900084F353 /* CanHoImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68DFDE5921C243900084F353 /* CanHoImageCollectionViewCell.swift */; };
 		68E173E321AAD3A6006444AA /* MenuOptionInforViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68E173E221AAD3A6006444AA /* MenuOptionInforViewController.swift */; };
 		68E173E621AAD3D1006444AA /* AccountInforUser.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68E173E521AAD3D1006444AA /* AccountInforUser.storyboard */; };
 		68E173E921AAEDBA006444AA /* AccountInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68E173E821AAEDBA006444AA /* AccountInformationViewController.swift */; };
@@ -134,9 +140,15 @@
 		6812061D21BDEB1F004924B2 /* CanHoInforViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanHoInforViewController.swift; sourceTree = "<group>"; };
 		6812061F21BDEDBC004924B2 /* CategoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
 		68284CCF21B573CC00298EDD /* ListCanHoNoTienTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCanHoNoTienTableViewCell.swift; sourceTree = "<group>"; };
+		687746AD21C671EC00A24264 /* MyServiceGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyServiceGroupView.swift; sourceTree = "<group>"; };
+		687746AF21C6729B00A24264 /* MyServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyServiceView.swift; sourceTree = "<group>"; };
+		687746B221C685F100A24264 /* HopDong_DichVu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HopDong_DichVu.swift; sourceTree = "<group>"; };
+		68D12DA821C2053E00CC9664 /* HoaDonInforViewConroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoaDonInforViewConroller.swift; sourceTree = "<group>"; };
+		68D12DAB21C2062D00CC9664 /* HoaDonInforTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoaDonInforTableViewCell.swift; sourceTree = "<group>"; };
 		68D2547821C0021D006C829E /* HopDongInforViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HopDongInforViewController.swift; sourceTree = "<group>"; };
 		68D8EF3921AD9747002DB7E6 /* ListDoanhThuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDoanhThuViewController.swift; sourceTree = "<group>"; };
 		68D8EF3C21AD97DA002DB7E6 /* DoanhThuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoanhThuTableViewCell.swift; sourceTree = "<group>"; };
+		68DFDE5921C243900084F353 /* CanHoImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanHoImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		68E173E221AAD3A6006444AA /* MenuOptionInforViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOptionInforViewController.swift; sourceTree = "<group>"; };
 		68E173E521AAD3D1006444AA /* AccountInforUser.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AccountInforUser.storyboard; sourceTree = "<group>"; };
 		68E173E821AAEDBA006444AA /* AccountInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInformationViewController.swift; sourceTree = "<group>"; };
@@ -297,6 +309,7 @@
 		6812061721BDE667004924B2 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
+				68D12DA721C2051500CC9664 /* HoaDon */,
 				68D2547721C001FF006C829E /* HopDong */,
 				6812061C21BDEADA004924B2 /* CanHo */,
 				6812061821BDE6E2004924B2 /* DetailBatDongSan.storyboard */,
@@ -307,10 +320,36 @@
 		6812061C21BDEADA004924B2 /* CanHo */ = {
 			isa = PBXGroup;
 			children = (
+				68DFDE5821C2436A0084F353 /* Cells */,
 				6812061A21BDEA9A004924B2 /* SlidePictureViewController.swift */,
 				6812061D21BDEB1F004924B2 /* CanHoInforViewController.swift */,
 			);
 			path = CanHo;
+			sourceTree = "<group>";
+		};
+		687746B121C685DB00A24264 /* HopDong_DichVu */ = {
+			isa = PBXGroup;
+			children = (
+				687746B221C685F100A24264 /* HopDong_DichVu.swift */,
+			);
+			path = HopDong_DichVu;
+			sourceTree = "<group>";
+		};
+		68D12DA721C2051500CC9664 /* HoaDon */ = {
+			isa = PBXGroup;
+			children = (
+				68D12DAA21C2061200CC9664 /* Cell */,
+				68D12DA821C2053E00CC9664 /* HoaDonInforViewConroller.swift */,
+			);
+			path = HoaDon;
+			sourceTree = "<group>";
+		};
+		68D12DAA21C2061200CC9664 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				68D12DAB21C2062D00CC9664 /* HoaDonInforTableViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		68D2547721C001FF006C829E /* HopDong */ = {
@@ -336,6 +375,14 @@
 				68D8EF3C21AD97DA002DB7E6 /* DoanhThuTableViewCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		68DFDE5821C2436A0084F353 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				68DFDE5921C243900084F353 /* CanHoImageCollectionViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		68E173E121AAD34A006444AA /* MenuOptionInforAccount */ = {
@@ -461,6 +508,8 @@
 				CE2AE4C7216059CB00EA61B8 /* ExpandView.swift */,
 				CE2AE4C6216059CB00EA61B8 /* MyCombobox.swift */,
 				CE4992002166DBD7005F6D5C /* MyButtonCalendar.swift */,
+				687746AD21C671EC00A24264 /* MyServiceGroupView.swift */,
+				687746AF21C6729B00A24264 /* MyServiceView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -476,6 +525,7 @@
 		CE2EFDDD215F73AD0036F45E /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				687746B121C685DB00A24264 /* HopDong_DichVu */,
 				6800086421B373720000EFF6 /* CanHo_DichVu */,
 				CE8E6BAA218D454F000187AE /* HopDong */,
 				CE1F84C1217E28E400C68AAD /* DichVu */,
@@ -1149,6 +1199,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				687746B021C6729B00A24264 /* MyServiceView.swift in Sources */,
 				CE3F68922159384D00F12672 /* SplashViewController.swift in Sources */,
 				6800087821B42A310000EFF6 /* DayAxisValueFormatter.swift in Sources */,
 				CE7991A321849F3D00AAEE5A /* QLPhongTableViewCell.swift in Sources */,
@@ -1167,7 +1218,9 @@
 				CE8FA00121593724005D4B10 /* LoginViewController.swift in Sources */,
 				CEFE99A321762862002FA809 /* KhachHang.swift in Sources */,
 				CE2AE4C9216059CB00EA61B8 /* ExpandView.swift in Sources */,
+				687746AE21C671EC00A24264 /* MyServiceGroupView.swift in Sources */,
 				CECFF78F215A82B8004189CD /* ViewRegisterViewController.swift in Sources */,
+				68D12DAC21C2062D00CC9664 /* HoaDonInforTableViewCell.swift in Sources */,
 				CE2AE4AA215FBD5A00EA61B8 /* MainMenuViewController.swift in Sources */,
 				CECFF78D215A82A8004189CD /* ViewLoginViewController.swift in Sources */,
 				CE5BC7BA21947F03000CF770 /* ListPhongTrongTableViewCell.swift in Sources */,
@@ -1230,13 +1283,16 @@
 				CE2EFDE6215F75810036F45E /* BaseObject.swift in Sources */,
 				68E173E921AAEDBA006444AA /* AccountInformationViewController.swift in Sources */,
 				CE2EFE0E215FADC70036F45E /* OptionTableViewCell.swift in Sources */,
+				687746B321C685F100A24264 /* HopDong_DichVu.swift in Sources */,
 				CE47D646216D2FD800F6025D /* PhieuThuWireFrame.swift in Sources */,
 				CE8E6BAC218D4567000187AE /* HopDong.swift in Sources */,
+				68D12DA921C2053E00CC9664 /* HoaDonInforViewConroller.swift in Sources */,
 				CE2AE4BE215FC69C00EA61B8 /* HoaDonProtocols.swift in Sources */,
 				6800087121B429AB0000EFF6 /* RadarMarkerView.swift in Sources */,
 				CE2EFDE4215F753E0036F45E /* Storage.swift in Sources */,
 				6800087021B429AB0000EFF6 /* BalloonMarker.swift in Sources */,
 				CE47D648216D313900F6025D /* ListPhieuThuViewController.swift in Sources */,
+				68DFDE5A21C243900084F353 /* CanHoImageCollectionViewCell.swift in Sources */,
 				CE44B23D21876ABC009DBEE6 /* QLDichVuViewController.swift in Sources */,
 				CE87695021684CCC001EF3C3 /* HeaderMainViewController.swift in Sources */,
 				CEC84F41218FEFB00095E683 /* AddAndEditHopDongViewController.swift in Sources */,

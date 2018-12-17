@@ -13,7 +13,6 @@ import RealmSwift
 class DichVu: BaseRealmObject, NSCopying {
     @objc dynamic var idDichVu: String = ""
     @objc dynamic var TenDichVu: String = ""
-    @objc dynamic var DonGia: String = ""
     @objc dynamic var DonVi: String = ""
     
     override static func primaryKey() -> String? {
@@ -25,7 +24,6 @@ class DichVu: BaseRealmObject, NSCopying {
         self.init()
         self.idDichVu = json["idDichVu"].stringValue
         self.TenDichVu = json["tenDichVu"].stringValue
-        self.DonGia = json["donGia"].stringValue
          self.DonVi = json["donVi"].stringValue
     }
     
@@ -33,7 +31,6 @@ class DichVu: BaseRealmObject, NSCopying {
         let copy = DichVu()
         copy.idDichVu = self.idDichVu
         copy.TenDichVu = self.TenDichVu
-        copy.DonGia = self.DonGia
         copy.DonVi = self.DonVi
         return copy
     }

@@ -16,6 +16,11 @@ class QLBatDongSanViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if AppState.shared.typeLogin == TypeLogin.ChuCanho.rawValue {
+            segueIdentifier = "segueTongQuan"
+        } else {
+            segueIdentifier = "segueHoadon"
+        }
         segueIdentifierReceivedFromParent(self.segueIdentifier)
         // Do any additional setup after loading the view.
     }
@@ -37,6 +42,13 @@ class QLBatDongSanViewController: UIViewController {
             let currentViewController = segue.destination as? AccountInformationViewController
             currentViewController?.dismissViewController = {
                 self.segueIdentifierReceivedFromParent(MainMenuType.segueTongQuan.rawValue)
+            }
+        }
+        
+        if segue.destination is QLCanHoViewControlvar {
+            let currentViewController = segue.destination as? QLCanHoViewControlvar
+            currentViewController?.eventChoThue = {
+                self.segueIdentifierReceivedFromParent(MainMenuType.segueHopdong.rawValue)
             }
         }
         currentViewController = segue.destination

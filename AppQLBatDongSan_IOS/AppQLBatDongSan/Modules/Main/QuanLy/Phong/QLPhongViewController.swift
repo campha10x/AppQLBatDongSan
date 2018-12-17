@@ -15,14 +15,18 @@ class QLCanHoViewControlvar: UIViewController {
     
     var listCanHo: [CanHo] = [CanHo]()
     let manager = Alamofire.SessionManager()
+    var eventChoThue: (()->())?
     
     @IBOutlet weak var tblCanHo: UITableView!
     @IBOutlet weak var constraintHeightViewBody: NSLayoutConstraint!
     @IBOutlet weak var viewBody: UIView!
     
+    @IBOutlet weak var btnCreateNew: UIButton!
+    var listHopDong: [HopDong] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         configService()
+        listHopDong = Storage.shared.getObjects(type: HopDong.self) as! [HopDong]
         viewBody.layer.borderWidth = 2.0
         viewBody.layer.borderColor = UIColor.init(netHex: 0x5D7AFF).cgColor
         tblCanHo.delegate = self
@@ -76,6 +80,15 @@ class QLCanHoViewControlvar: UIViewController {
             do {
                 let json: JSON = try JSON.init(data: responseObject.data! )
                 self.listCanHo  = json.arrayValue.map({CanHo.init(json: $0)})
+                
+                if AppState.shared.typeLogin == TypeLogin.NguoiThue.rawValue {
+                    guard let khachHangObject = AppState.shared.khachHangObject else { return }
+                    if let idCanHo = self.listCanHo.filter({$0.IdCanHo == khachHangObject.IdCanHo}).first?.IdCanHo {
+                        self.listCanHo = self.listCanHo.filter({ $0.IdCanHo != idCanHo})
+                    }
+                    self.btnCreateNew.isHidden = true
+                }
+                
                 self.listCanHo.forEach({ (canHo) in
                     if let canHoCopy = canHo.copy() as? CanHo {
                         Storage.shared.addOrUpdate([canHoCopy], type: CanHo.self)
@@ -101,7 +114,17 @@ extension QLCanHoViewControlvar: UITableViewDataSource, UITableViewDelegate  {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: QLCanHoTableViewCell.id, for: indexPath) as! QLCanHoTableViewCell
-        cell.binding(canHo: self.listCanHo[indexPath.row], index: indexPath.row)
+        let hopdongObjects = listHopDong.filter({$0.IdCanHo == self.listCanHo[indexPath.row].IdCanHo })
+        var isChoThue = true
+        
+        for item in hopdongObjects {
+            if Calendar.current.compare(item.NgayKT.toDate(format: "MM/dd/yyyy HH:mm:ss") ?? Date(), to: Date(), toGranularity: .day) == .orderedDescending {
+                isChoThue = false
+                break
+            }
+        }
+        
+        cell.binding(canHo: self.listCanHo[indexPath.row], index: indexPath.row, isChoThue: isChoThue)
         cell.delegate = self
         return cell
     }
@@ -150,7 +173,7 @@ extension QLCanHoViewControlvar: eventProtocols {
                 Storage.shared.delete(CanHo.self, ids: [self.listCanHo[index].IdCanHo], idPrefix: "IdCanHo")
                 self.listCanHo.remove(at: index)
                 self.tblCanHo.reloadData()
-                self.constraintHeightViewBody.constant = CGFloat (100 + 70 + 70 + 70 * self.listCanHo.count + 60)
+                self.constraintHeightViewBody.constant = CGFloat ( 70 + 200 * self.listCanHo.count + 50)
             } catch {
                 if let error = responseObject.error {
                     Notice.make(type: .Error, content: error.localizedDescription).show()
@@ -158,5 +181,11 @@ extension QLCanHoViewControlvar: eventProtocols {
             }
         }
     }
+    
+    func eventClickChoThue(_ index: Int) {
+        eventChoThue?()
+    }
+    
+    
 }
 

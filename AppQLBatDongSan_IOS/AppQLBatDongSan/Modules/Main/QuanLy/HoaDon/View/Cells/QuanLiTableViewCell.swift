@@ -16,7 +16,8 @@ class QuanLiTableViewCell: UITableViewCell {
     var onChiTietHoaDon: ((_ index: Int) -> ())?
     var onMoney: ((_ index: Int) -> ())?
     var onRemove: ((_ index: Int) -> ())?
-
+    var eventClickShowHoaDon: ((_ index: Int) -> ())?
+    
     @IBOutlet weak var labelPhong: UILabel!
     @IBOutlet weak var labelSoPhieu: UILabel!
     @IBOutlet weak var labelNgayTao: UILabel!
@@ -36,6 +37,11 @@ class QuanLiTableViewCell: UITableViewCell {
         [buttonDelete, buttonEdit, buttonDelete, buttonMoney].forEach({ $0?.layer.borderWidth = 1.0 })
         [buttonDelete, buttonEdit, buttonDelete, buttonMoney].forEach({ $0?.layer.cornerRadius = MyUI.buttonCornerRadius })
         buttonDelete.backgroundColor = UIColor.red
+        if AppState.shared.typeLogin == TypeLogin.NguoiThue.rawValue {
+            buttonDelete.isHidden = true
+            buttonMoney.isHidden = true
+            buttonEdit.isHidden = true
+        }
     }
 
     func bindding(index: Int, obj: HoaDon, datra: Double, maCanHo: String) {
@@ -51,9 +57,7 @@ class QuanLiTableViewCell: UITableViewCell {
         self.buttonEdit.isEnabled = conlai == 0 ? false : true
         self.backgroundColor = conlai == 0 ?  UIColor.gray : UIColor.white
     }
-    
 
-    
     @IBAction func eventRemove(_ sender: Any) {
         onRemove?(self.index ?? 0)
     }
@@ -63,6 +67,9 @@ class QuanLiTableViewCell: UITableViewCell {
         onChiTietHoaDon?(self.index ?? 0)
     }
     
+    @IBAction func eventClickShowHoaDon(_ sender: Any) {
+        eventClickShowHoaDon?(self.index ?? 0)
+    }
     
     @IBAction func eventMoney(_ sender: Any) {
         onMoney?(self.index ?? 0 )

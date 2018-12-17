@@ -10,7 +10,6 @@ namespace BatDongSanAPI.Models
 
         public string TenDichVu { get; set; }
 
-        public string DonGia { get; set; }
 
         public string DonVi { get; set; }
     }

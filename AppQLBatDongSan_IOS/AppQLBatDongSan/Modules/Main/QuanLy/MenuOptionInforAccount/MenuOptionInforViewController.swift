@@ -27,7 +27,7 @@ class MenuOptionInforViewController: UIViewController {
     }
     
     @IBAction func eventClickLogout(_ sender: Any) {
-        AppState.shared.saveAccount(account: nil)
+        AppState.shared.saveAccount(account: nil, typeLogin: nil)
         self.dismiss(animated: true, completion: nil)
         delegate?.eventClickLogout()
     }

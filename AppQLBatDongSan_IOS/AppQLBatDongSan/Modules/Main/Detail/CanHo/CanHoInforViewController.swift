@@ -23,11 +23,41 @@ class CanHoInforViewController: UIViewController {
     @IBOutlet weak var viewBanDo: UIView!
     var mapViewOutlet: MapViewCustom?
     
+    @IBOutlet weak var lbDichVu: UILabel!
+    
+    var listDichVu_CanHo: [CanHo_DichVu] = []
+    var listDichVu: [DichVu] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        listDichVu_CanHo = Storage.shared.getObjects(type: CanHo_DichVu.self) as! [CanHo_DichVu]
+        listDichVu = Storage.shared.getObjects(type: DichVu.self) as! [DichVu]
+        configData()
         displayDataWith()
         configService()
         initMapview()
+    }
+    
+    func configData() {
+        if let canHoObject = canHoObject {
+            lbTieuDe.text = canHoObject.TieuDe
+            lbKhuVuc.text = "Khu vực: " + canHoObject.DiaChi
+            lbGia.text = "Giá: " + canHoObject.DonGia.toNumberString(decimal: false)
+            lbDienTich.text = "Diện tích: " + canHoObject.DienTich + " m2"
+            lbThongTinMoTa.text = canHoObject.MoTa
+            if let dichVuObjects = listDichVu_CanHo.filter({ $0.IdCanHo == self.canHoObject?.IdCanHo }).first  {
+                let string = dichVuObjects.IdDichVu.components(separatedBy: ",")
+                var listDichVuSelected: [DichVu] = []
+                for item in string {
+                    if let dichVu = self.listDichVu.filter({ $0.idDichVu == item}).first {
+                        listDichVuSelected.append(dichVu)
+                    }
+                }
+                lbDichVu.text = "Các dịch vụ: " + listDichVuSelected.reduce("", { $0 + $1.TenDichVu + ", " })
+            }
+
+            
+        }
     }
     
     func initMapview() {
@@ -92,7 +122,6 @@ class CanHoInforViewController: UIViewController {
                 }
             }
         }
-
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

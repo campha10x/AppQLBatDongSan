@@ -35,13 +35,20 @@ class HopDongInforViewController: UIViewController {
     @IBOutlet weak var lbGiaDienGiaNuoc: UILabel!
     
     
+    @IBOutlet weak var lbDichVuCanHo: UILabel!
+    
     var hopDongObject: HopDong? = nil
     var canHoObject: CanHo? = nil
     var khachHangObject: KhachHang? = nil
     var accountObject: Account? = nil
+    var listdichVu: [DichVu] = []
+    var listDichVu_HopDong: [HopDong_DichVu] = []
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        listdichVu = Storage.shared.getObjects(type: DichVu.self) as! [DichVu]
+        listDichVu_HopDong = Storage.shared.getObjects(type: HopDong_DichVu.self) as! [HopDong_DichVu]
         let accounts = Storage.shared.getObjects(type: Account.self) as! [Account]
         accountObject = accounts.filter({$0.email == AppState.shared.getAccount()}).first?.copy() as? Account
         let listKhachHang = Storage.shared.getObjects(type: KhachHang.self) as! [KhachHang]
@@ -62,7 +69,7 @@ class HopDongInforViewController: UIViewController {
         lbSdtChuHopDong.text = "Số điện thoại: " + (self.accountObject?.sdt ?? "")
         
         // nguoi thue
-        lbHotenNguoiThue.text = "Họ và tên: " + (self.accountObject?.hoten ?? "")
+        lbHotenNguoiThue.text = "Họ và tên: " + (self.khachHangObject?.TenKH ?? "")
         lbCMNDNguoiThue.text = "CMND: " + (self.khachHangObject?.CMND ?? "")
         lbNgayCapNguoiThue.text = "Ngày cấp: " + (self.khachHangObject?.NgayCap.formatDate() ?? "")
         lbNoiCapNguoiThue.text = "Nơi cấp: " + (self.khachHangObject?.NoiCap ?? "")
@@ -84,6 +91,14 @@ class HopDongInforViewController: UIViewController {
             + Số nước căn hộ: \(hopDongObject.TienNuoc.toNumberString(decimal: false)) / số
             """
         }
+        let listDichVu_HopDongSelected = self.listDichVu_HopDong.filter({ $0.IdHopDong == hopDongObject?.IdHopDong })
+        var text: String = ""
+            for item in listDichVu_HopDongSelected {
+                if let getDichVu = self.listdichVu.filter({ $0.idDichVu == item.IdDichVu }).first {
+                    text += " \(getDichVu.TenDichVu) : \(item.DonGia.toNumberString(decimal: false)) \(getDichVu.DonVi) \n "
+                }
+            }
+            lbDichVuCanHo.text = "Các dịch vụ trong căn hộ : \n" + text
     }
     
     

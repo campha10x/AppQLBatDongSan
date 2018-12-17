@@ -39,12 +39,15 @@ class AddAndEditHoaDonViewController: UIViewController {
     var listHopDong: [HopDong] = []
     var listHoaDon: [HoaDon] = []
     
+    var listHopDong_DichVu: [HopDong_DichVu] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         listDichVu = Storage.shared.getObjects(type: DichVu.self) as! [DichVu]
         listDichVu_CanHo = Storage.shared.getObjects(type: CanHo_DichVu.self) as! [CanHo_DichVu]
         listHopDong = Storage.shared.getObjects(type: HopDong.self) as! [HopDong]
         listHoaDon = Storage.shared.getObjects(type: HoaDon.self) as! [HoaDon]
+        listHopDong_DichVu = Storage.shared.getObjects(type: HopDong_DichVu.self) as! [HopDong_DichVu]
         customized()
         configService()
         if !isCreateNew {
@@ -246,7 +249,7 @@ class AddAndEditHoaDonViewController: UIViewController {
                 return
             }
             btnTao.isUserInteractionEnabled = true
-            let arrayHoadonLonNhat = listHoaDon.filter({ $0.IdCanHo == self.listHoaDon[indexCanHo].IdCanHo}).sorted { (hoadon1, hoadon2) -> Bool in
+            let arrayHoadonLonNhat = listHoaDon.filter({ $0.IdCanHo == self.listCanHo[indexCanHo].IdCanHo}).sorted { (hoadon1, hoadon2) -> Bool in
                 let date1 = hoadon1.ngayTao.toDate(format: "MM/dd/yyyy HH:mm:ss") ?? Date()
                 let date2 = hoadon2.ngayTao.toDate(format: "MM/dd/yyyy HH:mm:ss") ?? Date()
                 return date1 < date2
@@ -280,11 +283,15 @@ class AddAndEditHoaDonViewController: UIViewController {
                     soTien +=  (tienDien * (tfSoDienMoi.getValue() - soDienCu ) +  tienNuoc * ( tfSoNuocMoi.getValue() - soNuocCu ) )
 
                 }
+            
+            // dich vu
+            if let listDichVuSelected: [HopDong_DichVu] = self.listHopDong_DichVu.filter({ $0.IdHopDong == hopdongObject.IdHopDong }) {
+                soTien += listDichVuSelected.reduce(0.0, { $0 + (Double($1.DonGia) ?? 0) })
+            }
             tfSotien.setValue(soTien)
         } else {
             Notice.make(type: .Error, content: "Bạn phải nhập căn hộ mới tính tiền được").show()
         }
-
     }
 
 }

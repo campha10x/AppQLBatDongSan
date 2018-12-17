@@ -24,7 +24,7 @@ class DoanhThuTableViewCell: UITableViewCell {
             self.lbDate.text = date
             self.lbDate.font = UIFont.boldSystemFont(ofSize: 15)
         } else {
-            self.lbDate.text = date + "/ \(Date().year)"
+            self.lbDate.text = date 
         }
         self.lbMoney.text = money.toNumberString(decimal: false)
     }

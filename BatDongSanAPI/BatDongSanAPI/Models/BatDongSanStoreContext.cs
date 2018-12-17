@@ -32,16 +32,16 @@ namespace BatDongSanAPI.Models
         }
 
 
-        public String removeDichVu(string idDichVu)
+        public String removeDichVu(string IdDichVu)
         {
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand("DELETE from DichVu where idDichVu = '" + idDichVu + "' ", conn);
+                MySqlCommand cmd = new MySqlCommand("DELETE from DichVu where IdDichVu = '" + IdDichVu + "' ", conn);
                 cmd.ExecuteNonQuery();
             }
 
-            return idDichVu;
+            return IdDichVu;
         }
 
         public String removeCanHo(string idCanHo)
@@ -153,6 +153,10 @@ namespace BatDongSanAPI.Models
 
             return canHo_DichVu;
         }
+
+
+
+
         public String removePhieuThu(string idPhieuThu)
         {
             using (MySqlConnection conn = GetConnection())
@@ -241,6 +245,32 @@ namespace BatDongSanAPI.Models
             return list;
         }
 
+        public List<HopDong_DichVu> GetListHopDong_DichVu()
+        {
+            List<HopDong_DichVu> list = new List<HopDong_DichVu>();
+
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("select * from HopDong_DichVu", conn);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        list.Add(new HopDong_DichVu()
+                        {
+                            IdHopDong = reader["IdHopDong"].ToString(),
+                            IdDichVu = reader["IdDichVu"].ToString(),
+                            DonGia = reader["DonGia"].ToString(),
+                            IdHopDong_DichVu = reader["IdHopDong_DichVu"].ToString()
+                        });
+                    }
+                }
+            }
+            return list;
+        }
+
         public List<KhachHang> GetListKhachHang()
         {
             List<KhachHang> list = new List<KhachHang>();
@@ -266,8 +296,8 @@ namespace BatDongSanAPI.Models
                             CMND = reader["CMND"].ToString(),
                             Quequan = reader["Quequan"].ToString(),
                             NgayCap = reader["NgayCap"].ToString(),
-                            NoiCap = reader["NoiCap"].ToString()
-
+                            NoiCap = reader["NoiCap"].ToString(),
+                            Password = reader["Password"].ToString()
                         });
                     }
                 }
@@ -436,14 +466,41 @@ namespace BatDongSanAPI.Models
             return phong;
         }
 
-        public DichVu addDichvu(string TenDichVu, string DonGia, string donvi)
+        public HopDong_DichVu addHopDong_DichVu(string IdHopDong, string IdDichVu, string DonGia)
+        {
+            HopDong_DichVu phong = new HopDong_DichVu();
+
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("INSERT INTO HopDong_DichVu (IdHopDong, IdDichVu, DonGia) VALUES('" + IdHopDong + "', '" + IdDichVu + "', '" + DonGia + "') ", conn);
+                cmd.ExecuteNonQuery();
+
+                cmd.CommandText = "SELECT * FROM HopDong_DichVu ORDER BY IdHopDong_DichVu DESC LIMIT 1 ";
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        phong.IdHopDong_DichVu = reader["IdHopDong_DichVu"].ToString();
+                        phong.IdHopDong = reader["IdHopDong"].ToString();
+                        phong.IdDichVu = reader["IdDichVu"].ToString();
+                        phong.DonGia = reader["DonGia"].ToString();
+                    }
+                }
+            }
+
+            return phong;
+        }
+
+        public DichVu addDichvu(string TenDichVu, string donvi)
         {
             DichVu phong = new DichVu();
 
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand("INSERT INTO DichVu (TenDichVu, DonGia, Donvi) VALUES('" + TenDichVu + "', '" + DonGia + "', '" + donvi + "') ", conn);
+                MySqlCommand cmd = new MySqlCommand("INSERT INTO DichVu (TenDichVu, Donvi) VALUES('" + TenDichVu + "', '" + donvi + "') ", conn);
                 cmd.ExecuteNonQuery();
 
                 cmd.CommandText = "SELECT * FROM DichVu ORDER BY IdDichVu DESC LIMIT 1 ";
@@ -453,7 +510,6 @@ namespace BatDongSanAPI.Models
                     while (reader.Read())
                     {
                         phong.TenDichVu = reader["TenDichVu"].ToString();
-                        phong.DonGia = reader["DonGia"].ToString();
                         phong.DonVi = reader["DonVi"].ToString();
                     }
                 }
@@ -464,14 +520,14 @@ namespace BatDongSanAPI.Models
 
 
 
-        public KhachHang addKhachHang( string TenKH, string IdCanHo, string NgaySinh, string GioiTinh, string SDT, string Email, string CMND, string Quequan,  string NgayCap, string NoiCap)
+        public KhachHang addKhachHang( string TenKH,  string IdCanHo,  string SDT, string CMND,  string NgayCap, string NoiCap)
         {
                 KhachHang khachhang = new KhachHang();
 
                 using (MySqlConnection conn = GetConnection())
                 {
                     conn.Open();
-                MySqlCommand cmd = new MySqlCommand("INSERT INTO KhachHang (TenKH, IdCanHo, NgaySinh, GioiTinh, SDT, Email, CMND, Quequan,NgayCap, NoiCap) VALUES('" + TenKH + "', '" + IdCanHo + "', '" + NgaySinh + "', '" + GioiTinh + "','" + SDT + "','" + Email + "','" + CMND + "','" + Quequan + "','" + NgayCap + "','" + NoiCap + "' ) ", conn);
+                MySqlCommand cmd = new MySqlCommand("INSERT INTO KhachHang (TenKH, IdCanHo, SDT, CMND, NgayCap, NoiCap) VALUES('" + TenKH + "', '" + IdCanHo + "', '" + SDT + "', '" + CMND + "','" + NgayCap + "','" + NoiCap + "' ) ", conn);
                 cmd.ExecuteNonQuery();
 
                 cmd.CommandText = "SELECT * FROM KhachHang ORDER BY IdKhachHang DESC LIMIT 1 ";
@@ -491,6 +547,7 @@ namespace BatDongSanAPI.Models
                             khachhang.Quequan = reader["Quequan"].ToString();
                             khachhang.NgayCap = reader["NgayCap"].ToString();
                             khachhang.NoiCap = reader["NoiCap"].ToString();
+                            khachhang.Password = reader["Password"].ToString();
                     }
                     }
                 }
@@ -591,14 +648,14 @@ namespace BatDongSanAPI.Models
         }
 
 
-        public CanHo updateCanHo(string IdCanHo, string DonGia, string DienTich,  string DiaChi,  string TieuDe, string MoTa,  string AnhCanHo)
+        public CanHo updateCanHo(string IdCanHo, string DonGia, string DienTich,  string DiaChi,  string TieuDe, string MoTa,  string AnhCanHo, string NgayTao)
         {
             CanHo phong = new CanHo();
 
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand("UPDATE CanHo SET DonGia = '" + DonGia + "' , DienTich = '" + DienTich + "', DiaChi = '" + DiaChi + "', TieuDe = '" + TieuDe + "', MoTa = '" + MoTa + "', AnhCanHo = '" + AnhCanHo + "' WHERE IdCanHo = '" + IdCanHo + "' ", conn);
+                MySqlCommand cmd = new MySqlCommand("UPDATE CanHo SET DonGia = '" + DonGia + "' , DienTich = '" + DienTich + "', DiaChi = '" + DiaChi + "', TieuDe = '" + TieuDe + "', MoTa = '" + MoTa + "', AnhCanHo = '" + AnhCanHo + "', NgayTao = '" + NgayTao + "' WHERE IdCanHo = '" + IdCanHo + "' ", conn);
                 cmd.ExecuteNonQuery();
 
                 cmd.CommandText = "SELECT * FROM CanHo WHERE IdCanHo = '" + IdCanHo + "' ";
@@ -622,17 +679,55 @@ namespace BatDongSanAPI.Models
             return phong;
         }
 
-        public DichVu updateDichVu(string IdDichVu, string TenDichVu, string DonGia, string donvi)
+        public HopDong_DichVu AddOrUpdateHopDong_DichVu( string IdHopDong, string IdDichVu,  string DonGia)
+        {
+            HopDong_DichVu canHo_DichVu = new HopDong_DichVu();
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("select * from HopDong_DichVu where IdHopDong = '" + IdHopDong + "' and IdDichVu = '" + IdDichVu + "' ", conn);
+                int count = (cmd.ExecuteScalar() == null ? -1 : 1);
+
+                if (count > 0)
+                {
+                    cmd.CommandText = "UPDATE HopDong_DichVu SET DonGia = '" + DonGia + "'  WHERE IdHopDong = '" + IdHopDong + "' and IdDichVu = '" + IdDichVu + "' ";
+                    cmd.ExecuteNonQuery();
+
+                }
+                else
+                {
+                    cmd.CommandText = "INSERT INTO HopDong_DichVu (IdHopDong,IdDichVu,DonGia ) VALUES('" + IdHopDong + "', '" + IdDichVu + "', '" + DonGia + "') ";
+                    cmd.ExecuteNonQuery();
+                }
+                cmd.CommandText = "SELECT * FROM HopDong_DichVu WHERE IdHopDong = '" + IdHopDong + "' AND IdDichVu = '"+ IdDichVu + "' ";
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        canHo_DichVu.IdHopDong = reader["IdHopDong"].ToString();
+                        canHo_DichVu.IdDichVu = reader["IdDichVu"].ToString();
+                        canHo_DichVu.DonGia = reader["DonGia"].ToString();
+                        canHo_DichVu.IdHopDong_DichVu = reader["IdHopDong_DichVu"].ToString();
+                    }
+                }
+
+            }
+
+            return canHo_DichVu;
+        }
+
+        public DichVu updateDichVu(string IdDichVu, string TenDichVu, string donvi)
         {
             DichVu dichvu = new DichVu();
 
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand("UPDATE DichVu SET TenDichVu = '" + TenDichVu + "' , DonGia = '" + DonGia + "', Donvi = '" + donvi + "' WHERE IdDichVu = '" + IdDichVu + "' ", conn);
+                MySqlCommand cmd = new MySqlCommand("UPDATE DichVu SET TenDichVu = '" + TenDichVu + "' ,  Donvi = '" + donvi + "' WHERE IdDichVu = '" + IdDichVu + "' ", conn);
                 cmd.ExecuteNonQuery();
 
-                cmd.CommandText = "SELECT * FROM DichVu WHERE idDichVu = '" + IdDichVu + "' ";
+                cmd.CommandText = "SELECT * FROM DichVu WHERE IdDichVu = '" + IdDichVu + "' ";
 
                 using (var reader = cmd.ExecuteReader())
                 {
@@ -640,7 +735,6 @@ namespace BatDongSanAPI.Models
                     {
                         dichvu.IdDichVu = reader["IdDichVu"].ToString();
                         dichvu.TenDichVu = reader["TenDichVu"].ToString();
-                        dichvu.DonGia = reader["DonGia"].ToString();
                         dichvu.DonVi = reader["DonVi"].ToString();
                     }
                 }
@@ -685,14 +779,14 @@ namespace BatDongSanAPI.Models
         }
 
 
-        public KhachHang updateKhachHang(string IdKhachHang, string TenKH, string IdCanHo, string NgaySinh, string GioiTinh, string SDT, string Email, string CMND, string Quequan,string NgayCap,  string NoiCap)
+        public KhachHang updateKhachHang(string IdKhachHang, string TenKH, string IdCanHo, string NgaySinh, string GioiTinh, string SDT, string Email, string CMND, string Quequan,string NgayCap,  string NoiCap,string Password)
         {
             KhachHang khachhang = new KhachHang();
 
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand("UPDATE KhachHang SET TenKH = '" + TenKH + "' , IdCanHo = '" + IdCanHo + "', NgaySinh = '" + NgaySinh + "', GioiTinh = '"+ GioiTinh + "', SDT = '" + SDT + "', Email = '" + Email + "', CMND = '" + CMND + "', Quequan = '" + Quequan + "', NgayCap = '" + NgayCap + "', NoiCap = '" + NoiCap + "'  WHERE IdKhachHang = '" + IdKhachHang + "'    ", conn);
+                MySqlCommand cmd = new MySqlCommand("UPDATE KhachHang SET TenKH = '" + TenKH + "' , IdCanHo = '" + IdCanHo + "', NgaySinh = '" + NgaySinh + "', GioiTinh = '"+ GioiTinh + "', SDT = '" + SDT + "', Email = '" + Email + "', CMND = '" + CMND + "', Quequan = '" + Quequan + "', NgayCap = '" + NgayCap + "', NoiCap = '" + NoiCap + "', Password = '" + Password + "'  WHERE IdKhachHang = '" + IdKhachHang + "'    ", conn);
                 cmd.ExecuteNonQuery();
 
                 cmd.CommandText = "SELECT * FROM KhachHang WHERE IdKhachHang = '" + IdKhachHang + "' ";
@@ -712,6 +806,43 @@ namespace BatDongSanAPI.Models
                         khachhang.Quequan = reader["Quequan"].ToString();
                         khachhang.NgayCap = reader["NgayCap"].ToString();
                         khachhang.NoiCap = reader["NoiCap"].ToString();
+                        khachhang.Password = reader["Password"].ToString();
+                    }
+                }
+            }
+
+            return khachhang;
+        }
+
+
+        public KhachHang updateKhachHang_HopDong( string IdKhachHang,  string TenKH,  string IdCanHo,  string CMND, string NgayCap,  string NoiCap,string SDT)
+        {
+            KhachHang khachhang = new KhachHang();
+
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("UPDATE KhachHang SET TenKH = '" + TenKH + "' , IdCanHo = '" + IdCanHo + "', CMND = '" + CMND + "', NgayCap = '" + NgayCap + "', NoiCap = '" + NoiCap + "', SDT = '" + SDT + "'  WHERE IdKhachHang = '" + IdKhachHang + "'    ", conn);
+                cmd.ExecuteNonQuery();
+
+                cmd.CommandText = "SELECT * FROM KhachHang WHERE IdKhachHang = '" + IdKhachHang + "' ";
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        khachhang.IdKhachHang = reader["IdKhachHang"].ToString();
+                        khachhang.IdCanHo = reader["IdCanHo"].ToString();
+                        khachhang.TenKH = reader["TenKH"].ToString();
+                        khachhang.NgaySinh = reader["NgaySinh"].ToString();
+                        khachhang.GioiTinh = reader["GioiTinh"].ToString();
+                        khachhang.SDT = reader["SDT"].ToString();
+                        khachhang.Email = reader["Email"].ToString();
+                        khachhang.CMND = reader["CMND"].ToString();
+                        khachhang.Quequan = reader["Quequan"].ToString();
+                        khachhang.NgayCap = reader["NgayCap"].ToString();
+                        khachhang.NoiCap = reader["NoiCap"].ToString();
+                        khachhang.Password = reader["Password"].ToString();
                     }
                 }
             }
@@ -767,7 +898,6 @@ namespace BatDongSanAPI.Models
                         {
                             IdDichVu = reader["IdDichVu"].ToString(),
                             TenDichVu = reader["TenDichVu"].ToString(),
-                            DonGia = reader["DonGia"].ToString(),
                             DonVi = reader["DonVi"].ToString()
                         });
                     }
@@ -869,6 +999,41 @@ namespace BatDongSanAPI.Models
             return list;
         }
 
+
+
+        public List<KhachHang> GetInformationKhachHang(string email, string password)
+        {
+            List<KhachHang> list = new List<KhachHang>();
+
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("select * from KhachHang where Email = '" + email + "' AND Password = '" + password + "' ", conn);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        list.Add(new KhachHang()
+                        {
+                            IdKhachHang = reader["IdKhachHang"].ToString(),
+                        IdCanHo = reader["IdCanHo"].ToString(),
+                        TenKH = reader["TenKH"].ToString(),
+                        NgaySinh = reader["NgaySinh"].ToString(),
+                        GioiTinh = reader["GioiTinh"].ToString(),
+                        SDT = reader["SDT"].ToString(),
+                        Email = reader["Email"].ToString(),
+                        CMND = reader["CMND"].ToString(),
+                        Quequan = reader["Quequan"].ToString(),
+                        NgayCap = reader["NgayCap"].ToString(),
+                        NoiCap = reader["NoiCap"].ToString(),
+                        Password = reader["Password"].ToString()
+                    });
+                    }
+                }
+            }
+            return list;
+        }
 
 
         public String UpdateHoaDon_PhieuThu( string IdHoaDon,  string IdPhieuThu) {

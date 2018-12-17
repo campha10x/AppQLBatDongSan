@@ -38,7 +38,7 @@ class EditPhieuChiViewController: UIViewController {
         super.viewDidLoad()
         configService()
         customized()
-        labelHeader.text = isCreateNew ? "Thêm phiêu thu" : "Sửa phiếu thu"
+        labelHeader.text = isCreateNew ? "Thêm phiêu chi" : "Sửa phiếu chi"
         if !isCreateNew {
             cbbNgay.date = phieuchi?.Ngay.toDate(format: "MM/dd/yyyy HH:mm:ss") ?? Date()
             let listCanHo = Storage.shared.getObjects(type: CanHo.self) as? [CanHo]
@@ -46,11 +46,11 @@ class EditPhieuChiViewController: UIViewController {
             textViewDiengiai.text = phieuchi?.DienGiai
             
             if let index = self.listCanHo.index(where: { $0.IdCanHo == self.phieuchi?.IdCanHo}) {
-//                self.cbbCanHo.setOptions(self.listCanHo.map({$0.TenCanHo}), placeholder: nil, selectedIndex: index)
+                self.cbbCanHo.setOptions(self.listCanHo.map({$0.maCanHo}), placeholder: nil, selectedIndex: index)
             }
 
         } else {
-//            self.cbbCanHo.setOptions(self.listCanHo.map({$0.TenCanHo}), placeholder: nil, selectedIndex: nil)
+            self.cbbCanHo.setOptions(self.listCanHo.map({$0.maCanHo}), placeholder: nil, selectedIndex: nil)
             cbbNgay.date = Date()
             
         }

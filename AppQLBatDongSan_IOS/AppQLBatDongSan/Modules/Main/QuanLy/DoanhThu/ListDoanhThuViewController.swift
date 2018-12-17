@@ -66,8 +66,6 @@ class ListDoanhThuViewController: UIViewController {
      let manager = Alamofire.SessionManager()
     var dispatch : DispatchGroup?
     
-    var months: [String]  = [ "1", "2" , "3" , "4" , "5" , "6" , "7", "8" , "9" , "10" , "11" , "12"]
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -107,7 +105,7 @@ class ListDoanhThuViewController: UIViewController {
         var convertNumberMonth: [String] = []
         var unitsSold: [Double] = []
         for item in listDoanhThu {
-            convertNumberMonth.append(item.thoigian + "/2018")
+            convertNumberMonth.append(item.thoigian)
             unitsSold.append((Double(item.sotien) ?? 0))
         }
         chartViewThongKe.setBarChartData(xValues: convertNumberMonth, yValues: unitsSold , label: "Doanh thu")
@@ -115,30 +113,43 @@ class ListDoanhThuViewController: UIViewController {
     }
     
     func caculatorDoanhThu() {
-        for month in months {
-            let getListPhieuThu = listPhieuThu.filter({ return returnMonth(ngayTao: $0.Ngay) == month })
-            let totalPhieuThu = getListPhieuThu.reduce(0.0, { $0 + (Double($1.SoTien) ?? 0.0) })
-            let getListPhieuChi = listPhieuChi.filter({ return returnMonth(ngayTao: $0.Ngay) == month })
-            let totalPhieuChi = getListPhieuChi.reduce(0.0, { $0 + (Double($1.Sotien) ?? 0.0) })
+        guard let value = Calendar.current.dateComponents([.month], from: btnCalendarFrom.date, to: btnCalenderTo.date).month else { return }
+        var dateCalendar = btnCalendarFrom.date
+        for _ in 0...value {
+            let month = Calendar.current.component(.month, from: dateCalendar)
+            let year = Calendar.current.component(.year, from: dateCalendar)
             
+            let getListPhieuThu = listPhieuThu.filter({ return (returnMonth(ngayTao: $0.Ngay) == month && year == returnYear(ngayTao: $0.Ngay)) })
+            let totalPhieuThu = getListPhieuThu.reduce(0.0, { $0 + (Double($1.SoTien) ?? 0.0) })
+            let getListPhieuChi = listPhieuChi.filter({ return (returnMonth(ngayTao: $0.Ngay) == month && year == returnYear(ngayTao: $0.Ngay)) })
+            let totalPhieuChi = getListPhieuChi.reduce(0.0, { $0 + (Double($1.Sotien) ?? 0.0) })
+
             let doanhThu = DoanhThu()
             doanhThu.sotien = "\(totalPhieuThu - totalPhieuChi)"
-            doanhThu.thoigian = month
+            doanhThu.thoigian = "\(month) / \(year)"
             self.listDoanhThu.append(doanhThu)
-            
+            dateCalendar = Calendar.current.date(byAdding: .month, value: 1 , to: dateCalendar) ?? Date()
+
         }
         tblViewThongKe.reloadData()
     }
     
-    func returnMonth(ngayTao: String) -> String {
-        if ngayTao.isEmpty {
-            return ""
+    func returnMonth(ngayTao: String) -> Int {
+        if let ngayTaoConvert = ngayTao.toDate(format: "MM/dd/yyyy HH:mm:ss") {
+            return Calendar.current.component(.month, from: ngayTaoConvert)
+        } else {
+            return 0
         }
-        var month = String(ngayTao.split(separator: "/")[0])
-        if month.contains("0"){
-            month.removeFirst()
+
+    }
+    
+    func returnYear(ngayTao: String) -> Int {
+        if let ngayTaoConvert = ngayTao.toDate(format: "MM/dd/yyyy HH:mm:ss") {
+            return Calendar.current.component(.year, from: ngayTaoConvert)
+        } else {
+            return 0
         }
-        return month
+        
     }
     
     func configService() {
@@ -241,8 +252,9 @@ class ListDoanhThuViewController: UIViewController {
         
 
     @IBAction func eventClickThongKe(_ sender: Any) {
-        
-        
+        self.listDoanhThu.removeAll()
+        caculatorDoanhThu()
+        self.setChart()
     }
     
 

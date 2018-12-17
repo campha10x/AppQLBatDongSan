@@ -128,7 +128,7 @@ extension QLDichVuViewController: eventProtocols {
     }
     
     func eventRemove(_ index: Int) {
-        let parameters = ["idDichVu": self.listDichvu[index].idDichVu ]
+        let parameters = ["IdDichVu": self.listDichvu[index].idDichVu ]
         SVProgressHUD.show()
         manager.request("https://localhost:5001/DichVu/RemoveListDichVu", method: .post, parameters: nil, encoding: URLEncoding.default, headers: parameters).responseJSON { (responseObject) in
             SVProgressHUD.dismiss()
