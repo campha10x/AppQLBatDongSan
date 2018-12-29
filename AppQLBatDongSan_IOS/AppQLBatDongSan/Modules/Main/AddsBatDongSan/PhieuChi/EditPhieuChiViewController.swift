@@ -42,7 +42,7 @@ class EditPhieuChiViewController: UIViewController {
         if !isCreateNew {
             cbbNgay.date = phieuchi?.Ngay.toDate(format: "MM/dd/yyyy HH:mm:ss") ?? Date()
             let listCanHo = Storage.shared.getObjects(type: CanHo.self) as? [CanHo]
-            textfieldSotien.text = phieuchi?.Sotien.toNumberString(decimal: false)
+            textfieldSotien.setValue(phieuchi?.Sotien)
             textViewDiengiai.text = phieuchi?.DienGiai
             
             if let index = self.listCanHo.index(where: { $0.IdCanHo == self.phieuchi?.IdCanHo}) {
@@ -103,7 +103,7 @@ class EditPhieuChiViewController: UIViewController {
         }
         
         phieuchi.IdPhieuChi = isCreateNew ? "" : self.phieuchi?.IdPhieuChi ?? ""
-        phieuchi.Sotien = "\(textfieldSotien.getValueString())"
+        phieuchi.Sotien = textfieldSotien.getValueString()
         phieuchi.DienGiai = textViewDiengiai.text ?? ""
         phieuchi.Ngay = "\(cbbNgay.date)"
         
@@ -123,7 +123,7 @@ class EditPhieuChiViewController: UIViewController {
         ]
         if isCreateNew {
             SVProgressHUD.show()
-            self.manager.request("https://localhost:5001/PhieuChi/AddPhieuChi", method: .post, parameters: nil, encoding: URLEncoding.default, headers: parameters).responseJSON { (responseObject) in
+            self.manager.request("https://localhost:5001/PhieuChi/AddPhieuChi", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (responseObject) in
                 SVProgressHUD.dismiss()
                 do {
                     let json: JSON = try JSON.init(data: responseObject.data! )
@@ -142,7 +142,7 @@ class EditPhieuChiViewController: UIViewController {
             }
         } else {
             SVProgressHUD.show()
-            self.manager.request("https://localhost:5001/PhieuChi/EditPhieuChi", method: .post, parameters: nil, encoding: URLEncoding.default, headers: parameters).responseJSON { (responseObject) in
+            self.manager.request("https://localhost:5001/PhieuChi/EditPhieuChi", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (responseObject) in
                 SVProgressHUD.dismiss()
                 do {
                     let json: JSON = try JSON.init(data: responseObject.data! )

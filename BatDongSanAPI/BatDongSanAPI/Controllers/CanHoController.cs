@@ -57,20 +57,19 @@ namespace BatDongSanAPI.Controllers
 
 
         [HttpPost("/CanHo/EditCanHo")]
-        public JsonResult EditCanHo([FromHeader(Name = "IdCanHo")] string IdCanHo, [FromHeader(Name = "DonGia")] string DonGia, [FromHeader(Name = "DienTich")] string DienTich, [FromHeader(Name = "DiaChi")] string DiaChi, [FromHeader(Name = "TieuDe")] string TieuDe, [FromHeader(Name = "MoTa")] string MoTa, [FromHeader(Name = "AnhCanHo")] string AnhCanHo, [FromHeader(Name = "NgayTao")] string NgayTao)
+        public JsonResult EditCanHo([FromBody]CanHo canHoObject)
         {
             BatDongSanStoreContext context = HttpContext.RequestServices.GetService(typeof(BatDongSanStoreContext)) as BatDongSanStoreContext;
-            CanHo a = context.updateCanHo(IdCanHo, DonGia, DienTich,DiaChi,TieuDe,MoTa,AnhCanHo,NgayTao);
+            CanHo a = context.updateCanHo(canHoObject.IdCanHo, canHoObject.DonGia, canHoObject.DienTich, canHoObject.DiaChi, canHoObject.TieuDe, canHoObject.MoTa, canHoObject.AnhCanHo, canHoObject.NgayTao);
             return Json(a);
         }
 
         [HttpPost("/CanHo/AddCanHo")]
-        public JsonResult AddCanHo([FromHeader(Name = "DonGia")] string DonGia, [FromHeader(Name = "DienTich")] string DienTich, [FromHeader(Name = "DiaChi")] string DiaChi, [FromHeader(Name = "TieuDe")] string TieuDe, [FromHeader(Name = "MoTa")] string MoTa, [FromHeader(Name = "AnhCanHo")] string AnhCanHo, [FromHeader(Name = "NgayTao")] string NgayTao)
+        public JsonResult AddCanHo([FromBody]CanHo canHoObject)
         {
             BatDongSanStoreContext context = HttpContext.RequestServices.GetService(typeof(BatDongSanStoreContext)) as BatDongSanStoreContext;
-            CanHo a = context.addCanHo(DonGia,DienTich,DiaChi,TieuDe,MoTa,AnhCanHo,NgayTao);
-            return Json(a);
+            CanHo canHoCopy = context.addCanHo(canHoObject.DonGia, canHoObject.DienTich, canHoObject.DiaChi, canHoObject.TieuDe, canHoObject. MoTa, canHoObject.AnhCanHo, canHoObject.NgayTao);
+            return Json(canHoCopy);
         }
-
     }
 }

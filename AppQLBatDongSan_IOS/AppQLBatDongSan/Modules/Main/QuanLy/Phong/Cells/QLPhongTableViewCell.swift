@@ -24,6 +24,7 @@ class QLCanHoTableViewCell: UITableViewCell {
     @IBOutlet weak var lbMoTa: UILabel!
     @IBOutlet weak var imgAnhCanHo: UIImageView!
     var delegate: eventProtocols?
+    @IBOutlet weak var constraintWidthChothue: NSLayoutConstraint!
     
     static let id = "QLCanHoTableViewCell"
     
@@ -33,6 +34,15 @@ class QLCanHoTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         configService()
+         if AppState.shared.typeLogin == TypeLogin.NguoiThue.rawValue {
+            btnChothue.isHidden = true
+            btnEdit.isHidden = true
+            btnRemove.isHidden = true
+         } else {
+            btnChothue.isHidden = false
+            btnEdit.isHidden = false
+            btnRemove.isHidden = false
+        }
         self.imgAnhCanHo.contentMode = .scaleAspectFit
     }
     
@@ -73,7 +83,7 @@ class QLCanHoTableViewCell: UITableViewCell {
         
     }
     
-    func binding(canHo: CanHo, index: Int, isChoThue: Bool  )  {
+    func binding(canHo: CanHo, index: Int, isShowChoThue: Bool  )  {
         self.index = index
         lbTieuDe.text = canHo.TieuDe
         lbMoTa.text = canHo.MoTa
@@ -96,12 +106,10 @@ class QLCanHoTableViewCell: UITableViewCell {
                 }
             }
         }
-        if AppState.shared.typeLogin == TypeLogin.ChuCanho.rawValue {
-            btnChothue.isHidden = !isChoThue
-        } else {
-             btnChothue.isHidden = true
-            btnEdit.isHidden = true
-            btnRemove.isHidden = true
+        if AppState.shared.typeLogin == TypeLogin.ChuCanho.rawValue && isShowChoThue  {
+            constraintWidthChothue.constant = 100
+        } else  {
+             constraintWidthChothue.constant = 0
         }
 
     }

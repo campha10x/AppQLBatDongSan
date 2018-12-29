@@ -115,16 +115,14 @@ extension QLCanHoViewControlvar: UITableViewDataSource, UITableViewDelegate  {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: QLCanHoTableViewCell.id, for: indexPath) as! QLCanHoTableViewCell
         let hopdongObjects = listHopDong.filter({$0.IdCanHo == self.listCanHo[indexPath.row].IdCanHo })
-        var isChoThue = true
-        
+        var isShowChoThue = true
         for item in hopdongObjects {
             if Calendar.current.compare(item.NgayKT.toDate(format: "MM/dd/yyyy HH:mm:ss") ?? Date(), to: Date(), toGranularity: .day) == .orderedDescending {
-                isChoThue = false
+                isShowChoThue = false
                 break
             }
         }
-        
-        cell.binding(canHo: self.listCanHo[indexPath.row], index: indexPath.row, isChoThue: isChoThue)
+        cell.binding(canHo: self.listCanHo[indexPath.row], index: indexPath.row,isShowChoThue: isShowChoThue)
         cell.delegate = self
         return cell
     }
@@ -135,7 +133,7 @@ extension QLCanHoViewControlvar: UITableViewDataSource, UITableViewDelegate  {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) {
-            cell.contentView.backgroundColor = UIColor.white
+            cell.contentView.backgroundColor = UIColor.clear
         }
         let storyboard = UIStoryboard.init(name: "DetailBatDongSan", bundle: nil)
         let currentViewController = storyboard.instantiateViewController(withIdentifier: "CanHoInforViewController") as! CanHoInforViewController

@@ -73,7 +73,8 @@ class AddAndEditDichVuViewController: UIViewController {
         ]
         if isCreateNew {
             SVProgressHUD.show()
-            self.manager.request("https://localhost:5001/DichVu/AddDichVu", method: .post, parameters: nil, encoding: URLEncoding.default, headers: parameters).responseJSON { (responseObject) in
+            
+            self.manager.request("https://localhost:5001/DichVu/AddDichVu", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (responseObject) in
                 SVProgressHUD.dismiss()
                 do {
                     let json: JSON = try JSON.init(data: responseObject.data! )
@@ -92,7 +93,7 @@ class AddAndEditDichVuViewController: UIViewController {
             }
         } else {
             SVProgressHUD.show()
-            self.manager.request("https://localhost:5001/DichVu/EditDichVu", method: .post, parameters: nil, encoding: URLEncoding.default, headers: parameters).responseJSON { (responseObject) in
+            self.manager.request("https://localhost:5001/DichVu/EditDichVu", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (responseObject) in
                 SVProgressHUD.dismiss()
                 do {
                     let json: JSON = try JSON.init(data: responseObject.data! )

@@ -80,6 +80,10 @@ class AddAndEditHoaDonViewController: UIViewController {
     func customized()  {
         listCanHo = Storage.shared.getObjects(type: CanHo.self) as! [CanHo]
         self.cbbCanHo.delegate = self
+        cbbCanHo.textColor = MyColor.black
+        cbbCanHo.dropdownBackgroundColor = MyColor.cyan
+        cbbCanHo.dropdownBackgroundSelectedColor = MyColor.cyanHover
+        cbbCanHo.dropdownForcegroundColor = .white
         tfSotien?.setAsNumericKeyboard(type: .money, autoSelectAll: true)
         tfSoDienMoi.setAsNumericKeyboard(type: .integer, autoSelectAll: true)
         tfSoNuocMoi.setAsNumericKeyboard(type: .integer, autoSelectAll: true)
@@ -151,20 +155,7 @@ class AddAndEditHoaDonViewController: UIViewController {
     }
     
     @IBAction func eventClickTaoHD(_ sender: Any) {
-//        if let soDienCu: Double = Double(self.listCanHo[indexCanHo].SoDienCu), let SoNuocCu: Double = Double(self.listCanHo[indexCanHo].SoNuocCu) {
-//            if soDienCu > tfSoDienMoi.getValue() {
-//                tfSoDienMoi.warning()
-//                Notice.make(type: .Error, content: "Số điện mới phải lớn hơn số điện cũ của căn hộ đó ").show()
-//                return
-//            } else if SoNuocCu > tfSoNuocMoi.getValue() {
-//                tfSoNuocMoi.warning()
-//                Notice.make(type: .Error, content: "Số nước mới phải lớn hơn số nước cũ của căn hộ đó ").show()
-//                return
-//            }
-//            tfSoDienMoi.borderColor = UIColor.gray.withAlphaComponent(0.8)
-//            tfSoNuocMoi.borderColor = UIColor.gray.withAlphaComponent(0.8)
-//        }
-        
+
         let hoadon = HoaDon()
         guard tfSotien.text != ""  else {
             if tfSotien.text == "" {
@@ -199,7 +190,7 @@ class AddAndEditHoaDonViewController: UIViewController {
         ]
         if isCreateNew {
             SVProgressHUD.show()
-            self.manager.request("https://localhost:5001/HoaDon/AddListHoaDon", method: .post, parameters: nil, encoding: URLEncoding.default, headers: parameters).responseJSON { (responseObject) in
+            self.manager.request("https://localhost:5001/HoaDon/AddListHoaDon", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (responseObject) in
                 SVProgressHUD.dismiss()
                 do {
                     let json: JSON = try JSON.init(data: responseObject.data! )
@@ -219,7 +210,7 @@ class AddAndEditHoaDonViewController: UIViewController {
             }
         } else {
             SVProgressHUD.show()
-            self.manager.request("https://localhost:5001/HoaDon/EditListHoaDon", method: .post, parameters: nil, encoding: URLEncoding.default, headers: parameters).responseJSON { (responseObject) in
+            self.manager.request("https://localhost:5001/HoaDon/EditListHoaDon", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (responseObject) in
                 SVProgressHUD.dismiss()
                 do {
                     let json: JSON = try JSON.init(data: responseObject.data! )

@@ -1413,6 +1413,9 @@
                                                                 </label>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ukJ-4M-j0d">
                                                                     <rect key="frame" x="915" y="21" width="32" height="32"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="32" id="fas-j4-BYF"/>
+                                                                    </constraints>
                                                                     <state key="normal" image="edit"/>
                                                                     <connections>
                                                                         <action selector="eventEdit:" destination="YEx-XJ-5Tz" eventType="touchUpInside" id="0oI-iK-TyG"/>
@@ -1482,6 +1485,7 @@
                                                             <outlet property="btnChothue" destination="FCh-II-kqR" id="zZp-Oh-rgf"/>
                                                             <outlet property="btnEdit" destination="ukJ-4M-j0d" id="daR-4z-I7Q"/>
                                                             <outlet property="btnRemove" destination="req-Y6-FdK" id="1nl-hp-vVX"/>
+                                                            <outlet property="constraintWidthChothue" destination="gH4-jq-m0A" id="SaW-0o-nPG"/>
                                                             <outlet property="imgAnhCanHo" destination="ECZ-bT-kIm" id="mnB-Pe-JC0"/>
                                                             <outlet property="lbDienTich" destination="wLr-8d-j0h" id="NNw-wc-L31"/>
                                                             <outlet property="lbGiaCanho" destination="BHa-El-rB2" id="e4U-Al-f3d"/>
@@ -1657,18 +1661,61 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HU3-oy-EKg">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HU3-oy-EKg" customClass="MyTextField" customModule="AppQLBatDongSan" customModuleProvider="target">
                                                 <rect key="frame" x="400" y="240" width="682" height="45"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CMND" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XsQ-cI-yFg">
+                                                <rect key="frame" x="30" y="395" width="350" height="45"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="350" id="0O1-zL-9cf"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2WE-d5-Q3O" customClass="MyTextField" customModule="AppQLBatDongSan" customModuleProvider="target">
+                                                <rect key="frame" x="400" y="395" width="682" height="45"/>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nơi cấp" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oD2-gZ-mwT">
+                                                <rect key="frame" x="30" y="450" width="350" height="45"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="350" id="gTf-QP-Nq3"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cXO-JS-HgY" customClass="MyTextField" customModule="AppQLBatDongSan" customModuleProvider="target">
+                                                <rect key="frame" x="400" y="450" width="682" height="45"/>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ngày cấp" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iQS-RJ-CA0">
+                                                <rect key="frame" x="30" y="505" width="350" height="45"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hAF-OV-ovV" customClass="MyButtonCalendar" customModule="AppQLBatDongSan" customModuleProvider="target">
+                                                <rect key="frame" x="400" y="505" width="682" height="45"/>
+                                                <connections>
+                                                    <action selector="eventChooseDateNgayCap:" destination="mym-te-W8v" eventType="touchUpInside" id="Qat-c4-WQC"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="HU3-oy-EKg" firstAttribute="top" secondItem="VXN-Qo-giH" secondAttribute="bottom" constant="10" id="00g-qb-mUW"/>
                                             <constraint firstItem="4g6-D4-EDd" firstAttribute="trailing" secondItem="gNU-0A-9kE" secondAttribute="trailing" id="2GZ-yQ-gE6"/>
                                             <constraint firstItem="C1B-mk-qM2" firstAttribute="height" secondItem="gtc-Vh-zIz" secondAttribute="height" id="2uF-9I-QgO"/>
+                                            <constraint firstItem="hAF-OV-ovV" firstAttribute="leading" secondItem="cXO-JS-HgY" secondAttribute="leading" id="2x3-Xc-VWu"/>
                                             <constraint firstItem="JCO-Sk-b2P" firstAttribute="leading" secondItem="P99-XW-kx4" secondAttribute="leading" id="3DK-Cu-ECg"/>
                                             <constraint firstItem="4g6-D4-EDd" firstAttribute="top" secondItem="gNU-0A-9kE" secondAttribute="bottom" constant="10" id="4v3-u7-T8G"/>
                                             <constraint firstItem="8Pn-rw-XKT" firstAttribute="trailing" secondItem="4g6-D4-EDd" secondAttribute="trailing" id="741-6m-kF4"/>
@@ -1679,34 +1726,56 @@
                                             <constraint firstItem="C1B-mk-qM2" firstAttribute="leading" secondItem="gtc-Vh-zIz" secondAttribute="leading" id="8S8-38-F2y"/>
                                             <constraint firstItem="Ha7-pd-FAd" firstAttribute="trailing" secondItem="JCO-Sk-b2P" secondAttribute="trailing" id="8nX-vQ-Zz7"/>
                                             <constraint firstItem="LW5-bP-0el" firstAttribute="trailing" secondItem="P99-XW-kx4" secondAttribute="trailing" id="9uT-hK-WUz"/>
-                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="LW5-bP-0el" secondAttribute="bottom" id="9vi-qM-ysq"/>
                                             <constraint firstItem="LW5-bP-0el" firstAttribute="leading" secondItem="P99-XW-kx4" secondAttribute="leading" id="ARz-Ea-Yeq"/>
+                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="hAF-OV-ovV" secondAttribute="bottom" id="Bex-sr-tIk"/>
                                             <constraint firstItem="Ha7-pd-FAd" firstAttribute="top" secondItem="JCO-Sk-b2P" secondAttribute="bottom" constant="10" id="CSe-Kg-dRK"/>
                                             <constraint firstItem="gNU-0A-9kE" firstAttribute="height" secondItem="VXN-Qo-giH" secondAttribute="height" id="DrR-uL-4FA"/>
                                             <constraint firstItem="C1B-mk-qM2" firstAttribute="trailing" secondItem="gtc-Vh-zIz" secondAttribute="trailing" id="F6z-Sk-RmU"/>
+                                            <constraint firstItem="2WE-d5-Q3O" firstAttribute="height" secondItem="HU3-oy-EKg" secondAttribute="height" id="HMX-4z-Fm0"/>
+                                            <constraint firstItem="cXO-JS-HgY" firstAttribute="leading" secondItem="2WE-d5-Q3O" secondAttribute="leading" id="HUx-Uf-G0V"/>
+                                            <constraint firstItem="iQS-RJ-CA0" firstAttribute="height" secondItem="oD2-gZ-mwT" secondAttribute="height" id="HeD-T5-pBC"/>
+                                            <constraint firstItem="oD2-gZ-mwT" firstAttribute="height" secondItem="XsQ-cI-yFg" secondAttribute="height" id="HgM-3C-My9"/>
+                                            <constraint firstItem="2WE-d5-Q3O" firstAttribute="leading" secondItem="HU3-oy-EKg" secondAttribute="leading" id="Ims-IE-voo"/>
                                             <constraint firstItem="gNU-0A-9kE" firstAttribute="leading" secondItem="C1B-mk-qM2" secondAttribute="leading" id="KS3-fu-Iyn"/>
                                             <constraint firstItem="LW5-bP-0el" firstAttribute="height" secondItem="P99-XW-kx4" secondAttribute="height" multiplier="2" id="KWe-ev-pWg"/>
                                             <constraint firstItem="LW5-bP-0el" firstAttribute="top" secondItem="8Pn-rw-XKT" secondAttribute="top" id="LAR-ti-1an"/>
                                             <constraint firstItem="8Pn-rw-XKT" firstAttribute="leading" secondItem="4g6-D4-EDd" secondAttribute="leading" id="LqO-u5-bKf"/>
+                                            <constraint firstItem="hAF-OV-ovV" firstAttribute="trailing" secondItem="cXO-JS-HgY" secondAttribute="trailing" id="QE6-gL-2FM"/>
                                             <constraint firstItem="VXN-Qo-giH" firstAttribute="height" secondItem="P99-XW-kx4" secondAttribute="height" id="QlE-Sx-Cvb"/>
                                             <constraint firstItem="VXN-Qo-giH" firstAttribute="top" secondItem="Ha7-pd-FAd" secondAttribute="bottom" constant="10" id="T6a-Up-mkI"/>
                                             <constraint firstItem="gNU-0A-9kE" firstAttribute="trailing" secondItem="C1B-mk-qM2" secondAttribute="trailing" id="TBV-zZ-0Mn"/>
                                             <constraint firstItem="8Pn-rw-XKT" firstAttribute="top" secondItem="4g6-D4-EDd" secondAttribute="bottom" constant="10" id="TPe-7e-n3Y"/>
+                                            <constraint firstItem="iQS-RJ-CA0" firstAttribute="top" secondItem="oD2-gZ-mwT" secondAttribute="bottom" constant="10" id="Tpa-Az-vhd"/>
+                                            <constraint firstItem="oD2-gZ-mwT" firstAttribute="trailing" secondItem="XsQ-cI-yFg" secondAttribute="trailing" id="Ux9-lR-ay1"/>
                                             <constraint firstItem="gNU-0A-9kE" firstAttribute="top" secondItem="Ha7-pd-FAd" secondAttribute="bottom" constant="10" id="WgW-WG-3vP"/>
                                             <constraint firstItem="gtc-Vh-zIz" firstAttribute="leading" secondItem="rEu-3s-JSd" secondAttribute="leading" constant="30" id="Whw-9f-Cqh"/>
+                                            <constraint firstItem="2WE-d5-Q3O" firstAttribute="top" secondItem="XsQ-cI-yFg" secondAttribute="top" id="ZiI-q3-YJ7"/>
                                             <constraint firstItem="gtc-Vh-zIz" firstAttribute="top" secondItem="rEu-3s-JSd" secondAttribute="top" constant="20" id="agr-SL-Kxq"/>
+                                            <constraint firstItem="cXO-JS-HgY" firstAttribute="top" secondItem="oD2-gZ-mwT" secondAttribute="top" id="cX9-RE-CNK"/>
+                                            <constraint firstItem="XsQ-cI-yFg" firstAttribute="height" secondItem="8Pn-rw-XKT" secondAttribute="height" id="d5L-sE-ZyK"/>
+                                            <constraint firstItem="cXO-JS-HgY" firstAttribute="trailing" secondItem="2WE-d5-Q3O" secondAttribute="trailing" id="eOt-Sb-ryh"/>
+                                            <constraint firstItem="cXO-JS-HgY" firstAttribute="height" secondItem="2WE-d5-Q3O" secondAttribute="height" id="edW-c5-y2v"/>
                                             <constraint firstItem="HU3-oy-EKg" firstAttribute="height" secondItem="VXN-Qo-giH" secondAttribute="height" id="fwf-DT-NSt"/>
+                                            <constraint firstItem="oD2-gZ-mwT" firstAttribute="top" secondItem="XsQ-cI-yFg" secondAttribute="bottom" constant="10" id="gM0-8y-iDh"/>
                                             <constraint firstItem="VXN-Qo-giH" firstAttribute="leading" secondItem="P99-XW-kx4" secondAttribute="leading" id="hLO-qH-IJR"/>
+                                            <constraint firstItem="hAF-OV-ovV" firstAttribute="top" secondItem="iQS-RJ-CA0" secondAttribute="top" id="hla-LA-oza"/>
                                             <constraint firstItem="Ha7-pd-FAd" firstAttribute="leading" secondItem="JCO-Sk-b2P" secondAttribute="leading" id="ick-Mg-aHb"/>
                                             <constraint firstItem="JCO-Sk-b2P" firstAttribute="centerY" secondItem="C1B-mk-qM2" secondAttribute="centerY" id="j1M-fS-Tfg"/>
                                             <constraint firstItem="8Pn-rw-XKT" firstAttribute="height" secondItem="4g6-D4-EDd" secondAttribute="height" id="jd7-yu-nTS"/>
+                                            <constraint firstItem="2WE-d5-Q3O" firstAttribute="trailing" secondItem="HU3-oy-EKg" secondAttribute="trailing" id="kN2-wV-5Eg"/>
+                                            <constraint firstItem="iQS-RJ-CA0" firstAttribute="leading" secondItem="oD2-gZ-mwT" secondAttribute="leading" id="lrH-6e-Gbc"/>
                                             <constraint firstItem="4g6-D4-EDd" firstAttribute="height" secondItem="HU3-oy-EKg" secondAttribute="height" id="p7t-GK-II0"/>
+                                            <constraint firstItem="hAF-OV-ovV" firstAttribute="height" secondItem="cXO-JS-HgY" secondAttribute="height" id="sDy-FI-fDf"/>
                                             <constraint firstItem="Ha7-pd-FAd" firstAttribute="height" secondItem="JCO-Sk-b2P" secondAttribute="height" id="sJp-bb-5yo"/>
+                                            <constraint firstItem="XsQ-cI-yFg" firstAttribute="leading" secondItem="8Pn-rw-XKT" secondAttribute="leading" id="tIn-5w-YtB"/>
                                             <constraint firstItem="4g6-D4-EDd" firstAttribute="leading" secondItem="gNU-0A-9kE" secondAttribute="leading" id="uWY-Om-M48"/>
                                             <constraint firstItem="P99-XW-kx4" firstAttribute="top" secondItem="gtc-Vh-zIz" secondAttribute="top" id="w9R-W8-vGR"/>
+                                            <constraint firstItem="oD2-gZ-mwT" firstAttribute="leading" secondItem="XsQ-cI-yFg" secondAttribute="leading" id="wX8-Kh-4EX"/>
                                             <constraint firstItem="C1B-mk-qM2" firstAttribute="top" secondItem="gtc-Vh-zIz" secondAttribute="bottom" constant="10" id="wby-YD-4gf"/>
+                                            <constraint firstItem="XsQ-cI-yFg" firstAttribute="top" secondItem="LW5-bP-0el" secondAttribute="bottom" constant="10" id="wkx-3H-k5b"/>
                                             <constraint firstItem="gtc-Vh-zIz" firstAttribute="height" secondItem="P99-XW-kx4" secondAttribute="height" id="xgx-cL-uij"/>
                                             <constraint firstItem="P99-XW-kx4" firstAttribute="leading" secondItem="gtc-Vh-zIz" secondAttribute="trailing" constant="20" id="ycu-tG-CHI"/>
+                                            <constraint firstItem="iQS-RJ-CA0" firstAttribute="trailing" secondItem="oD2-gZ-mwT" secondAttribute="trailing" id="zCN-SS-PRb"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -1760,10 +1829,13 @@
                     </view>
                     <connections>
                         <outlet property="btnCalendarNamSinh" destination="VXN-Qo-giH" id="aPZ-CX-jmN"/>
+                        <outlet property="btnCalendarNgayCap" destination="hAF-OV-ovV" id="K1f-ha-6IX"/>
                         <outlet property="btnCheckboxGioiTinhNam" destination="JCO-Sk-b2P" id="xcd-tx-5uc"/>
                         <outlet property="btnCheckboxGioiTinhNu" destination="Ha7-pd-FAd" id="KrA-tF-LEQ"/>
                         <outlet property="textviewDiaChi" destination="LW5-bP-0el" id="dbf-jo-K25"/>
+                        <outlet property="tfCMND" destination="2WE-d5-Q3O" id="yHP-41-iQF"/>
                         <outlet property="tfHoten" destination="P99-XW-kx4" id="6ZW-b9-cQc"/>
+                        <outlet property="tfNoiCap" destination="cXO-JS-HgY" id="HV5-Wh-H7V"/>
                         <outlet property="tfSDT" destination="HU3-oy-EKg" id="vNe-NP-5Xf"/>
                     </connections>
                 </viewController>

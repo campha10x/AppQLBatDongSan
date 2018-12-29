@@ -56,6 +56,11 @@ class AddAndEditHopDongViewController: UIViewController {
     var listDichVu_HopDong: [HopDong_DichVu] = []
     override func viewDidLoad() {
         super.viewDidLoad()
+        cbbCanHo.textColor = MyColor.black
+        cbbCanHo.dropdownBackgroundColor = MyColor.cyan
+        cbbCanHo.dropdownBackgroundSelectedColor = MyColor.cyanHover
+        cbbCanHo.dropdownForcegroundColor = .white
+        
         configService()
         listCanHo = Storage.shared.getObjects(type: CanHo.self) as! [CanHo]
         listKhachHang = Storage.shared.getObjects(type: KhachHang.self) as! [KhachHang]
@@ -293,7 +298,7 @@ class AddAndEditHopDongViewController: UIViewController {
             
             if isCreateNew {
                 SVProgressHUD.show()
-                self.manager.request("https://localhost:5001/KhachHang/AddKhachHang", method: .post, parameters: nil, encoding: URLEncoding.default, headers: parameters).responseJSON { (responseObject) in
+                self.manager.request("https://localhost:5001/KhachHang/AddKhachHang", method: .post, parameters: parameters, encoding: JSONEncoding.default ).responseJSON { (responseObject) in
                     SVProgressHUD.dismiss()
                     do {
                         let json: JSON = try JSON.init(data: responseObject.data! )
@@ -310,7 +315,7 @@ class AddAndEditHopDongViewController: UIViewController {
                 }
             } else {
                 SVProgressHUD.show()
-                self.manager.request("https://localhost:5001/KhachHang/EditKhachHang_HopDong", method: .post, parameters: nil, encoding: URLEncoding.default, headers: parameters).responseJSON { (responseObject) in
+                self.manager.request("https://localhost:5001/KhachHang/EditKhachHang_HopDong", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (responseObject) in
                     SVProgressHUD.dismiss()
                     do {
                         let json: JSON = try JSON.init(data: responseObject.data! )
@@ -378,7 +383,7 @@ class AddAndEditHopDongViewController: UIViewController {
         ]
         if isCreateNew {
             SVProgressHUD.show()
-            self.manager.request("https://localhost:5001/HopDong/AddHopDong", method: .post, parameters: nil, encoding: URLEncoding.default, headers: parameters).responseJSON { (responseObject) in
+            self.manager.request("https://localhost:5001/HopDong/AddHopDong", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (responseObject) in
                 SVProgressHUD.dismiss()
                 do {
                     let json: JSON = try JSON.init(data: responseObject.data! )
@@ -398,7 +403,7 @@ class AddAndEditHopDongViewController: UIViewController {
             }
         } else {
             SVProgressHUD.show()
-            self.manager.request("https://localhost:5001/HopDong/EditHopDong", method: .post, parameters: nil, encoding: URLEncoding.default, headers: parameters).responseJSON { (responseObject) in
+            self.manager.request("https://localhost:5001/HopDong/EditHopDong", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (responseObject) in
                 SVProgressHUD.dismiss()
                 do {
                     let json: JSON = try JSON.init(data: responseObject.data! )
@@ -423,13 +428,17 @@ class AddAndEditHopDongViewController: UIViewController {
         
         let listHopDong_DichVu: [(idDichVu: String, amount: Double)] = self.listSelectedDichVu.getDichVuAmount()
         
+        if listHopDong_DichVu.isEmpty {
+            self.dismiss(animated: true, completion: nil)
+            return
+        }
         for index in 0..<listHopDong_DichVu.count {
             let parameters: [String: String] = [
                 "IdHopDong" : idHopDong,
                 "IdDichVu" : listHopDong_DichVu[index].idDichVu ,
                 "DonGia" : "\(listHopDong_DichVu[index].amount)"
             ]
-                self.manager.request("https://localhost:5001/HopDong_DichVu/AddOrUpdateHopDong_DichVu", method: .post, parameters: nil, encoding: URLEncoding.default, headers: parameters).responseJSON { (responseObject) in
+                self.manager.request("https://localhost:5001/HopDong_DichVu/AddOrUpdateHopDong_DichVu", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (responseObject) in
                     SVProgressHUD.dismiss()
                     do {
                         let json: JSON = try JSON.init(data: responseObject.data! )

@@ -466,6 +466,36 @@ namespace BatDongSanAPI.Models
             return phong;
         }
 
+
+        public ChiTietHoaDon addChiTietHoaDon(string Id_HoaDon, string TenDichVu, string SoCu, string SoMoi, string DonGia)
+        {
+            ChiTietHoaDon phong = new ChiTietHoaDon();
+
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("INSERT INTO ChiTietHoaDon (Id_HoaDon, TenDichVu, SoCu, SoMoi,DonGia) VALUES('" + Id_HoaDon + "', '" + TenDichVu + "', '" + SoCu + "', '" + SoMoi + "', '" + DonGia + "') ", conn);
+                cmd.ExecuteNonQuery();
+
+                cmd.CommandText = "SELECT * FROM CanHo ORDER BY IdCanHo DESC LIMIT 1 ";
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        phong.Id_CTHD = reader["Id_CTHD"].ToString();
+                        phong.Id_HoaDon = reader["Id_HoaDon"].ToString();
+                        phong.TenDichVu = reader["TenDichVu"].ToString();
+                        phong.SoCu = reader["SoCu"].ToString();
+                        phong.SoMoi = reader["SoMoi"].ToString();
+                        phong.DonGia = reader["DonGia"].ToString();
+                    }
+                }
+            }
+
+            return phong;
+        }
+
         public HopDong_DichVu addHopDong_DichVu(string IdHopDong, string IdDichVu, string DonGia)
         {
             HopDong_DichVu phong = new HopDong_DichVu();
@@ -879,6 +909,35 @@ namespace BatDongSanAPI.Models
             }
             return list;
         }
+
+        public List<ChiTietHoaDon> GetListChiTietHoaDon()
+        {
+            List<ChiTietHoaDon> list = new List<ChiTietHoaDon>();
+
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("select * from ChiTietHoaDon", conn);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        list.Add(new ChiTietHoaDon()
+                        {
+                            Id_CTHD = reader["Id_CTHD"].ToString(),
+                            Id_HoaDon = reader["Id_HoaDon"].ToString(),
+                            TenDichVu = reader["TenDichVu"].ToString(),
+                            SoCu = reader["SoCu"].ToString(),
+                            SoMoi = reader["SoMoi"].ToString(),
+                            DonGia = reader["DonGia"].ToString()
+                        });
+                    }
+                }
+            }
+            return list;
+        }
+
 
 
         public List<DichVu> GetListDichVu()

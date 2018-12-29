@@ -27,18 +27,18 @@ namespace BatDongSanAPI.Controllers
         }
 
         [HttpPost("/PhieuChi/EditPhieuChi")]
-        public JsonResult editPhieuChi([FromHeader(Name = "IdPhieuChi")] string IdPhieuChi, [FromHeader(Name = "IdCanHo")] string IdCanHo, [FromHeader(Name = "Sotien")] string SoTien, [FromHeader(Name = "Ngay")] string Ngay, [FromHeader(Name = "DienGiai")] string DienGiai)
+        public JsonResult editPhieuChi([FromBody] PhieuChi phieuChiObject)
         {
             BatDongSanStoreContext context = HttpContext.RequestServices.GetService(typeof(BatDongSanStoreContext)) as BatDongSanStoreContext;
-            PhieuChi a = context.updatePhieuChi(IdPhieuChi, IdCanHo, SoTien, Ngay, DienGiai);
+            PhieuChi a = context.updatePhieuChi(phieuChiObject.IdPhieuChi, phieuChiObject.IdCanHo, phieuChiObject.Sotien, phieuChiObject.Ngay, phieuChiObject.DienGiai);
             return Json(a);
         }
 
         [HttpPost("/PhieuChi/AddPhieuChi")]
-        public JsonResult AddPhieuChi([FromHeader(Name = "IdCanHo")] string IdCanHo, [FromHeader(Name = "SoTien")] string SoTien, [FromHeader(Name = "Ngay")] string Ngay, [FromHeader(Name = "DienGiai")] string DienGiai)
+        public JsonResult AddPhieuChi([FromBody] PhieuChi phieuChiObject)
         {
             BatDongSanStoreContext context = HttpContext.RequestServices.GetService(typeof(BatDongSanStoreContext)) as BatDongSanStoreContext;
-            PhieuChi a = context.addPhieuChi(IdCanHo, SoTien, Ngay, DienGiai);
+            PhieuChi a = context.addPhieuChi(phieuChiObject.IdCanHo, phieuChiObject.Sotien, phieuChiObject.Ngay, phieuChiObject.DienGiai);
             return Json(a);
         }
 

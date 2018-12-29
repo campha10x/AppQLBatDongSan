@@ -63,7 +63,7 @@ class MainMenuViewController: UIViewController {
     }
     
     @IBAction func eventClickLogout(_ sender: Any) {
-        guard Global.appDelegate.hasInternet else { return }
+//        guard Global.appDelegate.hasInternet else { return }
         delegate?.mainMenuOpen(type: .segueLogout)
     }
     

@@ -18,19 +18,19 @@ class EditListKhachHangViewController: UIViewController {
     var listCanHo: [CanHo] = []
     
     @IBOutlet weak var groupGioiTinh: MyCheckboxGroup!
-    @IBOutlet weak var tfHoten: UITextField!
+    @IBOutlet weak var tfHoten: MyTextField!
     @IBOutlet weak var btnNgaySinh: MyButtonCalendar!
     
     @IBOutlet weak var textViewQueQuan: UITextView!
-    @IBOutlet weak var tfSodienthoai: UITextField!
-    @IBOutlet weak var tfEmail: UITextField!
-    @IBOutlet weak var tfCmnd: UITextField!
+    @IBOutlet weak var tfSodienthoai: MyTextField!
+    @IBOutlet weak var tfEmail: MyTextField!
+    @IBOutlet weak var tfCmnd: MyTextField!
     @IBOutlet weak var cbbCanHo: MyCombobox!
     @IBOutlet weak var viewBody: UIView!
     @IBOutlet weak var btnNgayCap: MyButtonCalendar!
-    @IBOutlet weak var tfNoiCap: UITextField!
+    @IBOutlet weak var tfNoiCap: MyTextField!
     
-    @IBOutlet weak var tfMatKhau: UITextField!
+    @IBOutlet weak var tfMatKhau: MyTextField!
     @IBOutlet weak var labelHeaderTitle: UILabel!
     
     var index: Int = -1
@@ -45,6 +45,10 @@ class EditListKhachHangViewController: UIViewController {
         viewBody.layer.cornerRadius = MyUI.buttonCornerRadius
         binding()
         configService()
+        cbbCanHo.textColor = MyColor.black
+        cbbCanHo.dropdownBackgroundColor = MyColor.cyan
+        cbbCanHo.dropdownBackgroundSelectedColor = MyColor.cyanHover
+        cbbCanHo.dropdownForcegroundColor = .white
 //        self.cbbCanHo.delegate = self
     }
     
@@ -111,7 +115,30 @@ class EditListKhachHangViewController: UIViewController {
     }
     
     @IBAction func eventClickSave(_ sender: Any) {
+        guard let hoten = tfHoten.text, let sdt = tfSodienthoai.text, let email = tfEmail.text, let cmnd = tfCmnd.text, let noicap =  tfNoiCap.text, let quequan = textViewQueQuan.text, let matkhau = tfMatKhau.text, !hoten.isEmpty, !sdt.isEmpty, !email.isEmpty, !cmnd.isEmpty, !noicap.isEmpty, !matkhau.isEmpty else {
+            if tfHoten.text?.isEmpty ?? true  {
+                tfHoten.warning()
+            }
+            if tfSodienthoai.text?.isEmpty ?? true {
+                tfSodienthoai.warning()
+            }
+            if tfEmail.text?.isEmpty ?? true {
+                tfEmail.warning()
+            }
+            if tfCmnd.text?.isEmpty  ?? true {
+                tfCmnd.warning()
+            }
+            if tfNoiCap.text?.isEmpty ?? true {
+                tfNoiCap.warning()
+            }
+            if tfMatKhau.text?.isEmpty  ?? true {
+                tfMatKhau.warning()
+            }
+            return
+            
+        }
 
+        
         let khachangNew = KhachHang()
         if let index = cbbCanHo.selectedIndex{
             khachangNew.IdCanHo = "\(self.listCanHo[index].IdCanHo)"
@@ -149,7 +176,7 @@ class EditListKhachHangViewController: UIViewController {
         ]
         if isCreateNew {
             SVProgressHUD.show()
-            self.manager.request("https://localhost:5001/KhachHang/AddKhachHang", method: .post, parameters: nil, encoding: URLEncoding.default, headers: parameters).responseJSON { (responseObject) in
+            self.manager.request("https://localhost:5001/KhachHang/AddKhachHang", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (responseObject) in
                 SVProgressHUD.dismiss()
                 do {
                     let json: JSON = try JSON.init(data: responseObject.data! )
@@ -168,7 +195,7 @@ class EditListKhachHangViewController: UIViewController {
             }
         } else {
             SVProgressHUD.show()
-            self.manager.request("https://localhost:5001/khachhang/EditKhachHang", method: .post, parameters: nil, encoding: URLEncoding.default, headers: parameters).responseJSON { (responseObject) in
+            self.manager.request("https://localhost:5001/khachhang/EditKhachHang", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (responseObject) in
                 SVProgressHUD.dismiss()
                 do {
                     let json: JSON = try JSON.init(data: responseObject.data! )

@@ -29,7 +29,7 @@ class ListPhieuThuViewController: UIViewController {
         viewBody.layer.borderColor = UIColor.init(netHex: 0x5D7AFF).cgColor
         tblPhieuThu.delegate = self
         tblPhieuThu.dataSource = self
-
+        tblPhieuThu.allowsSelection = false
     }
     
     func loadPhieuThu() {

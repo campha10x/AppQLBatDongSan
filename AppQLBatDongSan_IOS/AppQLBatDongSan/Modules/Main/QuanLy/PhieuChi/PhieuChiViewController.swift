@@ -27,6 +27,7 @@ class PhieuChiViewController: UIViewController {
         viewBody.layer.borderColor = UIColor.init(netHex: 0x5D7AFF).cgColor
         tblPhieuChi.delegate = self
         tblPhieuChi.dataSource = self
+        tblPhieuChi.allowsSelection = false
         loadPhieuChi()
   
     }
@@ -128,10 +129,10 @@ extension PhieuChiViewController: eventProtocols {
         vc.isCreateNew = false
         vc.onUpdatePhieuChi = { (phieuchiResponse) in
             if let index = self.listPhieuChi.firstIndex(where: { $0.IdPhieuChi == phieuchiResponse.IdPhieuChi}) {
-                self.reCaculatorAmountPhieuChi()
                 self.listPhieuChi[index] = phieuchiResponse
                 self.tblPhieuChi.reloadData()
                 self.constraintHeightViewBody.constant = CGFloat (100 + 70 + 70 + 70 * self.listPhieuChi.count + 60)
+                self.reCaculatorAmountPhieuChi()
             }
         }
         vc.modalPresentationStyle = .overCurrentContext

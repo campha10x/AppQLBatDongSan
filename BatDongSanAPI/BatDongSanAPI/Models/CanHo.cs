@@ -7,8 +7,6 @@ namespace BatDongSanAPI.Models
 
         public string IdCanHo { get; set; }
 
-        public string TenCanHo { get; set; }
-
         public string DienTich { get; set; }
 
         public string DonGia { get; set; }

@@ -18,7 +18,10 @@ class AccountInformationViewController: UIViewController {
     @IBOutlet weak var btnCheckboxGioiTinhNu: MyCheckbox!
     @IBOutlet weak var btnCalendarNamSinh: MyButtonCalendar!
     @IBOutlet weak var textviewDiaChi: UITextView!
-    @IBOutlet weak var tfSDT: UITextField!
+    @IBOutlet weak var tfSDT: MyTextField!
+    @IBOutlet weak var tfCMND: MyTextField!
+    @IBOutlet weak var btnCalendarNgayCap: MyButtonCalendar!
+    @IBOutlet weak var tfNoiCap: MyTextField!
     
     var group: [MyCheckbox]?
     var account: Account? = nil
@@ -42,6 +45,13 @@ class AccountInformationViewController: UIViewController {
         tfSDT.text = account?.sdt
         textviewDiaChi.text = account?.diaChi
         btnCalendarNamSinh.date = account?.namSinh.toDate(format: "MM/dd/yyyy HH:mm:ss") ?? Date()
+        btnCalendarNgayCap.date = account?.ngayCap.toDate(format: "MM/dd/yyyy HH:mm:ss") ?? Date()
+        tfCMND.text = account?.CMND ?? ""
+        tfNoiCap.text = account?.noiCap ?? ""
+        
+        textviewDiaChi.layer.cornerRadius = 6.0
+        textviewDiaChi.layer.borderWidth = 2.0
+        textviewDiaChi.layer.borderColor = MyColor.lightGray.cgColor
     }
     
     func configService() {
@@ -91,6 +101,27 @@ class AccountInformationViewController: UIViewController {
         self.present(controller, animated: true, completion: nil)
     }
     
+    
+    @IBAction func eventChooseDateNgayCap(_ sender: Any) {
+        guard let btn = sender as? MyButtonCalendar else { return  }
+        let picker = UIDatePicker()
+        picker.datePickerMode = .date
+        picker.date = btn.date
+        picker.addTarget(self, action: #selector(pickerChangedDateNgayCap), for: .valueChanged)
+        let controller = UIViewController()
+        controller.view = picker
+        controller.modalPresentationStyle = .popover
+        controller.preferredContentSize = CGSize(width: Global.screenSize.width/3, height: Global.screenSize.height/3)
+        controller.popoverPresentationController?.sourceView = btn
+        controller.popoverPresentationController?.sourceRect = btn.bounds
+        controller.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.up
+        self.present(controller, animated: true, completion: nil)
+    }
+    
+    @objc func pickerChangedDateNgayCap(picker: UIDatePicker) {
+        btnCalendarNgayCap.date = picker.date
+    }
+    
     @objc func pickerChangedDate(picker: UIDatePicker) {
         btnCalendarNamSinh.date = picker.date
     }
@@ -109,30 +140,39 @@ class AccountInformationViewController: UIViewController {
         account.namSinh = "\(btnCalendarNamSinh.date)"
         account.sdt = tfSDT.text!
         account.diaChi = textviewDiaChi.text
+        account.CMND = tfCMND.text ?? ""
+        account.noiCap = tfNoiCap.text ?? ""
+        account.ngayCap = "\(btnCalendarNgayCap.date)"
+        
         let parameters: [String: String] = [
             "IdAccount" : account.IdAccount,
             "HoTen" : account.hoten ,
             "GioiTinh" : account.gioitinh,
             "NamSinh" : account.namSinh.formatDate(date: "yyyy-MM-dd HH:mm:ss +HHHH", dateTo: "YYYY-MM-dd"),
             "SDT" : account.sdt,
-            "DiaChi" : account.diaChi
+            "DiaChi" : account.diaChi,
+            "CMND" : account.CMND,
+            "NgayCap": account.ngayCap.formatDate(date: "yyyy-MM-dd HH:mm:ss +HHHH", dateTo: "YYYY-MM-dd"),
+            "NoiCap": account.noiCap
         ]
-            SVProgressHUD.show()
-            self.manager.request("https://localhost:5001/Account/EditAccount", method: .post, parameters: nil, encoding: URLEncoding.default, headers: parameters).responseJSON { (responseObject) in
-                SVProgressHUD.dismiss()
-                do {
-                    let json: JSON = try JSON.init(data: responseObject.data! )
-                    let accountResponse  = Account.init(json: json)
-                    if let accountCopy = accountResponse.copy() as? Account{
-                        Storage.shared.addOrUpdate([accountCopy], type: Account.self)
-                    }
-                    Notice.make(type: .Success, content: "Sửa mới tài khoản thành công! ").show()
-                } catch {
-                    if let error = responseObject.error {
-                        Notice.make(type: .Error, content: error.localizedDescription).show()
-                    }
+        SVProgressHUD.show()
+        self.manager.request("https://localhost:5001/Account/EditAccount", method: .post, parameters: parameters, encoding: JSONEncoding.default).response{ (responseObject) in
+            SVProgressHUD.dismiss()
+            do {
+                let json: JSON = try JSON.init(data: responseObject.data! )
+                let accountResponse  = Account.init(json: json)
+                if let accountCopy = accountResponse.copy() as? Account{
+                    Storage.shared.addOrUpdate([accountCopy], type: Account.self)
+                }
+                Notice.make(type: .Success, content: "Sửa mới tài khoản thành công! ").show()
+            } catch {
+                if let error = responseObject.error {
+                    Notice.make(type: .Error, content: error.localizedDescription).show()
                 }
             }
+            
+        }
+        
     }
 
 }

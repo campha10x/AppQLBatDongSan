@@ -12,10 +12,10 @@ namespace BatDongSanAPI.Controllers
     {
 
         [HttpPost("/CanHo_DichVu/AddOrUpDateListCanHo_DichVu")]
-        public JsonResult AddOrUpDateListCanHo_DichVu([FromHeader(Name = "IdDichVu")] string IdDichVu, [FromHeader(Name = "IdCanHo")] string IdCanHo)
+        public JsonResult AddOrUpDateListCanHo_DichVu([FromBody]CanHo_DichVu canHoObject)
         {
             BatDongSanStoreContext context = HttpContext.RequestServices.GetService(typeof(BatDongSanStoreContext)) as BatDongSanStoreContext;
-            CanHo_DichVu a = context.AddOrUpDateListCanHo_DichVu(IdDichVu, IdCanHo);
+            CanHo_DichVu a = context.AddOrUpDateListCanHo_DichVu(canHoObject.IdDichVu, canHoObject.IdCanHo);
             return Json(a);
         }
 

@@ -45,7 +45,7 @@
         let heightTableHoaDon: CGFloat = 70
         var dispatch : DispatchGroup?
         
-        let listHopDong: [HopDong] = []
+        var listHopDong: [HopDong] = []
         
         override func viewDidLoad() {
             super.viewDidLoad()
@@ -69,6 +69,8 @@
                     if let idCanHo = self.listHopDong.filter({$0.IdKhachHang == khachHangObject.idKhachHang}).first?.IdCanHo {
                         self.listHoaDon = self.listHoaDon.filter({ $0.IdCanHo == idCanHo})
                         self.listSearchHoaDon = self.listHoaDon
+                    } else {
+                        self.listSearchHoaDon = []
                     }
                 }
                 self.constraintHeightViewBody.constant = CGFloat (100 + 70 + 70 + 70 * self.listSearchHoaDon.count + 60)
@@ -193,6 +195,7 @@
                             Storage.shared.addOrUpdate([hopdongCopy], type: HopDong.self)
                         }
                     })
+                    self.listHopDong = listHopDong
                     
                 } catch {
                     if let error = responseObject.error {

@@ -153,7 +153,7 @@ class AddAndEditCanHoViewController: UIViewController {
     @IBAction func tao(_ sender: Any) {
         let canHo = CanHo()
         canHo.IdCanHo = isCreateNew ? "" : self.canHo?.IdCanHo ?? ""
-        canHo.NgayTao = isCreateNew ? Date().toString(format: "yyyy-MM-dd") ?? "" : self.canHo?.NgayTao.formatDate(date: "MM/dd/yyyy HH:mm:ss ", dateTo: "YYYY-MM-dd") ?? ""
+        canHo.NgayTao = isCreateNew ? Date().toString(format: "yyyy-MM-dd") ?? "" : self.canHo?.NgayTao.formatDate(date: "MM-dd/yyyy HH:mm:ss ", dateTo: "YYYY-MM-dd") ?? ""
         canHo.DonGia =  "\(Int(tfGiaPhong.getValue()))"
         canHo.DienTich = "\(Int(tfDienTich.getValue()))"
         canHo.DiaChi = tfDiaChi.text ?? ""
@@ -175,9 +175,15 @@ class AddAndEditCanHoViewController: UIViewController {
             "NgayTao": canHo.NgayTao
         ]
         
+        
+//        self.manager.request("https://localhost:5001/CanHo/AddCanHo", method: .post, parameters: parameters, encoding: JSONEncoding.default)
+//            .responseJSON { response in
+//                print(response)
+//        }
+        
         if isCreateNew {
             SVProgressHUD.show()
-            self.manager.request("https://localhost:5001/CanHo/AddCanHo", method: .post, parameters: nil, encoding: URLEncoding.default, headers: parameters).responseJSON { (responseObject) in
+            self.manager.request("https://localhost:5001/CanHo/AddCanHo", method: .post, parameters: parameters, encoding: JSONEncoding.default).response{ (responseObject) in
                 SVProgressHUD.dismiss()
                 do {
                     let json: JSON = try JSON.init(data: responseObject.data! )
@@ -196,7 +202,7 @@ class AddAndEditCanHoViewController: UIViewController {
             }
         } else {
             SVProgressHUD.show()
-            self.manager.request("https://localhost:5001/CanHo/EditCanHo", method: .post, parameters: nil, encoding: URLEncoding.default, headers: parameters).responseJSON { (responseObject) in
+            self.manager.request("https://localhost:5001/CanHo/EditCanHo", method: .post, parameters: parameters, encoding: JSONEncoding.default).response { (responseObject) in
                 SVProgressHUD.dismiss()
                 do {
                     let json: JSON = try JSON.init(data: responseObject.data! )
@@ -235,9 +241,8 @@ class AddAndEditCanHoViewController: UIViewController {
             return
         }
         let parameters = ["IdDichVu": idDichVu, "IdCanHo": IdCanHo]
-        
             SVProgressHUD.show()
-            self.manager.request("https://localhost:5001/CanHo_DichVu/AddOrUpDateListCanHo_DichVu", method: .post, parameters: nil, encoding: URLEncoding.default, headers: parameters).responseJSON { (responseObject) in
+            self.manager.request("https://localhost:5001/CanHo_DichVu/AddOrUpDateListCanHo_DichVu", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: nil).responseJSON { (responseObject) in
                 SVProgressHUD.dismiss()
                 do {
                     let json: JSON = try JSON.init(data: responseObject.data! )

@@ -98,7 +98,7 @@ class PhieuThuViewController: UIViewController {
         ]
         
         SVProgressHUD.show()
-        self.manager.request("https://localhost:5001/PhieuThu/AddPhieuThu", method: .post, parameters: nil, encoding: URLEncoding.default, headers: parameters).responseJSON { (responseObject) in
+        self.manager.request("https://localhost:5001/PhieuThu/AddPhieuThu", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (responseObject) in
             SVProgressHUD.dismiss()
             do {
                 let json: JSON = try JSON.init(data: responseObject.data! )

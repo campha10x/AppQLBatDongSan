@@ -29,18 +29,18 @@ namespace BatDongSanAPI.Controllers
 
 
         [HttpPost("/DichVu/EditDichVu")]
-        public JsonResult EditDichVu([FromHeader(Name = "IdDichVu")] string idDichVu, [FromHeader(Name = "TenDichVu")] string TenDichVu, [FromHeader(Name = "Donvi")] string donvi)
+        public JsonResult EditDichVu([FromBody]DichVu dichvuObject)
         {
             BatDongSanStoreContext context = HttpContext.RequestServices.GetService(typeof(BatDongSanStoreContext)) as BatDongSanStoreContext;
-            DichVu a = context.updateDichVu(idDichVu, TenDichVu, donvi);
+            DichVu a = context.updateDichVu(dichvuObject.IdDichVu, dichvuObject.TenDichVu, dichvuObject.DonVi);
             return Json(a);
         }
 
         [HttpPost("/DichVu/AddDichVu")]
-        public JsonResult AddDichVu([FromHeader(Name = "TenDichVu")] string TenDichVu, [FromHeader(Name = "Donvi")] string donvi)
+        public JsonResult AddDichVu([FromBody]DichVu dichvuObject)
         {
             BatDongSanStoreContext context = HttpContext.RequestServices.GetService(typeof(BatDongSanStoreContext)) as BatDongSanStoreContext;
-            DichVu a = context.addDichvu(TenDichVu,donvi);
+            DichVu a = context.addDichvu(dichvuObject.TenDichVu, dichvuObject.DonVi);
             return Json(a);
         }
 

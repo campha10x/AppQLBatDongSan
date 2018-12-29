@@ -39,6 +39,7 @@ class QLKhachHangViewController: UIViewController {
         tableViewKhachHang.delegate = self
         tableViewKhachHang.dataSource = self
         self.listSearchKhachHang = self.listKhachHang
+        tableViewKhachHang.allowsSelection = false
     }
 
     @IBAction func eventSearchSdt(_ sender: Any) {
