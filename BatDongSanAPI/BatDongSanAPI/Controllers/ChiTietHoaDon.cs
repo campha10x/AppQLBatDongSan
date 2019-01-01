@@ -17,37 +17,34 @@ namespace BatDongSanAPI.Controllers
             return Json(listCTHD);
         }
 
-        //[HttpPost("/ChiTietHoaDon/RemoveListChiTietHoaDon")]
-        //public JsonResult RemoveListChiTietHoaDon([FromHeader(Name = "IdHoaDon")] string IdHoaDon)
+
+        //[HttpPost("/ChiTietHoaDon/AddListChiTietHoaDon")]
+        //public JsonResult AddListChiTietHoaDon([FromBody] List<ChiTietHoaDon> listChiTietHDObject)
         //{
         //    BatDongSanStoreContext context = HttpContext.RequestServices.GetService(typeof(BatDongSanStoreContext)) as BatDongSanStoreContext;
-        //    context.removeHoaDon(IdHoaDon);
-
-        //    string json_string = "{ success: \"'" + IdHoaDon + "'\" }";
-        //    return Json(json_string);
+        //    List<ChiTietHoaDon> listCTHD = new List<ChiTietHoaDon>();
+        //    for (int i = 0; i < listChiTietHDObject.Count; i++)
+        //    {
+        //        ChiTietHoaDon a = context.addChiTietHoaDon(listChiTietHDObject[i].Id_HoaDon, listChiTietHDObject[i].TenDichVu, listChiTietHDObject[i].SoCu, listChiTietHDObject[i].SoMoi, listChiTietHDObject[i].DonGia);
+        //        listCTHD.Append(a);
+        //    }
+        //    return Json(listCTHD);
         //}
 
-
-        [HttpPost("/ChiTietHoaDon/AddListChiTietHoaDon")]
-        public JsonResult AddListChiTietHoaDon([FromBody] List<ChiTietHoaDon> listChiTietHDObject)
+        [HttpPost("/ChiTietHoaDon/AddOrEditListChiTietHoaDon")]
+        public JsonResult EditListChiTietHoaDon([FromBody] List<ChiTietHoaDon> listChiTietHDObject)
         {
             BatDongSanStoreContext context = HttpContext.RequestServices.GetService(typeof(BatDongSanStoreContext)) as BatDongSanStoreContext;
+            context.removeChiTietHoaDon(listChiTietHDObject[0].Id_HoaDon);
             List<ChiTietHoaDon> listCTHD = new List<ChiTietHoaDon>();
             for (int i = 0; i < listChiTietHDObject.Count; i++)
             {
                 ChiTietHoaDon a = context.addChiTietHoaDon(listChiTietHDObject[i].Id_HoaDon, listChiTietHDObject[i].TenDichVu, listChiTietHDObject[i].SoCu, listChiTietHDObject[i].SoMoi, listChiTietHDObject[i].DonGia);
-                listCTHD.Append(a);
+                //listCTHD.Append(a);
+                listCTHD.Add(a);
             }
             return Json(listCTHD);
         }
-
-        //[HttpPost("/ChiTietHoaDon/EditListChiTietHoaDon")]
-        //public JsonResult EditListChiTietHoaDon([FromBody] ChiTietHoaDon chiTietHDObject)
-        //{
-        //    BatDongSanStoreContext context = HttpContext.RequestServices.GetService(typeof(BatDongSanStoreContext)) as BatDongSanStoreContext;
-        //    HoaDon a = context.updateHoaDon(hoadonObject.IdHoaDon, hoadonObject.IdCanHo, hoadonObject.SoPhieu, hoadonObject.NgayTao, hoadonObject.SoTien, hoadonObject.SoDienMoi, hoadonObject.SoNuocMoi);
-        //    return Json(a);
-        //}
 
     }
 }

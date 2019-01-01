@@ -40,6 +40,10 @@ class AddAndEditHoaDonViewController: UIViewController {
     var listHoaDon: [HoaDon] = []
     
     var listHopDong_DichVu: [HopDong_DichVu] = []
+    var soDienCu = 0.0
+    var soNuocCu = 0.0
+    var tienDien = 0.0
+    var tienNuoc = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -148,14 +152,49 @@ class AddAndEditHoaDonViewController: UIViewController {
     
     @objc func pickerChangedDate(picker: UIDatePicker) {
         btnNgayTao.date = picker.date
+        recaculatorSoTien (isUpdateTextField: true)
     }
     
     @IBAction func eventClickHuyHD(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
     
+    func returnMonth(ngayTao: String) -> Int {
+        if let ngayTaoConvert = ngayTao.toDate(format: "MM/dd/yyyy HH:mm:ss") {
+            return Calendar.current.component(.month, from: ngayTaoConvert)
+        } else {
+            return 0
+        }
+        
+    }
+    
+    func returnYear(ngayTao: String) -> Int {
+        if let ngayTaoConvert = ngayTao.toDate(format: "MM/dd/yyyy HH:mm:ss") {
+            return Calendar.current.component(.year, from: ngayTaoConvert)
+        } else {
+            return 0
+        }
+        
+    }
+    
     @IBAction func eventClickTaoHD(_ sender: Any) {
-
+        // CanHo
+        let listCanHo: [CanHo] = Storage.shared.getObjects(type: CanHo.self) as? [CanHo] ?? []
+        if let index = cbbCanHo.selectedIndex {
+            let canHoObject = listCanHo.filter({ $0.IdCanHo == self.listCanHo[index].IdCanHo }).first?.copy() as? CanHo
+            let listHopDong: [HopDong] = Storage.shared.getObjects(type: HopDong.self) as? [HopDong] ?? []
+            let hopDongObject = listHopDong.filter({ $0.IdCanHo == canHoObject?.IdCanHo && $0.active }).first?.copy() as? HopDong
+            
+            let month = returnMonth(ngayTao: hopDongObject?.NgayKT ?? "")
+            let year = returnYear(ngayTao: hopDongObject?.NgayKT ?? "" )
+            let monthNow = Calendar.current.component(.month, from: Date())
+            let yearNow = Calendar.current.component(.year, from: Date())
+            if (month < monthNow && year == yearNow && month != 0 && year != 0 ) {
+                Notice.make(type: .Error, content: "Căn hộ đã hết hợp đồng! Mời bạn gia hạn hợp đồng ").show()
+                return
+            }
+        }
+        
         let hoadon = HoaDon()
         guard tfSotien.text != ""  else {
             if tfSotien.text == "" {
@@ -199,7 +238,8 @@ class AddAndEditHoaDonViewController: UIViewController {
                         Storage.shared.addOrUpdate([hoadonCopy], type: HoaDon.self)
                     }
                     Notice.make(type: .Success, content: "Thêm mới hoá đơn thành công! ").show()
-                    self.dismiss(animated: true, completion: nil)
+//                    self.dismiss(animated: true, completion: nil)
+                    self.requestHoaDon(idHoaDon: hoadonResponse.idHoaDon, hoadonObject: hoadonResponse)
                     self.done?(hoadonResponse)
                     
                 } catch {
@@ -219,7 +259,8 @@ class AddAndEditHoaDonViewController: UIViewController {
                         Storage.shared.addOrUpdate([hoadonCopy], type: HoaDon.self)
                     }
                     Notice.make(type: .Success, content: "Sửa mới hoá đơn thành công! ").show()
-                    self.dismiss(animated: true, completion: nil)
+//                    self.dismiss(animated: true, completion: nil)
+                     self.requestHoaDon(idHoaDon: hoadonResponse.idHoaDon, hoadonObject: hoadonResponse)
                     self.done?(hoadonResponse)
                 } catch {
                     if let error = responseObject.error {
@@ -230,11 +271,94 @@ class AddAndEditHoaDonViewController: UIViewController {
         }
     }
     
+    func requestHoaDon(idHoaDon: String, hoadonObject: HoaDon){
+        var listDichVuDocument: [ChiTietHoaDon] = []
+        let hopdong_DichVu = Storage.shared.getObjects(type: HopDong_DichVu.self) as! [HopDong_DichVu]
+        listDichVu = Storage.shared.getObjects(type: DichVu.self) as! [DichVu]
+        // CanHo
+        let listCanHo: [CanHo] = Storage.shared.getObjects(type: CanHo.self) as? [CanHo] ?? []
+        let canHoObject = listCanHo.filter({ $0.IdCanHo == hoadonObject.IdCanHo }).first?.copy() as? CanHo
+        let listHopDong: [HopDong] = Storage.shared.getObjects(type: HopDong.self) as? [HopDong] ?? []
+        let hopDongObject = listHopDong.filter({ $0.IdCanHo == canHoObject?.IdCanHo && $0.active }).first?.copy() as? HopDong
+        let listHoaDon: [HoaDon] = Storage.shared.getObjects(type: HoaDon.self) as? [HoaDon] ?? []
+        
+        var canHoDocumentObject = ChiTietHoaDon()
+        canHoDocumentObject.Id_HoaDon = hoadonObject.idHoaDon
+        canHoDocumentObject.TenDichVu = "Căn hộ " + (canHoObject?.maCanHo ?? "")
+        canHoDocumentObject.DonGia = canHoObject?.DonGia ?? ""
+        listDichVuDocument.append(canHoDocumentObject)
+        
+        let arrayHoadonLonNhat = listHoaDon.filter({ $0.IdCanHo == hoadonObject.IdCanHo}).sorted { (hoadon1, hoadon2) -> Bool in
+            let date1 = hoadon1.ngayTao.toDate(format: "MM/dd/yyyy HH:mm:ss") ?? Date()
+            let date2 = hoadon2.ngayTao.toDate(format: "MM/dd/yyyy HH:mm:ss") ?? Date()
+            return date1 < date2
+        }
+        var  hoadonLonNhat: HoaDon? = nil
+        if  arrayHoadonLonNhat.count > 1 {
+            hoadonLonNhat = arrayHoadonLonNhat[1]
+        } else {
+            hoadonLonNhat = arrayHoadonLonNhat.first
+        }
+        guard let hopDongObjectNonOptional = hopDongObject  else { return  }
+        let giaDienDocumentObject = ChiTietHoaDon()
+        giaDienDocumentObject.Id_HoaDon = hoadonObject.idHoaDon
+        giaDienDocumentObject.TenDichVu = "Điện"
+        giaDienDocumentObject.DonGia = hopDongObjectNonOptional.TienDien
+        giaDienDocumentObject.SoCu = "\(Int(soDienCu))"
+        giaDienDocumentObject.SoMoi = hoadonObject.soDienMoi
+        listDichVuDocument.append(giaDienDocumentObject)
+        
+        let giaNuocDocumentObject = ChiTietHoaDon()
+        giaNuocDocumentObject.TenDichVu = "Nước"
+        giaNuocDocumentObject.Id_HoaDon = hoadonObject.idHoaDon
+        giaNuocDocumentObject.DonGia = hopDongObjectNonOptional.TienNuoc
+        giaNuocDocumentObject.SoCu = "\(Int(soNuocCu))"
+        giaNuocDocumentObject.SoMoi = hoadonObject.soNuocMoi
+        listDichVuDocument.append(giaNuocDocumentObject)
+        
+        let selectedHopDong_DichVu = hopdong_DichVu.filter({ $0.IdHopDong == hopDongObjectNonOptional.IdHopDong} )
+        for item in selectedHopDong_DichVu {
+            if  let dichvuSelected = self.listDichVu.filter({ $0.idDichVu == item.IdDichVu }).first {
+                var dichvuDocumentObject = ChiTietHoaDon()
+                dichvuDocumentObject.TenDichVu = dichvuSelected.TenDichVu
+                dichvuDocumentObject.DonGia = item.DonGia
+                dichvuDocumentObject.Id_HoaDon = hoadonObject.idHoaDon
+                listDichVuDocument.append(dichvuDocumentObject)
+            }
+        }
+    
+        let  parameters = listDichVuDocument.map({$0.toDics()})
+            SVProgressHUD.show()
+            if let url = NSURL(string: "https://localhost:5001/ChiTietHoaDon/AddOrEditListChiTietHoaDon"){
+                var request = URLRequest(url: url as URL)
+                
+                request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                request.httpMethod = "POST"
+                request.httpBody = try! JSONSerialization.data(withJSONObject: parameters)
+                manager.request(request as URLRequestConvertible)
+                    .responseJSON { responseObject in
+                        SVProgressHUD.dismiss()
+                        do {
+                            let json: JSON = try JSON.init(data: responseObject.data! )
+                            let hoadonResponse  =  json.arrayValue.map({ChiTietHoaDon.init(json: $0)})
+                            Storage.shared.delete(ChiTietHoaDon.self, ids: [hoadonObject.idHoaDon], idPrefix: "Id_HoaDon")
+                            Storage.shared.addOrUpdate(hoadonResponse, type: ChiTietHoaDon.self)
+                            self.dismiss(animated: true, completion: nil)
+                        } catch {
+                            if let error = responseObject.error {
+                                Notice.make(type: .Error, content: error.localizedDescription).show()
+                            }
+                        }
+                }
+            }
+    }
+    
     func recaculatorSoTien (isUpdateTextField: Bool = false) {
+        guard cbbCanHo.selectedIndex != nil else { return }
         soTien = 0
         if indexCanHo >= 0 {
             soTien += Double(self.listCanHo[indexCanHo].DonGia) ?? 0
-            guard let hopdongObject = listHopDong.filter({$0.IdCanHo == self.listCanHo[indexCanHo].IdCanHo}).first?.copy() as? HopDong else {
+            guard let hopdongObject = listHopDong.filter({$0.IdCanHo == self.listCanHo[indexCanHo].IdCanHo && $0.active }).first?.copy() as? HopDong else {
                 Notice.make(type: .Error, content: "Căn hộ này cần tạo hợp đồng mới có thể tạo được hoá đơn").show()
                 btnTao.isUserInteractionEnabled = false
                 return
@@ -243,7 +367,7 @@ class AddAndEditHoaDonViewController: UIViewController {
             let arrayHoadonLonNhat = listHoaDon.filter({ $0.IdCanHo == self.listCanHo[indexCanHo].IdCanHo}).sorted { (hoadon1, hoadon2) -> Bool in
                 let date1 = hoadon1.ngayTao.toDate(format: "MM/dd/yyyy HH:mm:ss") ?? Date()
                 let date2 = hoadon2.ngayTao.toDate(format: "MM/dd/yyyy HH:mm:ss") ?? Date()
-                return date1 < date2
+                return date1 > date2
             }
             var  hoadonLonNhat: HoaDon? = nil
             if let _ = self.hoadon, arrayHoadonLonNhat.count > 1 {
@@ -254,19 +378,19 @@ class AddAndEditHoaDonViewController: UIViewController {
                 let components = Calendar.current.dateComponents([.year, .month, .day], from: btnNgayTao.date)
                 if let hoadonLonNhat = hoadonLonNhat, let ngay1 = hoadonLonNhat.ngayTao.toDate(format: "MM/dd/yyyy HH:mm:ss"), ngay1.month == (components.month ?? 1) - 1 , ngay1.year == components.year {
                         let tienDien = Double(hopdongObject.TienDien) ?? 0
-                        let soDienCu = Double(hoadonLonNhat.soDienMoi) ?? 0
+                        soDienCu = Double(hoadonLonNhat.soDienMoi) ?? 0
                         let tienNuoc = Double(hopdongObject.TienNuoc) ?? 0
-                        let soNuocCu = Double(hoadonLonNhat.soNuocMoi) ?? 0
+                        soNuocCu = Double(hoadonLonNhat.soNuocMoi) ?? 0
                         if isUpdateTextField {
                             self.tfSoDienMoi.setValue(soDienCu)
                             self.tfSoNuocMoi.setValue(soNuocCu)
                         }
                         soTien +=  (tienDien * (tfSoDienMoi.getValue() - soDienCu ) +  tienNuoc * ( tfSoNuocMoi.getValue() - soNuocCu ) )
                 } else {
-                    let tienDien = Double(hopdongObject.TienDien) ?? 0
-                    let soDienCu = Double(hopdongObject.SoDienBd) ?? 0
-                    let tienNuoc = Double(hopdongObject.TienNuoc) ?? 0
-                    let soNuocCu = Double(hopdongObject.SoNuocBd) ?? 0
+                    tienDien = Double(hopdongObject.TienDien) ?? 0
+                    soDienCu = Double(hopdongObject.SoDienBd) ?? 0
+                    tienNuoc = Double(hopdongObject.TienNuoc) ?? 0
+                    soNuocCu = Double(hopdongObject.SoNuocBd) ?? 0
                     if isUpdateTextField {
                         tfSoDienMoi.setValue(soDienCu)
                         tfSoNuocMoi.setValue(soNuocCu)

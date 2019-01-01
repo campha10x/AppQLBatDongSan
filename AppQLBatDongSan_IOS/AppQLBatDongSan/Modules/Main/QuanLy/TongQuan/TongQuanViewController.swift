@@ -49,11 +49,13 @@ class TongQuanViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        Storage.shared.delete(DichVu.self)
         dispatch = DispatchGroup()
         configService()
         loadCanHo()
         loadHopDong_DichVu()
         loadHopDong()
+        loadChiTietHoaDon()
         loadHoaDon()
         loadListPhieuThu()
         loadPhieuChi()
@@ -372,6 +374,28 @@ class TongQuanViewController: UIViewController {
                 self.listHopDong.forEach({ (hopdong) in
                     if let hopdongCopy = hopdong.copy() as? HopDong {
                         Storage.shared.addOrUpdate([hopdongCopy], type: HopDong.self)
+                    }
+                })
+            } catch {
+                if let error = responseObject.error {
+                    Notice.make(type: .Error, content: error.localizedDescription).show()
+                }
+            }
+        }
+    }
+    
+    func loadChiTietHoaDon()  {
+        SVProgressHUD.show()
+        dispatch?.enter()
+        manager.request("https://localhost:5001/ChiTietHoaDon/GetListChiTietHoaDon", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil).responseJSON { (responseObject) in
+            self.dispatch?.leave()
+            SVProgressHUD.dismiss()
+            do {
+                let json: JSON = try JSON.init(data: responseObject.data! )
+                var listCTHD  = json.arrayValue.map({ChiTietHoaDon.init(json: $0)})
+                listCTHD.forEach({ (hopdong) in
+                    if let hopdongCopy = hopdong.copy() as? ChiTietHoaDon {
+                        Storage.shared.addOrUpdate([hopdongCopy], type: ChiTietHoaDon.self)
                     }
                 })
             } catch {

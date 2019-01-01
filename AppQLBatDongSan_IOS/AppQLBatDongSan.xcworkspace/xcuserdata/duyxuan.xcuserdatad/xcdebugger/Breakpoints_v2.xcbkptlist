@@ -25,93 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "AppQLBatDongSan/Custom Control/Common/MyServiceGroupView.swift"
-            timestampString = "566674679.859594"
+            filePath = "AppQLBatDongSan/Modules/Main/AddsBatDongSan/HopDong/AddAndEditHopDongViewController.swift"
+            timestampString = "567959365.107443"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
-            landmarkName = "addOptions(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AppQLBatDongSan/Modules/Main/AddsBatDongSan/CanHo/AddAndEditCanHoViewController.swift"
-            timestampString = "567741580.365082"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "184"
-            endingLineNumber = "184"
-            landmarkName = "tao(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AppQLBatDongSan/Modules/Main/QuanLy/HoaDon/View/HoaDonViewController.swift"
-            timestampString = "567779983.52885"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in AppQLBatDongSan.HoaDonViewController.viewDidLoad() -&gt; ()"
-                  moduleName = "AppQLBatDongSan"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/duyxuan/Desktop/AppQLBatDongSan/AppQLBatDongSan_IOS/AppQLBatDongSan/Modules/Main/QuanLy/HoaDon/View/HoaDonViewController.swift"
-                  timestampString = "567741580.6465729"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "70"
-                  endingLineNumber = "70"
-                  offsetFromSymbolStart = "1247">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 (AppQLBatDongSan.HoaDon) -&gt; Swift.Bool in closure #1 () -&gt; () in AppQLBatDongSan.HoaDonViewController.viewDidLoad() -&gt; ()"
-                  moduleName = "AppQLBatDongSan"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/duyxuan/Desktop/AppQLBatDongSan/AppQLBatDongSan_IOS/AppQLBatDongSan/Modules/Main/QuanLy/HoaDon/View/HoaDonViewController.swift"
-                  timestampString = "567741580.650255"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "70"
-                  endingLineNumber = "70"
-                  offsetFromSymbolStart = "28">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AppQLBatDongSan/Modules/Main/QuanLy/HoaDon/View/HoaDonViewController.swift"
-            timestampString = "567779983.530311"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "viewDidLoad()"
+            startingLineNumber = "457"
+            endingLineNumber = "457"
+            landmarkName = "requestHopDong(idHopDong:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

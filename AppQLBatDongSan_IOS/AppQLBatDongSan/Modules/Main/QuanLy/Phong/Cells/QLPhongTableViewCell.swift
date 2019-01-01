@@ -97,7 +97,6 @@ class QLCanHoTableViewCell: UITableViewCell {
         // The image to dowload
         let stringUrl = "https://localhost:5001/CanHo/Image/\(imgFirst)"
         if let remoteImageURL = URL(string: stringUrl) {
-            
             manager.request(remoteImageURL).responseData { (response) in
                 if response.error == nil {
                     if let data = response.data {
@@ -106,11 +105,12 @@ class QLCanHoTableViewCell: UITableViewCell {
                 }
             }
         }
-        if AppState.shared.typeLogin == TypeLogin.ChuCanho.rawValue && isShowChoThue  {
-            constraintWidthChothue.constant = 100
-        } else  {
-             constraintWidthChothue.constant = 0
-        }
+            if AppState.shared.typeLogin == TypeLogin.ChuCanho.rawValue && isShowChoThue  {
+                self.constraintWidthChothue.constant = 100
+            } else  {
+                self.constraintWidthChothue.constant = 0
+            }
+
 
     }
     

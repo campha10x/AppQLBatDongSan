@@ -1034,6 +1034,7 @@ Hợp đồng này gồm có 03 tờ, được lập thành 2 bản mỗi bên g
                         <viewLayoutGuide key="safeArea" id="0SX-3Z-6LM"/>
                     </view>
                     <connections>
+                        <outlet property="constraintHeightViewHoaDon" destination="IVQ-Et-8NE" id="CgJ-Yi-c7i"/>
                         <outlet property="lbMaHoaDon" destination="Fkp-Av-8Oq" id="JCP-OL-i6y"/>
                         <outlet property="lbMaHopDong" destination="MN6-no-cQ8" id="sce-EX-xz3"/>
                         <outlet property="lbNgayTaoHD" destination="aM6-3n-6gx" id="zmQ-1C-eep"/>
@@ -1044,7 +1045,7 @@ Hợp đồng này gồm có 03 tờ, được lập thành 2 bản mỗi bên g
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WsH-2t-egW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1204.6875" y="48.4375"/>
+            <point key="canvasLocation" x="1373" y="-26"/>
         </scene>
     </scenes>
     <resources>

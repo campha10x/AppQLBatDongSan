@@ -84,11 +84,47 @@ namespace BatDongSanAPI.Models
             using (MySqlConnection conn = GetConnection())
              {
                 conn.Open();
-                 MySqlCommand cmd = new MySqlCommand("DELETE from HoaDon where IdHoaDon = '" + idHoaDon + "' ", conn);
-                 cmd.ExecuteNonQuery();
+                MySqlCommand cmd = new MySqlCommand("DELETE from HoaDon where IdHoaDon = '" + idHoaDon + "' ", conn);
+                cmd.ExecuteNonQuery();
              }
 
             return idHoaDon;
+        }
+
+        public String removeChiTietHoaDon(string idHoaDon)
+        {
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+
+                MySqlCommand cmd1 = new MySqlCommand("select * from ChiTietHoaDon where Id_HoaDon = '" + idHoaDon + "' ", conn);
+                int count = (cmd1.ExecuteScalar() == null ? -1 : 1);
+                if (count > 0) {
+                    MySqlCommand cmd = new MySqlCommand("DELETE from ChiTietHoaDon where Id_HoaDon = '" + idHoaDon + "' ", conn);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+
+            return idHoaDon;
+        }
+
+
+        public String removeHopDong_DichVu(string IdHopDong)
+        {
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+
+                MySqlCommand cmd1 = new MySqlCommand("select * from HopDong_DichVu where IdHopDong = '" + IdHopDong + "' ", conn);
+                int count = (cmd1.ExecuteScalar() == null ? -1 : 1);
+                if (count > 0)
+                {
+                    MySqlCommand cmd = new MySqlCommand("DELETE from HopDong_DichVu where IdHopDong = '" + IdHopDong + "' ", conn);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+
+            return IdHopDong;
         }
 
         public HoaDon AddListHoaDon(String IdCanHo, String SoPhieu, String  NgayTao, String SoTien, string SoDienMoi,  string SoNuocMoi)
@@ -337,6 +373,7 @@ namespace BatDongSanAPI.Models
             return hoadon;
         }
 
+
         public PhieuThu addPhieuThu(string IdCanHo, string IdHoaDon, string SoTien, string Ngay, string GhiChu)
         {
             PhieuThu phieuthu =  new PhieuThu() ;
@@ -477,7 +514,7 @@ namespace BatDongSanAPI.Models
                 MySqlCommand cmd = new MySqlCommand("INSERT INTO ChiTietHoaDon (Id_HoaDon, TenDichVu, SoCu, SoMoi,DonGia) VALUES('" + Id_HoaDon + "', '" + TenDichVu + "', '" + SoCu + "', '" + SoMoi + "', '" + DonGia + "') ", conn);
                 cmd.ExecuteNonQuery();
 
-                cmd.CommandText = "SELECT * FROM CanHo ORDER BY IdCanHo DESC LIMIT 1 ";
+                cmd.CommandText = "SELECT * FROM ChiTietHoaDon ORDER BY Id_CTHD DESC LIMIT 1 ";
 
                 using (var reader = cmd.ExecuteReader())
                 {
@@ -489,6 +526,34 @@ namespace BatDongSanAPI.Models
                         phong.SoCu = reader["SoCu"].ToString();
                         phong.SoMoi = reader["SoMoi"].ToString();
                         phong.DonGia = reader["DonGia"].ToString();
+                    }
+                }
+            }
+
+            return phong;
+        }
+
+
+        public HopDong_DichVu addHopDongDichVu(string IdHopDong, string IdDichVu, string DonGia)
+        {
+            HopDong_DichVu phong = new HopDong_DichVu();
+
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("INSERT INTO HopDong_DichVu (IdHopDong, IdDichVu, DonGia) VALUES('" + IdHopDong + "', '" + IdDichVu + "', '" + DonGia + "') ", conn);
+                cmd.ExecuteNonQuery();
+
+                cmd.CommandText = "SELECT * FROM HopDong_DichVu ORDER BY IdHopDong_DichVu DESC LIMIT 1 ";
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        phong.IdHopDong = reader["IdHopDong"].ToString();
+                        phong.IdDichVu = reader["IdDichVu"].ToString();
+                        phong.DonGia = reader["DonGia"].ToString();
+                        phong.IdHopDong_DichVu = reader["IdHopDong_DichVu"].ToString();
                     }
                 }
             }

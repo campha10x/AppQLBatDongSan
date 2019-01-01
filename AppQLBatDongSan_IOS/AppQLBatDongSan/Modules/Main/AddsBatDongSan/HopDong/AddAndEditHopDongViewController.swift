@@ -428,33 +428,41 @@ class AddAndEditHopDongViewController: UIViewController {
         
         let listHopDong_DichVu: [(idDichVu: String, amount: Double)] = self.listSelectedDichVu.getDichVuAmount()
         
+        var listHopDong_DichVuStorage: [HopDong_DichVu] = []
         if listHopDong_DichVu.isEmpty {
             self.dismiss(animated: true, completion: nil)
             return
         }
         for index in 0..<listHopDong_DichVu.count {
-            let parameters: [String: String] = [
-                "IdHopDong" : idHopDong,
-                "IdDichVu" : listHopDong_DichVu[index].idDichVu ,
-                "DonGia" : "\(listHopDong_DichVu[index].amount)"
-            ]
-                self.manager.request("https://localhost:5001/HopDong_DichVu/AddOrUpdateHopDong_DichVu", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (responseObject) in
+            var obj = HopDong_DichVu()
+            obj.IdHopDong = idHopDong
+            obj.IdDichVu = listHopDong_DichVu[index].idDichVu
+            obj.DonGia = "\(Int(listHopDong_DichVu[index].amount))"
+            listHopDong_DichVuStorage.append(obj)
+        }
+        let parameters = listHopDong_DichVuStorage.map({$0.toDics()})
+        SVProgressHUD.show()
+        if let url = NSURL(string: "https://localhost:5001/HopDong_DichVu/AddOrUpdateHopDong_DichVu"){
+            var request = URLRequest(url: url as URL)
+            
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.httpMethod = "POST"
+            request.httpBody = try! JSONSerialization.data(withJSONObject: parameters)
+            manager.request(request as URLRequestConvertible)
+                .responseJSON { responseObject in
                     SVProgressHUD.dismiss()
                     do {
                         let json: JSON = try JSON.init(data: responseObject.data! )
-                        let hopdongResponse  = HopDong_DichVu.init(json: json)
-                        if let hopdongCopy = hopdongResponse.copy() as? HopDong_DichVu{
-                            Storage.shared.addOrUpdate([hopdongCopy], type: HopDong_DichVu.self)
-                        }
-                        if index == listHopDong_DichVu.count - 1 {
-                            self.dismiss(animated: true, completion: nil)
-                        }
+                        let hoadonResponse  =  json.arrayValue.map({HopDong_DichVu.init(json: $0)})
+                        Storage.shared.delete(HopDong_DichVu.self, ids: [idHopDong], idPrefix: "IdHopDong")
+                        Storage.shared.addOrUpdate(hoadonResponse, type: HopDong_DichVu.self)
+                        self.dismiss(animated: true, completion: nil)
                     } catch {
                         if let error = responseObject.error {
                             Notice.make(type: .Error, content: error.localizedDescription).show()
                         }
                     }
-                }
+            }
         }
         
     }
@@ -485,6 +493,8 @@ class AddAndEditHopDongViewController: UIViewController {
         }
         constraintHeightDichVu.constant = CGFloat(dicsDichVu.count * 65)
         listSelectedDichVu.addOptions(dicsDichVu)
+        
+        
     }
 }
 

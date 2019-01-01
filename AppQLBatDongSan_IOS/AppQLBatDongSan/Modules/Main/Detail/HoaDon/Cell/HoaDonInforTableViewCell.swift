@@ -22,12 +22,12 @@ class HoaDonInforTableViewCell: UITableViewCell {
         // Initialization code
     }
 
-    func binding(dichvu: DichVuDocument) {
-        lbTenDichVu.text = dichvu.nameDichVu
-        lbSoCu.text = dichvu.soCu
-        lbSoMoi.text = dichvu.soMoi
-        lbDonGia.text = dichvu.donGia.toNumberString(decimal: false)
-        lbThanhTien.text = dichvu.thanhTien.toNumberString(decimal: false)
+    func binding(CTHD: ChiTietHoaDon) {
+        lbTenDichVu.text = CTHD.TenDichVu
+        lbSoCu.text = CTHD.SoCu
+        lbSoMoi.text = CTHD.SoMoi
+        lbDonGia.text = CTHD.DonGia.toNumberString(decimal: false)
+        lbThanhTien.text = "\(CTHD.thanhTien)".toNumberString(decimal: false)
     }
 
 }

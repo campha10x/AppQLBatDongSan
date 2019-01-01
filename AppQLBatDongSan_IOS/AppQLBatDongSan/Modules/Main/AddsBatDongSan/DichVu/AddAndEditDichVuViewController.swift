@@ -64,7 +64,6 @@ class AddAndEditDichVuViewController: UIViewController {
         dichvu.idDichVu = isCreateNew ? "" : self.dichvu?.idDichVu ?? ""
         dichvu.TenDichVu = tfTenDV.text!
         dichvu.DonVi = tfDonVi.text!
-        Storage.shared.addOrUpdate([dichvu], type: DichVu.self)
         
         let parameters: [String: String] = [
             "IdDichVu" : dichvu.idDichVu,

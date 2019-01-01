@@ -29,6 +29,7 @@
 		687746AE21C671EC00A24264 /* MyServiceGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 687746AD21C671EC00A24264 /* MyServiceGroupView.swift */; };
 		687746B021C6729B00A24264 /* MyServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 687746AF21C6729B00A24264 /* MyServiceView.swift */; };
 		687746B321C685F100A24264 /* HopDong_DichVu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 687746B221C685F100A24264 /* HopDong_DichVu.swift */; };
+		68C5FBBF21D7C84E0047F844 /* ChiTietHoaDon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C5FBBE21D7C84E0047F844 /* ChiTietHoaDon.swift */; };
 		68D12DA921C2053E00CC9664 /* HoaDonInforViewConroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D12DA821C2053E00CC9664 /* HoaDonInforViewConroller.swift */; };
 		68D12DAC21C2062D00CC9664 /* HoaDonInforTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D12DAB21C2062D00CC9664 /* HoaDonInforTableViewCell.swift */; };
 		68D2547921C0021D006C829E /* HopDongInforViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D2547821C0021D006C829E /* HopDongInforViewController.swift */; };
@@ -143,6 +144,7 @@
 		687746AD21C671EC00A24264 /* MyServiceGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyServiceGroupView.swift; sourceTree = "<group>"; };
 		687746AF21C6729B00A24264 /* MyServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyServiceView.swift; sourceTree = "<group>"; };
 		687746B221C685F100A24264 /* HopDong_DichVu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HopDong_DichVu.swift; sourceTree = "<group>"; };
+		68C5FBBE21D7C84E0047F844 /* ChiTietHoaDon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChiTietHoaDon.swift; sourceTree = "<group>"; };
 		68D12DA821C2053E00CC9664 /* HoaDonInforViewConroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoaDonInforViewConroller.swift; sourceTree = "<group>"; };
 		68D12DAB21C2062D00CC9664 /* HoaDonInforTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoaDonInforTableViewCell.swift; sourceTree = "<group>"; };
 		68D2547821C0021D006C829E /* HopDongInforViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HopDongInforViewController.swift; sourceTree = "<group>"; };
@@ -335,6 +337,14 @@
 			path = HopDong_DichVu;
 			sourceTree = "<group>";
 		};
+		68C5FBBD21D7C71F0047F844 /* ChiTietHoaDon */ = {
+			isa = PBXGroup;
+			children = (
+				68C5FBBE21D7C84E0047F844 /* ChiTietHoaDon.swift */,
+			);
+			path = ChiTietHoaDon;
+			sourceTree = "<group>";
+		};
 		68D12DA721C2051500CC9664 /* HoaDon */ = {
 			isa = PBXGroup;
 			children = (
@@ -525,6 +535,7 @@
 		CE2EFDDD215F73AD0036F45E /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				68C5FBBD21D7C71F0047F844 /* ChiTietHoaDon */,
 				687746B121C685DB00A24264 /* HopDong_DichVu */,
 				6800086421B373720000EFF6 /* CanHo_DichVu */,
 				CE8E6BAA218D454F000187AE /* HopDong */,
@@ -1200,6 +1211,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				687746B021C6729B00A24264 /* MyServiceView.swift in Sources */,
+				68C5FBBF21D7C84E0047F844 /* ChiTietHoaDon.swift in Sources */,
 				CE3F68922159384D00F12672 /* SplashViewController.swift in Sources */,
 				6800087821B42A310000EFF6 /* DayAxisValueFormatter.swift in Sources */,
 				CE7991A321849F3D00AAEE5A /* QLPhongTableViewCell.swift in Sources */,

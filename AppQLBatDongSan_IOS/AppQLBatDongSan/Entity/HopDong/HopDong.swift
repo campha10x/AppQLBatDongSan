@@ -24,6 +24,39 @@ class HopDong: BaseRealmObject, NSCopying {
     @objc dynamic var SoDienBd: String = ""
     @objc dynamic var SoNuocBd: String = ""
     
+    var active: Bool {
+        get {
+            let month = returnMonth(ngayTao: self.NgayKT)
+            let year = returnYear(ngayTao: self.NgayKT)
+            let monthNow = Calendar.current.component(.month, from: Date())
+            let yearNow = Calendar.current.component(.year, from: Date())
+            if month < monthNow && year == yearNow {
+                return false
+            } else {
+                return true
+            }
+        }
+
+    }
+    
+    func returnMonth(ngayTao: String) -> Int {
+        if let ngayTaoConvert = ngayTao.toDate(format: "MM/dd/yyyy HH:mm:ss") {
+            return Calendar.current.component(.month, from: ngayTaoConvert)
+        } else {
+            return 0
+        }
+        
+    }
+    
+    func returnYear(ngayTao: String) -> Int {
+        if let ngayTaoConvert = ngayTao.toDate(format: "MM/dd/yyyy HH:mm:ss") {
+            return Calendar.current.component(.year, from: ngayTaoConvert)
+        } else {
+            return 0
+        }
+        
+    }
+    
     var maHopDong: String {
         let id = (Int(IdHopDong) ?? 0) + 9444001
         return "HD-\(id)"

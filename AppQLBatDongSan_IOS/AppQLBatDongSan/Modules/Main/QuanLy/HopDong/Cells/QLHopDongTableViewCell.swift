@@ -18,6 +18,7 @@ class QLHopDongTableViewCell: UITableViewCell {
     @IBOutlet weak var lblNgayBatDau: UILabel!
     @IBOutlet weak var lblSoTienCoc: UILabel!
     @IBOutlet weak var lblNgayKetThuc: UILabel!
+    @IBOutlet weak var lblTrangThaiHD: UILabel!
     
     @IBOutlet weak var btnDelete: UIButton!
     @IBOutlet weak var btnEdit: UIButton!
@@ -52,8 +53,18 @@ class QLHopDongTableViewCell: UITableViewCell {
         lblSoTienCoc.text = hopdong.SoTienCoc.toNumberString(decimal: false)
         lblNgayBatDau.text = hopdong.NgayBD.formatDate()
         lblNgayKetThuc.text = hopdong.NgayKT.formatDate()
+
+        if !hopdong.active {
+            lblTrangThaiHD.text = "Hết thời hạn"
+            lblTrangThaiHD.textColor = UIColor.red
+        }else {
+            lblTrangThaiHD.text = "Còn thời hạn"
+            lblTrangThaiHD.textColor = UIColor.black
+        }
     }
 
+   
+    
     @IBAction func eventClickShowHopDong(_ sender: Any) {
         if let delegate = self.delegate {
             delegate.eventShowHopDong?(self.index)

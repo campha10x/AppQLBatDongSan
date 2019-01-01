@@ -25,9 +25,14 @@ class HopDong_DichVu: BaseRealmObject, NSCopying {
         self.IdHopDong = json["idHopDong"].stringValue
         self.IdDichVu = json["idDichVu"].stringValue
         self.DonGia = json["donGia"].stringValue
-        self.IdHopDong_DichVu = json["IdHopDong_DichVu"].stringValue
+        self.IdHopDong_DichVu = json["idHopDong_DichVu"].stringValue
     }
     
+    func toDics() -> [String: String] {
+        return ["IdHopDong": IdHopDong,
+                "IdDichVu" : IdDichVu,
+                "DonGia": DonGia]
+    }
     
     func copy(with zone: NSZone? = nil) -> Any {
         let copy = HopDong_DichVu()

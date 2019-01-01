@@ -45,7 +45,8 @@ import UIKit
     override func restyle() {
         super.restyle()
         self.layer.cornerRadius = MyUI.buttonCornerRadius
-        self.setBackgroundColor(color:  UIColor(netHex: 0x1fa79d), forState: .normal)
+//        self.setBackgroundColor(color:  UIColor(netHex: 0x1fa79d), forState: .normal)
+        self.backgroundColor = UIColor(netHex: 0x1fa79d)
         self.setTitleColor(.white, for: .normal)
         self.titleLabel?.font = UIFont.boldSystemFont(ofSize: 13)
         self.addTarget(self, action: #selector(onPressed), for: .touchUpInside)

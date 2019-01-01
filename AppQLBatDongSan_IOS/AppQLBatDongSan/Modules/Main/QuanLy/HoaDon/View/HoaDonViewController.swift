@@ -60,13 +60,14 @@
             loadHopDong()
             loadDichvu()
             loadHopDong_DichVu()
+            loadChiTietHoaDon()
             dispatch?.notify(queue: .main, execute: {
                 if AppState.shared.typeLogin == TypeLogin.ChuCanho.rawValue {
                     
                 } else {
                     self.btnCreateNew.isHidden = true
                     guard let khachHangObject = AppState.shared.khachHangObject else { return }
-                    if let idCanHo = self.listHopDong.filter({$0.IdKhachHang == khachHangObject.idKhachHang}).first?.IdCanHo {
+                    if let idCanHo = self.listHopDong.filter({$0.IdKhachHang == khachHangObject.idKhachHang && $0.active }).first?.IdCanHo {
                         self.listHoaDon = self.listHoaDon.filter({ $0.IdCanHo == idCanHo})
                         self.listSearchHoaDon = self.listHoaDon
                     } else {
@@ -84,6 +85,28 @@
             cbbThang.setOptions(months, placeholder: nil, selectedIndex: nil)
             cbbThang.delegate = self
             tableViewHoaDon.allowsSelection = false
+        }
+        
+        func loadChiTietHoaDon()  {
+            SVProgressHUD.show()
+            dispatch?.enter()
+            manager.request("https://localhost:5001/ChiTietHoaDon/GetListChiTietHoaDon", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil).responseJSON { (responseObject) in
+                self.dispatch?.leave()
+                SVProgressHUD.dismiss()
+                do {
+                    let json: JSON = try JSON.init(data: responseObject.data! )
+                    var listCTHD  = json.arrayValue.map({ChiTietHoaDon.init(json: $0)})
+                    listCTHD.forEach({ (hopdong) in
+                        if let hopdongCopy = hopdong.copy() as? ChiTietHoaDon {
+                            Storage.shared.addOrUpdate([hopdongCopy], type: ChiTietHoaDon.self)
+                        }
+                    })
+                } catch {
+                    if let error = responseObject.error {
+                        Notice.make(type: .Error, content: error.localizedDescription).show()
+                    }
+                }
+            }
         }
         
         func loadDichvu()  {

@@ -23,11 +23,22 @@ namespace BatDongSanAPI.Controllers
         }
 
         [HttpPost("/HopDong_DichVu/AddOrUpdateHopDong_DichVu")]
-        public JsonResult EditHopDong_DichVu([FromHeader(Name = "IdHopDong")] string IdHopDong, [FromHeader(Name = "IdDichVu")] string IdDichVu, [FromHeader(Name = "DonGia")] string DonGia)
+        public JsonResult EditHopDong_DichVu([FromBody] List<HopDong_DichVu> listHopDong_DichVuObject)
         {
             BatDongSanStoreContext context = HttpContext.RequestServices.GetService(typeof(BatDongSanStoreContext)) as BatDongSanStoreContext;
-            HopDong_DichVu a = context.AddOrUpdateHopDong_DichVu(IdHopDong,IdDichVu,DonGia);
-            return Json(a);
+            context.removeHopDong_DichVu(listHopDong_DichVuObject[0].IdHopDong);
+            List<HopDong_DichVu> listCTHD = new List<HopDong_DichVu>();
+            for (int i = 0; i < listHopDong_DichVuObject.Count; i++)
+            {
+                HopDong_DichVu a = context.addHopDong_DichVu(listHopDong_DichVuObject[i].IdHopDong,listHopDong_DichVuObject[i].IdDichVu, listHopDong_DichVuObject[i].DonGia);
+                //listCTHD.Append(a);
+                listCTHD.Add(a);
+            }
+            return Json(listCTHD);
+
+            //BatDongSanStoreContext context = HttpContext.RequestServices.GetService(typeof(BatDongSanStoreContext)) as BatDongSanStoreContext;
+            //HopDong_DichVu a = context.AddOrUpdateHopDong_DichVu(hopdongDichVuObject.IdHopDong, hopdongDichVuObject.IdDichVu, hopdongDichVuObject.DonGia);
+            //return Json(a);
         }
 
 
