@@ -11,12 +11,21 @@ namespace BatDongSanAPI.Controllers
 
     public class AccountController : Controller
     {
-        // GET: /<controller>/
-        [HttpGet("/Account/Index/{email}/{password}")]
-        public IActionResult Index(string email, string password)
+
+        [HttpGet("/Account/GetListAccounts")]
+        public JsonResult GetListAccounts()
         {
             BatDongSanStoreContext context = HttpContext.RequestServices.GetService(typeof(BatDongSanStoreContext)) as BatDongSanStoreContext;
-            Account a = context.GetInformationAccount(email, password).First();
+            List<Account> listHopDong = context.GetListAccounts();
+            return Json(listHopDong);
+        }
+
+        // GET: /<controller>/
+        [HttpPost("/Account/Index")]
+        public IActionResult Index([FromBody]Account accountObject)
+        {
+            BatDongSanStoreContext context = HttpContext.RequestServices.GetService(typeof(BatDongSanStoreContext)) as BatDongSanStoreContext;
+            Account a = context.GetInformationAccount(accountObject.Email, accountObject.MatKhau).First();
             return Json(a);
         }
 

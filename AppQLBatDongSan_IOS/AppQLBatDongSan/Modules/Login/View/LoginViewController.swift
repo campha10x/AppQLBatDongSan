@@ -56,34 +56,35 @@ class LoginViewController: UIViewController {
     func login(username email: String, password: String, typeLogin: TypeLogin) {
         SVProgressHUD.show()
         if typeLogin.rawValue == TypeLogin.ChuCanho.rawValue {
-            manager.request("https://localhost:5001/Account/Index/\(email)/\(password)", method: .get, parameters: [:], encoding: JSONEncoding(options: [])).responseJSON { response in
+            let parameters: [String: String ] = ["Email": email, "MatKhau": password]
+            self.manager.request("https://localhost:5001/Account/Index", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (responseObject) in
+                SVProgressHUD.dismiss()
                 do {
-                    let json: JSON = try JSON.init(data: response.data! )
+                    let json: JSON = try JSON.init(data: responseObject.data! )
                     let account  = Account.init(json: json)
-//                    Storage.shared.addOrUpdate([account], type: Account.self)
+                    //                    Storage.shared.addOrUpdate([account], type: Account.self)
                     AppState.shared.saveAccount(account: account, typeLogin: typeLogin)
                     
                     self.presentMainScreen( animated: true)
-                } catch {
                     
-                    self.loginFail(error: error.localizedDescription)
+                } catch {
+                     self.loginFail(error: error.localizedDescription)
                 }
-                SVProgressHUD.dismiss()
             }
         } else {
-            manager.request("https://localhost:5001/KhachHang/Index/\(email)/\(password)", method: .get, parameters: [:], encoding: JSONEncoding(options: [])).responseJSON { response in
+            let parameters: [String: String ] = ["Email": email, "Password": password]
+            self.manager.request("https://localhost:5001/KhachHang/Index", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (responseObject) in
+                SVProgressHUD.dismiss()
                 do {
-                    let json: JSON = try JSON.init(data: response.data! )
+                    let json: JSON = try JSON.init(data: responseObject.data! )
                     let khachHang  = KhachHang.init(json: json)
-//                    Storage.shared.addOrUpdate([khachHang], type: KhachHang.self)
-                    AppState.shared.saveKhachHang(khachHang: khachHang, typeLogin: typeLogin)
-                    
+                    //                    Storage.shared.addOrUpdate([account], type: Account.self)
+                   AppState.shared.saveKhachHang(khachHang: khachHang, typeLogin: typeLogin)
                     self.presentMainScreen( animated: true)
-                } catch {
                     
+                } catch {
                     self.loginFail(error: error.localizedDescription)
                 }
-                SVProgressHUD.dismiss()
             }
         }
        

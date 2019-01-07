@@ -19,11 +19,11 @@ namespace BatDongSanAPI.Controllers
         }
 
 
-        [HttpGet("/KhachHang/Index/{email}/{password}")]
-        public IActionResult Index(string email, string password)
+        [HttpPost("/KhachHang/Index")]
+        public IActionResult Index([FromBody]KhachHang accountObject)
         {
             BatDongSanStoreContext context = HttpContext.RequestServices.GetService(typeof(BatDongSanStoreContext)) as BatDongSanStoreContext;
-            KhachHang a = context.GetInformationKhachHang(email, password).First();
+            KhachHang a = context.GetInformationKhachHang(accountObject.Email, accountObject.Password).First();
             return Json(a);
         }
 

@@ -12,7 +12,7 @@ import RealmSwift
 
 class HopDong: BaseRealmObject, NSCopying {
     @objc dynamic var IdHopDong: String = ""
-    @objc dynamic var ChuHopDong: String = ""
+    @objc dynamic var IdChuCanHo: String = ""
     @objc dynamic var IdCanHo: String = ""
     @objc dynamic var SoTienCoc: String = ""
     @objc dynamic var NgayBD: String = ""
@@ -30,7 +30,7 @@ class HopDong: BaseRealmObject, NSCopying {
             let year = returnYear(ngayTao: self.NgayKT)
             let monthNow = Calendar.current.component(.month, from: Date())
             let yearNow = Calendar.current.component(.year, from: Date())
-            if month < monthNow && year == yearNow {
+            if (month < monthNow && year == yearNow || year < yearNow ){
                 return false
             } else {
                 return true
@@ -69,7 +69,7 @@ class HopDong: BaseRealmObject, NSCopying {
     convenience init(json: JSON ) {
         self.init()
         self.IdHopDong = json["idHopDong"].stringValue
-        self.ChuHopDong = json["chuHopDong"].stringValue
+        self.IdChuCanHo = json["idChuCanHo"].stringValue
         self.IdCanHo = json["idCanHo"].stringValue
         self.SoTienCoc = json["soTienCoc"].stringValue
         self.NgayBD = json["ngayBD"].stringValue
@@ -86,7 +86,7 @@ class HopDong: BaseRealmObject, NSCopying {
     func copy(with zone: NSZone? = nil) -> Any {
         let copy = HopDong()
         copy.IdHopDong = self.IdHopDong
-        copy.ChuHopDong = self.ChuHopDong
+        copy.IdChuCanHo = self.IdChuCanHo
         copy.IdCanHo = self.IdCanHo
         copy.SoTienCoc = self.SoTienCoc
         copy.NgayBD = self.NgayBD

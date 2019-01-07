@@ -120,6 +120,9 @@ class QLKhachHangViewController: UIViewController {
     }
     
     func customized() {
+        cbbCanHo.textColor = MyColor.veryblack
+        cbbCanHo.dropdownBackgroundColor = MyColor.quiteLightcyan
+        cbbCanHo.dropdownForcegroundColor = MyColor.white
         viewHeader.layer.borderColor = UIColor.lightGray.cgColor
         viewHeader.layer.borderWidth = 1.0
         btnCreateNew.layer.borderColor = UIColor.red.cgColor
@@ -131,7 +134,6 @@ class QLKhachHangViewController: UIViewController {
         viewBody.layer.borderWidth = 2.0
         viewBody.layer.borderColor = UIColor.init(netHex: 0x5D7AFF).cgColor
     }
-    
 }
 
 extension QLKhachHangViewController: MyComboboxDelegate {

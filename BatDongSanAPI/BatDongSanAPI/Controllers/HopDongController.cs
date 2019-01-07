@@ -31,7 +31,7 @@ namespace BatDongSanAPI.Controllers
         public JsonResult EditHopDong([FromBody]HopDong hopdongObject)
         {
             BatDongSanStoreContext context = HttpContext.RequestServices.GetService(typeof(BatDongSanStoreContext)) as BatDongSanStoreContext;
-            HopDong a = context.updateHopDong(hopdongObject.IdHopDong, hopdongObject.ChuHopDong, hopdongObject.IdCanHo, hopdongObject.SoTienCoc, hopdongObject.NgayBD, hopdongObject.NgayKT, hopdongObject.GhiChu, hopdongObject.IdKhachHang, hopdongObject.TienDien, hopdongObject.TienNuoc, hopdongObject.SoDienBd, hopdongObject.SoNuocBd);
+            HopDong a = context.updateHopDong(hopdongObject.IdHopDong, hopdongObject.IdChuCanHo, hopdongObject.IdCanHo, hopdongObject.SoTienCoc, hopdongObject.NgayBD, hopdongObject.NgayKT, hopdongObject.GhiChu, hopdongObject.IdKhachHang, hopdongObject.TienDien, hopdongObject.TienNuoc, hopdongObject.SoDienBd, hopdongObject.SoNuocBd);
             return Json(a);
         }
 
@@ -39,7 +39,7 @@ namespace BatDongSanAPI.Controllers
         public JsonResult AddHopDong([FromBody]HopDong hopdongObject)
         {
             BatDongSanStoreContext context = HttpContext.RequestServices.GetService(typeof(BatDongSanStoreContext)) as BatDongSanStoreContext;
-            HopDong a = context.addHopDong(hopdongObject.ChuHopDong, hopdongObject.IdCanHo, hopdongObject.SoTienCoc, hopdongObject.NgayBD, hopdongObject.NgayKT, hopdongObject.GhiChu, hopdongObject.IdKhachHang, hopdongObject.TienDien, hopdongObject.TienNuoc, hopdongObject.SoDienBd, hopdongObject.SoNuocBd);
+            HopDong a = context.addHopDong(hopdongObject.IdChuCanHo, hopdongObject.IdCanHo, hopdongObject.SoTienCoc, hopdongObject.NgayBD, hopdongObject.NgayKT, hopdongObject.GhiChu, hopdongObject.IdKhachHang, hopdongObject.TienDien, hopdongObject.TienNuoc, hopdongObject.SoDienBd, hopdongObject.SoNuocBd);
             return Json(a);
         }
     }

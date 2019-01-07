@@ -54,6 +54,9 @@ class AddAndEditHopDongViewController: UIViewController {
     var listDichVu_CanHo: [CanHo_DichVu] = []
      var listDichVu: [DichVu] = []
     var listDichVu_HopDong: [HopDong_DichVu] = []
+    var idChuCanHo: String = ""
+    var listHopDong: [HopDong] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         cbbCanHo.textColor = MyColor.black
@@ -62,7 +65,12 @@ class AddAndEditHopDongViewController: UIViewController {
         cbbCanHo.dropdownForcegroundColor = .white
         
         configService()
-        listCanHo = Storage.shared.getObjects(type: CanHo.self) as! [CanHo]
+        listHopDong = Storage.shared.getObjects(type: HopDong.self) as! [HopDong]
+        var listCanHoDB = Storage.shared.getObjects(type: CanHo.self) as! [CanHo]
+        listCanHo = listCanHoDB.filter({ (item) -> Bool in
+            return listHopDong.filter({$0.IdCanHo == item.IdCanHo}).first == nil ? true : false
+        })
+        
         listKhachHang = Storage.shared.getObjects(type: KhachHang.self) as! [KhachHang]
         listDichVu_HopDong = Storage.shared.getObjects(type: HopDong_DichVu.self) as! [HopDong_DichVu]
         listDichVu_CanHo = Storage.shared.getObjects(type: CanHo_DichVu.self) as! [CanHo_DichVu]
@@ -76,8 +84,10 @@ class AddAndEditHopDongViewController: UIViewController {
         labelHeaderTitle.text = isCreateNew == true ? "Tạo hợp đồng" : "Sửa hợp đồng"
         let accounts = Storage.shared.getObjects(type: Account.self) as! [Account]
         tfTenChuHD.text = accounts.filter({ $0.email == AppState.shared.getAccount()}).first?.hoten ?? ""
+        idChuCanHo = accounts.filter({ $0.email == AppState.shared.getAccount()}).first?.IdAccount ?? ""
         if !isCreateNew {
-            tfTenChuHD.text = self.hopdong?.ChuHopDong
+             idChuCanHo = accounts.filter({ $0.email == AppState.shared.getAccount()}).first?.IdAccount ?? ""
+            tfTenChuHD.text = accounts.filter({ $0.IdAccount == self.hopdong?.IdChuCanHo }).first?.hoten ?? ""
             if let index = self.listCanHo.index(where: { $0.IdCanHo == self.hopdong?.IdCanHo}) {
                 self.cbbCanHo.setOptions(self.listCanHo.map({$0.maCanHo}), placeholder: nil, selectedIndex: index)
             } else {
@@ -353,7 +363,6 @@ class AddAndEditHopDongViewController: UIViewController {
             
         }
         hopdong.IdHopDong = isCreateNew ? "" : self.hopdong?.IdHopDong ?? ""
-        hopdong.ChuHopDong = tfTenChuHD.text ?? ""
         hopdong.SoTienCoc = "\(tfTienCoc.getValue())"
         hopdong.NgayBD = "\(btnNgayBatDauCalendar.date)"
         hopdong.NgayKT = "\(btnNgayKTCalendar.date)"
@@ -369,7 +378,7 @@ class AddAndEditHopDongViewController: UIViewController {
         }
         let parameters: [String: String] = [
             "IdHopDong" : hopdong.IdHopDong,
-            "ChuHopDong" : hopdong.ChuHopDong,
+            "IdChuCanHo" : self.idChuCanHo,
             "IdCanHo" : hopdong.IdCanHo ,
             "SoTienCoc" : hopdong.SoTienCoc,
             "IdKhachHang": hopdong.IdKhachHang,

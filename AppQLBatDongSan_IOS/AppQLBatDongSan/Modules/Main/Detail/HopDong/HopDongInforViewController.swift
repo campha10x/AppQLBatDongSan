@@ -50,7 +50,8 @@ class HopDongInforViewController: UIViewController {
         listdichVu = Storage.shared.getObjects(type: DichVu.self) as! [DichVu]
         listDichVu_HopDong = Storage.shared.getObjects(type: HopDong_DichVu.self) as! [HopDong_DichVu]
         let accounts = Storage.shared.getObjects(type: Account.self) as! [Account]
-        accountObject = accounts.filter({$0.email == AppState.shared.getAccount()}).first?.copy() as? Account
+        accountObject = accounts.filter({$0.IdAccount == self.hopDongObject?.IdChuCanHo}).first?.copy() as? Account
+
         let listKhachHang = Storage.shared.getObjects(type: KhachHang.self) as! [KhachHang]
         khachHangObject = listKhachHang.filter({ $0.idKhachHang == hopDongObject?.IdKhachHang }).first?.copy() as? KhachHang
         let listCanHo = Storage.shared.getObjects(type: CanHo.self) as! [CanHo]

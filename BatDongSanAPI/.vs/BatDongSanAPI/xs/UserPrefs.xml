@@ -1,21 +1,13 @@
 ﻿<Properties StartupConfiguration="{5052F413-D199-413A-BD23-A2BD31F1F3AE}|Default">
   <MonoDevelop.Ide.ItemProperties.BatDongSanAPI PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="BatDongSanAPI/Controllers/ChiTietHoaDon.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="BatDongSanAPI/Models/KhachHang.cs">
     <Files>
-      <File FileName="BatDongSanAPI/Controllers/ChiTietHoaDon.cs" Line="42" Column="52" />
-      <File FileName="BatDongSanAPI/Models/BatDongSanStoreContext.cs" Line="564" Column="31" />
-      <File FileName="BatDongSanAPI/Controllers/CanHoController.cs" Line="36" Column="10" />
-      <File FileName="BatDongSanAPI/Models/ChiTietHoaDon.cs" Line="11" Column="29" />
-      <File FileName="BatDongSanAPI/Controllers/CanHo_DichVuController.cs" Line="18" Column="49" />
-      <File FileName="BatDongSanAPI/Controllers/DichVuController.cs" Line="1" Column="1" />
-      <File FileName="BatDongSanAPI/Controllers/HoaDonController.cs" Line="52" Column="1" />
-      <File FileName="BatDongSanAPI/Controllers/HopDong_DichVuController.cs" Line="33" Column="51" />
-      <File FileName="BatDongSanAPI/Models/CanHo.cs" Line="1" Column="1" />
-      <File FileName="BatDongSanAPI/Models/CanHo_DichVu.cs" Line="1" Column="1" />
-      <File FileName="BatDongSanAPI/Controllers/AccountController.cs" Line="17" Column="10" />
-      <File FileName="BatDongSanAPI/Controllers/HopDongController.cs" Line="1" Column="1" />
-      <File FileName="BatDongSanAPI/Models/HopDong_DichVu.cs" Line="8" Column="43" />
-      <File FileName="BatDongSanAPI/Controllers/KhachHangController.cs" Line="1" Column="1" />
+      <File FileName="BatDongSanAPI/Controllers/AccountController.cs" Line="25" Column="36" />
+      <File FileName="BatDongSanAPI/Controllers/HopDongController.cs" Line="31" Column="70" />
+      <File FileName="BatDongSanAPI/Models/Account.cs" Line="15" Column="37" />
+      <File FileName="BatDongSanAPI/Controllers/KhachHangController.cs" Line="25" Column="30" />
+      <File FileName="BatDongSanAPI/Models/KhachHang.cs" Line="19" Column="31" />
+      <File FileName="BatDongSanAPI/Models/BatDongSanStoreContext.cs" Line="8" Column="18" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

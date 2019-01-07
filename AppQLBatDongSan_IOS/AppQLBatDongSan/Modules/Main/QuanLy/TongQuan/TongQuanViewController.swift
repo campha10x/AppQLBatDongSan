@@ -62,6 +62,7 @@ class TongQuanViewController: UIViewController {
         loadKhachHang()
         loadDichvu()
         loadCanHo_DichVu()
+        loadListAccounts()
         dispatch?.notify(queue: .main, execute: {
             self.config()
         })
@@ -396,6 +397,28 @@ class TongQuanViewController: UIViewController {
                 listCTHD.forEach({ (hopdong) in
                     if let hopdongCopy = hopdong.copy() as? ChiTietHoaDon {
                         Storage.shared.addOrUpdate([hopdongCopy], type: ChiTietHoaDon.self)
+                    }
+                })
+            } catch {
+                if let error = responseObject.error {
+                    Notice.make(type: .Error, content: error.localizedDescription).show()
+                }
+            }
+        }
+    }
+    
+    func loadListAccounts()  {
+        SVProgressHUD.show()
+        dispatch?.enter()
+        manager.request("https://localhost:5001/Account/GetListAccounts", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil).responseJSON { (responseObject) in
+            self.dispatch?.leave()
+            SVProgressHUD.dismiss()
+            do {
+                let json: JSON = try JSON.init(data: responseObject.data! )
+                var listCTHD  = json.arrayValue.map({Account.init(json: $0)})
+                listCTHD.forEach({ (hopdong) in
+                    if let hopdongCopy = hopdong.copy() as? ChiTietHoaDon {
+                        Storage.shared.addOrUpdate([hopdongCopy], type: Account.self)
                     }
                 })
             } catch {

@@ -212,7 +212,7 @@ class ListDoanhThuViewController: UIViewController {
                 self.listPhieuChi  = json.arrayValue.map({PhieuChi.init(json: $0)})
                 self.listPhieuChi.forEach({ (phieuchi) in
                     if let phieuchiCopy = phieuchi.copy() as? PhieuChi {
-                        Storage.shared.addOrUpdate([phieuchi], type: PhieuChi.self)
+                        Storage.shared.addOrUpdate([phieuchiCopy], type: PhieuChi.self)
                     }
                 })
             } catch {
@@ -230,7 +230,12 @@ class ListDoanhThuViewController: UIViewController {
         let picker = UIDatePicker()
         picker.datePickerMode = .date
         picker.date = btn.date
-        picker.addTarget(self, action: #selector(pickerChangedDate), for: .valueChanged)
+        if btn == btnCalendarFrom {
+            picker.addTarget(self, action: #selector(pickerChangedDateFrom), for: .valueChanged)
+        } else {
+            picker.addTarget(self, action: #selector(pickerChangedDateTo), for: .valueChanged)
+        }
+
         let controller = UIViewController()
         controller.view = picker
         controller.modalPresentationStyle = .popover
@@ -241,14 +246,13 @@ class ListDoanhThuViewController: UIViewController {
         self.present(controller, animated: true, completion: nil)
     }
     
-    @objc func pickerChangedDate(picker: UIDatePicker) {
-        if picker == btnCalendarFrom {
-            btnCalendarFrom.date = picker.date
-        } else {
-            btnCalenderTo.date = picker.date
-        }
+    @objc func pickerChangedDateFrom(picker: UIDatePicker) {
+        btnCalendarFrom.date = picker.date
     }
     
+    @objc func pickerChangedDateTo(picker: UIDatePicker) {
+        btnCalenderTo.date = picker.date
+    }
         
 
     @IBAction func eventClickThongKe(_ sender: Any) {

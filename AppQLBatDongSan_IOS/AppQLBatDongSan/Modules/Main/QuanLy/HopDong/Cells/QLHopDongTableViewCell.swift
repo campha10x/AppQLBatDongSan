@@ -48,7 +48,12 @@ class QLHopDongTableViewCell: UITableViewCell {
         self.index = index
         let canHo = listCanHo.filter({$0.IdCanHo == hopdong.IdCanHo }).first
         lblMaHopDong.text = hopdong.maHopDong
-        lblChuHopDong.text = hopdong.ChuHopDong
+        let listAccount = Storage.shared.getObjects(type: Account.self) as! [Account]
+        if let hoten = listAccount.filter({ $0.IdAccount == hopdong.IdChuCanHo}).first?.hoten {
+            lblChuHopDong.text = hoten
+        } else {
+            lblChuHopDong.text = "None"
+        }
         lblCanHo.text = canHo?.maCanHo
         lblSoTienCoc.text = hopdong.SoTienCoc.toNumberString(decimal: false)
         lblNgayBatDau.text = hopdong.NgayBD.formatDate()

@@ -58,6 +58,7 @@
             loadHoaDon()
             loadListPhieuThu()
             loadHopDong()
+            loadListAccounts()
             loadDichvu()
             loadHopDong_DichVu()
             loadChiTietHoaDon()
@@ -85,6 +86,28 @@
             cbbThang.setOptions(months, placeholder: nil, selectedIndex: nil)
             cbbThang.delegate = self
             tableViewHoaDon.allowsSelection = false
+        }
+        
+        func loadListAccounts()  {
+            SVProgressHUD.show()
+            dispatch?.enter()
+            manager.request("https://localhost:5001/Account/GetListAccounts", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil).responseJSON { (responseObject) in
+                self.dispatch?.leave()
+                SVProgressHUD.dismiss()
+                do {
+                    let json: JSON = try JSON.init(data: responseObject.data! )
+                    var listCTHD  = json.arrayValue.map({Account.init(json: $0)})
+                    listCTHD.forEach({ (hopdong) in
+                        if let hopdongCopy = hopdong.copy() as? Account {
+                            Storage.shared.addOrUpdate([hopdongCopy], type: Account.self)
+                        }
+                    })
+                } catch {
+                    if let error = responseObject.error {
+                        Notice.make(type: .Error, content: error.localizedDescription).show()
+                    }
+                }
+            }
         }
         
         func loadChiTietHoaDon()  {
