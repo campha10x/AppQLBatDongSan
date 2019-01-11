@@ -66,11 +66,7 @@ class AddAndEditHopDongViewController: UIViewController {
         
         configService()
         listHopDong = Storage.shared.getObjects(type: HopDong.self) as! [HopDong]
-        var listCanHoDB = Storage.shared.getObjects(type: CanHo.self) as! [CanHo]
-        listCanHo = listCanHoDB.filter({ (item) -> Bool in
-            return listHopDong.filter({$0.IdCanHo == item.IdCanHo}).first == nil ? true : false
-        })
-        
+        listCanHo = Storage.shared.getObjects(type: CanHo.self) as! [CanHo]
         listKhachHang = Storage.shared.getObjects(type: KhachHang.self) as! [KhachHang]
         listDichVu_HopDong = Storage.shared.getObjects(type: HopDong_DichVu.self) as! [HopDong_DichVu]
         listDichVu_CanHo = Storage.shared.getObjects(type: CanHo_DichVu.self) as! [CanHo_DichVu]
@@ -86,6 +82,9 @@ class AddAndEditHopDongViewController: UIViewController {
         tfTenChuHD.text = accounts.filter({ $0.email == AppState.shared.getAccount()}).first?.hoten ?? ""
         idChuCanHo = accounts.filter({ $0.email == AppState.shared.getAccount()}).first?.IdAccount ?? ""
         if !isCreateNew {
+            listCanHo = listCanHo.filter({ (item) -> Bool in
+                return listHopDong.filter({$0.IdCanHo == item.IdCanHo && $0.active && $0.IdCanHo != hopdong?.IdCanHo }).first == nil ? true : false
+            })
              idChuCanHo = accounts.filter({ $0.email == AppState.shared.getAccount()}).first?.IdAccount ?? ""
             tfTenChuHD.text = accounts.filter({ $0.IdAccount == self.hopdong?.IdChuCanHo }).first?.hoten ?? ""
             if let index = self.listCanHo.index(where: { $0.IdCanHo == self.hopdong?.IdCanHo}) {
@@ -109,6 +108,9 @@ class AddAndEditHopDongViewController: UIViewController {
             tfGiaNuoc.setValue(hopdong?.TienNuoc)
             
         } else {
+            listCanHo = listCanHo.filter({ (item) -> Bool in
+                return listHopDong.filter({$0.IdCanHo == item.IdCanHo && $0.active }).first == nil ? true : false
+            })
             self.cbbCanHo.setOptions(self.listCanHo.map({$0.maCanHo}), placeholder: nil, selectedIndex: nil)
             btnNgayBatDauCalendar.date = Date()
             btnNgayKTCalendar.date = Date()

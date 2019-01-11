@@ -431,7 +431,7 @@ class TongQuanViewController: UIViewController {
     
     func config() {
         for item in listCanHo {
-            if listHopDong.filter({ $0.IdCanHo == item.IdCanHo && Calendar.current.compare(Date.init(), to: $0.NgayKT.toDate(format: "MM/dd/yyyy HH:mm:ss" ) ?? Date(), toGranularity: .day) == .orderedAscending }).first != nil{
+            if listHopDong.filter({ $0.IdCanHo == item.IdCanHo && $0.active }).first != nil{
                 slCanHoDaThue = slCanHoDaThue + 1
             } else {
                 listCanHoTrong.append(item)
@@ -473,7 +473,7 @@ class TongQuanViewController: UIViewController {
         let entries = (0..<count).map { (i) -> PieChartDataEntry in
             var value: Double = 0
             if slCanHoConLai != 0 || slCanHoDaThue != 0 {
-                value = Double(i == 0 ? slCanHoConLai : slCanHoDaThue) / Double(slCanHoConLai + slCanHoDaThue)
+                value = Double(i == 0 ? slCanHoDaThue  : slCanHoConLai) / Double(slCanHoConLai + slCanHoDaThue)
             }
             return PieChartDataEntry(value: value * 100,
                                      label: stateCanHo[i],

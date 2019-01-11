@@ -52,6 +52,14 @@ class AccountInformationViewController: UIViewController {
         textviewDiaChi.layer.cornerRadius = 6.0
         textviewDiaChi.layer.borderWidth = 2.0
         textviewDiaChi.layer.borderColor = MyColor.lightGray.cgColor
+        
+        btnCalendarNgayCap.layer.cornerRadius = 6.0
+        btnCalendarNgayCap.layer.borderColor = UIColor.gray.cgColor
+        btnCalendarNgayCap.layer.borderWidth = 1.0
+        
+        btnCalendarNamSinh.layer.cornerRadius = 6.0
+        btnCalendarNamSinh.layer.borderColor = UIColor.gray.cgColor
+        btnCalendarNamSinh.layer.borderWidth = 1.0
     }
     
     func configService() {

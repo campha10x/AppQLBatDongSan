@@ -645,7 +645,7 @@
                                                         <inset key="imageEdgeInsets" minX="-200" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                         <state key="normal" image="icon-calendar"/>
                                                         <connections>
-                                                            <action selector="eventChooseDate:" destination="nwT-06-CIm" eventType="touchUpInside" id="2c2-ZK-dBt"/>
+                                                            <action selector="eventChooseDateNgaySinh:" destination="nwT-06-CIm" eventType="touchUpInside" id="You-cu-kSX"/>
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CMND" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G5i-jb-ll8">
@@ -687,7 +687,7 @@
                                                         <inset key="imageEdgeInsets" minX="-200" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                         <state key="normal" image="icon-calendar"/>
                                                         <connections>
-                                                            <action selector="eventChooseDate:" destination="nwT-06-CIm" eventType="touchUpInside" id="QDJ-qV-K8v"/>
+                                                            <action selector="eventChooseDateNgayCap:" destination="nwT-06-CIm" eventType="touchUpInside" id="eHO-iH-kOl"/>
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nơi cấp" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s1H-Ky-a1P">

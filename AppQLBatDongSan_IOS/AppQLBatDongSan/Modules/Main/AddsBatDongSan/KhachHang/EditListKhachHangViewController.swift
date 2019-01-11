@@ -215,12 +215,12 @@ class EditListKhachHangViewController: UIViewController {
         }
     }
     
-    @IBAction func eventChooseDate(_ sender: Any) {
+    @IBAction func eventChooseDateNgaySinh(_ sender: Any) {
         guard let btn = sender as? MyButtonCalendar else { return  }
         let picker = UIDatePicker()
         picker.datePickerMode = .date
         picker.date = btn.date
-        picker.addTarget(self, action: #selector(pickerChangedDate), for: .valueChanged)
+        picker.addTarget(self, action: #selector(pickerChangedDateNgaySinh), for: .valueChanged)
         let controller = UIViewController()
         controller.view = picker
         controller.modalPresentationStyle = .popover
@@ -232,7 +232,28 @@ class EditListKhachHangViewController: UIViewController {
         
     }
     
-    @objc func pickerChangedDate(picker: UIDatePicker) {
+    @IBAction func eventChooseDateNgayCap(_ sender: Any) {
+        guard let btn = sender as? MyButtonCalendar else { return  }
+        let picker = UIDatePicker()
+        picker.datePickerMode = .date
+        picker.date = btn.date
+        picker.addTarget(self, action: #selector(pickerChangedDateNgayCap), for: .valueChanged)
+        let controller = UIViewController()
+        controller.view = picker
+        controller.modalPresentationStyle = .popover
+        controller.preferredContentSize = CGSize(width: Global.screenSize.width/3, height: Global.screenSize.height/3)
+        controller.popoverPresentationController?.sourceView = btn
+        controller.popoverPresentationController?.sourceRect = btn.bounds
+        controller.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.up
+        self.present(controller, animated: true, completion: nil)
+        
+    }
+    
+    @objc func pickerChangedDateNgayCap(picker: UIDatePicker) {
+        btnNgayCap.date = picker.date
+    }
+    
+    @objc func pickerChangedDateNgaySinh(picker: UIDatePicker) {
         btnNgaySinh.date = picker.date
     }
     

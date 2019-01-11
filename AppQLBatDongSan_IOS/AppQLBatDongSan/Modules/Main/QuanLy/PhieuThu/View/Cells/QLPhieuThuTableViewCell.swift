@@ -22,7 +22,10 @@ class ListPhieuThuTableViewCell: UITableViewCell {
     var onRemovePhieuThu: ((_ index: Int)->())?
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        buttonRemove?.layer.borderColor = UIColor.lightGray.cgColor
+        buttonRemove?.layer.borderWidth = 1.0
+       buttonRemove?.layer.cornerRadius = MyUI.buttonCornerRadius
+        buttonRemove.backgroundColor = UIColor.red
     }
 
     @IBAction func eventRemovePhieuThu(_ sender: Any) {
@@ -37,7 +40,6 @@ class ListPhieuThuTableViewCell: UITableViewCell {
         labelSoTien.text = phieuthu.SoTien.toNumberString(decimal: false)
         labelNgay.text = phieuthu.Ngay.formatDate()
         labelGhiChu.text = phieuthu.GhiChu
-        buttonRemove.backgroundColor = UIColor.red
     }
 
 }

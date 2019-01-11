@@ -14,6 +14,7 @@ class QLDichVuTableViewCell: UITableViewCell {
     
     @IBOutlet weak var lblTenDichVu: UILabel!
     @IBOutlet weak var lblDonvi: UILabel!
+    @IBOutlet weak var btnDelete: UIButton!
     
     
         
@@ -23,6 +24,10 @@ class QLDichVuTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        btnDelete?.layer.borderColor = UIColor.lightGray.cgColor
+        btnDelete?.layer.borderWidth = 1.0
+        btnDelete?.layer.cornerRadius = MyUI.buttonCornerRadius
+        btnDelete?.backgroundColor =  UIColor.red
     }
     
     @IBAction func eventEdit(_ sender: Any) {

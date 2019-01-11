@@ -21,6 +21,7 @@ class QLKhachHangTableViewCell: UITableViewCell {
     @IBOutlet weak var lbCMND: UILabel!
     @IBOutlet weak var lbEmail: UILabel!
     @IBOutlet weak var lbSDT: UILabel!
+    @IBOutlet weak var buttonRemove: UIButton!
     var index: Int = -1
     var delegate: QLKhachHangCellDelegates?
     
@@ -28,7 +29,10 @@ class QLKhachHangTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        buttonRemove?.layer.borderColor = UIColor.lightGray.cgColor
+        buttonRemove?.layer.borderWidth = 1.0
+        buttonRemove?.layer.cornerRadius = MyUI.buttonCornerRadius
+        buttonRemove?.backgroundColor = UIColor.red
     }
 
     @IBAction func eventRemoveKhachHang(_ sender: Any) {

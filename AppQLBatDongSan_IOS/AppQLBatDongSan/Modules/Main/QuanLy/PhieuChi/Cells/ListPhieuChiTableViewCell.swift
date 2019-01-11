@@ -30,7 +30,9 @@ class ListPhieuChiTableViewCell: UITableViewCell {
     var index: Int = -1
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        buttonRemove?.layer.borderColor = UIColor.lightGray.cgColor
+        buttonRemove?.layer.borderWidth = 1.0
+        buttonRemove?.layer.cornerRadius = MyUI.buttonCornerRadius
     }
 
     @IBAction func eventEditPhieuChi(_ sender: Any) {

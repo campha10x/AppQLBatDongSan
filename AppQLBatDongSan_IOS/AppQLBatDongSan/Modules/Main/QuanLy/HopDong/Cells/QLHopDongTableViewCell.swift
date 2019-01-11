@@ -30,6 +30,11 @@ class QLHopDongTableViewCell: UITableViewCell {
     var listCanHo: [CanHo] = Storage.shared.getObjects(type: CanHo.self) as! [CanHo]
     override func awakeFromNib() {
         super.awakeFromNib()
+        btnDelete?.layer.borderColor = UIColor.lightGray.cgColor
+        btnDelete?.layer.borderWidth = 1.0
+        btnDelete?.layer.cornerRadius = MyUI.buttonCornerRadius
+        btnDelete?.backgroundColor = UIColor.red
+        
         if AppState.shared.typeLogin == TypeLogin.NguoiThue.rawValue {
            btnDelete.isHidden = true
             btnEdit.isHidden = true

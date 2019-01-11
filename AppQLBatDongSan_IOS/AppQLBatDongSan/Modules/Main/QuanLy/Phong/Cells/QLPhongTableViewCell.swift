@@ -43,6 +43,10 @@ class QLCanHoTableViewCell: UITableViewCell {
             btnEdit.isHidden = false
             btnRemove.isHidden = false
         }
+        btnRemove?.layer.borderColor = UIColor.lightGray.cgColor
+        btnRemove?.layer.borderWidth = 1.0
+        btnRemove?.layer.cornerRadius = MyUI.buttonCornerRadius
+        btnRemove?.backgroundColor = UIColor.red
         self.imgAnhCanHo.contentMode = .scaleAspectFit
     }
     
