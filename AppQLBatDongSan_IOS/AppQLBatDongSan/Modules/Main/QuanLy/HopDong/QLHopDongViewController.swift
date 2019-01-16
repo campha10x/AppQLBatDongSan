@@ -26,6 +26,7 @@ class QLHopDongViewController: UIViewController {
         configService()
         viewBody.layer.borderWidth = 2.0
         viewBody.layer.borderColor = UIColor.init(netHex: 0x5D7AFF).cgColor
+        viewBody.layer.cornerRadius = MyUI.groupCornerRadius
         tblHopDong.delegate = self
         tblHopDong.dataSource = self
         loadHopDong()

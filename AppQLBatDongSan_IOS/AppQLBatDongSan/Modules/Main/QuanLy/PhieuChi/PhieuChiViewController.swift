@@ -14,6 +14,7 @@ import SwiftyJSON
 class PhieuChiViewController: UIViewController {
     var listPhieuChi: [PhieuChi] = [PhieuChi]()
     
+    @IBOutlet weak var viewPrice: UIView!
     @IBOutlet weak var tblPhieuChi: UITableView!
     @IBOutlet weak var constraintHeightViewBody: NSLayoutConstraint!
     @IBOutlet weak var viewBody: UIView!
@@ -23,8 +24,10 @@ class PhieuChiViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configService()
+        viewPrice.layer.cornerRadius = MyUI.groupCornerRadius
         viewBody.layer.borderWidth = 2.0
         viewBody.layer.borderColor = UIColor.init(netHex: 0x5D7AFF).cgColor
+        viewBody.layer.cornerRadius = MyUI.groupCornerRadius
         tblPhieuChi.delegate = self
         tblPhieuChi.dataSource = self
         tblPhieuChi.allowsSelection = false

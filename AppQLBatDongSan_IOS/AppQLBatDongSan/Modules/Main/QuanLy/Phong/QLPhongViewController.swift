@@ -29,6 +29,7 @@ class QLCanHoViewControlvar: UIViewController {
         listHopDong = Storage.shared.getObjects(type: HopDong.self) as! [HopDong]
         viewBody.layer.borderWidth = 2.0
         viewBody.layer.borderColor = UIColor.init(netHex: 0x5D7AFF).cgColor
+        viewBody.layer.cornerRadius = MyUI.groupCornerRadius
         tblCanHo.delegate = self
         tblCanHo.dataSource = self
         loadCanHo()

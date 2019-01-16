@@ -13,6 +13,7 @@ import SwiftyJSON
 
 class ListPhieuThuViewController: UIViewController {
 
+    @IBOutlet weak var viewPrice: UIView!
     @IBOutlet weak var tblPhieuThu: UITableView!
     @IBOutlet weak var constraintHeightViewBody: NSLayoutConstraint!
     @IBOutlet weak var viewBody: UIView!
@@ -25,6 +26,8 @@ class ListPhieuThuViewController: UIViewController {
         super.viewDidLoad()
         configService()
         loadPhieuThu()
+        viewPrice.layer.cornerRadius = MyUI.groupCornerRadius
+        viewBody.layer.cornerRadius = MyUI.groupCornerRadius
         viewBody.layer.borderWidth = 2.0
         viewBody.layer.borderColor = UIColor.init(netHex: 0x5D7AFF).cgColor
         tblPhieuThu.delegate = self

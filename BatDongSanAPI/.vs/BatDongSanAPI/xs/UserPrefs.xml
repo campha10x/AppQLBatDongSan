@@ -6,7 +6,7 @@
       <File FileName="BatDongSanAPI/Controllers/HopDongController.cs" Line="31" Column="70" />
       <File FileName="BatDongSanAPI/Models/Account.cs" Line="15" Column="37" />
       <File FileName="BatDongSanAPI/Controllers/KhachHangController.cs" Line="25" Column="30" />
-      <File FileName="BatDongSanAPI/Models/KhachHang.cs" Line="24" Column="6" />
+      <File FileName="BatDongSanAPI/Models/KhachHang.cs" Line="15" Column="40" />
       <File FileName="BatDongSanAPI/Models/BatDongSanStoreContext.cs" Line="8" Column="18" />
     </Files>
   </MonoDevelop.Ide.Workbench>

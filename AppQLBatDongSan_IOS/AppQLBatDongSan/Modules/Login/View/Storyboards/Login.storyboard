@@ -122,9 +122,9 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j4M-s4-ECN">
                                 <rect key="frame" x="0.0" y="0.0" width="683" height="600"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mkm-dz-BMi">
-                                        <rect key="frame" x="30" y="50" width="95" height="48"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOGIN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mkm-dz-BMi">
+                                        <rect key="frame" x="281" y="50" width="121" height="48"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -199,12 +199,12 @@
                                     <constraint firstAttribute="trailing" secondItem="YEJ-ap-PYF" secondAttribute="trailing" constant="20" id="FLJ-9K-HhY"/>
                                     <constraint firstAttribute="trailing" secondItem="Jc2-ot-efe" secondAttribute="trailing" id="MMt-ld-Z7R"/>
                                     <constraint firstAttribute="trailing" secondItem="Jye-FR-top" secondAttribute="trailing" id="RLX-Ry-RDa"/>
-                                    <constraint firstItem="Mkm-dz-BMi" firstAttribute="leading" secondItem="j4M-s4-ECN" secondAttribute="leading" constant="30" id="TG8-Mf-UhB"/>
                                     <constraint firstItem="Mkm-dz-BMi" firstAttribute="top" secondItem="j4M-s4-ECN" secondAttribute="top" constant="50" id="VjT-DZ-Q4e"/>
                                     <constraint firstItem="YEJ-ap-PYF" firstAttribute="top" secondItem="t8u-ch-r0P" secondAttribute="bottom" constant="20" id="WOk-Kz-uPk"/>
                                     <constraint firstItem="bdt-7h-2sE" firstAttribute="top" secondItem="YEJ-ap-PYF" secondAttribute="bottom" constant="59" id="YRR-V3-N2z"/>
                                     <constraint firstItem="Jc2-ot-efe" firstAttribute="top" secondItem="Jye-FR-top" secondAttribute="bottom" id="bB2-17-fb9"/>
                                     <constraint firstAttribute="trailing" secondItem="t8u-ch-r0P" secondAttribute="trailing" constant="20" id="bY4-nb-jbh"/>
+                                    <constraint firstItem="Mkm-dz-BMi" firstAttribute="centerX" secondItem="j4M-s4-ECN" secondAttribute="centerX" id="eSa-gE-FQf"/>
                                     <constraint firstItem="t8u-ch-r0P" firstAttribute="leading" secondItem="j4M-s4-ECN" secondAttribute="leading" constant="20" id="jgz-CS-kqu"/>
                                     <constraint firstAttribute="bottom" secondItem="Jc2-ot-efe" secondAttribute="bottom" id="kbk-v1-Yh0"/>
                                     <constraint firstItem="Jye-FR-top" firstAttribute="top" secondItem="bdt-7h-2sE" secondAttribute="bottom" constant="50" id="l32-V6-Ful"/>
@@ -224,6 +224,7 @@
                         <viewLayoutGuide key="safeArea" id="Pvs-TU-UDD"/>
                     </view>
                     <connections>
+                        <outlet property="btnLogin" destination="bdt-7h-2sE" id="OcH-Xj-Cz4"/>
                         <outlet property="checkboxTypeLogin" destination="c8n-tT-ZfV" id="N7f-cm-s7G"/>
                         <outlet property="textfieldEmail" destination="t8u-ch-r0P" id="3kE-By-FUi"/>
                         <outlet property="textfieldPassword" destination="YEJ-ap-PYF" id="CcY-RT-Edo"/>

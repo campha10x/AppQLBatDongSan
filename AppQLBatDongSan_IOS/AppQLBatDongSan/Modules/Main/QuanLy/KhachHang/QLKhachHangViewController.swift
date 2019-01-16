@@ -31,6 +31,7 @@ class QLKhachHangViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         customized()
+        
         configService()
         loadKhachHang()
         listCanHo = Storage.shared.getObjects(type: CanHo.self) as! [CanHo]
@@ -133,6 +134,7 @@ class QLKhachHangViewController: UIViewController {
         btnSearch.layer.borderWidth = 1.0
         viewBody.layer.borderWidth = 2.0
         viewBody.layer.borderColor = UIColor.init(netHex: 0x5D7AFF).cgColor
+        viewBody.layer.cornerRadius = MyUI.groupCornerRadius
     }
 }
 

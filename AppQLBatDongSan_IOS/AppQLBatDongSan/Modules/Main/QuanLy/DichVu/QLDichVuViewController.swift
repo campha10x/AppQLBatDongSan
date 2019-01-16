@@ -25,6 +25,7 @@ class QLDichVuViewController: UIViewController {
         configService()
         viewBody.layer.borderWidth = 2.0
         viewBody.layer.borderColor = UIColor.init(netHex: 0x5D7AFF).cgColor
+        viewBody.layer.cornerRadius = MyUI.groupCornerRadius
         tblDichvu.delegate = self
         tblDichvu.dataSource = self
         loadDichvu()

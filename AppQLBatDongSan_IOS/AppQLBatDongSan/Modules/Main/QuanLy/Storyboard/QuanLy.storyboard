@@ -875,7 +875,7 @@
                                     <constraint firstAttribute="height" constant="120" id="ueD-zz-gFb"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8qH-g6-OGn">
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8qH-g6-OGn">
                                 <rect key="frame" x="70" y="210" width="972" height="500"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rza-Ws-gY3">
@@ -1301,6 +1301,7 @@
                         <outlet property="labelTongCong" destination="CaO-Mo-oCS" id="oBD-td-cCf"/>
                         <outlet property="tblPhieuChi" destination="kFa-VF-shx" id="k4u-h2-g2q"/>
                         <outlet property="viewBody" destination="8qH-g6-OGn" id="GlV-DZ-wwz"/>
+                        <outlet property="viewPrice" destination="R74-V3-LaU" id="kZ9-QB-Smv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nKP-3m-xZP" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1315,7 +1316,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="1112" height="834"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s5g-d5-cuX">
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s5g-d5-cuX">
                                 <rect key="frame" x="50" y="70" width="1012" height="500"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xg8-T2-GmT">
@@ -1851,7 +1852,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="1112" height="834"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6d9-Yc-xTv">
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6d9-Yc-xTv">
                                 <rect key="frame" x="50" y="80" width="1012" height="500"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AGI-JE-VLW">
@@ -2549,7 +2550,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="1112" height="834"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rgx-mA-30s">
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rgx-mA-30s">
                                 <rect key="frame" x="50" y="80" width="1012" height="500"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GrK-70-Thc">
@@ -3225,7 +3226,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="1112" height="834"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NHP-Cb-k0Z">
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NHP-Cb-k0Z">
                                 <rect key="frame" x="50" y="80" width="1012" height="500"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1lc-P3-6Yx">
@@ -3560,7 +3561,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="1300" height="834"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0hn-Zf-y4i">
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0hn-Zf-y4i">
                                 <rect key="frame" x="50" y="80" width="1200" height="500"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e9J-ht-2Wt">
@@ -4194,7 +4195,7 @@
                                     <constraint firstAttribute="width" constant="300" id="jUG-Jd-B6n"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q3n-xW-dlq">
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q3n-xW-dlq">
                                 <rect key="frame" x="70" y="180" width="972" height="500"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vyZ-XI-jMC">
@@ -4647,6 +4648,7 @@
                         <outlet property="labelTongCong" destination="bFq-P0-HtQ" id="R4g-gQ-DQK"/>
                         <outlet property="tblPhieuThu" destination="H4C-qJ-KI2" id="gWP-wg-oxf"/>
                         <outlet property="viewBody" destination="q3n-xW-dlq" id="QS2-AP-jwa"/>
+                        <outlet property="viewPrice" destination="vWe-fz-akO" id="QXg-FZ-cLY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ubv-RT-jso" userLabel="First Responder" sceneMemberID="firstResponder"/>

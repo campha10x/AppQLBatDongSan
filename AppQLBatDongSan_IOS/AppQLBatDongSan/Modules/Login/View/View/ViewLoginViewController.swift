@@ -15,6 +15,7 @@ enum TypeLogin: Int {
 
 class ViewLoginViewController: UIViewController {
 
+    @IBOutlet weak var btnLogin: UIButton!
     @IBOutlet weak var textfieldPassword: UITextField!
     @IBOutlet weak var textfieldEmail: UITextField!
     var onRegister: (()->())?
@@ -28,6 +29,8 @@ class ViewLoginViewController: UIViewController {
         textfieldEmail.text = "phamxuanduy1996@gmail.com"
         textfieldPassword.text = "thaythuoc"
         textfieldPassword.isSecureTextEntry = true
+        btnLogin.backgroundColor = MyColor.cyan
+        btnLogin.layer.cornerRadius = MyUI.buttonCornerRadius
         checkboxTypeLogin.addTitleAndOptions("", options: [TypeLogin.ChuCanho.rawValue:  "Bạn là chủ căn hộ",TypeLogin.NguoiThue.rawValue: "Bạn là người thuê"],isRadioBox: true)
             checkboxTypeLogin.selecteAt(index: 0)
     }
@@ -37,7 +40,11 @@ class ViewLoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     @IBAction func eventLogin(_ sender: Any) {
-        guard let email = textfieldEmail.text, let password = textfieldPassword.text else { return }
+        guard let email = textfieldEmail.text, let password = textfieldPassword.text, email.isValidEmail(), !email.isEmpty, !password.isEmpty else {
+            Notice.make(type: .Error, content: "Đăng nhập thất bại mời bạn kiểm tra lại").show()
+            return
+            
+        }
         if let type = TypeLogin.init(rawValue: checkboxTypeLogin.selectedId ?? 0){
             onLogin?(email, password, type)
         }

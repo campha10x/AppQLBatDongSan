@@ -24,6 +24,8 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configService()
+        containerViewLogin.layer.cornerRadius = 6.0
+        containerViewLogin.clipsToBounds = true
         showContainer(containerView: self.containerViewLogin)
         listenForEvent()
     }

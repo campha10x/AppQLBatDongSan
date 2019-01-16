@@ -49,6 +49,7 @@
         
         override func viewDidLoad() {
             super.viewDidLoad()
+            viewBody.layer.cornerRadius = MyUI.groupCornerRadius
             self.navigationController?.navigationBar.isHidden = true
             configService()
             customized()
@@ -215,10 +216,10 @@
             
             viewHeader.layer.borderColor = UIColor.lightGray.cgColor
             viewHeader.layer.borderWidth = 1.0
-            btnCreateNew.layer.borderColor = UIColor.red.cgColor
-            btnCreateNew.layer.cornerRadius = MyUI.buttonCornerRadius
-            btnCreateNew.layer.borderWidth = 1.0
-            btnCreateNew.clipsToBounds = true
+//            btnCreateNew.layer.borderColor = UIColor.red.cgColor
+//            btnCreateNew.layer.cornerRadius = MyUI.buttonCornerRadius
+//            btnCreateNew.layer.borderWidth = 1.0
+//            btnCreateNew.clipsToBounds = true
             btnSearch.layer.cornerRadius = MyUI.buttonCornerRadius
             btnSearch.layer.borderWidth = 1.0
             viewBody.layer.borderWidth = 2.0
@@ -393,7 +394,10 @@
                 if stateRoom == StateRoom.DaThanhToan.rawValue {
                     //                self.listSearchHoaDon = self.listHoaDon.filter({ (Double($0.soTien) ?? 0) - datra == 0 })
                     self.listSearchHoaDon = self.listHoaDon.filter({ (item) -> Bool in
-                        let datra = listPhieuThu.filter({ $0.IdHoaDon == item.idHoaDon }).reduce(0, ( { $0 + (Double($1.SoTien) ?? 0) }))
+                        let datra = listPhieuThu.filter({ $0.IdHoaDon == item.idHoaDon}).reduce(0, ( { $0 + (Double($1.SoTien) ?? 0) }))
+                        if item.idHoaDon == "48" {
+                            
+                        }
                         return (Double(item.soTien) ?? 0 ) - datra == 0
                     })
                 } else {
